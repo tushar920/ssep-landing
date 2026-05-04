@@ -302,14 +302,15 @@ section {
 .prob-resolve.in-view{opacity:1}
 
 
-/* ─── ATHLETES SECTION (NO OVERLAPS) ─── */
+/* ─── ATHLETES SECTION (COMPACT FIT FOR SINGLE SCREEN) ─── */
 #athletes{
   background:var(--ink-mid);
   min-height:100vh; 
   display:flex; flex-direction:column; justify-content:center;
+  padding: 60px 72px; /* Overrides global padding to keep it tightly packed */
 }
 .sec-header{
-  margin-bottom:24px;
+  margin-bottom: 16px; /* Tightened */
   display:flex;justify-content:space-between;align-items:flex-end;
 }
 .sec-eyebrow{
@@ -318,16 +319,17 @@ section {
 }
 .sec-h{
   font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(36px,4.5vw,60px);letter-spacing:1px;color:#FFF;line-height:1;
+  font-size:clamp(32px,4vw,48px); /* Tightened down slightly */
+  letter-spacing:1px;color:#FFF;line-height:1;
 }
 .sec-note{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:16px;color:var(--text-bright);font-weight:400; 
+  font-size:15px;color:var(--text-bright);font-weight:400; 
   text-align:right;max-width:280px;
 }
-.tab-row{display:flex;gap:2px;margin-bottom:40px; position:relative; z-index: 10;}
+.tab-row{display:flex;gap:2px;margin-bottom:24px; position:relative; z-index: 10;}
 .tab{
-  padding:10px 24px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;
+  padding:8px 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
   letter-spacing:2.5px;text-transform:uppercase;background:transparent;
   border:1px solid var(--text-dim);color:var(--text-muted);
   cursor:none;transition:all .3s ease;
@@ -340,14 +342,14 @@ section {
   display:flex; flex-direction:column; align-items:center;
 }
 .showcase-ghost {
-  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(120px, 18vw, 260px);color:rgba(217,95,26,0.03);
+  font-size:clamp(100px, 15vw, 200px);color:rgba(217,95,26,0.03); /* Shrunk */
   white-space:nowrap;pointer-events:none;z-index:0;
   transition:opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* TOP INFO */
+/* TOP INFO (Shrunk Typography) */
 .showcase-info-top {
   position:relative;z-index:2;text-align:center;
   display:flex;flex-direction:column;align-items:center;
@@ -359,34 +361,34 @@ section {
   font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;padding:4px 12px;
   border:1px solid rgba(217,95,26,0.3);background:rgba(5,6,10,0.6);
-  backdrop-filter:blur(8px);color:var(--orange-light);margin-bottom:12px;
+  backdrop-filter:blur(8px);color:var(--orange-light);margin-bottom:8px; /* Tighter */
 }
 .si-sport {
-  font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:var(--chrome);margin-bottom:6px;
+  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;color:var(--chrome);margin-bottom:4px; /* Tighter */
 }
 .si-name {
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(36px, 5vw, 64px);line-height:1;letter-spacing:1px;
-  color:#FFF;margin-bottom:8px;
+  font-size:clamp(28px, 4vw, 42px);line-height:1;letter-spacing:1px; /* Scaled down perfectly */
+  color:#FFF;margin-bottom:6px;
 }
-.si-role {font-size:16px;color:var(--text-bright);font-style:italic;font-family:'Playfair Display',serif;}
+.si-role {font-size:15px;color:var(--text-bright);font-style:italic;font-family:'Playfair Display',serif;}
 
-/* ROTARY CAROUSEL (MASSIVE WRAPPER PREVENTS OVERLAP) */
+/* ROTARY CAROUSEL (MASSIVELY COMPACT WRAPPER & CARDS) */
 .showcase-rotary-wrapper {
   position: relative;
   width: 100%;
-  height: 500px; /* Forces abundant vertical space so cards NEVER bleed into text */
-  margin: 20px 0;
+  height: 320px; /* Reduced securely from 500px to guarantee no overlap */
+  margin: 16px 0;
   z-index: 5;
 }
 .rotary-track {
-  position:absolute; top:200px; 
+  position:absolute; top:130px; /* Aligns cards perfectly in the 320px wrapper */
   left:50%; width:0; height:0;
 }
 .rotary-item {
   position:absolute;top:0; left:0;
-  width:180px; height:260px;
+  width:140px; height:210px; /* Scaled down from 180x260 for massive vertical savings */
   background:var(--ink-lift);border:1px solid rgba(255,255,255,0.04);
   cursor:none;overflow:hidden;display:flex; align-items:center; justify-content:center;
   transform-origin:center center;transition:all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -399,7 +401,7 @@ section {
 .ri-art {position:absolute;inset:0;z-index:0;}
 .ri-art::before {
   content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
-  width:140px;height:200px;border-radius:50% 50% 0 0;
+  width:110px;height:160px;border-radius:50% 50% 0 0;
   background:linear-gradient(to top,rgba(217,95,26,0.15),transparent);
 }
 .ri-overlay {
@@ -410,15 +412,15 @@ section {
 .rotary-item.active .ri-overlay { opacity: 0.4; }
 .ri-init {
   position:relative;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:60px;letter-spacing:2px;color:rgba(255,255,255,0.15);
+  font-size:48px;letter-spacing:2px;color:rgba(255,255,255,0.15); /* Smaller */
   transition:color 0.4s ease, transform 0.4s ease;
 }
 .rotary-item.active .ri-init {color:rgba(217,95,26,0.15);transform:scale(1.2);}
 
-/* Nav Buttons aligned inside the 500px wrapper */
+/* Nav Buttons centered safely within wrapper */
 .scroll-btn{
-  position:absolute;top:45%;transform:translateY(-50%);
-  width:48px;height:48px;border-radius:50%;
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
   background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.1);
   color:#FFF;display:flex;align-items:center;justify-content:center;
   z-index:20;cursor:none;backdrop-filter:blur(10px);
@@ -431,7 +433,7 @@ section {
 .athlete-nav-btn.prev-btn { left: 0; }
 .athlete-nav-btn.next-btn { right: 0; }
 
-/* BOTTOM INFO (Safely rests under the 500px wrapper) */
+/* BOTTOM INFO (Safely positioned) */
 .showcase-info-bottom {
   position: relative;
   z-index: 10;
@@ -441,32 +443,43 @@ section {
 .showcase-info-bottom.fade-out {opacity:0;transform:translateY(15px);}
 
 .si-desc-box {
-  padding: 24px 32px;
+  padding: 16px 24px;
   background: linear-gradient(to bottom, rgba(255,255,255,0.03), transparent);
   border: 1px solid rgba(255,255,255,0.05);
   border-top: 1px solid rgba(217,95,26,0.4); 
   border-radius: 4px;
-  max-width: 600px;
+  max-width: 560px;
   text-align: center;
   font-family: 'Barlow', sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--text-bright);
   backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .showcase-cta-wrap {
-  margin-top: 24px;
+  margin-top: 16px;
   text-align: center;
 }
 .si-cta {
   display:inline-flex;align-items:center;gap:8px;
-  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
+  font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
   border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;transition:all 0.3s ease;
 }
 .si-cta:hover { color:#FFF; border-color:var(--orange); }
+
+/* EXTRA LAPTOP OPTIMIZATION (Failsafe for 1366x768 screens) */
+@media(max-width: 1400px) and (max-height: 800px) {
+  #athletes { padding: 40px 72px; }
+  .showcase-rotary-wrapper { height: 280px; margin: 10px 0; }
+  .rotary-track { top: 110px; }
+  .rotary-item { width: 120px; height: 180px; }
+  .ri-art::before { width: 90px; height: 130px; }
+  .ri-init { font-size: 36px; }
+  .si-desc-box { font-size: 13px; padding: 12px 20px; }
+}
 
 
 /* ─── PORTFOLIO (HORIZONTAL LAYOUT) ─── */
@@ -940,7 +953,7 @@ section {
       <div class="si-role" id="siRole">India Legend · Spin Icon</div>
     </div>
     
-    <!-- STRICT DOCUMENT FLOW WRAPPER TO PREVENT OVERLAPS (500px Height Locks It) -->
+    <!-- STRICT DOCUMENT FLOW WRAPPER TO PREVENT OVERLAPS -->
     <div class="showcase-rotary-wrapper">
         <button class="scroll-btn prev-btn athlete-nav-btn" onclick="rotateAthleteCarousel(-1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1290,8 +1303,9 @@ function rotateAthleteCarousel(dir) {
 
 function updateAthleteCarousel(instant = false) {
   const items = document.querySelectorAll('.rotary-item');
-  const R = window.innerWidth < 768 ? 260 : 450; 
-  const angleStep = window.innerWidth < 768 ? 30 : 22; 
+  /* Completely redesigned massive, flatter arc radius so background cards never dip into the text below */
+  const R = window.innerWidth < 768 ? 260 : 700; 
+  const angleStep = window.innerWidth < 768 ? 30 : 14; 
   
   items.forEach((item, i) => {
     const offset = i - currentAthleteIndex;
