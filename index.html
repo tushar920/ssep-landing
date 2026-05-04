@@ -226,6 +226,40 @@ section {
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 .btn-outline:hover::before{color:var(--orange)}
 
+/* ─── STORY ─── */
+#story{
+  min-height:100vh;
+  background:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;overflow:hidden;
+}
+.story-label{
+  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:32px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity 1s,transform 1s;position:relative;z-index:1;
+}
+.story-h{
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
+  font-size:clamp(38px,6vw,88px);line-height:1;
+  letter-spacing:1px;max-width:900px;
+  opacity:0;transform:translateY(24px);
+  transition:opacity 1.2s .2s,transform 1.2s .2s;
+  position:relative;z-index:1;
+}
+.story-h .accent{
+  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.story-p{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:19px;color:var(--text-bright);font-weight:400; 
+  margin-top:20px;max-width:540px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity 1s .5s,transform 1s .5s;
+  position:relative;z-index:1;
+}
+.in-view .story-label, .in-view .story-h, .in-view .story-p{opacity:1;transform:translateY(0)}
+
 /* ─── ATHLETES ─── */
 #athletes{
   background:var(--ink-mid);
@@ -316,6 +350,8 @@ section {
   z-index:20;cursor:none;backdrop-filter:blur(10px);
   transition:all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
+.athlete-nav-btn.prev-btn { left: 0; }
+.athlete-nav-btn.next-btn { right: 0; }
 
 .showcase-info-bottom {
   position: relative;
@@ -341,6 +377,15 @@ section {
   letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
   border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;
 }
+.tab-row{display:flex;gap:2px;margin-bottom:24px; position:relative; z-index: 10;}
+.tab{
+  padding:8px 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;background:transparent;
+  border:1px solid var(--text-dim);color:var(--text-muted);
+  cursor:none;transition:all .3s ease;
+}
+.tab:hover {background:var(--orange);color:#FFF;border-color:var(--orange);}
+.tab.on{background:var(--metal);border-color:transparent;color:#FFF;}
 
 
 /* ─── PORTFOLIO ─── */
@@ -460,7 +505,6 @@ section {
   background-size: cover;
   background-position: center;
 }
-/* Updated background image filename as per user request */
 .ip-bg-1 { background-image: url("who's the boss.png"); }
 .ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
 .ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
@@ -739,7 +783,7 @@ section {
         <button class="scroll-btn next-btn" onclick="rotateAthleteCarousel(1)">→</button>
     </div>
     <div class="showcase-info-bottom" id="showcaseInfoBottom">
-      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history...</div>
+      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a match-winning temperament.</div>
       <div class="si-cta" style="margin-top:16px;">View Profile →</div>
     </div>
   </div>
@@ -759,7 +803,6 @@ section {
   </ul>
   <div class="port-content-area" id="portPanelsArea">
     
-    <!-- Vertical Logos fixed with exact provided filenames -->
     <div class="port-panel active">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -769,6 +812,8 @@ section {
         <div class="port-panel-right">
           <p class="port-p">We provide end-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
           <div class="pf-item">Financial & Legal Advisory</div>
+          <div class="pf-item">PR & Personal Branding</div>
+          <div class="pf-item">Endorsement & Equity Deals</div>
           <div class="port-link">Explore Elite →</div>
         </div>
       </div>
@@ -781,8 +826,10 @@ section {
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We produce cinematic content that defines careers. From biopics to branded series, Legaxy Studio creates value across TV, digital, and BTL.</p>
+          <p class="port-p">We produce cinematic content that defines careers. From biopics to branded series, podcasts and digital IP — Legaxy Studio creates value at every touchpoint across TV, digital, and BTL.</p>
           <div class="pf-item">IP Creation & Biopics</div>
+          <div class="pf-item">Branded Content</div>
+          <div class="pf-item">White-label Production</div>
           <div class="port-link">Explore Studio →</div>
         </div>
       </div>
@@ -795,7 +842,9 @@ section {
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle through leagues and tours.</p>
+          <p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle. We create award shows, concerts, and professional leagues that define the sports calendar.</p>
+          <div class="pf-item">Large-scale Sports Leagues</div>
+          <div class="pf-item">Concerts & Award Shows</div>
           <div class="pf-item">Global Tours</div>
           <div class="port-link">Explore Live →</div>
         </div>
@@ -809,8 +858,10 @@ section {
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Unlocking the potential of sports IP through licensing, franchising, and digital collectibles for the ultimate fan experience.</p>
+          <p class="port-p">Unlocking the potential of sports IP through licensing, franchising, and digital collectibles. We bridge the gap between icons and fans through premium merchandise and Web3 experiences.</p>
           <div class="pf-item">Team Logo Licensing</div>
+          <div class="pf-item">NFTs & Digital Avatars</div>
+          <div class="pf-item">Fan Zones & Pop-ups</div>
           <div class="port-link">Explore Merch →</div>
         </div>
       </div>
@@ -823,8 +874,10 @@ section {
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Education-first initiatives delivering mentorship and masterclasses across schools and academies to nurture tomorrow's icons.</p>
+          <p class="port-p">Education-first initiatives delivering mentorship and masterclasses across schools and academies. We leverage athlete experience to nurture the next generation of sporting talent at the grassroots level.</p>
+          <div class="pf-item">Athlete-led Masterclasses</div>
           <div class="pf-item">Mentorship Modules</div>
+          <div class="pf-item">Youth Development Initiatives</div>
           <div class="port-link">Explore Learning →</div>
         </div>
       </div>
@@ -843,7 +896,6 @@ section {
     <div class="ip-main-info active" id="ipHeroInfo">
       <p class="ip-sec-title">Original Productions</p>
       <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
-      <!-- Interactive title linking to YT -->
       <h2 class="ip-hero-title" id="ipHeroTitle" onclick="openProduction()">Who's The Boss?</h2>
       <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers.</p>
       
@@ -856,7 +908,6 @@ section {
 
     <div class="ip-thumbnails">
       <div class="nf-thumb active" data-ip-index="0">
-        <!-- Thumbnail using who's the boss.png -->
         <div class="nf-thumb-bg" style="background-image: url('who\'s the boss.png');"></div>
         <span class="nf-thumb-title">Who's The Boss</span>
         <div class="nf-progress"></div>
@@ -884,12 +935,22 @@ section {
     <div class="bento-card">
       <div class="bento-num">01</div>
       <h3 class="bento-title">Leaders in Management</h3>
-      <p class="bento-desc">Experience crafting lasting careers across industries.</p>
+      <p class="bento-desc">Experience crafting lasting careers across industries. We know what it takes to build an icon from the ground up.</p>
     </div>
     <div class="bento-card">
       <div class="bento-num">02</div>
       <h3 class="bento-title">Personalised Approach</h3>
-      <p class="bento-desc">Tailored strategies that ensure long-term growth.</p>
+      <p class="bento-desc">Tailored strategies that accelerate success and ensure long-term growth for every athlete we represent.</p>
+    </div>
+    <div class="bento-card">
+      <div class="bento-num">03</div>
+      <h3 class="bento-title">Brand Alliances</h3>
+      <p class="bento-desc">Strategic partnerships with global brands that align with talent identity, creating authentic collaborations.</p>
+    </div>
+    <div class="bento-card">
+      <div class="bento-num">04</div>
+      <h3 class="bento-title">Global Reach</h3>
+      <p class="bento-desc">Deep roots in India combined with a worldwide footprint, bridging the gap across all markets.</p>
     </div>
   </div>
 </section>
@@ -933,11 +994,30 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* Semi-Circle Athlete Carousel */
 const eliteRoster=[
-  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend',init:'HS',desc:'A legendary figure in Indian cricket history...'},
-  {name:'Yuzvendra Chahal',sport:'Cricket',role:'India Leg-Spinner',init:'YC',desc:'India\'s premier leg-spinner...'}
+  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend',init:'HS',desc:'A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a match-winning temperament.'},
+  {name:'Yuzvendra Chahal',sport:'Cricket',role:'India Leg-Spinner',init:'YC',desc:'India\'s premier leg-spinner and tactical genius, renowned for deceiving the world\'s best batters in high-pressure white-ball encounters.'},
+  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · IPL Star',init:'BK',desc:'A maestro of swing bowling. His calm execution and pinpoint precision have made him one of the most reliable pacers of his generation.'},
+  {name:'Ishant Sharma',sport:'Cricket',role:'India Pacer · DC Veteran',init:'IS',desc:'A towering presence and veteran of Indian fast bowling, carrying the immense experience of over a hundred Test matches.'},
+  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',init:'UY',desc:'Pace, raw power, and an imposing run-up. Known for providing crucial breakthroughs and thriving aggressively with the new ball.'},
+  {name:'Harshal Patel',sport:'Cricket',role:'India & RCB · Death Bowler',init:'HP',desc:'The master of death bowling and variations. His calculated slower balls and deceptive dip make him a lethal asset in the final overs.'},
+  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · All-rounder',init:'RT',desc:'A charismatic all-rounder who has authored some of the most miraculous finishes in modern T20 franchise history.'},
+  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Emerging Star',init:'SS',desc:'A dynamic and explosive middle-order batter, rapidly carving out a reputation for finishing games with breathtaking power hitting.'},
+  {name:'Sai Kishore',sport:'Cricket',role:'GT · Left-arm Spinner',init:'SK',desc:'A tall, highly accurate left-arm spinner combining discipline with sharp bounce to suffocate scoring rates in crucial middle overs.'},
+  {name:'Mayank Dagar',sport:'Cricket',role:'RR · Qatar Airways',init:'MD',desc:'An electrifying fielder and a highly effective left-arm spinner, continuously rising through the ranks as a vital white-ball specialist.'},
+  {name:'Sangram Singh',sport:'Wrestling',role:'India Champion',init:'SG',desc:'A celebrated champion and inspirational icon in Indian wrestling, inspiring the next generation through resilience.'}
 ];
+const risingRoster=[
+  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Rising Prospect',init:'VB',desc:'A high-potential rising prospect, blending natural athleticism with a sharp cricketing brain to dominate the youth circuit.'},
+  {name:'Vathsal Govind',sport:'Cricket',role:'Emerging India Talent',init:'VG',desc:'An emerging talent showcasing exceptional technique and temperament, marked as a future cornerstone of the batting order.'},
+  {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',init:'MR',desc:'A powerful star in the making, possessing the rare ability to aggressively dismantle bowling attacks.'},
+  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',init:'TD',desc:'A highly versatile youth-circuit all-rounder, consistently delivering impactful performances with both bat and ball.'},
+  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',init:'SH',desc:'An aggressive and fast-improving pace bowler, generating impressive speed and leading the charge for women\'s cricket.'},
+  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency.'}
+];
+
 let currentAthleteIndex = 0;
 let currentRoster = eliteRoster;
+let currentTab = 'elite';
 
 function renderAthletes(roster) {
   currentRoster = roster;
@@ -951,6 +1031,13 @@ function renderAthletes(roster) {
     </div>
   `).join('');
   updateAthleteCarousel(true); 
+}
+
+function switchTab(el, type){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  currentTab = type;
+  renderAthletes(type==='elite'?eliteRoster:risingRoster);
 }
 
 function setAthleteIndex(idx) { currentAthleteIndex = idx; updateAthleteCarousel(); }
@@ -979,6 +1066,7 @@ function updateAthleteCarousel(instant = false) {
 
 function updateAthleteInfo() {
   const data = currentRoster[currentAthleteIndex];
+  document.getElementById('siBadge').textContent = currentTab === 'elite' ? 'Elite Roster' : 'Rising Star';
   document.getElementById('siName').textContent = data.name;
   document.getElementById('siRole').textContent = data.role;
   document.getElementById('siDesc').textContent = data.desc;
