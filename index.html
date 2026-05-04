@@ -58,8 +58,8 @@ body{
   border:1px solid rgba(217,95,26,.45);
   transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s;
 }
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover) #cx{width:14px;height:14px;background:var(--orange)}
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover, .ip-hero-title:hover) #cx{width:14px;height:14px;background:var(--orange)}
+body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover, .ip-hero-title:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
 
 /* ─── SCROLL PROGRESS ─── */
 #prog{
@@ -540,8 +540,8 @@ section {
   background-size: cover;
   background-position: center;
 }
-/* Background image fix */
-.ip-bg-1 { background-image: url(""); }
+/* Corrected background filename */
+.ip-bg-1 { background-image: url("whos the boss.png"); }
 .ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
 .ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
 
@@ -787,7 +787,6 @@ section {
   <p class="story-p reveal">Every champion has a story. We architect the rest of it — from first contract to cultural icon.</p>
 </section>
 
-<!-- PROBLEM SECTION RESTORED -->
 <section id="problem">
   <div class="prob-inner">
     <span class="prob-line" data-d="0">No Structure</span>
@@ -848,7 +847,7 @@ section {
     <div class="port-panel active">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
@@ -864,7 +863,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
@@ -880,7 +879,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
@@ -896,7 +895,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
@@ -912,7 +911,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
@@ -950,7 +949,8 @@ section {
 
     <div class="ip-thumbnails">
       <div class="nf-thumb active" data-ip-index="0">
-        <div class="nf-thumb-bg" style="background-image: url('who's the boss.png');"></div>
+        <!-- Fix: whos the boss.png -->
+        <div class="nf-thumb-bg" style="background-image: url('whos the boss.png');"></div>
         <span class="nf-thumb-title">Who's The Boss</span>
         <div class="nf-progress"></div>
       </div>
@@ -1071,7 +1071,13 @@ const risingRoster=[
   {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',init:'MR',desc:'A powerful star in the making, possessing the rare ability to aggressively dismantle bowling attacks.'},
   {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',init:'TD',desc:'A highly versatile youth-circuit all-rounder, consistently delivering impactful performances with both bat and ball.'},
   {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',init:'SH',desc:'An aggressive and fast-improving pace bowler, generating impressive speed and leading the charge for women\'s cricket.'},
-  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency.'}
+  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency.'},
+  {name:'Archana',sport:'Athletics',role:'Emerging Track Star',init:'AR',desc:'An explosive emerging track star. Her sheer pace, dedication, and explosive acceleration highlight her as a premier athlete to watch.'},
+  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National',init:'KS',desc:'A highly promising national-level talent, refining his all-round game and consistently turning heads in competitive age-group tournaments.'},
+  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Pacer',init:'YD',desc:'A resilient and technically gifted top-order anchor, capable of building massive innings and stabilizing the crease under pressure.'},
+  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Rising Fast Bowler',init:'AJ',desc:'A fiery rising fast bowler who brings raw pace, intimidating bounce, and an attacking mindset to every spell.'},
+  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',init:'AV',desc:'A highly stylish and dependable batter, recognized for his expansive stroke play and steady consistency in the local circuits.'},
+  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging',init:'AG',desc:'A young, determined prodigy making swift strides. His unwavering focus and natural flair earmark him as a future game-changer.'}
 ];
 
 let currentAthleteIndex = 0;
