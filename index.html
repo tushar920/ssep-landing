@@ -72,7 +72,7 @@ nav{
   position:fixed;top:0;inset-inline:0;z-index:1000;
   display:flex;justify-content:space-between;align-items:center;
   padding:0 52px;height:72px;
-  background:linear-gradient(to bottom,rgba(5,6,10,.95) 0%,rgba(5,6,10,0) 100%);
+  background:linear-gradient(to bottom,rgba(5,6,10,0.9) 0%,rgba(5,6,10,0) 100%);
 }
 .logo{
   display:flex;align-items:center;gap:2px;
@@ -80,15 +80,13 @@ nav{
 }
 .text-logo{
   display:flex;align-items:center;gap:2px;
-  font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:600;
-  letter-spacing:4px;text-transform:uppercase;color:var(--text);
+  font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;color:#FFF;
 }
 .logo-x{
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.nav-logo-img{
-  height: 36px;width: auto;object-fit: contain;
-}
+
 nav ul{display:flex;gap:36px;list-style:none}
 nav ul a{
   font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
@@ -117,12 +115,7 @@ nav ul a:hover{color:var(--orange)}
 section {
   position: relative;
   z-index: 1;
-  padding: 120px 72px; /* UNIVERSAL SPACING FOR ALL SECTIONS */
-}
-.metal-rule{
-  width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--orange-dark),var(--orange),var(--orange-dark),transparent);
-  opacity:.4;
+  padding: 120px 72px; 
 }
 
 /* ─── HERO ─── */
@@ -130,7 +123,7 @@ section {
   min-height:100vh;
   display:flex;flex-direction:column;justify-content:flex-end;
   align-items:flex-start;overflow:hidden;
-  padding-bottom: 80px; /* Slight adjustment for hero bottom */
+  padding-bottom: 80px;
   background: var(--ink);
   position: relative;
 }
@@ -151,31 +144,30 @@ section {
 }
 .hero-video-overlay {
   position:absolute;inset:0;z-index:1;
-  /* Lightened the overlay so the video is much brighter */
   background:
-    linear-gradient(to right,rgba(5,6,10,.6) 10%,rgba(5,6,10,.2) 50%,rgba(5,6,10,.4)),
-    linear-gradient(to top,rgba(5,6,10,.8) 0%,rgba(5,6,10,0) 40%),
-    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.15),transparent 70%);
+    linear-gradient(to right,rgba(5,6,10,.5) 10%,rgba(5,6,10,.1) 50%,rgba(5,6,10,.3)),
+    linear-gradient(to top,rgba(5,6,10,.7) 0%,rgba(5,6,10,0) 30%),
+    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.1),transparent 70%);
 }
 .hero-video-overlay::before{
   content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);
-  opacity:.4;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
+  opacity:.3;
 }
 .hero-content-layer { position: relative; z-index: 10; width: 100%; }
 .hero-badge{
-  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700; /* Scaled down slightly */
-  letter-spacing:5px;text-transform:uppercase;color:rgba(184,184,192,0.8); /* Faded chrome */
-  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;color:rgba(184,184,192,0.6);
+  display:flex;align-items:center;gap:12px;margin-bottom:12px;
   animation: heroFade 1s 0.2s both;
 }
-.hero-badge::before{content:'';width:32px;height:1px;background:var(--metal)}
+.hero-badge::before{content:'';width:32px;height:1px;background:rgba(217,95,26,0.6)}
 .hero-h1{
   font-family:'Rajdhani',sans-serif;font-weight:600;
-  font-size:clamp(40px,7vw,100px); /* Scaled down for cinematic balance */
-  line-height:.95;
+  font-size:clamp(32px, 6vw, 88px); 
+  line-height:0.95;
   letter-spacing:-1px;
-  color:rgba(255,255,255,0.85); /* Slightly faded white */
+  color:rgba(255,255,255,0.7); 
   animation: heroFade 1s 0.4s both;
 }
 .hero-h1 em{
@@ -184,19 +176,19 @@ section {
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;background-size:200%;
   animation:shineText 4s linear infinite;
-  opacity: 0.95;
+  opacity: 0.8;
 }
 @keyframes shineText{0%{background-position:200%}100%{background-position:-200%}}
 .hero-sub{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:16px; /* Scaled down slightly */
-  color:rgba(223, 223, 229, 0.7); /* Faded brightness */
+  font-size:14px;
+  color:rgba(223, 223, 229, 0.5); 
   font-weight:400; 
-  margin-top:16px;
+  margin-top:12px;
   animation: heroFade 1s 0.6s both;
 }
 .hero-ctas{
-  display:flex;gap:14px;margin-top:36px;
+  display:flex;gap:14px;margin-top:28px;
   animation: heroFade 1s 0.8s both;
 }
 @keyframes heroFade {
@@ -205,13 +197,13 @@ section {
 }
 
 .btn-gold{
-  background:transparent;color:var(--orange);
-  padding:14px 36px;font-size:11px;
+  background:transparent;color:rgba(217,95,26,0.8);
+  padding:12px 32px;font-size:10px;
   letter-spacing:3px;text-transform:uppercase;
-  border:1px solid rgba(217,95,26,0.6); /* Slightly faded border */
+  border:1px solid rgba(217,95,26,0.4);
   cursor:none;
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  transition:all .3s ease;
+  transition:all 0.3s ease;
 }
 .btn-gold:hover{
   background:var(--metal);color:#FFF;
@@ -219,15 +211,15 @@ section {
   border-color:transparent;
 }
 .btn-outline{
-  background:transparent;border:1px solid rgba(255,255,255,.15); /* Slightly faded */
-  color:rgba(184,184,192,0.8);
-  padding:14px 36px;font-size:11px;
+  background:transparent;border:1px solid rgba(255,255,255,0.1);
+  color:rgba(184,184,192,0.6);
+  padding:12px 32px;font-size:10px;
   letter-spacing:3px;text-transform:uppercase;cursor:none;
   font-family:'Rajdhani',sans-serif;font-weight:600;
   display:flex;align-items:center;gap:10px;
   transition:border-color .3s,color .3s;
 }
-.btn-outline::before{content:'▶';font-size:8px;color:rgba(184,184,192,0.8)}
+.btn-outline::before{content:'▶';font-size:7px;color:rgba(184,184,192,0.6)}
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 .btn-outline:hover::before{color:var(--orange)}
 
@@ -290,50 +282,15 @@ section {
 }
 .in-view .story-label, .in-view .story-h, .in-view .story-p{opacity:1;transform:translateY(0)}
 
-/* ─── PROBLEM ─── */
-#problem{
-  min-height:100vh;
-  background:var(--ink-mid);
-  display:flex;justify-content:center;align-items:center;
-}
-.prob-inner{width:100%;max-width:860px}
-.prob-line{
-  display:block;font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(40px,7vw,96px);letter-spacing:2px;line-height:1;
-  color:var(--text-dim); opacity:0.6; transform:translateX(0);
-  transition:opacity .8s,transform .8s,color .8s;
-  position:relative;padding-left:56px;
-}
-.prob-line::before{
-  content:'//';position:absolute;left:0;
-  font-size:.5em;color:var(--orange);opacity:0;
-  transition:opacity .5s .2s;letter-spacing:0;
-}
-.prob-line.lit{color:#FFF;opacity:1;}
-.prob-line.lit::before{opacity:1}
-.prob-seam{
-  height:1px;background:linear-gradient(90deg,var(--orange),rgba(217,95,26,0));
-  width:0;margin:28px 0;transition:width 1.1s cubic-bezier(.23,1,.32,1);
-}
-.prob-seam.in-view{width:100%}
-.prob-resolve{
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(24px,3.5vw,52px);letter-spacing:2px;
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  opacity:0.4; transition:opacity 1s .3s;
-}
-.prob-resolve.in-view{opacity:1}
-
-
-/* ─── ATHLETES SECTION (COMPACT FIT FOR SINGLE SCREEN) ─── */
+/* ─── ATHLETES ─── */
 #athletes{
   background:var(--ink-mid);
   min-height:100vh; 
   display:flex; flex-direction:column; justify-content:center;
-  padding: 60px 72px; /* Overrides global padding to keep it tightly packed */
+  padding: 60px 72px; 
 }
 .sec-header{
-  margin-bottom: 16px; /* Tightened */
+  margin-bottom: 16px; 
   display:flex;justify-content:space-between;align-items:flex-end;
 }
 .sec-eyebrow{
@@ -342,13 +299,8 @@ section {
 }
 .sec-h{
   font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(32px,4vw,48px); /* Tightened down slightly */
+  font-size:clamp(32px,4vw,48px); 
   letter-spacing:1px;color:#FFF;line-height:1;
-}
-.sec-note{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:15px;color:var(--text-bright);font-weight:400; 
-  text-align:right;max-width:280px;
 }
 .tab-row{display:flex;gap:2px;margin-bottom:24px; position:relative; z-index: 10;}
 .tab{
@@ -367,51 +319,47 @@ section {
 .showcase-ghost {
   position:absolute;top:10px;left:50%;transform:translateX(-50%);
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(100px, 15vw, 200px);color:rgba(217,95,26,0.03); /* Shrunk */
+  font-size:clamp(100px, 15vw, 200px);color:rgba(217,95,26,0.03); 
   white-space:nowrap;pointer-events:none;z-index:0;
   transition:opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* TOP INFO (Shrunk Typography) */
 .showcase-info-top {
   position:relative;z-index:2;text-align:center;
   display:flex;flex-direction:column;align-items:center;
   transition:opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.showcase-info-top.fade-out {opacity:0;transform:scale(0.97) translateY(-10px);}
-
 .si-badge {
   font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;padding:4px 12px;
   border:1px solid rgba(217,95,26,0.3);background:rgba(5,6,10,0.6);
-  backdrop-filter:blur(8px);color:var(--orange-light);margin-bottom:8px; /* Tighter */
+  backdrop-filter:blur(8px);color:var(--orange-light);margin-bottom:8px;
 }
 .si-sport {
   font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:var(--chrome);margin-bottom:4px; /* Tighter */
+  letter-spacing:4px;text-transform:uppercase;color:var(--chrome);margin-bottom:4px;
 }
 .si-name {
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(28px, 4vw, 42px);line-height:1;letter-spacing:1px; /* Scaled down perfectly */
+  font-size:clamp(28px, 4vw, 42px);line-height:1;letter-spacing:1px; 
   color:#FFF;margin-bottom:6px;
 }
 .si-role {font-size:15px;color:var(--text-bright);font-style:italic;font-family:'Playfair Display',serif;}
 
-/* ROTARY CAROUSEL (MASSIVELY COMPACT WRAPPER & CARDS) */
 .showcase-rotary-wrapper {
   position: relative;
   width: 100%;
-  height: 320px; /* Reduced securely from 500px to guarantee no overlap */
+  height: 320px; 
   margin: 16px 0;
   z-index: 5;
 }
 .rotary-track {
-  position:absolute; top:130px; /* Aligns cards perfectly in the 320px wrapper */
+  position:absolute; top:130px; 
   left:50%; width:0; height:0;
 }
 .rotary-item {
   position:absolute;top:0; left:0;
-  width:140px; height:210px; /* Scaled down from 180x260 for massive vertical savings */
+  width:140px; height:210px; 
   background:var(--ink-lift);border:1px solid rgba(255,255,255,0.04);
   cursor:none;overflow:hidden;display:flex; align-items:center; justify-content:center;
   transform-origin:center center;transition:all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -420,27 +368,17 @@ section {
   border-color:rgba(217,95,26,0.6);
   box-shadow:0 15px 40px rgba(217,95,26,0.3);
 }
-.rotary-item:hover:not(.active) {border-color:rgba(255,255,255,0.15);}
 .ri-art {position:absolute;inset:0;z-index:0;}
-.ri-art::before {
-  content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
-  width:110px;height:160px;border-radius:50% 50% 0 0;
-  background:linear-gradient(to top,rgba(217,95,26,0.15),transparent);
-}
 .ri-overlay {
   position:absolute;inset:0;
   background:linear-gradient(to top, rgba(5,6,10,0.95) 0%, rgba(5,6,10,0.2) 60%, transparent);
   z-index:1;transition:opacity 0.4s ease;
 }
-.rotary-item.active .ri-overlay { opacity: 0.4; }
 .ri-init {
   position:relative;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:48px;letter-spacing:2px;color:rgba(255,255,255,0.15); /* Smaller */
-  transition:color 0.4s ease, transform 0.4s ease;
+  font-size:48px;letter-spacing:2px;color:rgba(255,255,255,0.15); 
 }
-.rotary-item.active .ri-init {color:rgba(217,95,26,0.15);transform:scale(1.2);}
 
-/* Nav Buttons centered safely within wrapper */
 .scroll-btn{
   position:absolute;top:50%;transform:translateY(-50%);
   width:44px;height:44px;border-radius:50%;
@@ -449,22 +387,14 @@ section {
   z-index:20;cursor:none;backdrop-filter:blur(10px);
   transition:all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.scroll-btn:hover{
-  background:var(--orange);border-color:var(--orange);color:#FFF;
-  transform:translateY(-50%) scale(1.05);box-shadow:0 10px 30px var(--orange-glow);
-}
 .athlete-nav-btn.prev-btn { left: 0; }
 .athlete-nav-btn.next-btn { right: 0; }
 
-/* BOTTOM INFO (Safely positioned) */
 .showcase-info-bottom {
   position: relative;
   z-index: 10;
   display: flex; flex-direction: column; align-items: center;
-  transition:opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.showcase-info-bottom.fade-out {opacity:0;transform:translateY(15px);}
-
 .si-desc-box {
   padding: 16px 24px;
   background: linear-gradient(to bottom, rgba(255,255,255,0.03), transparent);
@@ -477,35 +407,16 @@ section {
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-bright);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.showcase-cta-wrap {
-  margin-top: 16px;
-  text-align: center;
 }
 .si-cta {
   display:inline-flex;align-items:center;gap:8px;
   font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
-  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;transition:all 0.3s ease;
-}
-.si-cta:hover { color:#FFF; border-color:var(--orange); }
-
-/* EXTRA LAPTOP OPTIMIZATION (Failsafe for 1366x768 screens) */
-@media(max-width: 1400px) and (max-height: 800px) {
-  #athletes { padding: 40px 72px; }
-  .showcase-rotary-wrapper { height: 280px; margin: 10px 0; }
-  .rotary-track { top: 110px; }
-  .rotary-item { width: 120px; height: 180px; }
-  .ri-art::before { width: 90px; height: 130px; }
-  .ri-init { font-size: 36px; }
-  .si-desc-box { font-size: 13px; padding: 12px 20px; }
+  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;
 }
 
 
-/* ─── PORTFOLIO (HORIZONTAL LAYOUT) ─── */
+/* ─── PORTFOLIO ─── */
 #portfolio {
   min-height: 100vh;
   background: var(--ink);
@@ -535,7 +446,6 @@ section {
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: none;
-  transition: all 0.4s ease;
   padding: 10px 0;
   position: relative;
 }
@@ -543,20 +453,16 @@ section {
   content: ''; position: absolute; bottom: -25px; left: 0; width: 100%; height: 2px;
   background: var(--orange); transform: scaleX(0); transition: transform 0.4s ease;
 }
-.port-nav-item:hover, .port-nav-item.active {
-  color: #FFF;
-}
-.port-nav-item.active::after {
-  transform: scaleX(1);
-}
+.port-nav-item.active { color: #FFF; }
+.port-nav-item.active::after { transform: scaleX(1); }
 
 .port-content-area {
   width: 100%;
-  display: grid; /* Grid stacking avoids fixed absolute heights */
+  display: grid; 
   flex-grow: 1;
 }
 .port-panel {
-  grid-area: 1 / 1; /* Stacks panels perfectly on top of each other */
+  grid-area: 1 / 1; 
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.6s ease, visibility 0.6s ease;
@@ -570,7 +476,6 @@ section {
   z-index: 2;
 }
 
-/* Split Layout Styling */
 .port-panel-inner {
   position: relative;
   z-index: 2;
@@ -583,47 +488,34 @@ section {
 .port-panel-left { flex: 0 0 45%; }
 .port-panel-right { flex: 0 0 55%; }
 
-@media(max-width: 1000px) {
-  .port-panel-inner { flex-direction: column; align-items: flex-start; gap: 40px; }
-  .port-panel-left, .port-panel-right { flex: 1 1 auto; }
-}
-
-.port-vertical{
-  font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;
-  letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:16px;
-  display:flex;align-items:center;gap:12px;
-}
-.port-vertical::before{content:'';width:24px;height:1px;background:var(--metal)}
 .port-h{
   font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(40px,5vw,64px);letter-spacing:1px;line-height:1;color:#FFF;
+  font-size:clamp(40px, 5vw, 64px);letter-spacing:1px;line-height:1;color:#FFF;
 }
 .port-h .x{
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .port-p{font-size:16px;line-height:1.75;color:var(--text-bright);font-weight:400; margin-bottom:28px;}
-.port-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
 .pf-item{
   display:flex;align-items:center;gap:12px;font-family:'Rajdhani',sans-serif;
   font-size:13px;font-weight:600;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--text-bright);
+  margin-bottom: 8px;
 }
 .pf-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;}
-
 .port-link {
   display:inline-flex;align-items:center;gap:8px;
   font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
-  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;transition:all 0.3s ease;
+  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;
 }
-.port-link:hover { color:#FFF; border-color:var(--orange); }
 
 
-/* ─── NETFLIX STYLE IP CAROUSEL (FULL SCREEN HERO LAYOUT) ─── */
+/* ─── NETFLIX STYLE IP CAROUSEL ─── */
 #ip{
-  height: 100vh; /* Strict full screen */
+  height: 100vh; 
   min-height: 700px;
-  padding: 0; /* Padding handled internally by overlay */
+  padding: 0; 
   background:var(--ink);
   position:relative;
   display: flex;
@@ -641,14 +533,14 @@ section {
   background-size: cover;
   background-position: center;
 }
-.ip-bg-1 { background: radial-gradient(circle at 60% 40%, rgba(217,95,26,0.25), var(--ink) 80%); }
+/* Updated IP background to use uploaded image */
+.ip-bg-1 { background-image: url('whos the boss.png'); }
 .ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
 .ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
 
 .ip-slide-bg.active { opacity: 1; }
 .ip-bg-slider::after {
   content:'';position:absolute;inset:0;
-  /* Aggressive bottom gradient to mimic Netflix text readability */
   background: linear-gradient(to top, rgba(5,6,10,1) 0%, rgba(5,6,10,0.8) 25%, rgba(5,6,10,0.3) 100%);
 }
 
@@ -656,10 +548,10 @@ section {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 120px 72px; /* Universal spacing enforced internally */
+  padding: 120px 72px; 
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; /* Locks everything to the bottom */
+  align-items: flex-end; 
 }
 
 .ip-main-info {
@@ -697,7 +589,7 @@ section {
 .ip-thumbnails {
   display: flex;
   gap: 16px;
-  margin-bottom: 10px; /* Slight lift to align with text baseline */
+  margin-bottom: 10px; 
 }
 .nf-thumb {
   width: 180px; height: 100px;
@@ -715,29 +607,31 @@ section {
   transform: translateY(-5px);
 }
 .nf-thumb-bg {
-  position: absolute; inset: 0; opacity: 0.4;
+  position: absolute; inset: 0; opacity: 1;
+  background-size: cover;
+  background-position: center;
 }
 .nf-thumb-title {
   position: absolute; bottom: 10px; left: 14px;
   font-family: 'Rajdhani', sans-serif; font-weight: 700;
   font-size: 13px; text-transform: uppercase; color: #FFF;
+  z-index: 2;
+}
+.nf-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+  z-index: 1;
 }
 .nf-progress {
   position: absolute; bottom: 0; left: 0; height: 2px;
-  background: var(--orange); width: 0;
+  background: var(--orange); width: 0; z-index: 3;
 }
 .nf-thumb.active .nf-progress {
   animation: nfTimer 5s linear forwards;
 }
 @keyframes nfTimer { from {width:0;} to {width:100%;} }
 
-@media(max-width: 1000px) {
-  .ip-content-overlay { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 40px; }
-  .ip-main-info { max-width: 100%; }
-}
-
-
-/* ─── WHY US: PREMIUM BENTO GRID ─── */
+/* ─── WHY US ─── */
 #why {
   background: var(--ink-mid);
   min-height: 100vh;
@@ -757,24 +651,7 @@ section {
   padding: 50px;
   position: relative;
   overflow: hidden;
-  cursor: none;
-  transition: all 0.5s ease;
 }
-.bento-card:hover {
-  background: #151624; 
-  border-color: rgba(217,95,26,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-.bento-bg-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at bottom right, rgba(217,95,26,0.1), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-.bento-card:hover .bento-bg-glow { opacity: 1; }
-
 .bento-num {
   font-family: 'Rajdhani', sans-serif;
   font-size: 80px;
@@ -784,16 +661,6 @@ section {
   position: absolute;
   top: 30px;
   right: 40px;
-  transition: color 0.5s, transform 0.5s;
-}
-.bento-card:hover .bento-num {
-  color: rgba(217,95,26,0.08);
-  transform: scale(1.1);
-}
-
-.bento-content {
-  position: relative;
-  z-index: 2;
 }
 .bento-title {
   font-family: 'Rajdhani', sans-serif;
@@ -808,15 +675,9 @@ section {
   font-size: 16px;
   line-height: 1.7;
   color: var(--text-bright);
-  max-width: 85%;
 }
 
-@media(max-width: 900px) {
-  .bento-grid { grid-template-columns: 1fr; }
-}
-
-
-/* ─── CTA / FINAL ─── */
+/* ─── CTA / FOOTER ─── */
 #cta{
   min-height:100vh; position:relative;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -824,38 +685,21 @@ section {
 }
 .cta-bg{
   position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 90% 70% at 50% 110%,rgba(217,95,26,.18),transparent 65%),
-    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(217,95,26,.06),transparent),
-    linear-gradient(to top,#0d0902,#05060A);
-}
-.cta-horizon{
-  position:absolute;bottom:32%;left:5%;right:5%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--orange-dark),var(--orange),var(--orange-light),var(--orange),var(--orange-dark),transparent);
-  opacity:.25;
+  background: linear-gradient(to top,#0d0902,#05060A);
 }
 .cta-content{position:relative;z-index:2;padding:0 40px}
 .cta-eyebrow{
   font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
   letter-spacing:6px;text-transform:uppercase;color:var(--chrome);margin-bottom:24px;
-  opacity:0;transform:translateY(16px);transition:opacity 1s,transform 1s;
 }
 .cta-h{
   font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(44px,7vw,96px);letter-spacing:1px;line-height:.95;
-  max-width:900px;opacity:0;transform:translateY(24px);transition:opacity 1.2s .2s,transform 1.2s .2s;
-}
-.cta-sub{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:20px;color:var(--text-bright);font-weight:400; 
-  margin-top:16px;opacity:0;transition:opacity 1s .5s;
+  max-width:900px;
 }
 .cta-btns{
   display:flex;gap:14px;justify-content:center;margin-top:52px;
-  opacity:0;transform:translateY(16px);transition:opacity 1s .7s,transform 1s .7s;
 }
-.in-view .cta-eyebrow, .in-view .cta-h, .in-view .cta-sub, .in-view .cta-btns{opacity:1;transform:translateY(0)}
-
 .cta-footer{
   position:absolute;bottom:36px;inset-inline:0;
   display:flex;justify-content:space-between;align-items:center;
@@ -868,51 +712,33 @@ section {
 .footer-links{display:flex;gap:28px}
 .footer-links a{
   font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(238,236,232,.18);text-decoration:none;
-  font-family:'Rajdhani',sans-serif;transition:color .3s;
+  color:rgba(238,236,232,0.5);text-decoration:none;
+  font-family:'Rajdhani',sans-serif;
 }
-.footer-links a:hover{color:var(--orange)}
-.footer-copy{
-  font-size:10px;letter-spacing:1px;
-  color:rgba(238,236,232,.12);font-family:'Rajdhani',sans-serif;
-}
-
-/* Reveal animation classes */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 1s,transform 1s;}
 .reveal.in-view{opacity:1;transform:translateY(0)}
-.reveal-l{opacity:0;transform:translateX(-32px);transition:opacity 1s,transform 1s;}
-.reveal-l.in-view{opacity:1;transform:translateX(0)}
-.reveal-r{opacity:0;transform:translateX(32px);transition:opacity 1s,transform 1s;}
-.reveal-r.in-view{opacity:1;transform:translateX(0)}
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div id="cx"></div>
 <div id="cr"></div>
-
-<!-- SCROLL PROGRESS -->
 <div id="prog"></div>
 
-<!-- ════ NAV ════ -->
 <nav>
   <a class="logo" href="#">
-    <img src="Legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
-    <span id="fallback-logo" class="text-logo" style="display:none;">LEGA<span class="logo-x">X</span>Y</span>
+    <span class="text-logo">LEGA<span class="logo-x">X</span>Y</span>
   </a>
   <ul>
-    <li><a href="#ecosystem">Ecosystem</a></li>
     <li><a href="#athletes">Athletes</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#ip">Productions</a></li>
     <li><a href="#why">Difference</a></li>
-    <li><a href="team.html">Team</a></li> <!-- Moved to separate page as requested -->
+    <li><a href="team.html">Team</a></li>
   </ul>
   <button class="nav-btn"><span>Join Legaxy</span></button>
 </nav>
 
-<!-- ════ HERO ════ -->
 <section id="hero">
   <div class="hero-video-container">
     <video autoplay muted loop playsinline>
@@ -937,82 +763,50 @@ section {
   </div>
 </section>
 
-<!-- ════ STORY ════ -->
-<section id="story" class="story-wrap">
-  <p class="story-label">Our Belief</p>
-  <h2 class="story-h">We don't manage athletes.<br/>We build <span class="accent">legacies.</span></h2>
-  <p class="story-p">Every champion has a story. We architect the rest of it — from first contract to cultural icon.</p>
+<section id="story">
+  <p class="story-label reveal">Our Belief</p>
+  <h2 class="story-h reveal">We don't manage athletes.<br/>We build <span class="accent">legacies.</span></h2>
+  <p class="story-p reveal">Every champion has a story. We architect the rest of it — from first contract to cultural icon.</p>
 </section>
 
-<!-- ════ PROBLEM ════ -->
-<section id="problem">
-  <div class="prob-inner">
-    <span class="prob-line" data-d="0">No Structure</span>
-    <span class="prob-line" data-d="200">No Exposure</span>
-    <span class="prob-line" data-d="400">No Pathways</span>
-    <div class="prob-seam"></div>
-    <div class="prob-resolve">The system is broken. We fix it.</div>
-  </div>
-</section>
-
-<!-- ════ ATHLETES ════ -->
 <section id="athletes">
   <div class="sec-header reveal">
     <div>
       <p class="sec-eyebrow">Legaxy Elite Roster</p>
       <h2 class="sec-h">The Athletes</h2>
     </div>
-    <p class="sec-note">Profiles that define generations.</p>
   </div>
   
-  <div class="tab-row">
+  <div class="tab-row reveal">
     <button class="tab on" onclick="switchTab(this,'elite')">Elite Athletes</button>
     <button class="tab" onclick="switchTab(this,'rising')">Rising Stars</button>
   </div>
   
   <div class="athlete-showcase" id="athleteShowcase">
     <div class="showcase-ghost" id="showcaseGhost"></div>
-    
-    <!-- TOP INFO (Name, Role, Badge) -->
     <div class="showcase-info-top" id="showcaseInfoTop">
       <div class="si-badge" id="siBadge">Elite Roster</div>
       <div class="si-sport" id="siSport">Cricket</div>
       <div class="si-name" id="siName">Harbhajan Singh</div>
       <div class="si-role" id="siRole">India Legend · Spin Icon</div>
     </div>
-    
-    <!-- STRICT DOCUMENT FLOW WRAPPER TO PREVENT OVERLAPS -->
     <div class="showcase-rotary-wrapper">
-        <button class="scroll-btn prev-btn athlete-nav-btn" onclick="rotateAthleteCarousel(-1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        
+        <button class="scroll-btn prev-btn" onclick="rotateAthleteCarousel(-1)">←</button>
         <div class="rotary-track" id="rotaryTrack"></div>
-        
-        <button class="scroll-btn next-btn athlete-nav-btn" onclick="rotateAthleteCarousel(1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+        <button class="scroll-btn next-btn" onclick="rotateAthleteCarousel(1)">→</button>
     </div>
-
-    <!-- BOTTOM INFO (Description and Button perfectly positioned below cards) -->
     <div class="showcase-info-bottom" id="showcaseInfoBottom">
-      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a fierce, match-winning temperament.</div>
-      <div class="showcase-cta-wrap">
-        <div class="si-cta">View Profile →</div>
-      </div>
+      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history...</div>
+      <div class="si-cta" style="margin-top:16px;">View Profile →</div>
     </div>
-    
   </div>
 </section>
 
-<!-- ════ HOVER-ACTIVATED PORTFOLIO (HORIZONTAL NAV, SPLIT CONTENT) ════ -->
 <section id="portfolio">
-  
   <div class="port-header-wrap reveal">
     <p class="sec-eyebrow">Our Ecosystem</p>
     <h2 class="sec-h">Business Verticals</h2>
   </div>
-
   <ul class="port-nav-list reveal" id="portNavList">
     <li class="port-nav-item active" data-target="0">ELITE</li>
     <li class="port-nav-item" data-target="1">STUDIO</li>
@@ -1020,115 +814,76 @@ section {
     <li class="port-nav-item" data-target="3">MERCH</li>
     <li class="port-nav-item" data-target="4">LEARNING</li>
   </ul>
-
   <div class="port-content-area" id="portPanelsArea">
-    
     <div class="port-panel active">
-      <div class="port-bg bg-elite"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <p class="port-vertical" style="display:none;">Legaxy Elite</p>
+          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We provide end-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
-          <div class="port-features">
-            <div class="pf-item">Financial & Legal Advisory</div>
-            <div class="pf-item">PR & Personal Branding</div>
-            <div class="pf-item">Endorsement & Equity Deals</div>
-          </div>
+          <p class="port-p">We provide end-to-end career architecture...</p>
+          <div class="pf-item">Financial & Legal Advisory</div>
           <div class="port-link">Explore Elite →</div>
         </div>
       </div>
     </div>
-
     <div class="port-panel">
-      <div class="port-bg bg-studio"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <p class="port-vertical" style="display:none;">Legaxy Studio</p>
+          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We produce the content that defines careers. From cinematic biopics to branded series, podcasts and digital IP — Legaxy Studio creates value at every touchpoint across TV, digital, and BTL.</p>
-          <div class="port-features">
-            <div class="pf-item">IP Creation & Biopics</div>
-            <div class="pf-item">Branded Content</div>
-            <div class="pf-item">White-label Production</div>
-          </div>
+          <p class="port-p">We produce cinematic content...</p>
+          <div class="pf-item">IP Creation & Biopics</div>
           <div class="port-link">Explore Studio →</div>
         </div>
       </div>
     </div>
-
     <div class="port-panel">
-      <div class="port-bg bg-live"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <p class="port-vertical" style="display:none;">Legaxy Live</p>
+          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Award shows. Concerts. Sports leagues. Talent hunts. We create larger-than-life live entertainment experiences that electrify fans and elevate regional sport to global spectacle.</p>
-          <div class="port-features">
-            <div class="pf-item">Large-scale Sports Leagues</div>
-            <div class="pf-item">Concerts & Award Shows</div>
-            <div class="pf-item">Global Tours</div>
-          </div>
+          <p class="port-p">Larger-than-life experiences...</p>
+          <div class="pf-item">Global Tours</div>
           <div class="port-link">Explore Live →</div>
         </div>
       </div>
     </div>
-
     <div class="port-panel">
-      <div class="port-bg bg-merch"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <p class="port-vertical" style="display:none;">Legaxy Merch</p>
+          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Unlocking the vast potential of sports IP through licensing and franchising — player branding, apparel collections, digital collectibles, NFTs, Web3 avatars, fan zones, and pop-up retail.</p>
-          <div class="port-features">
-            <div class="pf-item">Team Logo Licensing</div>
-            <div class="pf-item">NFTs & Digital Avatars</div>
-            <div class="pf-item">Fan Zones & Pop-ups</div>
-          </div>
+          <p class="port-p">Licensing and franchising...</p>
+          <div class="pf-item">Team Logo Licensing</div>
           <div class="port-link">Explore Merch →</div>
         </div>
       </div>
     </div>
-
     <div class="port-panel">
-      <div class="port-bg bg-learn"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <p class="port-vertical" style="display:none;">Legaxy Learning</p>
+          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">An education-first initiative delivering mentorship programmes, athlete-led masterclasses, and structured training modules across schools and sports academies — nurturing tomorrow's icons from grassroots up.</p>
-          <div class="port-features">
-            <div class="pf-item">Athlete-led Masterclasses</div>
-            <div class="pf-item">Mentorship Modules</div>
-            <div class="pf-item">Underprivileged Youth Initiatives</div>
-          </div>
+          <p class="port-p">Education-first initiatives...</p>
+          <div class="pf-item">Mentorship Modules</div>
           <div class="port-link">Explore Learning →</div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════ NETFLIX STYLE IP CAROUSEL (FULL SCREEN HERO 100VH) ════ -->
 <section id="ip">
-  
   <div class="ip-bg-slider" id="ipBgSlider">
     <div class="ip-slide-bg ip-bg-1 active"></div>
     <div class="ip-slide-bg ip-bg-2"></div>
@@ -1136,17 +891,17 @@ section {
   </div>
   
   <div class="ip-content-overlay">
-    
     <div class="ip-main-info active" id="ipHeroInfo">
       <p class="ip-sec-title">Original Productions</p>
       <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
       <h2 class="ip-hero-title" id="ipHeroTitle">Who's The Boss?</h2>
-      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers — where sport meets stardom meets home life.</p>
+      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers.</p>
     </div>
 
     <div class="ip-thumbnails">
       <div class="nf-thumb active" data-ip-index="0">
-        <div class="nf-thumb-bg" style="background: radial-gradient(circle, var(--orange), transparent);"></div>
+        <!-- Thumbnail for Who's The Boss using the uploaded image -->
+        <div class="nf-thumb-bg" style="background-image: url('whos the boss.jpg');"></div>
         <span class="nf-thumb-title">Who's The Boss</span>
         <div class="nf-progress"></div>
       </div>
@@ -1161,67 +916,35 @@ section {
         <div class="nf-progress"></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════ WHY US: PREMIUM BENTO GRID ════ -->
 <section id="why">
   <div class="reveal" style="text-align: center;">
     <p class="sec-eyebrow">Why Legaxy</p>
     <h2 class="sec-h">The Difference</h2>
   </div>
-
   <div class="bento-grid reveal">
     <div class="bento-card">
-      <div class="bento-bg-glow"></div>
       <div class="bento-num">01</div>
-      <div class="bento-content">
-        <h3 class="bento-title">Leaders in Management</h3>
-        <p class="bento-desc">A team carrying decades of experience crafting lasting careers across industries. We know what it takes to build an icon from the ground up.</p>
-      </div>
+      <h3 class="bento-title">Leaders in Management</h3>
+      <p class="bento-desc">Experience crafting lasting careers across industries.</p>
     </div>
-
     <div class="bento-card">
-      <div class="bento-bg-glow"></div>
       <div class="bento-num">02</div>
-      <div class="bento-content">
-        <h3 class="bento-title">Personalised Approach</h3>
-        <p class="bento-desc">Tailored strategies that accelerate success and ensure long-term financial and personal growth for every single athlete we represent.</p>
-      </div>
-    </div>
-
-    <div class="bento-card">
-      <div class="bento-bg-glow"></div>
-      <div class="bento-num">03</div>
-      <div class="bento-content">
-        <h3 class="bento-title">Brand Alliances</h3>
-        <p class="bento-desc">Strategic partnerships with top-tier global brands that align with talent identity and values — creating highly authentic and lucrative collaborations.</p>
-      </div>
-    </div>
-
-    <div class="bento-card">
-      <div class="bento-bg-glow"></div>
-      <div class="bento-num">04</div>
-      <div class="bento-content">
-        <h3 class="bento-title">Global Reach</h3>
-        <p class="bento-desc">Deep roots in India's sports ecosystem combined with a worldwide operational footprint across urban and Tier 2/3 markets.</p>
-      </div>
+      <h3 class="bento-title">Personalised Approach</h3>
+      <p class="bento-desc">Tailored strategies that ensure long-term growth.</p>
     </div>
   </div>
 </section>
 
-<!-- ════ FINAL CTA ════ -->
 <section id="cta">
   <div class="cta-bg"></div>
-  <div class="cta-horizon"></div>
-  <div class="cta-content">
+  <div class="cta-content reveal">
     <p class="cta-eyebrow">The Ecosystem Awaits</p>
-    <h2 class="cta-h">BUILD A SPORTS<br/>CULTURE.<br/>NOT JUST A PROGRAM.</h2>
-    <p class="cta-sub">Join the athletes, brands, and creators shaping the future of Indian sport.</p>
+    <h2 class="cta-h">BUILD A SPORTS CULTURE.</h2>
     <div class="cta-btns">
       <button class="btn-gold">Enter the Ecosystem</button>
-      <button class="btn-outline">View Portfolio</button>
     </div>
   </div>
   <div class="cta-footer">
@@ -1231,79 +954,32 @@ section {
       <a href="#">Contact</a>
       <a href="team.html">Team</a>
     </div>
-    <div class="footer-copy">© 2025 Legaxy. All rights reserved.</div>
   </div>
 </section>
 
-<!-- ════ SCRIPT ════ -->
 <script>
-/* ── Cursor ── */
 const cx=document.getElementById('cx');
 const cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cx.style.left=mx+'px';cx.style.top=my+'px'});
 (function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
 
-/* ── Progress bar ── */
 const prog=document.getElementById('prog');
 window.addEventListener('scroll',()=>{
   const pct=scrollY/(document.body.scrollHeight-innerHeight)*100;
   prog.style.width=pct+'%';
 },{passive:true});
 
-/* ── Intersection observer ── */
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')});
 },{threshold:.18});
-document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.story-wrap,.prob-seam,.prob-resolve,#cta .cta-content, .port-header-wrap').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Problem lines Observer */
-const plines=document.querySelectorAll('.prob-line');
-const pObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      plines.forEach(l=>{
-        const d=parseInt(l.dataset.d)||0;
-        setTimeout(()=>l.classList.add('lit'),d);
-      });
-    }
-  });
-},{threshold:.10}); 
-const prob=document.getElementById('problem');
-if(prob)pObs.observe(prob);
-
-
-/* ── Semi-Circle Athlete Carousel Logic ── */
+/* Semi-Circle Athlete Carousel */
 const eliteRoster=[
-  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend · Spin Icon',init:'HS',desc:'A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a fierce, match-winning temperament.'},
-  {name:'Yuzvendra Chahal',sport:'Cricket',role:'RCB · India Leg-Spinner',init:'YC',desc:'India\'s premier leg-spinner and tactical genius, renowned for deceiving the world\'s best batters in high-pressure white-ball encounters.'},
-  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · IPL Star',init:'BK',desc:'A maestro of swing bowling. His calm execution and pinpoint precision have made him one of the most reliable pacers of his generation.'},
-  {name:'Ishant Sharma',sport:'Cricket',role:'India Pacer · DC Veteran',init:'IS',desc:'A towering presence and veteran of Indian fast bowling, carrying the immense experience of over a hundred Test matches and iconic spells.'},
-  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',init:'UY',desc:'Pace, raw power, and an imposing run-up. Known for providing crucial breakthroughs and thriving aggressively with the new ball.'},
-  {name:'Harshal Patel',sport:'Cricket',role:'India & RCB · Death Bowler',init:'HP',desc:'The master of death bowling and variations. His calculated slower balls and deceptive dip make him a lethal asset in the final overs.'},
-  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · All-rounder',init:'RT',desc:'A charismatic all-rounder who has authored some of the most miraculous, jaw-dropping finishes in modern T20 franchise history.'},
-  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Emerging Star',init:'SS',desc:'A dynamic and explosive middle-order batter, rapidly carving out a reputation for finishing games with breathtaking power hitting.'},
-  {name:'Sai Kishore',sport:'Cricket',role:'GT · Left-arm Spinner',init:'SK',desc:'A tall, highly accurate left-arm spinner combining discipline with sharp bounce to suffocate scoring rates in crucial middle overs.'},
-  {name:'Mayank Dagar',sport:'Cricket',role:'RR · Qatar Airways',init:'MD',desc:'An electrifying fielder and a highly effective left-arm spinner, continuously rising through the ranks as a vital white-ball specialist.'},
-  {name:'Sangram Singh',sport:'Wrestling',role:'India Champion',init:'SG',desc:'A celebrated champion and inspirational icon in Indian wrestling, inspiring the next generation through resilience and immense physical prowess.'},
+  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend',init:'HS',desc:'A legendary figure in Indian cricket history...'},
+  {name:'Yuzvendra Chahal',sport:'Cricket',role:'India Leg-Spinner',init:'YC',desc:'India\'s premier leg-spinner...'}
 ];
-const risingRoster=[
-  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Rising Prospect',init:'VB',desc:'A high-potential rising prospect, blending natural athleticism with a sharp cricketing brain to dominate the youth circuit.'},
-  {name:'Vathsal Govind',sport:'Cricket',role:'Emerging India Talent',init:'VG',desc:'An emerging talent showcasing exceptional technique and temperament, marked as a future cornerstone of the batting order.'},
-  {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',init:'MR',desc:'A powerful star in the making, possessing the rare ability to aggressively dismantle bowling attacks from the moment he takes the crease.'},
-  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',init:'TD',desc:'A highly versatile youth-circuit all-rounder, consistently delivering impactful performances with both bat and ball.'},
-  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',init:'SH',desc:'An aggressive and fast-improving pace bowler, generating impressive speed and leading the charge for the next generation of women\'s cricket.'},
-  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency that ranks her among Asia\'s top juniors.'},
-  {name:'Archana',sport:'Athletics',role:'Emerging Track Star',init:'AR',desc:'An explosive emerging track star. Her sheer pace, dedication, and explosive acceleration highlight her as a premier athlete to watch.'},
-  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National',init:'KS',desc:'A highly promising national-level talent, refining his all-round game and consistently turning heads in competitive age-group tournaments.'},
-  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Pacer',init:'YD',desc:'A resilient and technically gifted top-order anchor, capable of building massive innings and stabilizing the crease under pressure.'},
-  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Rising Fast Bowler',init:'AJ',desc:'A fiery rising fast bowler who brings raw pace, intimidating bounce, and an attacking mindset to every spell.'},
-  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',init:'AV',desc:'A highly stylish and dependable batter, recognized for his expansive stroke play and steady consistency in the local circuits.'},
-  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging',init:'AG',desc:'A young, determined prodigy making swift strides. His unwavering focus and natural flair earmark him as a future game-changer.'},
-];
-
-let currentTab='elite';
-const colors=['#120e04','#080d14','#140a04','#0a0d0a','#10081a','#04100e','#140604','#060f14'];
 let currentAthleteIndex = 0;
 let currentRoster = eliteRoster;
 
@@ -1313,7 +989,7 @@ function renderAthletes(roster) {
   const track = document.getElementById('rotaryTrack');
   track.innerHTML = roster.map((a, i) => `
     <div class="rotary-item" onclick="setAthleteIndex(${i})">
-      <div class="ri-art" style="background:linear-gradient(135deg, ${colors[i % colors.length]}, var(--ink-lift))"></div>
+      <div class="ri-art" style="background:#111"></div>
       <div class="ri-overlay"></div>
       <div class="ri-init">${a.init}</div>
     </div>
@@ -1321,170 +997,68 @@ function renderAthletes(roster) {
   updateAthleteCarousel(true); 
 }
 
-function setAthleteIndex(idx) {
-  if (idx === currentAthleteIndex) return;
-  currentAthleteIndex = idx;
-  updateAthleteCarousel();
-}
-
+function setAthleteIndex(idx) { currentAthleteIndex = idx; updateAthleteCarousel(); }
 function rotateAthleteCarousel(dir) {
-  currentAthleteIndex += dir;
-  if (currentAthleteIndex < 0) currentAthleteIndex = currentRoster.length - 1;
-  if (currentAthleteIndex >= currentRoster.length) currentAthleteIndex = 0;
+  currentAthleteIndex = (currentAthleteIndex + dir + currentRoster.length) % currentRoster.length;
   updateAthleteCarousel();
 }
 
 function updateAthleteCarousel(instant = false) {
   const items = document.querySelectorAll('.rotary-item');
-  /* Completely redesigned massive, flatter arc radius so background cards never dip into the text below */
-  const R = window.innerWidth < 768 ? 260 : 700; 
-  const angleStep = window.innerWidth < 768 ? 30 : 14; 
+  const R = 700; 
+  const angleStep = 14; 
   
   items.forEach((item, i) => {
     const offset = i - currentAthleteIndex;
-    const angleDeg = offset * angleStep;
-    const angleRad = angleDeg * (Math.PI / 180);
+    const angleRad = offset * angleStep * (Math.PI / 180);
     const x = R * Math.sin(angleRad);
     const y = -R * Math.cos(angleRad) + R; 
     const dist = Math.abs(offset);
-    const scale = dist === 0 ? 1.2 : Math.max(0.7, 1 - dist * 0.1);
-    const opacity = dist === 0 ? 1 : Math.max(0, 0.7 - dist * 0.15);
-    const zIndex = 100 - dist;
-    
-    if (instant) item.style.transition = 'none';
-    else item.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-    
-    item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
-    item.style.opacity = opacity;
-    item.style.zIndex = zIndex;
-    item.style.pointerEvents = opacity > 0 ? 'auto' : 'none';
-    
-    if (dist === 0) item.classList.add('active');
-    else item.classList.remove('active');
+    item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${dist===0?1.2:0.8})`;
+    item.style.opacity = dist === 0 ? 1 : 0.5;
+    item.classList.toggle('active', dist === 0);
   });
-
-  if (instant) items[0]?.offsetHeight; 
   updateAthleteInfo();
 }
 
 function updateAthleteInfo() {
-  const infoTop = document.getElementById('showcaseInfoTop');
-  const infoBottom = document.getElementById('showcaseInfoBottom');
-  const ghost = document.getElementById('showcaseGhost');
   const data = currentRoster[currentAthleteIndex];
-  
-  infoTop.classList.add('fade-out');
-  infoBottom.classList.add('fade-out');
-  ghost.style.opacity = 0;
-  ghost.style.transform = 'translateX(-50%) translateY(20px)';
-  
-  setTimeout(() => {
-    document.getElementById('siBadge').textContent = currentTab === 'elite' ? 'Elite Roster' : 'Rising Star';
-    document.getElementById('siSport').textContent = data.sport;
-    document.getElementById('siName').textContent = data.name;
-    document.getElementById('siRole').textContent = data.role;
-    document.getElementById('siDesc').textContent = data.desc;
-    ghost.textContent = data.init;
-    
-    infoTop.classList.remove('fade-out');
-    infoBottom.classList.remove('fade-out');
-    ghost.style.opacity = 1;
-    ghost.style.transform = 'translateX(-50%) translateY(0)';
-  }, 400); 
+  document.getElementById('siName').textContent = data.name;
+  document.getElementById('siRole').textContent = data.role;
+  document.getElementById('siDesc').textContent = data.desc;
 }
-
 renderAthletes(eliteRoster);
 
-function switchTab(el,type){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  currentTab=type;
-  renderAthletes(type==='elite'?eliteRoster:risingRoster);
-}
-
-
-/* ── Portfolio Horizontal Nav Logic ── */
-const portNavItems = document.querySelectorAll('.port-nav-item');
-const portPanels = document.querySelectorAll('.port-panel');
-
-portNavItems.forEach(item => {
+/* Portfolio Vertical Nav */
+document.querySelectorAll('.port-nav-item').forEach(item => {
   item.addEventListener('mouseenter', () => {
-    const targetIndex = item.getAttribute('data-target');
-    
-    portNavItems.forEach(nav => nav.classList.remove('active'));
-    portPanels.forEach(panel => panel.classList.remove('active'));
-    
+    const idx = item.dataset.target;
+    document.querySelectorAll('.port-nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.port-panel').forEach(p => p.classList.remove('active'));
     item.classList.add('active');
-    portPanels[targetIndex].classList.add('active');
+    document.querySelectorAll('.port-panel')[idx].classList.add('active');
   });
 });
 
-/* ── NETFLIX IP SLIDER LOGIC ── */
+/* IP Slider */
 const ipData = [
-  { tag: "Talk Show", title: "Who's The Boss?", desc: "Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers — where sport meets stardom meets home life." },
-  { tag: "Docuseries", title: "The Unheard Story", desc: "Cinematic athlete documentaries capturing the journeys of India's sports icons — from village fields to international arenas. An intimate look at the sacrifices that forge a champion." },
-  { tag: "Live Event IP", title: "Legaxy Awards", desc: "The definitive annual celebration of Indian sport — honouring excellence, courage, and legacy across disciplines from grassroots to the global stage." }
+  { tag: "Talk Show", title: "Who's The Boss?", desc: "Starring Harbhajan Singh & Geeta Basra. A talk show blending behind-the-scenes banter and real conversations." },
+  { tag: "Docuseries", title: "The Unheard Story", desc: "Cinematic athlete documentaries capturing the journeys of India's sports icons." },
+  { tag: "Live Event IP", title: "Legaxy Awards", desc: "The definitive annual celebration of Indian sport." }
 ];
-
-const thumbs = document.querySelectorAll('.nf-thumb');
-const bgs = document.querySelectorAll('.ip-slide-bg');
-const heroInfo = document.getElementById('ipHeroInfo');
 let ipIndex = 0;
-let ipInterval;
-
-function setIp(index) {
-  ipIndex = index;
-  
-  // Update UI state
-  thumbs.forEach(t => t.classList.remove('active'));
-  bgs.forEach(b => b.classList.remove('active'));
-  
-  thumbs[index].classList.add('active');
-  bgs[index].classList.add('active');
-  
-  // Animate text change
-  heroInfo.classList.remove('active');
-  
-  setTimeout(() => {
-    document.getElementById('ipHeroTag').textContent = ipData[index].tag;
-    document.getElementById('ipHeroTitle').textContent = ipData[index].title;
-    document.getElementById('ipHeroDesc').textContent = ipData[index].desc;
-    heroInfo.classList.add('active');
-  }, 300);
-  
-  resetIpTimer();
+function setIp(idx) {
+  ipIndex = idx;
+  document.querySelectorAll('.nf-thumb').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ip-slide-bg').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nf-thumb')[idx].classList.add('active');
+  document.querySelectorAll('.ip-slide-bg')[idx].classList.add('active');
+  document.getElementById('ipHeroTag').textContent = ipData[idx].tag;
+  document.getElementById('ipHeroTitle').textContent = ipData[idx].title;
+  document.getElementById('ipHeroDesc').textContent = ipData[idx].desc;
 }
-
-function nextIp() {
-  setIp((ipIndex + 1) % ipData.length);
-}
-
-function resetIpTimer() {
-  clearInterval(ipInterval);
-  ipInterval = setInterval(nextIp, 5000); // 5 second auto play
-}
-
-// Hover interaction
-thumbs.forEach((thumb, idx) => {
-  thumb.addEventListener('mouseenter', () => {
-    if(idx !== ipIndex) setIp(idx);
-    clearInterval(ipInterval); // Pause on hover
-  });
-  thumb.addEventListener('mouseleave', () => {
-    resetIpTimer(); // Resume on leave
-  });
-});
-
-// Start loop
-resetIpTimer();
-
-/* ── CTA section observer ── */
-const ctaObs2=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting)e.target.closest('#cta')?.querySelector('.cta-content').classList.add('in-view');
-  });
-},{threshold:.2});
-document.querySelectorAll('#cta .cta-content').forEach(el=>ctaObs2.observe(el));
+document.querySelectorAll('.nf-thumb').forEach((t, i) => t.addEventListener('mouseenter', () => setIp(i)));
+setInterval(() => setIp((ipIndex + 1) % 3), 5000);
 </script>
 </body>
 </html>
