@@ -260,6 +260,41 @@ section {
 }
 .in-view .story-label, .in-view .story-h, .in-view .story-p{opacity:1;transform:translateY(0)}
 
+/* ─── PROBLEM ─── */
+#problem{
+  min-height:100vh;
+  background:var(--ink-mid);
+  display:flex;justify-content:center;align-items:center;
+}
+.prob-inner{width:100%;max-width:860px}
+.prob-line{
+  display:block;font-family:'Rajdhani',sans-serif;font-weight:700; 
+  font-size:clamp(40px,7vw,96px);letter-spacing:2px;line-height:1;
+  color:var(--text-dim); opacity:0.6; transform:translateX(0);
+  transition:opacity .8s,transform .8s,color .8s;
+  position:relative;padding-left:56px;
+}
+.prob-line::before{
+  content:'//';position:absolute;left:0;
+  font-size:.5em;color:var(--orange);opacity:0;
+  transition:opacity .5s .2s;letter-spacing:0;
+}
+.prob-line.lit{color:#FFF;opacity:1;}
+.prob-line.lit::before{opacity:1}
+.prob-seam{
+  height:1px;background:linear-gradient(90deg,var(--orange),rgba(217,95,26,0));
+  width:0;margin:28px 0;transition:width 1.1s cubic-bezier(.23,1,.32,1);
+}
+.prob-seam.in-view{width:100%}
+.prob-resolve{
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(24px,3.5vw,52px);letter-spacing:2px;
+  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:0.4; transition:opacity 1s .3s;
+}
+.prob-resolve.in-view{opacity:1}
+
+
 /* ─── ATHLETES ─── */
 #athletes{
   background:var(--ink-mid);
@@ -505,6 +540,7 @@ section {
   background-size: cover;
   background-position: center;
 }
+/* Background image fix */
 .ip-bg-1 { background-image: url("who's the boss.png"); }
 .ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
 .ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
@@ -743,17 +779,23 @@ section {
       <button class="btn-outline">Watch Film</button>
     </div>
   </div>
-
-  <div class="hero-scroll-hint">
-    <div class="scroll-wire"></div>
-    <span>Scroll</span>
-  </div>
 </section>
 
 <section id="story">
   <p class="story-label reveal">Our Belief</p>
   <h2 class="story-h reveal">We don't manage athletes.<br/>We build <span class="accent">legacies.</span></h2>
   <p class="story-p reveal">Every champion has a story. We architect the rest of it — from first contract to cultural icon.</p>
+</section>
+
+<!-- PROBLEM SECTION RESTORED -->
+<section id="problem">
+  <div class="prob-inner">
+    <span class="prob-line" data-d="0">No Structure</span>
+    <span class="prob-line" data-d="200">No Exposure</span>
+    <span class="prob-line" data-d="400">No Pathways</span>
+    <div class="prob-seam"></div>
+    <div class="prob-resolve">The system is broken. We fix it.</div>
+  </div>
 </section>
 
 <section id="athletes">
@@ -806,7 +848,7 @@ section {
     <div class="port-panel active">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
@@ -822,7 +864,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
@@ -838,7 +880,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
@@ -854,7 +896,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
@@ -870,7 +912,7 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <img src="Legaxy Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
@@ -990,7 +1032,24 @@ window.addEventListener('scroll',()=>{
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')});
 },{threshold:.18});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal,.story-wrap,.prob-seam,.prob-resolve').forEach(el=>io.observe(el));
+
+/* Problem lines Observer */
+const plines=document.querySelectorAll('.prob-line');
+const pObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      plines.forEach(l=>{
+        const d=parseInt(l.dataset.d)||0;
+        setTimeout(()=>l.classList.add('lit'),d);
+      });
+      document.querySelector('.prob-seam').classList.add('in-view');
+      document.querySelector('.prob-resolve').classList.add('in-view');
+    }
+  });
+},{threshold:.10}); 
+const prob=document.getElementById('problem');
+if(prob)pObs.observe(prob);
 
 /* Semi-Circle Athlete Carousel */
 const eliteRoster=[
