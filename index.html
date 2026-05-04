@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Legaxy — Next Gen Sportainment Ecosystem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ─────────────────────────────────────────
    TOKENS & RESET
@@ -18,16 +18,17 @@
   --orange-dark:#9D3C00;
   
   --chrome:#B8B8C0;
-  --chrome-dim:#8A8A93; /* Muted for premium subtlety */
+  --chrome-dim:#8A8A93; 
 
   --ink:#05060A;
   --ink-mid:#0B0C14;
   --ink-lift:#12131E;
   --ink-panel:#0F1019;
 
-  --text:#EAEAEA; /* Less harsh white */
+  --text:#EAEAEA; 
   --text-muted:#8A8A93;
   --text-dim:#4A4A52;
+  --text-bright:#DFDFE5;
 
   --glass:rgba(255,255,255,0.03);
   --glass-border:rgba(255,255,255,0.07);
@@ -55,7 +56,7 @@ body{
 }
 #cx{
   width:8px;height:8px;
-  background:var(--orange-light);
+  background:var(--orange);
   transition:width .25s,height .25s,background .25s;
 }
 #cr{
@@ -63,8 +64,8 @@ body{
   border:1px solid rgba(217,95,26,.45);
   transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s;
 }
-body:has(a:hover,button:hover, .acard:hover, .port-link:hover) #cx{width:14px;height:14px;background:var(--orange)}
-body:has(a:hover,button:hover, .acard:hover, .port-link:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+body:has(a:hover,button:hover, .acard:hover, .port-link:hover, .scroll-btn:hover) #cx{width:14px;height:14px;background:var(--orange)}
+body:has(a:hover,button:hover, .acard:hover, .port-link:hover, .scroll-btn:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
 
 /* ─── SCROLL PROGRESS ─── */
 #prog{
@@ -96,7 +97,7 @@ nav{
   background-clip:text;
 }
 .nav-logo-img{
-  height: 36px;
+  height: 70px;
   width: auto;
   object-fit: contain;
 }
@@ -115,7 +116,7 @@ nav ul a:hover{color:var(--orange)}
   color:var(--orange);padding:9px 22px;cursor:none;
   transition:background .3s,color .3s,border-color .3s;
   position:relative;overflow:hidden;
-  border-radius:0; /* ensuring sharp edges */
+  border-radius:0; 
 }
 .nav-btn::before{
   content:'';position:absolute;inset:0;
@@ -160,15 +161,17 @@ nav ul a:hover{color:var(--orange)}
 }
 .hero-badge{
   position:relative;z-index:2;
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);
+  font-family:'Rajdhani',sans-serif;font-size:11px;
+  font-weight:700; 
+  letter-spacing:5px;
+  text-transform:uppercase;color:var(--chrome);
   display:flex;align-items:center;gap:12px;margin-bottom:20px;
   opacity:0;animation:fadeUp .9s .8s forwards;
 }
 .hero-badge::before{content:'';width:32px;height:1px;background:var(--metal)}
 .hero-h1{
   position:relative;z-index:2;
-  font-family:'Rajdhani',sans-serif;font-weight:600; /* premium, slightly less bold */
+  font-family:'Rajdhani',sans-serif;font-weight:600;
   font-size:clamp(60px,9.5vw,130px);line-height:.92;
   letter-spacing:-1px;
   opacity:0;animation:fadeUp 1s 1s forwards;
@@ -184,7 +187,9 @@ nav ul a:hover{color:var(--orange)}
 .hero-sub{
   position:relative;z-index:2;
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:18px;color:var(--chrome-dim);margin-top:16px;
+  font-size:18px;
+  color:var(--text-bright);font-weight:400; 
+  margin-top:16px;
   opacity:0;animation:fadeUp .9s 1.3s forwards;
 }
 .hero-ctas{
@@ -193,14 +198,13 @@ nav ul a:hover{color:var(--orange)}
   opacity:0;animation:fadeUp .9s 1.6s forwards;
 }
 
-/* Updating CTAs to transparent rectangles that fill with orange */
 .btn-gold{
   background:transparent;
   color:var(--orange);
   padding:14px 36px;font-size:11px;
   letter-spacing:3px;text-transform:uppercase;
   border:1px solid var(--orange);cursor:none;
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700;
   position:relative;overflow:hidden;
   transition:all .3s ease;
   border-radius: 0;
@@ -215,18 +219,19 @@ nav ul a:hover{color:var(--orange)}
 
 .btn-outline{
   background:transparent;
-  border:1px solid rgba(217,95,26,.3);
+  border:1px solid rgba(255,255,255,.2);
   color:var(--chrome);
   padding:14px 36px;font-size:11px;
   letter-spacing:3px;text-transform:uppercase;
   cursor:none;
-  font-family:'Rajdhani',sans-serif;font-weight:500;
+  font-family:'Rajdhani',sans-serif;font-weight:600;
   display:flex;align-items:center;gap:10px;
   transition:border-color .3s,color .3s;
   border-radius: 0;
 }
-.btn-outline::before{content:'▶';font-size:8px;color:var(--orange)}
+.btn-outline::before{content:'▶';font-size:8px;color:var(--chrome)}
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+.btn-outline:hover::before{color:var(--orange)}
 
 .hero-scroll-hint{
   position:absolute;bottom:40px;right:72px;z-index:2;
@@ -270,12 +275,12 @@ section{position:relative}
 }
 .story-label{
   font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:32px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:32px;
   opacity:0;transform:translateY(16px);
   transition:opacity 1s,transform 1s;position:relative;z-index:1;
 }
 .story-h{
-  font-family:'Rajdhani',sans-serif;font-weight:600; /* refined */
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(38px,6.5vw,88px);line-height:1;
   letter-spacing:1px;max-width:900px;
   opacity:0;transform:translateY(24px);
@@ -287,7 +292,9 @@ section{position:relative}
 }
 .story-p{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:19px;color:var(--chrome-dim);margin-top:20px;max-width:540px;
+  font-size:19px;
+  color:var(--text-bright);font-weight:400; 
+  margin-top:20px;max-width:540px;
   opacity:0;transform:translateY(16px);
   transition:opacity 1s .5s,transform 1s .5s;
   position:relative;z-index:1;
@@ -304,7 +311,7 @@ section{position:relative}
 .prob-inner{padding:0 72px;width:100%;max-width:860px}
 .prob-line{
   display:block;
-  font-family:'Rajdhani',sans-serif;font-weight:600; /* refined */
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(44px,7.5vw,96px);letter-spacing:2px;line-height:1;
   color:var(--text-dim);
   opacity:0;transform:translateX(-24px);
@@ -326,30 +333,79 @@ section{position:relative}
 }
 .prob-seam.in-view{width:100%}
 .prob-resolve{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700;
   font-size:clamp(28px,4vw,52px);letter-spacing:2px;
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   opacity:0;transition:opacity 1s .3s;
 }
 .prob-resolve.in-view{opacity:1}
 
-/* ─── ECOSYSTEM HORIZONTAL ─── */
-#ecosystem{height:100vh;width:100%;position:relative}
-.eco-sticky{position:relative;height:100vh;width:100%;display:flex}
+/* ─── ECOSYSTEM FADE CAROUSEL ─── */
+#ecosystem{height:100vh;width:100%;position:relative;}
+.eco-sticky{
+  position:relative;
+  height:100vh;
+  width:100%;
+  display:block; /* Removed Flex */
+}
+
+/* Premium Navigation Buttons */
+.scroll-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:56px;height:56px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#FFF;
+  display:flex;align-items:center;justify-content:center;
+  z-index:20;
+  cursor:none; 
+  backdrop-filter:blur(10px);
+  transition:all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.scroll-btn:hover{
+  background:var(--orange);
+  border-color:var(--orange);
+  color:#FFF;
+  transform:translateY(-50%) scale(1.05);
+  box-shadow:0 10px 30px var(--orange-glow);
+}
+.prev-btn{left:32px;}
+.next-btn{right:32px;}
+
+@media(max-width:768px){
+  .scroll-btn{width:44px;height:44px;}
+  .prev-btn{left:16px;}
+  .next-btn{right:16px;}
+}
+
 .eco-track{
-  display:flex;width:100%;height:100%;
-  overflow-x:auto;overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
+  position:relative;
+  width:100%;
+  height:100%;
+  display:block;
 }
-.eco-track::-webkit-scrollbar{display:none}
+
 .eco-panel{
-  width:100vw;height:100vh;flex-shrink:0;
-  scroll-snap-align:start;
-  position:relative;display:flex;align-items:flex-end;
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  width:100%;
+  height:100vh;
+  display:flex;align-items:flex-end;
   padding:80px 72px;overflow:hidden;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
+  z-index:1;
 }
+.eco-panel.active {
+  opacity:1;
+  visibility:visible;
+  z-index:2;
+}
+
 /* Panel backgrounds */
 .ep1{background:linear-gradient(135deg,#080601 0%,#150e03 50%,#0a0702 100%)}
 .ep2{background:linear-gradient(135deg,#040608 0%,#060d14 50%,#04080d 100%)}
@@ -375,7 +431,7 @@ section{position:relative}
 .eco-tag{
   position:absolute;top:56px;left:72px;
   font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);z-index:2;
+  text-transform:uppercase;color:var(--chrome);z-index:2;
 }
 .eco-num{
   position:absolute;top:50px;right:72px;z-index:2;
@@ -384,7 +440,8 @@ section{position:relative}
 }
 .eco-content{position:relative;z-index:2;max-width:560px}
 .eco-title{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700; 
   font-size:clamp(48px,5.5vw,76px);letter-spacing:2px;line-height:.95;
   margin-bottom:18px;
 }
@@ -392,28 +449,32 @@ section{position:relative}
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .eco-desc{
-  font-size:15px;line-height:1.75;color:var(--chrome-dim);max-width:400px;
+  font-size:15px;line-height:1.75;
+  color:var(--text-bright);font-weight:400; 
+  max-width:400px;
 }
 .eco-services{
   display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;
 }
 .eco-chip{
   padding:6px 14px;
-  background:rgba(217,95,26,.07);
-  border:1px solid rgba(217,95,26,.15);
+  background:transparent;
+  border:1px solid rgba(255,255,255,.15);
   font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--orange);
+  text-transform:uppercase;color:var(--chrome); 
   transition:background .3s,color .3s,border-color .3s;cursor:none;
 }
-.eco-chip:hover{background:rgba(217,95,26,.15);color:var(--orange-light);border-color:var(--orange)}
+.eco-chip:hover{background:var(--orange);color:#FFF;border-color:var(--orange)}
 .eco-cta{
   display:inline-flex;align-items:center;gap:10px;margin-top:32px;
-  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--orange);cursor:none;
-  border-bottom:1px solid rgba(217,95,26,.3);padding-bottom:2px;
+  font-family:'Rajdhani',sans-serif;font-size:12px; 
+  font-weight:700; 
+  letter-spacing:3px;
+  text-transform:uppercase;color:var(--chrome);cursor:none;
+  border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:2px;
   transition:color .3s,border-color .3s;
 }
-.eco-cta:hover{color:var(--orange-light);border-color:var(--orange)}
+.eco-cta:hover{color:#FFF;border-color:var(--orange)}
 /* Panel indicator dots */
 .eco-dots{
   position:absolute;bottom:56px;right:72px;z-index:2;
@@ -422,6 +483,7 @@ section{position:relative}
 .eco-dot{
   width:5px;height:5px;border-radius:50%;
   background:var(--text-dim);transition:background .4s,width .4s;
+  cursor:none;
 }
 .eco-dot.a{background:var(--orange);width:16px;border-radius:3px}
 /* metallic accent bar left edge */
@@ -442,22 +504,24 @@ section{position:relative}
 }
 .sec-eyebrow{
   font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:12px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:12px;
 }
 .sec-h{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(36px,4.5vw,60px);letter-spacing:1px;
 }
 .sec-note{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:17px;color:var(--chrome-dim);text-align:right;max-width:280px;
+  font-size:17px;color:var(--text-bright);font-weight:400; 
+  text-align:right;max-width:280px;
 }
 .tab-row{
   display:flex;gap:2px;padding:0 72px;margin-bottom:44px;
 }
 .tab{
   padding:9px 22px;
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2.5px;
+  font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:2.5px;
   text-transform:uppercase;background:transparent;
   border:1px solid var(--text-dim);color:var(--text-muted);
   cursor:none;transition:all .3s ease;
@@ -471,81 +535,208 @@ section{position:relative}
 .tab.on{
   background:var(--metal);border-color:transparent;color:#FFF;
 }
-.athlete-track{
-  display:flex;gap:16px;padding:0 72px;
-  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  padding-bottom:40px;
-}
-.athlete-track::-webkit-scrollbar{display:none}
 
-/* ── Athlete card ── */
-.acard{
-  flex-shrink:0;width:260px;height:380px;position:relative;
-  overflow:hidden;cursor:none;background:var(--ink-lift);
-  border-radius: 0; /* Ensuring sharp corners */
+/* ─── ATHLETE SEMI-CIRCLE CAROUSEL ─── */
+.athlete-showcase {
+  position:relative;
+  width:100%;
+  height:850px; /* Increased height to give plenty of breathing room */
+  margin-top:20px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
-.acard-inner{
+
+/* Background Ghost Text */
+.showcase-ghost {
+  position:absolute;
+  top:8%;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  font-size:clamp(120px, 15vw, 240px);
+  color:rgba(217,95,26,0.03);
+  white-space:nowrap;
+  pointer-events:none;
+  z-index:0;
+  transition:opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Featured Info Panel */
+.showcase-info {
+  position:relative;
+  z-index:2;
+  text-align:center;
+  margin-top:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition:opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.showcase-info.fade-out {
+  opacity:0;
+  transform:scale(0.97) translateY(15px);
+}
+.si-badge {
+  font-family:'Rajdhani',sans-serif;
+  font-size:10px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  padding:6px 14px;
+  border:1px solid rgba(217,95,26,0.3);
+  background:rgba(5,6,10,0.6);
+  backdrop-filter:blur(8px);
+  color:var(--orange-light);
+  margin-bottom:16px;
+}
+.si-sport {
+  font-family:'Rajdhani',sans-serif;
+  font-size:14px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--chrome);
+  margin-bottom:8px;
+}
+.si-name {
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  font-size:clamp(44px, 6vw, 72px);
+  line-height:1;
+  letter-spacing:1px;
+  color:#FFF;
+  margin-bottom:12px;
+}
+.si-role {
+  font-size:16px;
+  color:var(--text-bright);
+  font-style:italic;
+  font-family:'Playfair Display',serif;
+}
+
+/* Premium Subtle Description Box */
+.si-desc-box {
+  margin-top:28px;
+  margin-bottom:16px;
+  padding:18px 28px;
+  background:rgba(255,255,255,0.015);
+  border:1px solid rgba(255,255,255,0.06);
+  max-width:540px;
+  position:relative;
+  font-family:'Barlow',sans-serif;
+  font-size:14px;
+  line-height:1.7;
+  color:var(--chrome-dim);
+  backdrop-filter:blur(4px);
+}
+/* Orange accent wire on top of box */
+.si-desc-box::before {
+  content:'';
+  position:absolute;
+  top:-1px;
+  left:50%;
+  transform:translateX(-50%);
+  width:40px;
+  height:1px;
+  background:var(--orange);
+}
+
+.showcase-cta-wrap {
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10;
+  transition:opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.showcase-cta-wrap.fade-out {
+  opacity:0;
+  transform:translateX(-50%) translateY(15px);
+}
+
+.si-cta {
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Rajdhani',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--orange);cursor:none;
+  border-bottom:1px solid rgba(217,95,26,0.3);
+  padding-bottom:2px;
+  transition:all 0.3s ease;
+}
+.si-cta:hover { color:#FFF; border-color:var(--orange); }
+
+/* Rotary Track System */
+.showcase-rotary {
+  position:absolute;
+  bottom:60px;
+  width:100%;
+  height:300px;
+  z-index:5;
+}
+.rotary-track {
+  position:absolute;
+  top:20px;
+  left:50%;
+  width:0;
+  height:0;
+}
+.rotary-item {
+  position:absolute;
+  top:0; left:0;
+  width:160px; height:240px;
+  background:var(--ink-lift);
+  border:1px solid rgba(255,255,255,0.04);
+  cursor:none;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  transform-origin:center center;
+  transition:all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.rotary-item.active {
+  border-color:rgba(217,95,26,0.6);
+  box-shadow:0 15px 40px rgba(217,95,26,0.25);
+}
+.rotary-item:hover:not(.active) {
+  border-color:rgba(255,255,255,0.15);
+}
+
+.ri-art {
   position:absolute;inset:0;
-  transition:transform .5s cubic-bezier(.23,1,.32,1);
+  z-index:0;
 }
-.acard:hover .acard-inner{transform:scale(1.04)}
-/* abstract athlete bg */
-.acard-art{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--ink-panel),var(--ink-lift));
-}
-.acard-art::before{
+.ri-art::before {
   content:'';position:absolute;
   bottom:-30px;left:50%;transform:translateX(-50%);
-  width:200px;height:280px;border-radius:50% 50% 0 0;
-  background:linear-gradient(to top,rgba(217,95,26,.1),rgba(217,95,26,.04),transparent);
+  width:120px;height:180px;border-radius:50% 50% 0 0;
+  background:linear-gradient(to top,rgba(217,95,26,0.15),transparent);
 }
-.acard-overlay{
+.ri-overlay {
   position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(5,6,10,.96) 0%,rgba(5,6,10,.25) 55%,transparent 100%);
+  background:linear-gradient(to top, rgba(5,6,10,0.95) 0%, rgba(5,6,10,0.3) 60%, transparent);
+  z-index:1;
+  transition:opacity 0.4s ease;
 }
-.acard-glow{
-  position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(217,95,26,.18),transparent 70%);
-  opacity:.8;transition:opacity .4s;
-}
-.acard:hover .acard-glow{opacity:1.4}
-.acard-badge{
-  position:absolute;top:18px;left:18px;z-index:3;
-  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:2.5px;
-  text-transform:uppercase;padding:4px 10px;
-  border:1px solid rgba(217,95,26,.3);
-  background:rgba(5,6,10,.5);backdrop-filter:blur(8px);
-  color:var(--orange);
-}
-.acard-info{
-  position:absolute;bottom:0;left:0;right:0;padding:24px 20px;z-index:3;
-}
-.acard-sport{
-  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:6px;
-}
-.acard-name{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
-  font-size:22px;letter-spacing:1px;line-height:1;
-}
-.acard-role{font-size:12px;color:var(--chrome-dim);margin-top:4px}
-/* metallic bottom line sweep */
-.acard-line{
-  position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:var(--metal);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .5s cubic-bezier(.23,1,.32,1);
-}
-.acard:hover .acard-line{transform:scaleX(1)}
-/* initials shown in card center */
-.acard-init{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+.rotary-item.active .ri-overlay { opacity: 0.5; }
+.ri-init {
+  position:relative;z-index:2;
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:72px;letter-spacing:4px;
-  color:rgba(217,95,26,.07);z-index:1;user-select:none;
-  line-height:1;
+  font-size:64px;letter-spacing:2px;
+  color:rgba(255,255,255,0.15);
+  transition:color 0.4s ease, transform 0.4s ease;
+}
+.rotary-item.active .ri-init {
+  color:rgba(217,95,26,0.1);
+  transform:scale(1.2);
+}
+
+/* Nav Buttons inside Athletes */
+.athlete-nav-btn {
+  top:60%;
+}
+@media(max-width:768px) {
+  .rotary-item { width:120px; height:180px; }
+  .si-name { font-size: 36px; }
+  .showcase-rotary { bottom: 80px; }
 }
 
 /* ─── PORTFOLIO / VERTICAL SHOWCASE ─── */
@@ -606,13 +797,14 @@ section{position:relative}
 
 .port-text{flex:1;padding-right:80px}
 .port-vertical{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:20px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:5px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:20px;
   display:flex;align-items:center;gap:12px;
 }
 .port-vertical::before{content:'';width:24px;height:1px;background:var(--metal)}
 .port-h{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(40px,4.5vw,64px);letter-spacing:1px;line-height:1;
   margin-bottom:24px;
 }
@@ -620,14 +812,16 @@ section{position:relative}
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .port-p{
-  font-size:15px;line-height:1.85;color:var(--chrome-dim);
+  font-size:15px;line-height:1.85;
+  color:var(--text-bright);font-weight:400; 
   margin-bottom:32px;max-width:420px;
 }
 .port-features{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
 .pf-item{
   display:flex;align-items:center;gap:12px;
-  font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--chrome-dim);
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-bright);
 }
 .pf-item::before{
   content:'';width:6px;height:6px;border-radius:50%;
@@ -635,8 +829,9 @@ section{position:relative}
 }
 .port-link{
   display:inline-flex;align-items:center;gap:10px;
-  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--orange);cursor:none;
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700; 
+  letter-spacing:3px;
+  text-transform:uppercase;color:var(--chrome);cursor:none;
   position:relative;
 }
 .port-link::after{
@@ -645,7 +840,7 @@ section{position:relative}
   transition:transform .4s;
 }
 .port-link:hover::after{transform:scaleX(1)}
-.port-link:hover{color:var(--orange-light)}
+.port-link:hover{color:var(--orange)}
 
 /* ─── IP SPOTLIGHT ─── */
 #ip{
@@ -677,17 +872,19 @@ section{position:relative}
   background:linear-gradient(135deg,#0a0b14,#0e0f18);
 }
 .ip-type{
-  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:4px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:12px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:4px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:12px;
   position:relative;z-index:2;
 }
 .ip-title{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(28px,3.5vw,48px);letter-spacing:1px;
   position:relative;z-index:2;margin-bottom:12px;
 }
 .ip-desc{
-  font-size:13px;line-height:1.7;color:var(--chrome-dim);
+  font-size:14px;line-height:1.7;
+  color:var(--text-bright);font-weight:400; 
   position:relative;z-index:2;max-width:380px;
 }
 .ip-overlay{
@@ -731,11 +928,14 @@ section{position:relative}
 }
 .why-card:hover .why-num{opacity:.7}
 .why-h{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:18px;letter-spacing:1px;text-transform:uppercase;
   margin-bottom:16px;
 }
-.why-p{font-size:13px;line-height:1.8;color:var(--chrome-dim)}
+.why-p{
+  font-size:14px;line-height:1.8;
+  color:var(--text-bright);font-weight:400; 
+}
 .why-bar{
   position:absolute;bottom:0;left:0;right:0;height:1px;
   background:var(--metal);transform:scaleX(0);transform-origin:left;
@@ -787,8 +987,9 @@ section{position:relative}
 }
 .team-content{max-width:520px}
 .team-eyebrow{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:32px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:5px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:32px;
 }
 .team-quote{
   font-family:'Playfair Display',serif;font-style:italic;
@@ -804,14 +1005,15 @@ section{position:relative}
 }
 .team-role{
   font-size:11px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--chrome-dim);margin-top:4px;
+  color:var(--text-bright);margin-top:4px;
 }
 .team-rule{
   width:48px;height:1px;
   background:var(--metal);margin:36px 0;
 }
 .team-mission{
-  font-size:14px;line-height:1.9;color:var(--chrome-dim);
+  font-size:15px;line-height:1.9;
+  color:var(--text-bright);font-weight:400; 
 }
 
 /* ─── CTA / FINAL ─── */
@@ -834,13 +1036,14 @@ section{position:relative}
 }
 .cta-content{position:relative;z-index:2;padding:0 40px}
 .cta-eyebrow{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:6px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:24px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:6px;
+  text-transform:uppercase;color:var(--chrome);margin-bottom:24px;
   opacity:0;transform:translateY(16px);
   transition:opacity 1s,transform 1s;
 }
 .cta-h{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-weight:700; 
   font-size:clamp(44px,7vw,96px);letter-spacing:1px;line-height:.95;
   max-width:900px;
   opacity:0;transform:translateY(24px);
@@ -848,7 +1051,9 @@ section{position:relative}
 }
 .cta-sub{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:20px;color:var(--chrome-dim);margin-top:16px;
+  font-size:20px;
+  color:var(--text-bright);font-weight:400; 
+  margin-top:16px;
   opacity:0;transition:opacity 1s .5s;
 }
 .cta-btns{
@@ -918,7 +1123,7 @@ section{position:relative}
 <nav>
   <a class="logo" href="#">
     <!-- Tries to load your uploaded logo, falls back to text instantly if missing -->
-    <img src="Legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
+    <img src="legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
     <span id="fallback-logo" class="text-logo" style="display:none;">LEGA<span class="logo-x">X</span>Y</span>
   </a>
   <ul>
@@ -933,7 +1138,6 @@ section{position:relative}
 
 <!-- ════ HERO ════ -->
 <section id="hero">
-  <!-- In production: replace this div with a fullscreen <video autoplay muted loop playsinline> pointing to legaxy.org video -->
   <div class="hero-video" id="heroVideoBg"></div>
 
   <p class="hero-badge">Next Gen Sportainment Ecosystem</p>
@@ -974,13 +1178,22 @@ section{position:relative}
   </div>
 </section>
 
-<!-- ════ ECOSYSTEM HORIZONTAL SCROLL ════ -->
+<!-- ════ ECOSYSTEM FADE CAROUSEL ════ -->
 <section id="ecosystem">
   <div class="eco-sticky">
+    
+    <!-- Premium Next/Prev SVG Buttons -->
+    <button class="scroll-btn prev-btn" id="ecoPrev" aria-label="Previous Panel">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="scroll-btn next-btn" id="ecoNext" aria-label="Next Panel">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
     <div class="eco-track" id="ecoTrack">
 
       <!-- PANEL 1: LEGAXY ELITE -->
-      <div class="eco-panel ep1">
+      <div class="eco-panel ep1 active">
         <div class="eco-edge"></div>
         <div class="eco-glow"></div>
         <div class="eco-wm">E</div>
@@ -1119,7 +1332,39 @@ section{position:relative}
     <button class="tab" onclick="switchTab(this,'rising')">Rising Stars</button>
   </div>
 
-  <div class="athlete-track" id="athleteTrack"></div>
+  <div class="athlete-showcase" id="athleteShowcase">
+    <!-- Big Ghost Text in Background -->
+    <div class="showcase-ghost" id="showcaseGhost"></div>
+    
+    <!-- Central Featured Info -->
+    <div class="showcase-info" id="showcaseInfo">
+      <div class="si-badge" id="siBadge">Elite Roster</div>
+      <div class="si-sport" id="siSport">Cricket</div>
+      <div class="si-name" id="siName">Harbhajan Singh</div>
+      <div class="si-role" id="siRole">India Legend · Spin Icon</div>
+      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a fierce, match-winning temperament.</div>
+    </div>
+
+    <!-- Rotary Track & Navigation -->
+    <div class="showcase-rotary">
+      <button class="scroll-btn prev-btn athlete-nav-btn" onclick="rotateAthleteCarousel(-1)" aria-label="Previous Athlete">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      
+      <div class="rotary-track" id="rotaryTrack">
+        <!-- Cards injected via JS -->
+      </div>
+      
+      <button class="scroll-btn next-btn athlete-nav-btn" onclick="rotateAthleteCarousel(1)" aria-label="Next Athlete">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- CTA Button Below Cards -->
+    <div class="showcase-cta-wrap" id="showcaseCtaWrap">
+      <div class="si-cta">View Profile →</div>
+    </div>
+  </div>
 </section>
 
 <div class="metal-rule"></div>
@@ -1452,79 +1697,176 @@ const pObs=new IntersectionObserver(entries=>{
 const prob=document.getElementById('problem');
 if(prob)pObs.observe(prob);
 
-/* ── Ecosystem horizontal scroll ── */
-const ecotrack = document.getElementById('ecoTrack');
-if(ecotrack){
-  ecotrack.addEventListener('wheel', (e) => {
-    // Allow native horizontal swiping on trackpads
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+/* ── Ecosystem Fade Carousel ── */
+const ecoPanels = document.querySelectorAll('.eco-panel');
+const ecoPrev = document.getElementById('ecoPrev');
+const ecoNext = document.getElementById('ecoNext');
+let ecoIndex = 0;
 
-    const atStart = ecotrack.scrollLeft <= 0;
-    const atEnd = Math.ceil(ecotrack.scrollLeft + ecotrack.clientWidth) >= ecotrack.scrollWidth - 1;
+function switchEco(index) {
+  ecoPanels.forEach((p, i) => {
+    if(i === index) p.classList.add('active');
+    else p.classList.remove('active');
+  });
+}
 
-    // Isolate horizontal scroll logic from vertical window scrolling
-    if (e.deltaY > 0 && !atEnd) {
-      e.preventDefault();
-      ecotrack.scrollLeft += e.deltaY;
-    } else if (e.deltaY < 0 && !atStart) {
-      e.preventDefault();
-      ecotrack.scrollLeft += e.deltaY;
-    }
-  }, { passive: false });
+if(ecoPanels.length > 0) {
+  switchEco(0); // Initialize first panel
+  
+  if(ecoPrev && ecoNext) {
+    ecoPrev.addEventListener('click', () => {
+      ecoIndex = (ecoIndex - 1 + ecoPanels.length) % ecoPanels.length;
+      switchEco(ecoIndex);
+    });
+    ecoNext.addEventListener('click', () => {
+      ecoIndex = (ecoIndex + 1) % ecoPanels.length;
+      switchEco(ecoIndex);
+    });
+  }
+
+  // Dots functionality across all panels
+  document.querySelectorAll('.eco-dot').forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      ecoIndex = index % ecoPanels.length;
+      switchEco(ecoIndex);
+    });
+  });
 }
 
 /* ── Athlete data ── */
 const eliteRoster=[
-  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend · Spin Icon',init:'HS'},
-  {name:'Yuzvendra Chahal',sport:'Cricket',role:'RCB · India Leg-Spinner',init:'YC'},
-  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · IPL Star',init:'BK'},
-  {name:'Ishant Sharma',sport:'Cricket',role:'India Pacer · DC Veteran',init:'IS'},
-  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',init:'UY'},
-  {name:'Harshal Patel',sport:'Cricket',role:'India & RCB · Death Bowler',init:'HP'},
-  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · All-rounder',init:'RT'},
-  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Emerging Star',init:'SS'},
-  {name:'Sai Kishore',sport:'Cricket',role:'GT · Left-arm Spinner',init:'SK'},
-  {name:'Mayank Dagar',sport:'Cricket',role:'RR · Qatar Airways',init:'MD'},
-  {name:'Sangram Singh',sport:'Wrestling',role:'India Champion',init:'SG'},
+  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend · Spin Icon',init:'HS',desc:'A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a fierce, match-winning temperament to the Legaxy ecosystem.'},
+  {name:'Yuzvendra Chahal',sport:'Cricket',role:'RCB · India Leg-Spinner',init:'YC',desc:'India\'s premier leg-spinner and tactical genius, renowned for deceiving the world\'s best batters in high-pressure white-ball encounters.'},
+  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · IPL Star',init:'BK',desc:'A maestro of swing bowling. His calm execution and pinpoint precision have made him one of the most reliable pacers of his generation.'},
+  {name:'Ishant Sharma',sport:'Cricket',role:'India Pacer · DC Veteran',init:'IS',desc:'A towering presence and veteran of Indian fast bowling, carrying the immense experience of over a hundred Test matches and iconic spells.'},
+  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',init:'UY',desc:'Pace, raw power, and an imposing run-up. Known for providing crucial breakthroughs and thriving aggressively with the new ball.'},
+  {name:'Harshal Patel',sport:'Cricket',role:'India & RCB · Death Bowler',init:'HP',desc:'The master of death bowling and variations. His calculated slower balls and deceptive dip make him a lethal asset in the final overs.'},
+  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · All-rounder',init:'RT',desc:'A charismatic all-rounder who has authored some of the most miraculous, jaw-dropping finishes in modern T20 franchise history.'},
+  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Emerging Star',init:'SS',desc:'A dynamic and explosive middle-order batter, rapidly carving out a reputation for finishing games with breathtaking power hitting.'},
+  {name:'Sai Kishore',sport:'Cricket',role:'GT · Left-arm Spinner',init:'SK',desc:'A tall, highly accurate left-arm spinner combining discipline with sharp bounce to suffocate scoring rates in crucial middle overs.'},
+  {name:'Mayank Dagar',sport:'Cricket',role:'RR · Qatar Airways',init:'MD',desc:'An electrifying fielder and a highly effective left-arm spinner, continuously rising through the ranks as a vital white-ball specialist.'},
+  {name:'Sangram Singh',sport:'Wrestling',role:'India Champion',init:'SG',desc:'A celebrated champion and inspirational icon in Indian wrestling, inspiring the next generation through resilience and immense physical prowess.'},
 ];
 const risingRoster=[
-  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Rising Prospect',init:'VB'},
-  {name:'Vathsal Govind',sport:'Cricket',role:'Emerging India Talent',init:'VG'},
-  {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',init:'MR'},
-  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',init:'TD'},
-  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',init:'SH'},
-  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK'},
-  {name:'Archana',sport:'Athletics',role:'Emerging Track Star',init:'AR'},
-  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National',init:'KS'},
-  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Pacer',init:'YD'},
-  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Rising Fast Bowler',init:'AJ'},
-  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',init:'AV'},
-  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging',init:'AG'},
+  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Rising Prospect',init:'VB',desc:'A high-potential rising prospect, blending natural athleticism with a sharp cricketing brain to dominate the youth circuit.'},
+  {name:'Vathsal Govind',sport:'Cricket',role:'Emerging India Talent',init:'VG',desc:'An emerging talent showcasing exceptional technique and temperament, marked as a future cornerstone of the batting order.'},
+  {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',init:'MR',desc:'A powerful star in the making, possessing the rare ability to aggressively dismantle bowling attacks from the moment he takes the crease.'},
+  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',init:'TD',desc:'A highly versatile youth-circuit all-rounder, consistently delivering impactful performances with both bat and ball.'},
+  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',init:'SH',desc:'An aggressive and fast-improving pace bowler, generating impressive speed and leading the charge for the next generation of women\'s cricket.'},
+  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',init:'AK',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency that ranks her among Asia\'s top juniors.'},
+  {name:'Archana',sport:'Athletics',role:'Emerging Track Star',init:'AR',desc:'An explosive emerging track star. Her sheer pace, dedication, and explosive acceleration highlight her as a premier athlete to watch.'},
+  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National',init:'KS',desc:'A highly promising national-level talent, refining his all-round game and consistently turning heads in competitive age-group tournaments.'},
+  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Pacer',init:'YD',desc:'A resilient and technically gifted top-order anchor, capable of building massive innings and stabilizing the crease under pressure.'},
+  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Rising Fast Bowler',init:'AJ',desc:'A fiery rising fast bowler who brings raw pace, intimidating bounce, and an attacking mindset to every spell.'},
+  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',init:'AV',desc:'A highly stylish and dependable batter, recognized for his expansive stroke play and steady consistency in the local circuits.'},
+  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging',init:'AG',desc:'A young, determined prodigy making swift strides. His unwavering focus and natural flair earmark him as a future game-changer.'},
 ];
 
 let currentTab='elite';
 const colors=['#120e04','#080d14','#140a04','#0a0d0a','#10081a','#04100e','#140604','#060f14'];
 
-function renderAthletes(roster){
-  const track=document.getElementById('athleteTrack');
-  track.innerHTML=roster.map((a,i)=>`
-    <div class="acard">
-      <div class="acard-inner">
-        <div class="acard-art" style="background:linear-gradient(135deg,${colors[i%colors.length]},var(--ink-lift))"></div>
-        <div class="acard-glow"></div>
-        <div class="acard-overlay"></div>
-        <div class="acard-init">${a.init}</div>
-        <div class="acard-badge">${currentTab==='elite'?'Elite':'Rising'}</div>
-        <div class="acard-info">
-          <div class="acard-sport">${a.sport}</div>
-          <div class="acard-name">${a.name}</div>
-          <div class="acard-role">${a.role}</div>
-        </div>
-        <div class="acard-line"></div>
-      </div>
+/* ── Semi-Circle Carousel Logic ── */
+let currentAthleteIndex = 0;
+let currentRoster = eliteRoster;
+
+function renderAthletes(roster) {
+  currentRoster = roster;
+  currentAthleteIndex = 0; // Always start at the first person when switching tabs
+  
+  const track = document.getElementById('rotaryTrack');
+  track.innerHTML = roster.map((a, i) => `
+    <div class="rotary-item" onclick="setAthleteIndex(${i})">
+      <div class="ri-art" style="background:linear-gradient(135deg, ${colors[i % colors.length]}, var(--ink-lift))"></div>
+      <div class="ri-overlay"></div>
+      <div class="ri-init">${a.init}</div>
     </div>
   `).join('');
+  
+  updateAthleteCarousel(true); // instant update to prevent animation glitch on tab switch
 }
+
+function setAthleteIndex(idx) {
+  if (idx === currentAthleteIndex) return;
+  currentAthleteIndex = idx;
+  updateAthleteCarousel();
+}
+
+function rotateAthleteCarousel(dir) {
+  currentAthleteIndex += dir;
+  if (currentAthleteIndex < 0) currentAthleteIndex = currentRoster.length - 1;
+  if (currentAthleteIndex >= currentRoster.length) currentAthleteIndex = 0;
+  updateAthleteCarousel();
+}
+
+function updateAthleteCarousel(instant = false) {
+  const items = document.querySelectorAll('.rotary-item');
+  // Radius of the circle (larger on desktop to make a gentle curve)
+  const R = window.innerWidth < 768 ? 320 : 600; 
+  const angleStep = window.innerWidth < 768 ? 22 : 14; // Degrees between each card
+  
+  items.forEach((item, i) => {
+    const offset = i - currentAthleteIndex;
+    const angleDeg = offset * angleStep;
+    const angleRad = angleDeg * (Math.PI / 180);
+    
+    // Calculate X and Y along the perimeter of the circle
+    const x = R * Math.sin(angleRad);
+    // Y drops down as it moves away from 0 degrees (the top of the circle)
+    const y = -R * Math.cos(angleRad) + R; 
+    
+    const dist = Math.abs(offset);
+    // Scale the center active item up, scale distant items down
+    const scale = dist === 0 ? 1.25 : Math.max(0.7, 1 - dist * 0.08);
+    // Fade out items that are far away
+    const opacity = dist === 0 ? 1 : Math.max(0, 0.7 - dist * 0.15);
+    const zIndex = 100 - dist;
+    
+    if (instant) item.style.transition = 'none';
+    else item.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+    
+    item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
+    item.style.opacity = opacity;
+    item.style.zIndex = zIndex;
+    item.style.pointerEvents = opacity > 0 ? 'auto' : 'none';
+    
+    if (dist === 0) item.classList.add('active');
+    else item.classList.remove('active');
+  });
+
+  if (instant) items[0]?.offsetHeight; // Force reflow
+  
+  updateAthleteInfo();
+}
+
+function updateAthleteInfo() {
+  const infoBox = document.getElementById('showcaseInfo');
+  const ghost = document.getElementById('showcaseGhost');
+  const ctaWrap = document.getElementById('showcaseCtaWrap');
+  const data = currentRoster[currentAthleteIndex];
+  
+  // Fade out
+  infoBox.classList.add('fade-out');
+  if(ctaWrap) ctaWrap.classList.add('fade-out');
+  ghost.style.opacity = 0;
+  ghost.style.transform = 'translateX(-50%) translateY(20px)';
+  
+  // Update text then fade in
+  setTimeout(() => {
+    document.getElementById('siBadge').textContent = currentTab === 'elite' ? 'Elite Roster' : 'Rising Star';
+    document.getElementById('siSport').textContent = data.sport;
+    document.getElementById('siName').textContent = data.name;
+    document.getElementById('siRole').textContent = data.role;
+    document.getElementById('siDesc').textContent = data.desc;
+    ghost.textContent = data.init;
+    
+    infoBox.classList.remove('fade-out');
+    if(ctaWrap) ctaWrap.classList.remove('fade-out');
+    ghost.style.opacity = 1;
+    ghost.style.transform = 'translateX(-50%) translateY(0)';
+  }, 400); // Wait for the fade-out to complete
+}
+
+// Initial render
 renderAthletes(eliteRoster);
 
 function switchTab(el,type){
