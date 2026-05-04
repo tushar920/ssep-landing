@@ -58,8 +58,8 @@ body{
   border:1px solid rgba(217,95,26,.45);
   transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s;
 }
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover) #cx{width:14px;height:14px;background:var(--orange)}
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover) #cx{width:14px;height:14px;background:var(--orange)}
+body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
 
 /* ─── SCROLL PROGRESS ─── */
 #prog{
@@ -159,6 +159,7 @@ section {
   font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
   letter-spacing:5px;text-transform:uppercase;color:rgba(184,184,192,0.6);
   display:flex;align-items:center;gap:12px;margin-bottom:12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
   animation: heroFade 1s 0.2s both;
 }
 .hero-badge::before{content:'';width:32px;height:1px;background:rgba(217,95,26,0.6)}
@@ -168,6 +169,7 @@ section {
   line-height:0.95;
   letter-spacing:-1px;
   color:rgba(255,255,255,0.7); 
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
   animation: heroFade 1s 0.4s both;
 }
 .hero-h1 em{
@@ -185,6 +187,7 @@ section {
   color:rgba(223, 223, 229, 0.5); 
   font-weight:400; 
   margin-top:12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
   animation: heroFade 1s 0.6s both;
 }
 .hero-ctas{
@@ -223,65 +226,6 @@ section {
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 .btn-outline:hover::before{color:var(--orange)}
 
-.hero-scroll-hint{
-  position:absolute;bottom:40px;right:72px;z-index:10;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  animation: heroFade 1s 1.2s both;
-}
-.hero-scroll-hint span{
-  font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--text-muted);writing-mode:vertical-lr;
-}
-.scroll-wire{width:1px;height:52px;background:linear-gradient(to bottom,var(--orange),transparent);animation:wirePulse 2s infinite}
-@keyframes wirePulse{0%,100%{opacity:.3;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
-
-
-/* ─── STORY ─── */
-#story{
-  min-height:100vh;
-  background:var(--ink);
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;overflow:hidden;
-}
-#story::before{
-  content:'';position:absolute;
-  width:600px;height:600px;border-radius:50%;
-  border:1px solid rgba(217,95,26,.06);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-}
-#story::after{
-  content:'';position:absolute;
-  width:900px;height:900px;border-radius:50%;
-  border:1px solid rgba(217,95,26,.03);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-}
-.story-label{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--chrome);margin-bottom:32px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 1s,transform 1s;position:relative;z-index:1;
-}
-.story-h{
-  font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(38px,6vw,88px);line-height:1;
-  letter-spacing:1px;max-width:900px;
-  opacity:0;transform:translateY(24px);
-  transition:opacity 1.2s .2s,transform 1.2s .2s;
-  position:relative;z-index:1;
-}
-.story-h .accent{
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.story-p{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:19px;color:var(--text-bright);font-weight:400; 
-  margin-top:20px;max-width:540px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 1s .5s,transform 1s .5s;
-  position:relative;z-index:1;
-}
-.in-view .story-label, .in-view .story-h, .in-view .story-p{opacity:1;transform:translateY(0)}
-
 /* ─── ATHLETES ─── */
 #athletes{
   background:var(--ink-mid);
@@ -302,15 +246,6 @@ section {
   font-size:clamp(32px,4vw,48px); 
   letter-spacing:1px;color:#FFF;line-height:1;
 }
-.tab-row{display:flex;gap:2px;margin-bottom:24px; position:relative; z-index: 10;}
-.tab{
-  padding:8px 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:2.5px;text-transform:uppercase;background:transparent;
-  border:1px solid var(--text-dim);color:var(--text-muted);
-  cursor:none;transition:all .3s ease;
-}
-.tab:hover {background:var(--orange);color:#FFF;border-color:var(--orange);}
-.tab.on{background:var(--metal);border-color:transparent;color:#FFF;}
 
 .athlete-showcase {
   position:relative;width:100%;
@@ -368,12 +303,6 @@ section {
   border-color:rgba(217,95,26,0.6);
   box-shadow:0 15px 40px rgba(217,95,26,0.3);
 }
-.ri-art {position:absolute;inset:0;z-index:0;}
-.ri-overlay {
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(5,6,10,0.95) 0%, rgba(5,6,10,0.2) 60%, transparent);
-  z-index:1;transition:opacity 0.4s ease;
-}
 .ri-init {
   position:relative;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;
   font-size:48px;letter-spacing:2px;color:rgba(255,255,255,0.15); 
@@ -387,8 +316,6 @@ section {
   z-index:20;cursor:none;backdrop-filter:blur(10px);
   transition:all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.athlete-nav-btn.prev-btn { left: 0; }
-.athlete-nav-btn.next-btn { right: 0; }
 
 .showcase-info-bottom {
   position: relative;
@@ -533,8 +460,8 @@ section {
   background-size: cover;
   background-position: center;
 }
-/* Updated IP background to use uploaded image */
-.ip-bg-1 { background-image: url('whos the boss.png'); }
+/* Updated background image filename as per user request */
+.ip-bg-1 { background-image: url("who's the boss.png"); }
 .ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
 .ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
 
@@ -580,11 +507,27 @@ section {
   color: #FFF;
   margin-bottom: 20px;
   text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  cursor: pointer;
+  display: inline-block;
 }
+.ip-hero-title:hover { color: var(--orange-light); }
+
 .ip-hero-desc {
   font-size: 16px; line-height: 1.7; color: var(--text-bright);
   max-width: 540px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
+
+.ip-link-box {
+  margin-top: 24px;
+}
+.ip-watch-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 28px; background: #FFF; color: #000;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
+  text-decoration: none; transition: all 0.3s ease;
+}
+.ip-watch-btn:hover { background: var(--orange); color: #FFF; transform: scale(1.05); }
 
 .ip-thumbnails {
   display: flex;
@@ -815,6 +758,8 @@ section {
     <li class="port-nav-item" data-target="4">LEARNING</li>
   </ul>
   <div class="port-content-area" id="portPanelsArea">
+    
+    <!-- Vertical Logos fixed with exact provided filenames -->
     <div class="port-panel active">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -822,12 +767,13 @@ section {
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We provide end-to-end career architecture...</p>
+          <p class="port-p">We provide end-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
           <div class="pf-item">Financial & Legal Advisory</div>
           <div class="port-link">Explore Elite →</div>
         </div>
       </div>
     </div>
+
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -835,12 +781,13 @@ section {
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We produce cinematic content...</p>
+          <p class="port-p">We produce cinematic content that defines careers. From biopics to branded series, Legaxy Studio creates value across TV, digital, and BTL.</p>
           <div class="pf-item">IP Creation & Biopics</div>
           <div class="port-link">Explore Studio →</div>
         </div>
       </div>
     </div>
+
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -848,12 +795,13 @@ section {
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Larger-than-life experiences...</p>
+          <p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle through leagues and tours.</p>
           <div class="pf-item">Global Tours</div>
           <div class="port-link">Explore Live →</div>
         </div>
       </div>
     </div>
+
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -861,12 +809,13 @@ section {
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Licensing and franchising...</p>
+          <p class="port-p">Unlocking the potential of sports IP through licensing, franchising, and digital collectibles for the ultimate fan experience.</p>
           <div class="pf-item">Team Logo Licensing</div>
           <div class="port-link">Explore Merch →</div>
         </div>
       </div>
     </div>
+
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
@@ -874,7 +823,7 @@ section {
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Education-first initiatives...</p>
+          <p class="port-p">Education-first initiatives delivering mentorship and masterclasses across schools and academies to nurture tomorrow's icons.</p>
           <div class="pf-item">Mentorship Modules</div>
           <div class="port-link">Explore Learning →</div>
         </div>
@@ -894,14 +843,21 @@ section {
     <div class="ip-main-info active" id="ipHeroInfo">
       <p class="ip-sec-title">Original Productions</p>
       <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
-      <h2 class="ip-hero-title" id="ipHeroTitle">Who's The Boss?</h2>
+      <!-- Interactive title linking to YT -->
+      <h2 class="ip-hero-title" id="ipHeroTitle" onclick="openProduction()">Who's The Boss?</h2>
       <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers.</p>
+      
+      <div class="ip-link-box" id="ipLinkBox">
+         <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="ip-watch-btn">
+            Watch Now <span style="margin-left:8px;">▶</span>
+         </a>
+      </div>
     </div>
 
     <div class="ip-thumbnails">
       <div class="nf-thumb active" data-ip-index="0">
-        <!-- Thumbnail for Who's The Boss using the uploaded image -->
-        <div class="nf-thumb-bg" style="background-image: url('whos the boss.png');"></div>
+        <!-- Thumbnail using who's the boss.png -->
+        <div class="nf-thumb-bg" style="background-image: url('who\'s the boss.png');"></div>
         <span class="nf-thumb-title">Who's The Boss</span>
         <div class="nf-progress"></div>
       </div>
@@ -1042,21 +998,38 @@ document.querySelectorAll('.port-nav-item').forEach(item => {
 
 /* IP Slider */
 const ipData = [
-  { tag: "Talk Show", title: "Who's The Boss?", desc: "Starring Harbhajan Singh & Geeta Basra. A talk show blending behind-the-scenes banter and real conversations." },
-  { tag: "Docuseries", title: "The Unheard Story", desc: "Cinematic athlete documentaries capturing the journeys of India's sports icons." },
-  { tag: "Live Event IP", title: "Legaxy Awards", desc: "The definitive annual celebration of Indian sport." }
+  { tag: "Talk Show", title: "Who's The Boss?", desc: "Starring Harbhajan Singh & Geeta Basra. A talk show blending behind-the-scenes banter and real conversations.", link: "https://www.youtube.com/@WhosTheBossShow" },
+  { tag: "Docuseries", title: "The Unheard Story", desc: "Cinematic athlete documentaries capturing the journeys of India's sports icons.", link: "#" },
+  { tag: "Live Event IP", title: "Legaxy Awards", desc: "The definitive annual celebration of Indian sport.", link: "#" }
 ];
 let ipIndex = 0;
+
 function setIp(idx) {
   ipIndex = idx;
   document.querySelectorAll('.nf-thumb').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.ip-slide-bg').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.nf-thumb')[idx].classList.add('active');
   document.querySelectorAll('.ip-slide-bg')[idx].classList.add('active');
-  document.getElementById('ipHeroTag').textContent = ipData[idx].tag;
-  document.getElementById('ipHeroTitle').textContent = ipData[idx].title;
-  document.getElementById('ipHeroDesc').textContent = ipData[idx].desc;
+  
+  const info = ipData[idx];
+  document.getElementById('ipHeroTag').textContent = info.tag;
+  document.getElementById('ipHeroTitle').textContent = info.title;
+  document.getElementById('ipHeroDesc').textContent = info.desc;
+  
+  const linkBox = document.getElementById('ipLinkBox');
+  if (info.link !== "#") {
+      linkBox.style.display = "block";
+      linkBox.querySelector('a').href = info.link;
+  } else {
+      linkBox.style.display = "none";
+  }
 }
+
+function openProduction() {
+    const link = ipData[ipIndex].link;
+    if (link !== "#") window.open(link, '_blank');
+}
+
 document.querySelectorAll('.nf-thumb').forEach((t, i) => t.addEventListener('mouseenter', () => setIp(i)));
 setInterval(() => setIp((ipIndex + 1) % 3), 5000);
 </script>
