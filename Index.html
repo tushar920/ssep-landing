@@ -334,14 +334,14 @@ section{position:relative}
 .prob-resolve.in-view{opacity:1}
 
 /* ─── ECOSYSTEM HORIZONTAL ─── */
-#ecosystem{height:100vh;width:100vw;position:relative}
+#ecosystem{height:100vh;width:100%;position:relative}
 .eco-sticky{position:relative;height:100vh;width:100%;display:flex}
 .eco-track{
   display:flex;width:100%;height:100%;
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
-  scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
 }
 .eco-track::-webkit-scrollbar{display:none}
 .eco-panel{
@@ -918,7 +918,7 @@ section{position:relative}
 <nav>
   <a class="logo" href="#">
     <!-- Tries to load your uploaded logo, falls back to text instantly if missing -->
-    <img src="image_a83597.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
+    <img src="Legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
     <span id="fallback-logo" class="text-logo" style="display:none;">LEGA<span class="logo-x">X</span>Y</span>
   </a>
   <ul>
