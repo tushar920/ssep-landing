@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Roster — Legaxy Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────
+   CORE TOKENS & CINEMATIC RESET
+───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange-light:#FFB37A;
+  --orange:#D95F1A;
+  --orange-dark:#9D3C00;
+  --chrome:#B8B8C0;
+  --ink:#05060A;
+  --ink-mid:#0B0C14;
+  --ink-lift:#12131E;
+  --text:#EAEAEA; 
+  --text-muted:#8A8A93;
+  --metal:linear-gradient(135deg,var(--orange-light) 0%,var(--orange) 40%,var(--orange-dark) 70%,var(--orange) 100%);
+}
+
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:'Barlow',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+#cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0;}
+#cx{width:8px;height:8px;background:var(--orange);transition:width .25s,height .25s,background .25s;}
+#cr{width:30px;height:30px;border:1px solid rgba(217,95,26,.45);transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s;}
+body:has(a:hover,button:hover, .team-card:hover) #cx{width:14px;height:14px;}
+body:has(a:hover,button:hover, .team-card:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+
+/* ─── NAVIGATION ─── */
+nav{
+  position:fixed;top:0;inset-inline:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 52px;height:72px;
+  background:rgba(5,6,10,0.95);backdrop-filter:blur(15px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.logo{display:flex;align-items:center;gap:2px;text-decoration:none;}
+.text-logo{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;}
+.logo-x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+nav ul{display:flex;gap:36px;list-style:none}
+nav ul a{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:500;transition:color .3s;}
+nav ul a:hover{color:var(--orange)}
+
+/* ─── HEADER ─── */
+header{
+  padding: 180px 72px 80px;
+  text-align:center;
+  background: radial-gradient(circle at 50% 0%, rgba(217,95,26,0.15), transparent 70%);
+}
+.eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:8px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;font-weight:700;}
+h1{font-family:'Rajdhani',sans-serif;font-size:clamp(40px, 8vw, 96px);font-weight:700;line-height:0.85;text-transform:uppercase;margin-bottom:24px;letter-spacing:-2px;}
+.header-desc{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--text-muted);max-width:750px;margin:0 auto;line-height:1.4;}
+
+/* ─── TEAM ARCHITECTURE ─── */
+.team-container{padding:0 72px 120px;max-width:1600px;margin:0 auto;}
+.section-wrap{margin-bottom:120px;}
+.section-title{
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:5px;
+  text-transform:uppercase;color:var(--orange-light);margin-bottom:48px;
+  display:flex;align-items:center;gap:20px;
+}
+.section-title::after{content:''; height:1px; flex-grow:1; background:linear-gradient(90deg, rgba(217,95,26,0.4), transparent);}
+
+/* Tile Grids */
+.grid-leadership{ display:grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap:32px; }
+.grid-standard{ display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:24px; }
+.grid-small{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:16px; }
+
+/* ─── PREMIUM TEAM CARD ─── */
+.team-card{
+  position:relative;
+  background:var(--ink-lift);
+  border:1px solid rgba(255,255,255,0.05);
+  overflow:hidden;
+  transition:all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.team-card:hover{
+  border-color:var(--orange);
+  transform:translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(217,95,26,0.15);
+}
+
+.img-box{
+  width:100%; aspect-ratio: 4/5;
+  background:var(--ink-mid);
+  overflow:hidden;
+  position:relative;
+}
+.team-card.large .img-box{ aspect-ratio: 16/10; } 
+
+.member-img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(1);
+}
+.team-card:hover .member-img{
+  transform:scale(1.08);
+  filter: grayscale(0);
+}
+
+.card-info{
+  padding:24px;
+  position:relative;
+  z-index:2;
+  background: linear-gradient(to top, var(--ink-lift) 85%, transparent);
+}
+.team-card.large .card-info{ padding:40px; position:absolute; bottom:0; width:100%; background:linear-gradient(to top, var(--ink) 30%, transparent); }
+
+.member-name{
+  font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;color:#FFF;
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;
+}
+.member-role{
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;color:var(--orange);
+  text-transform:uppercase;letter-spacing:3px;
+}
+
+/* ─── LEADERSHIP SPECIALS ─── */
+.team-card.large .member-name{ font-size:42px; line-height:1; }
+.team-card.large .member-role{ font-size:14px; margin-top:8px; }
+
+/* ─── FOOTER ─── */
+footer{
+  padding:100px 72px 40px;
+  background:var(--ink-mid);
+  border-top:1px solid rgba(255,255,255,0.03);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:6px;color:rgba(255,255,255,0.12);}
+.footer-links{display:flex;gap:40px;}
+.footer-links a{color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:2.5px;text-decoration:none;font-family:'Rajdhani',sans-serif;transition:color .3s;}
+.footer-links a:hover{color:var(--orange);}
+
+@media (max-width: 768px){
+  header, .team-container, footer{ padding-inline: 30px; }
+  .grid-leadership{ grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cx"></div>
+<div id="cr"></div>
+
+<nav>
+  <a class="logo" href="legaxy_final.html">
+    <span class="text-logo">LEGA<span class="logo-x">X</span>Y</span>
+  </a>
+  <ul>
+    <li><a href="legaxy_final.html#athletes">Athletes</a></li>
+    <li><a href="legaxy_final.html#portfolio">Portfolio</a></li>
+    <li><a href="legaxy_final.html#ip">Productions</a></li>
+    <li><a href="team.html">Team</a></li>
+  </ul>
+</nav>
+
+<header>
+  <p class="eyebrow">The Architects of Sportainment</p>
+  <h1>Our <span style="color:var(--orange)">Roster.</span></h1>
+  <p class="header-desc">A collective of specialists, advisors, and visionaries committed to building the world’s most powerful sporting legacies.</p>
+</header>
+
+<main class="team-container">
+  
+  <!-- LEADERSHIP -->
+  <div class="section-wrap">
+    <h2 class="section-title">Leadership</h2>
+    <div class="grid-leadership">
+      <div class="team-card large">
+        <div class="img-box">
+          <img src="amitesh.jpeg" alt="Amitesh Shah" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Amitesh Shah</div>
+          <div class="member-role">Founder & CEO</div>
+        </div>
+      </div>
+      <div class="team-card large">
+        <div class="img-box">
+          <img src="aneesh.jpeg" alt="Aneesh Gautam" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Aneesh Gautam</div>
+          <div class="member-role">Co-Founder & Director Talent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVISORY BOARD -->
+  <div class="section-wrap">
+    <h2 class="section-title">Advisory Board</h2>
+    <div class="grid-standard">
+      <div class="team-card">
+        <div class="img-box"><img src="siraj.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Mohammed Sirajuddin</div>
+          <div class="member-role">Founding Advisor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="sharat.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Sharat Bhattatiripad</div>
+          <div class="member-role">Global Advisor - Content & Programming</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="sajid.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Sajid Shamim</div>
+          <div class="member-role">Founding Advisor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="abhinav.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Abhinav Tandon</div>
+          <div class="member-role">Advisor - Global Strategy & Expansion</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="pranay.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Pranay Mathur</div>
+          <div class="member-role">Founding Advisor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="priyadarshi.png" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Priyadarshi Mishra</div>
+          <div class="member-role">Strategic Advisor - Investor Relations</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="zameeruddin.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Zameeruddin Khan</div>
+          <div class="member-role">Strategic Advisor - Investor Relations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGY & GROWTH -->
+  <div class="section-wrap">
+    <h2 class="section-title">Strategy & Growth</h2>
+    <div class="grid-standard">
+      <div class="team-card">
+        <div class="img-box"><img src="prateek.png" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Prateek Pawar</div>
+          <div class="member-role">Venture Partner</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="priyank.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Priyank Tehlan</div>
+          <div class="member-role">Venture Partner</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="abhishek.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Abhishek Gupta</div>
+          <div class="member-role">Entrepreneur in Residence</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="ravinder.png" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Ravinder Nandal</div>
+          <div class="member-role">Venture Partner</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="manik.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Manik Arora</div>
+          <div class="member-role">Associate Partner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE TEAM -->
+  <div class="section-wrap">
+    <h2 class="section-title">Executive Team</h2>
+    <div class="grid-standard">
+      <div class="team-card">
+        <div class="img-box"><img src="karan.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Karan Kaul</div>
+          <div class="member-role">Head - Business Solution</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="aman.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Amandeep Singh</div>
+          <div class="member-role">VP - Brands & Partnerships</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="srisha.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Srisha Bhalle</div>
+          <div class="member-role">VP - IPs & Education</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="apar.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Apar Mathur</div>
+          <div class="member-role">Social Media & PR</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="rohitbhatt.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400'"></div>
+        <div class="card-info">
+          <div class="member-name">Rohit Bhatt</div>
+          <div class="member-role">AVP - Institutional Alliances</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPERATIONS & MANAGEMENT -->
+  <div class="section-wrap">
+    <h2 class="section-title">Management & Operations</h2>
+    <div class="grid-small">
+      <div class="team-card">
+        <div class="img-box"><img src="sukriti.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Sukriti Kapil</div>
+          <div class="member-role">Sr. Manager - Brands</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="anurag.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Anurag Bharati</div>
+          <div class="member-role">Sr. Manager - Brands</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="puneet.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Puneet Solanki</div>
+          <div class="member-role">Sr. Manager - Brands</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="jatin.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Jatin Siwach</div>
+          <div class="member-role">Sr. Manager - Talent</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="tushar.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Tushar Bhaskar</div>
+          <div class="member-role">Manager - Sales</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="ashwath.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Ashwath Rajagopalan</div>
+          <div class="member-role">Manager - Sports Ops</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="rohitsharma.png" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Rohit Sharma</div>
+          <div class="member-role">Sr. Manager - Talent</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="ranjit.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Ranjeet Singh</div>
+          <div class="member-role">Sr. Manager - Sports Ops</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="snigdha.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Snigdha Sharma</div>
+          <div class="member-role">Sr. Manager - Content</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="harpal.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Harpal Singh</div>
+          <div class="member-role">Manager - YouTube</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="ayushree.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Ayushree Saumya</div>
+          <div class="member-role">Manager - Video Editor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="sarthak.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Sarthak Bharija</div>
+          <div class="member-role">Executive Video Editor</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="mohit.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Mohit Lohia</div>
+          <div class="member-role">Manager - Content Research</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="azhar.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Aazar Abrez</div>
+          <div class="member-role">Executive - Sports Ops</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box"><img src="roopsi.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200'"></div>
+        <div class="card-info">
+          <div class="member-name">Roopsi Bharija</div>
+          <div class="member-role">Manager - Front Desk</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSULTANTS & PARTNERS -->
+  <div class="section-wrap">
+    <h2 class="section-title">Consultants & Strategic Partners</h2>
+    <div class="grid-small">
+      <div class="team-card">
+        <div class="img-box">
+          <img src="suresh.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Suresh B Kapur</div>
+          <div class="member-role">Chartered Accountant</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box">
+          <img src="rajinder.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Rajinder Singh</div>
+          <div class="member-role">Manager - Accounts</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box">
+          <img src="rizwan.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Rizwan</div>
+          <div class="member-role">Legal Counsel</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box">
+          <img src="sachi.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Sachi Chopra</div>
+          <div class="member-role">Legal Counsel</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box">
+          <img src="balvinder.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Balvinder Sahrawat</div>
+          <div class="member-role">Advisor - FnB</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="img-box">
+          <img src="sudhanshu.jpeg" class="member-img" onerror="this.src='https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&q=80&w=200'">
+        </div>
+        <div class="card-info">
+          <div class="member-name">Sudhanshu Shrivastav</div>
+          <div class="member-role">LinkedIn & Web Partner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">LEGAXY</div>
+  <div class="footer-links">
+    <a href="legaxy_final.html">Home</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy</a>
+  </div>
+</footer>
+
+<script>
+const cx=document.getElementById('cx');
+const cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cx.style.left=mx+'px';cx.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+</script>
+
+</body>
+</html>
