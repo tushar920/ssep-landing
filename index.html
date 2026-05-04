@@ -132,19 +132,34 @@ section {
   align-items:flex-start;overflow:hidden;
   padding-bottom: 80px; /* Slight adjustment for hero bottom */
   background: var(--ink);
+  position: relative;
 }
-.hero-video{
-  position:absolute;inset:0;z-index:0;
+.hero-video-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-video-overlay {
+  position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(to right,rgba(5,6,10,.9) 20%,rgba(5,6,10,.4) 70%,rgba(5,6,10,.7)),
-    linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 40%),
-    radial-gradient(ellipse 70% 60% at 60% 40%,rgba(217,95,26,.05),transparent 70%),
-    #0B0C14;
+    linear-gradient(to right,rgba(5,6,10,.95) 10%,rgba(5,6,10,.6) 50%,rgba(5,6,10,.8)),
+    linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 50%),
+    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.1),transparent 70%);
 }
-.hero-video::before{
+.hero-video-overlay::before{
   content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);
-  opacity:.4;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);
+  opacity:.5;
 }
 .hero-content-layer { position: relative; z-index: 10; width: 100%; }
 .hero-badge{
@@ -875,7 +890,7 @@ section {
 <!-- ════ NAV ════ -->
 <nav>
   <a class="logo" href="#">
-    <img src="Legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
+    <img src="legaxy_logo_light.png" alt="Legaxy" class="nav-logo-img" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
     <span id="fallback-logo" class="text-logo" style="display:none;">LEGA<span class="logo-x">X</span>Y</span>
   </a>
   <ul>
@@ -891,7 +906,12 @@ section {
 
 <!-- ════ HERO ════ -->
 <section id="hero">
-  <div class="hero-video" id="heroVideoBg"></div>
+  <div class="hero-video-container">
+    <video autoplay muted loop playsinline>
+      <source src="LegaXy (1).mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+  </div>
   
   <div class="hero-content-layer">
     <p class="hero-badge">Next Gen Sportainment Ecosystem</p>
@@ -999,7 +1019,8 @@ section {
       <div class="port-bg bg-elite"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <p class="port-vertical">Legaxy Elite</p>
+          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <p class="port-vertical" style="display:none;">Legaxy Elite</p>
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
@@ -1018,7 +1039,8 @@ section {
       <div class="port-bg bg-studio"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <p class="port-vertical">Legaxy Studio</p>
+          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <p class="port-vertical" style="display:none;">Legaxy Studio</p>
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
@@ -1037,7 +1059,8 @@ section {
       <div class="port-bg bg-live"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <p class="port-vertical">Legaxy Live</p>
+          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <p class="port-vertical" style="display:none;">Legaxy Live</p>
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
@@ -1056,7 +1079,8 @@ section {
       <div class="port-bg bg-merch"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <p class="port-vertical">Legaxy Merch</p>
+          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <p class="port-vertical" style="display:none;">Legaxy Merch</p>
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
@@ -1075,7 +1099,8 @@ section {
       <div class="port-bg bg-learn"></div>
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <p class="port-vertical">Legaxy Learning</p>
+          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 20px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <p class="port-vertical" style="display:none;">Legaxy Learning</p>
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
