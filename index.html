@@ -151,28 +151,31 @@ section {
 }
 .hero-video-overlay {
   position:absolute;inset:0;z-index:1;
+  /* Lightened the overlay so the video is much brighter */
   background:
-    linear-gradient(to right,rgba(5,6,10,.95) 10%,rgba(5,6,10,.6) 50%,rgba(5,6,10,.8)),
-    linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 50%),
-    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.1),transparent 70%);
+    linear-gradient(to right,rgba(5,6,10,.6) 10%,rgba(5,6,10,.2) 50%,rgba(5,6,10,.4)),
+    linear-gradient(to top,rgba(5,6,10,.8) 0%,rgba(5,6,10,0) 40%),
+    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.15),transparent 70%);
 }
 .hero-video-overlay::before{
   content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);
-  opacity:.5;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);
+  opacity:.4;
 }
 .hero-content-layer { position: relative; z-index: 10; width: 100%; }
 .hero-badge{
-  font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700; 
-  letter-spacing:5px;text-transform:uppercase;color:var(--chrome);
-  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700; /* Scaled down slightly */
+  letter-spacing:5px;text-transform:uppercase;color:rgba(184,184,192,0.8); /* Faded chrome */
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
   animation: heroFade 1s 0.2s both;
 }
 .hero-badge::before{content:'';width:32px;height:1px;background:var(--metal)}
 .hero-h1{
   font-family:'Rajdhani',sans-serif;font-weight:600;
-  font-size:clamp(52px,9vw,130px);line-height:.92;
-  letter-spacing:-1px;color:#FFF;
+  font-size:clamp(40px,7vw,100px); /* Scaled down for cinematic balance */
+  line-height:.95;
+  letter-spacing:-1px;
+  color:rgba(255,255,255,0.85); /* Slightly faded white */
   animation: heroFade 1s 0.4s both;
 }
 .hero-h1 em{
@@ -181,16 +184,19 @@ section {
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;background-size:200%;
   animation:shineText 4s linear infinite;
+  opacity: 0.95;
 }
 @keyframes shineText{0%{background-position:200%}100%{background-position:-200%}}
 .hero-sub{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:18px;color:var(--text-bright);font-weight:400; 
+  font-size:16px; /* Scaled down slightly */
+  color:rgba(223, 223, 229, 0.7); /* Faded brightness */
+  font-weight:400; 
   margin-top:16px;
   animation: heroFade 1s 0.6s both;
 }
 .hero-ctas{
-  display:flex;gap:14px;margin-top:44px;
+  display:flex;gap:14px;margin-top:36px;
   animation: heroFade 1s 0.8s both;
 }
 @keyframes heroFade {
@@ -202,7 +208,8 @@ section {
   background:transparent;color:var(--orange);
   padding:14px 36px;font-size:11px;
   letter-spacing:3px;text-transform:uppercase;
-  border:1px solid var(--orange);cursor:none;
+  border:1px solid rgba(217,95,26,0.6); /* Slightly faded border */
+  cursor:none;
   font-family:'Rajdhani',sans-serif;font-weight:700;
   transition:all .3s ease;
 }
@@ -212,14 +219,15 @@ section {
   border-color:transparent;
 }
 .btn-outline{
-  background:transparent;border:1px solid rgba(255,255,255,.2);
-  color:var(--chrome);padding:14px 36px;font-size:11px;
+  background:transparent;border:1px solid rgba(255,255,255,.15); /* Slightly faded */
+  color:rgba(184,184,192,0.8);
+  padding:14px 36px;font-size:11px;
   letter-spacing:3px;text-transform:uppercase;cursor:none;
   font-family:'Rajdhani',sans-serif;font-weight:600;
   display:flex;align-items:center;gap:10px;
   transition:border-color .3s,color .3s;
 }
-.btn-outline::before{content:'▶';font-size:8px;color:var(--chrome)}
+.btn-outline::before{content:'▶';font-size:8px;color:rgba(184,184,192,0.8)}
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
 .btn-outline:hover::before{color:var(--orange)}
 
