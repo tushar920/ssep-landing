@@ -42,8 +42,8 @@ nav{
   background:linear-gradient(to bottom,rgba(5,6,10,.96) 0%,rgba(5,6,10,0) 100%);
 }
 /* LOGO using actual image file */
-.logo{display:flex;align-items:center;text-decoration:none;height:44px}
-.logo img{height:100%;width:auto;object-fit:contain;display:block}
+.logo{display:flex;align-items:center;text-decoration:none;height:56px}
+.logo img{height:100%;width:auto;object-fit:contain;display:block;filter:brightness(1.1)}
 .logo-text-fallback{
   font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;
   letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none
@@ -154,9 +154,9 @@ nav>ul>li:hover .nav-drop{display:block}
 
 /* ════════════════ STORY (OUR BELIEF) ════════════════ */
 #story{
-  min-height:100vh;background:var(--ink);
+  height:100vh;background:var(--ink);
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;overflow:hidden;padding:120px 72px
+  text-align:center;overflow:hidden;padding:80px 72px
 }
 .story-label{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:32px;opacity:0;transform:translateY(16px);transition:opacity 1s,transform 1s;position:relative;z-index:1}
 .story-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(38px,6vw,88px);line-height:1;letter-spacing:1px;max-width:920px;opacity:0;transform:translateY(24px);transition:opacity 1.2s .2s,transform 1.2s .2s;position:relative;z-index:1}
@@ -166,9 +166,9 @@ nav>ul>li:hover .nav-drop{display:block}
 
 /* ════════════════ MOMENTUM / IMPACT ════════════════ */
 #problem{
-  min-height:100vh;background:var(--ink-mid);
+  height:100vh;background:var(--ink-mid);
   display:flex;justify-content:center;align-items:center;
-  padding:120px 72px;overflow:hidden
+  padding:60px 72px;overflow:hidden
 }
 .momentum-inner{width:100%;max-width:1100px}
 .momentum-top{
@@ -245,9 +245,9 @@ nav>ul>li:hover .nav-drop{display:block}
 .atrack-dot.on{width:16px;border-radius:2px;background:var(--orange)}
 
 /* ════════════════ PORTFOLIO ════════════════ */
-#portfolio{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:80px 72px}
-.port-header-wrap{margin-bottom:40px;text-align:center}
-.port-nav-list{display:flex;justify-content:center;gap:clamp(16px,3.5vw,52px);list-style:none;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:20px;margin-bottom:52px;position:relative;z-index:10}
+#portfolio{height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:48px 72px;overflow:hidden}
+.port-header-wrap{margin-bottom:20px;text-align:center}
+.port-nav-list{display:flex;justify-content:center;gap:clamp(16px,3.5vw,52px);list-style:none;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:16px;margin-bottom:32px;position:relative;z-index:10}
 .port-nav-item{font-family:'Rajdhani',sans-serif;font-size:clamp(14px,1.8vw,22px);font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;cursor:none;padding:8px 0;position:relative;transition:color .3s}
 .port-nav-item::after{content:'';position:absolute;bottom:-21px;left:0;width:100%;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .4s ease}
 .port-nav-item.active{color:#FFF}
@@ -258,7 +258,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .port-panel-inner{position:relative;z-index:2;width:100%;max-width:1100px;display:flex;align-items:center;gap:80px}
 .port-panel-left{flex:0 0 45%}
 .port-panel-right{flex:0 0 55%}
-.port-logo-wrap{height:60px;display:flex;align-items:center;margin-bottom:28px}
+.port-logo-wrap{height:48px;display:flex;align-items:center;margin-bottom:16px}
 .port-logo-wrap img{height:100%;width:auto;object-fit:contain;display:block}
 .port-logo-fallback{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:3px;text-transform:uppercase;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:none}
 /* show fallback when img errors */
@@ -266,7 +266,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .port-logo-wrap img.err + .port-logo-fallback{display:block}
 .port-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,4.5vw,60px);letter-spacing:1px;line-height:1;color:#FFF}
 .port-h .x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.port-p{font-size:16px;line-height:1.75;color:var(--text-bright);margin:20px 0 24px}
+.port-p{font-size:14px;line-height:1.65;color:var(--text-bright);margin:12px 0 16px}
 .pf-item{display:flex;align-items:center;gap:12px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);margin-bottom:8px}
 .pf-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
 .port-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;border-bottom:1px solid rgba(188,82,37,.3);padding-bottom:2px;transition:color .3s}
@@ -304,8 +304,9 @@ nav>ul>li:hover .nav-drop{display:block}
 
 /* ════════════════ TEAM PREVIEW ════════════════ */
 #team-preview{
-  background:var(--ink);padding:120px 72px;
-  border-top:1px solid rgba(255,255,255,.04)
+  background:var(--ink);padding:40px 72px 32px;
+  border-top:1px solid rgba(255,255,255,.04);
+  height:100vh;display:flex;flex-direction:column;justify-content:center
 }
 .team-preview-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
 .team-preview-link{
@@ -329,7 +330,7 @@ nav>ul>li:hover .nav-drop{display:block}
   transition:border-color .4s
 }
 .tcard:hover{border-color:rgba(188,82,37,.25)}
-.tcard.founder{height:380px;width:100%}
+.tcard.founder{height:calc(100vh - 280px);max-height:480px;min-height:320px;width:100%}
 .tcard.member{height:240px;width:180px}
 .tc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(.25) brightness(.82);transition:transform .5s cubic-bezier(.23,1,.32,1),filter .5s}
 .tcard:hover .tc-img{transform:scale(1.04);filter:grayscale(0) brightness(.9)}
@@ -343,8 +344,8 @@ nav>ul>li:hover .nav-drop{display:block}
 .tcard:hover .tc-line{transform:scaleX(1)}
 
 /* ════════════════ WHY / DIFFERENCE — premium photo layout ════════════════ */
-#why{background:var(--ink-mid);padding:120px 72px}
-.why-header{margin-bottom:64px}
+#why{background:var(--ink-mid);padding:60px 72px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.why-header{margin-bottom:36px}
 .why-eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
 .why-h{
   font-family:'Rajdhani',sans-serif;font-weight:700;
@@ -354,9 +355,9 @@ nav>ul>li:hover .nav-drop{display:block}
 .why-h .accent{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 /* 2-col layout: left=text pillars, right=photo mosaic */
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.why-pillars{display:flex;flex-direction:column;gap:0}
+.why-pillars{display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .why-card{
-  padding:36px 40px;position:relative;
+  padding:28px 32px;position:relative;
   border-left:1px solid rgba(255,255,255,.06);
   cursor:none;transition:border-color .4s,background .4s;
 }
@@ -381,7 +382,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .why-mosaic{
   display:grid;
   grid-template-columns:1fr 1fr;
-  grid-template-rows:260px 180px;
+  grid-template-rows:200px 140px;
   gap:3px;position:sticky;top:100px
 }
 .wm-photo{
@@ -395,9 +396,9 @@ nav>ul>li:hover .nav-drop{display:block}
 
 /* ════════════════ CTA — interactive ════════════════ */
 #cta{
-  min-height:100vh;position:relative;
+  height:100vh;position:relative;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;overflow:hidden;padding:80px 40px
+  text-align:center;overflow:hidden;padding:40px
 }
 .cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 120%,rgba(188,82,37,.18),transparent 70%),linear-gradient(to top,#0d0902,#05060A)}
 /* Particle lines */
@@ -452,6 +453,127 @@ nav>ul>li:hover .nav-drop{display:block}
 
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 1s,transform 1s}
 .reveal.in-view{opacity:1;transform:translateY(0)}
+
+/* ════════════ LSA SECTION ════════════ */
+.lsa-sec{
+  height:100vh;background:var(--ink);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;overflow:hidden;position:relative;
+}
+.lsa-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(188,82,37,.07),transparent 60%);
+  pointer-events:none;z-index:0;
+}
+.lsa-left{
+  padding:72px 60px 72px 72px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+  border-right:1px solid rgba(255,255,255,.05);
+}
+.lsa-pill{
+  display:inline-block;
+  font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;
+  background:var(--orange);color:#FFF;
+  padding:5px 14px;margin-bottom:12px;
+  width:fit-content;
+}
+.lsa-sub{
+  font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--chrome-dim);margin-bottom:20px;
+}
+.lsa-h{
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(32px,3.8vw,54px);letter-spacing:1px;line-height:.95;
+  text-transform:uppercase;color:#FFF;margin-bottom:20px;
+}
+.lsa-accent{
+  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lsa-p{
+  font-size:14px;line-height:1.75;color:var(--text-bright);
+  max-width:440px;margin-bottom:28px;
+}
+.lsa-stats{display:flex;gap:32px;margin-bottom:32px;padding:20px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.lsa-sn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:32px;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.lsa-sl{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--chrome-dim);margin-top:4px}
+.lsa-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.lsa-btn{display:inline-block;text-decoration:none;padding:11px 28px;font-size:10px}
+.lsa-btn-o{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:11px 28px;font-size:10px}
+
+.lsa-right{
+  padding:40px 60px 40px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:0;position:relative;z-index:1;background:var(--ink-mid);
+}
+.lsa-pillars{display:flex;flex-direction:column;gap:2px;flex:1;margin-bottom:12px}
+.lsa-pillar{
+  padding:18px 24px;position:relative;
+  border-left:2px solid rgba(255,255,255,.06);
+  cursor:default;transition:all .35s;flex:1;
+}
+.lsa-pillar.active,.lsa-pillar:hover{
+  border-left-color:var(--orange);
+  background:rgba(188,82,37,.06);
+}
+.lsa-pillar-tag{
+  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--orange);margin-bottom:6px;
+}
+.lsa-pillar-title{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;
+  letter-spacing:2px;text-transform:uppercase;color:#FFF;margin-bottom:2px;
+}
+.lsa-pillar-sub{font-size:12px;color:var(--chrome-dim);margin-bottom:8px;font-style:italic;font-family:'Playfair Display',serif}
+.lsa-pillar-desc{font-size:12px;line-height:1.6;color:var(--text-muted);margin-bottom:8px}
+.lsa-pillar-tags{display:flex;flex-wrap:wrap;gap:6px}
+.lsa-pillar-tags span{
+  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;padding:3px 8px;
+  border:1px solid rgba(255,255,255,.08);color:var(--chrome-dim);
+}
+.lsa-feature-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;border-top:1px solid rgba(255,255,255,.05);padding-top:12px;
+}
+.lsa-feat{
+  padding:12px 10px;text-align:center;
+  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--chrome-dim);
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.04);
+  transition:background .3s,color .3s;
+}
+.lsa-feat:hover{background:rgba(188,82,37,.08);color:var(--orange)}
+.lsa-feat span{display:block;font-size:18px;margin-bottom:6px}
+
+/* ════════════ PORTFOLIO visual upgrade ════════════ */
+/* Right side: instead of plain text, add a visual accent */
+.port-panel-right{flex:0 0 55%;padding-left:24px;border-left:1px solid rgba(255,255,255,.06)}
+.port-visual-accent{
+  position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:200px;line-height:1;letter-spacing:-8px;
+  color:rgba(188,82,37,.04);pointer-events:none;user-select:none;
+}
+
+/* ════════════ CTA upgrades ════════════ */
+/* Particle/grid background */
+.cta-grid-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(188,82,37,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(188,82,37,.06) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:gridShift 20s linear infinite;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+@keyframes gridShift{0%{background-position:0 0}100%{background-position:80px 80px}}
+.cta-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(40px,6vw,88px);letter-spacing:1px;line-height:.95;max-width:900px;text-transform:uppercase}
+
+/* ════════════ TEAM PREVIEW tighter ════════════ */
+.team-preview-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px}
 </style>
 </head>
 <body>
@@ -503,8 +625,7 @@ nav>ul>li:hover .nav-drop{display:block}
       </div>
     </li>
     <li><a href="#ip">Productions</a></li>
-    <!-- Legaxy Learning → opens LSA subdomain/repo -->
-    <li><a href="https://[YOUR-USERNAME].github.io/LSA" target="_blank">Legaxy Learning</a></li>
+    <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
     <li><a href="team/index.html">Team</a></li>
   </ul>
   <button class="nav-btn"><span>Join Legaxy</span></button>
@@ -610,7 +731,7 @@ nav>ul>li:hover .nav-drop{display:block}
   <div class="port-content-area" id="portPanelsArea">
 
     <div class="port-panel active">
-      <div class="port-panel-inner">
+      <div class="port-panel-inner" style="position:relative">
         <div class="port-panel-left">
           <div class="port-logo-wrap">
             <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite"
@@ -620,6 +741,7 @@ nav>ul>li:hover .nav-drop{display:block}
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
+          <div class="port-visual-accent">01</div>
           <p class="port-p">End-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
           <div class="pf-item">Financial & Legal Advisory</div>
           <div class="pf-item">PR & Personal Branding</div>
@@ -757,8 +879,8 @@ nav>ul>li:hover .nav-drop{display:block}
 <section id="team-preview">
   <div class="team-preview-header reveal">
     <div>
-      <p class="sec-eyebrow">The Architects</p>
-      <h2 class="sec-h">Meet The Team</h2>
+      <p class="sec-eyebrow">Leadership</p>
+      <h2 class="sec-h">The Architects</h2>
     </div>
     <a href="team/index.html" class="team-preview-link">View Full Team →</a>
   </div>
@@ -802,7 +924,7 @@ nav>ul>li:hover .nav-drop{display:block}
     </div>
   </div>
   <!-- Team scroll row -->
-  <div class="team-scroll-row" style="margin-top:2px">
+  <div class="team-scroll-row" style="margin-top:2px;flex-shrink:0">
     <div class="tcard member">
       <img src="team/prateek.png" class="tc-img" alt="Prateek Pawar" onerror="this.style.opacity='0'">
       <div class="tc-overlay"></div>
@@ -842,6 +964,56 @@ nav>ul>li:hover .nav-drop{display:block}
     <div class="tcard member" style="background:rgba(188,82,37,.06);border:1px dashed rgba(188,82,37,.2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
       <div style="font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);text-align:center">View All<br/>Team Members</div>
       <a href="team/index.html" style="font-family:'Rajdhani',sans-serif;font-size:20px;color:var(--orange);text-decoration:none">→</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LSA SECTION ══ -->
+<section id="lsa-section" class="lsa-sec">
+  <div class="lsa-left reveal">
+    <div class="lsa-pill">LEGAXY LEARNING</div>
+    <div class="lsa-sub">School Sports Education Program</div>
+    <h2 class="lsa-h">WHERE SCHOOL<br/>SPORTS BECOME<br/><span class="lsa-accent">A SYSTEM.</span></h2>
+    <p class="lsa-p">A structured, outcome-driven sports program that transforms physical education into measurable growth, competitive excellence, and a thriving sports culture for Classes 1–10.</p>
+    <div class="lsa-stats">
+      <div class="lsa-stat"><div class="lsa-sn">8+</div><div class="lsa-sl">Sports Offered</div></div>
+      <div class="lsa-stat"><div class="lsa-sn">1–10</div><div class="lsa-sl">All Classes</div></div>
+      <div class="lsa-stat"><div class="lsa-sn">100%</div><div class="lsa-sl">Fully Managed</div></div>
+    </div>
+    <div class="lsa-ctas">
+      <a href="https://tushar920.github.io/LSA/" target="_blank" class="btn-gold lsa-btn">Explore LSA →</a>
+      <a href="https://tushar920.github.io/LSA/#schools" target="_blank" class="btn-outline lsa-btn-o">Partner With Us</a>
+    </div>
+  </div>
+  <div class="lsa-right reveal" style="transition-delay:.2s">
+    <div class="lsa-pillars">
+      <div class="lsa-pillar">
+        <div class="lsa-pillar-tag">Classes 1–3</div>
+        <div class="lsa-pillar-title">FOUNDATION</div>
+        <div class="lsa-pillar-sub">Movement First</div>
+        <div class="lsa-pillar-desc">Balance, coordination, motor skills and spatial awareness through fun, play-based sport sessions.</div>
+        <div class="lsa-pillar-tags"><span>Motor Skills</span><span>Multi-Sport Play</span><span>Team Behaviour</span></div>
+      </div>
+      <div class="lsa-pillar active">
+        <div class="lsa-pillar-tag">Classes 4–7</div>
+        <div class="lsa-pillar-title">DEVELOPMENT</div>
+        <div class="lsa-pillar-sub">Skill Building</div>
+        <div class="lsa-pillar-desc">Structured technique, sport rules, and gameplay across cricket, football, basketball, badminton and more.</div>
+        <div class="lsa-pillar-tags"><span>Technique</span><span>Sport IQ</span><span>Competitive Exposure</span></div>
+      </div>
+      <div class="lsa-pillar">
+        <div class="lsa-pillar-tag">Classes 8–10</div>
+        <div class="lsa-pillar-title">PERFORMANCE</div>
+        <div class="lsa-pillar-sub">Excel & Compete</div>
+        <div class="lsa-pillar-desc">Advanced tactics, talent identification, and formal competitive pathways — inter-school tournaments and high-performance tracks.</div>
+        <div class="lsa-pillar-tags"><span>Tactical Play</span><span>Talent ID</span><span>Inter-School</span></div>
+      </div>
+    </div>
+    <div class="lsa-feature-bar">
+      <div class="lsa-feat"><span>📋</span><div>Structured Curriculum</div></div>
+      <div class="lsa-feat"><span>🎯</span><div>Pro Coaching</div></div>
+      <div class="lsa-feat"><span>📊</span><div>Performance Tracking</div></div>
+      <div class="lsa-feat"><span>🏅</span><div>8+ Sports</div></div>
     </div>
   </div>
 </section>
@@ -899,6 +1071,7 @@ nav>ul>li:hover .nav-drop{display:block}
 <!-- ══ CTA — interactive ══ -->
 <section id="cta">
   <div class="cta-bg"></div>
+  <div class="cta-grid-bg"></div>
   <div class="cta-lines">
     <div class="cta-line"></div>
     <div class="cta-line"></div>
@@ -931,7 +1104,7 @@ nav>ul>li:hover .nav-drop{display:block}
         <a href="#portfolio" onclick="switchPortfolio(1)">Legaxy Studio</a>
         <a href="#portfolio" onclick="switchPortfolio(2)">Legaxy Live</a>
         <a href="#portfolio" onclick="switchPortfolio(3)">Legaxy Merch</a>
-        <a href="https://[YOUR-USERNAME].github.io/LSA" target="_blank">Legaxy Learning</a>
+        <a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
