@@ -7,773 +7,510 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ─────────────────────────────────────────
-   TOKENS & RESET
-───────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --orange-light:#FFB37A;
-  --orange:#D95F1A;
-  --orange-dark:#9D3C00;
-  
+  --orange:#BC5225;
+  --orange-dark:#7A3010;
   --chrome:#B8B8C0;
-  --chrome-dim:#8A8A93; 
-
+  --chrome-dim:#8A8A93;
   --ink:#05060A;
   --ink-mid:#0B0C14;
   --ink-lift:#12131E;
-  --ink-panel:#0F1019;
-
-  --text:#EAEAEA; 
+  --text:#EAEAEA;
   --text-muted:#8A8A93;
   --text-dim:#4A4A52;
   --text-bright:#DFDFE5;
-
   --metal:linear-gradient(135deg,var(--orange-light) 0%,var(--orange) 40%,var(--orange-dark) 70%,var(--orange) 100%);
   --metal-text:linear-gradient(90deg,var(--orange-light),var(--orange),var(--orange-dark),var(--orange),var(--orange-light));
 }
-
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{
-  background:var(--ink);
-  color:var(--text);
-  font-family:'Barlow',sans-serif;
-  font-weight:300;
-  overflow-x:hidden;
-  cursor:none;
-}
+body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+#cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
+#cx{width:8px;height:8px;background:var(--orange);transition:width .25s,height .25s}
+#cr{width:30px;height:30px;border:1px solid rgba(188,82,37,.45);transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s}
+body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover,.nf-thumb:hover) #cx{width:14px;height:14px}
+body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover,.nf-thumb:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+#prog{position:fixed;top:0;left:0;height:1px;z-index:9999;background:var(--metal);width:0}
+section{position:relative;z-index:1}
 
-/* ─── CURSOR ─── */
-#cx,#cr{
-  position:fixed;pointer-events:none;border-radius:50%;z-index:10000;
-  transform:translate(-50%,-50%);top:0;left:0;
-}
-#cx{
-  width:8px;height:8px;
-  background:var(--orange);
-  transition:width .25s,height .25s,background .25s;
-}
-#cr{
-  width:30px;height:30px;
-  border:1px solid rgba(217,95,26,.45);
-  transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s;
-}
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover, .ip-hero-title:hover) #cx{width:14px;height:14px;background:var(--orange)}
-body:has(a:hover,button:hover, .rotary-item:hover, .port-nav-item:hover, .nf-thumb:hover, .bento-card:hover, .ip-link:hover, .ip-hero-title:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
-
-/* ─── SCROLL PROGRESS ─── */
-#prog{
-  position:fixed;top:0;left:0;height:1px;z-index:9999;
-  background:var(--metal);width:0;
-}
-
-/* ─── NAV ─── */
+/* ════════════════ NAV ════════════════ */
 nav{
-  position:fixed;top:0;inset-inline:0;z-index:1000;
+  position:fixed;top:0;inset-inline:0;z-index:2000;
   display:flex;justify-content:space-between;align-items:center;
   padding:0 52px;height:72px;
-  background:linear-gradient(to bottom,rgba(5,6,10,0.9) 0%,rgba(5,6,10,0) 100%);
+  background:linear-gradient(to bottom,rgba(5,6,10,.96) 0%,rgba(5,6,10,0) 100%);
 }
-.logo{
-  display:flex;align-items:center;gap:2px;
-  text-decoration:none;
-}
-.text-logo{
-  display:flex;align-items:center;gap:2px;
+/* LOGO using actual image file */
+.logo{display:flex;align-items:center;text-decoration:none;height:44px}
+.logo img{height:100%;width:auto;object-fit:contain;display:block}
+.logo-text-fallback{
   font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:#FFF;
+  letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none
 }
-.logo-x{
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
+.logo-x-fb{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-nav ul{display:flex;gap:36px;list-style:none}
-nav ul a{
+nav>ul{display:flex;gap:0;list-style:none;align-items:center}
+nav>ul>li{position:relative}
+nav>ul>li>a{
+  display:block;padding:0 16px;height:72px;line-height:72px;
   font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
   color:var(--chrome-dim);text-decoration:none;
-  font-family:'Rajdhani',sans-serif;font-weight:500;
-  transition:color .3s;
+  font-family:'Rajdhani',sans-serif;font-weight:600;
+  transition:color .3s;white-space:nowrap
 }
-nav ul a:hover{color:var(--orange)}
+nav>ul>li>a:hover{color:var(--orange)}
+.nav-arr{font-size:8px;margin-left:3px;opacity:.5;transition:transform .3s;display:inline-block}
+nav>ul>li:hover .nav-arr{transform:rotate(180deg)}
+
+.nav-drop{
+  display:none;position:absolute;top:72px;left:0;
+  background:rgba(5,6,10,.97);backdrop-filter:blur(20px);
+  border:1px solid rgba(188,82,37,.15);border-top:2px solid var(--orange);
+  min-width:210px;padding:10px 0;z-index:3000;
+  animation:dropIn .2s ease
+}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+nav>ul>li:hover .nav-drop{display:block}
+.drop-label{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--orange);padding:8px 20px 4px;opacity:.7}
+.nav-drop a{
+  display:block;padding:7px 20px;font-family:'Rajdhani',sans-serif;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--chrome-dim);text-decoration:none;font-weight:500;
+  transition:color .2s,background .2s
+}
+.nav-drop a:hover{color:var(--orange);background:rgba(188,82,37,.06)}
+.nav-drop hr{border:none;border-top:1px solid rgba(255,255,255,.05);margin:5px 0}
+
 .nav-btn{
   font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;
   letter-spacing:2.5px;text-transform:uppercase;
   background:transparent;border:1px solid var(--orange);
-  color:var(--orange);padding:9px 22px;cursor:none;
-  transition:background .3s,color .3s,border-color .3s;
-  position:relative;overflow:hidden;
+  color:var(--orange);padding:9px 22px;cursor:none;margin-left:20px;
+  transition:background .3s,color .3s
 }
-.nav-btn::before{
-  content:'';position:absolute;inset:0;
-  background:var(--metal);opacity:0;transition:opacity .3s;z-index:0;
-}
-.nav-btn:hover::before{opacity:1}
-.nav-btn:hover{color:#FFF;border-color:transparent;}
-.nav-btn span{position:relative;z-index:1}
+.nav-btn:hover{background:var(--orange);color:#FFF}
 
-/* ─── GENERAL SPACING RULES ─── */
-section {
-  position: relative;
-  z-index: 1;
-  padding: 120px 72px; 
-}
-
-/* ─── HERO ─── */
+/* ════════════════ HERO ════════════════ */
 #hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  align-items:flex-start;overflow:hidden;
-  padding-bottom: 80px;
-  background: var(--ink);
-  position: relative;
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:flex-start;
+  overflow:hidden;padding:0 72px 80px;background:var(--ink);position:relative
 }
-.hero-video-container {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
+.hero-video-container{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-video-container video{
+  width:100%;height:100%;object-fit:cover;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  opacity:.52
 }
-.hero-video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.hero-video-overlay {
+.hero-video-overlay{
   position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(to right,rgba(5,6,10,.5) 10%,rgba(5,6,10,.1) 50%,rgba(5,6,10,.3)),
-    linear-gradient(to top,rgba(5,6,10,.7) 0%,rgba(5,6,10,0) 30%),
-    radial-gradient(ellipse 80% 80% at 50% 50%,rgba(217,95,26,.1),transparent 70%);
+    linear-gradient(to right,rgba(5,6,10,.82) 0%,rgba(5,6,10,.28) 55%,rgba(5,6,10,.45) 100%),
+    linear-gradient(to top,rgba(5,6,10,.9) 0%,rgba(5,6,10,0) 45%)
 }
-.hero-video-overlay::before{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
-  opacity:.3;
-}
-.hero-content-layer { position: relative; z-index: 10; width: 100%; }
+.hero-content-layer{position:relative;z-index:10;width:100%;max-width:700px}
 .hero-badge{
   font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
-  letter-spacing:5px;text-transform:uppercase;color:rgba(184,184,192,0.6);
-  display:flex;align-items:center;gap:12px;margin-bottom:12px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  animation: heroFade 1s 0.2s both;
+  letter-spacing:5px;text-transform:uppercase;color:rgba(255,179,122,.85);
+  display:flex;align-items:center;gap:12px;margin-bottom:14px;
+  animation:heroFade 1s .2s both
 }
-.hero-badge::before{content:'';width:32px;height:1px;background:rgba(217,95,26,0.6)}
+.hero-badge::before{content:'';width:32px;height:1px;background:var(--orange)}
 .hero-h1{
-  font-family:'Rajdhani',sans-serif;font-weight:600;
-  font-size:clamp(32px, 6vw, 88px); 
-  line-height:0.95;
-  letter-spacing:-1px;
-  color:rgba(255,255,255,0.7); 
-  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  animation: heroFade 1s 0.4s both;
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(44px,7vw,96px);line-height:.93;letter-spacing:-1px;
+  color:#FFF;text-shadow:0 2px 20px rgba(0,0,0,.5);
+  animation:heroFade 1s .4s both
 }
 .hero-h1 em{
   display:block;font-style:normal;
-  background:var(--metal-text);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;background-size:200%;
-  animation:shineText 4s linear infinite;
-  opacity: 0.8;
+  background:var(--metal-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;background-size:200%;animation:shineText 4s linear infinite
 }
 @keyframes shineText{0%{background-position:200%}100%{background-position:-200%}}
 .hero-sub{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:14px;
-  color:rgba(223, 223, 229, 0.5); 
-  font-weight:400; 
-  margin-top:12px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-  animation: heroFade 1s 0.6s both;
+  font-family:'Playfair Display',serif;font-style:italic;font-size:15px;
+  color:rgba(223,223,229,.75);margin-top:14px;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);animation:heroFade 1s .6s both
 }
-.hero-ctas{
-  display:flex;gap:14px;margin-top:28px;
-  animation: heroFade 1s 0.8s both;
-}
-@keyframes heroFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+.hero-ctas{display:flex;gap:14px;margin-top:32px;animation:heroFade 1s .8s both}
+@keyframes heroFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .btn-gold{
-  background:transparent;color:rgba(217,95,26,0.8);
-  padding:12px 32px;font-size:10px;
-  letter-spacing:3px;text-transform:uppercase;
-  border:1px solid rgba(217,95,26,0.4);
-  cursor:none;
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  transition:all 0.3s ease;
+  background:transparent;color:var(--orange);
+  padding:12px 32px;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  border:1px solid rgba(188,82,37,.6);cursor:none;
+  font-family:'Rajdhani',sans-serif;font-weight:700;transition:all .3s ease
 }
-.btn-gold:hover{
-  background:var(--metal);color:#FFF;
-  transform:translateY(-2px);box-shadow:0 10px 30px rgba(217,95,26,.35);
-  border-color:transparent;
-}
+.btn-gold:hover{background:var(--orange);color:#FFF;transform:translateY(-2px);box-shadow:0 10px 30px rgba(188,82,37,.35)}
 .btn-outline{
-  background:transparent;border:1px solid rgba(255,255,255,0.1);
-  color:rgba(184,184,192,0.6);
-  padding:12px 32px;font-size:10px;
-  letter-spacing:3px;text-transform:uppercase;cursor:none;
-  font-family:'Rajdhani',sans-serif;font-weight:600;
-  display:flex;align-items:center;gap:10px;
-  transition:border-color .3s,color .3s;
+  background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(184,184,192,.75);
+  padding:12px 32px;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:none;
+  font-family:'Rajdhani',sans-serif;font-weight:600;display:flex;align-items:center;gap:10px;
+  transition:border-color .3s,color .3s
 }
-.btn-outline::before{content:'▶';font-size:7px;color:rgba(184,184,192,0.6)}
+.btn-outline::before{content:'▶';font-size:7px;color:rgba(188,82,37,.7)}
 .btn-outline:hover{border-color:var(--orange);color:var(--orange)}
-.btn-outline:hover::before{color:var(--orange)}
 
-/* ─── STORY ─── */
+/* ════════════════ STORY (OUR BELIEF) ════════════════ */
 #story{
-  min-height:100vh;
-  background:var(--ink);
+  min-height:100vh;background:var(--ink);
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;overflow:hidden;
+  text-align:center;overflow:hidden;padding:120px 72px
 }
-.story-label{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--chrome);margin-bottom:32px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 1s,transform 1s;position:relative;z-index:1;
-}
-.story-h{
-  font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(38px,6vw,88px);line-height:1;
-  letter-spacing:1px;max-width:900px;
-  opacity:0;transform:translateY(24px);
-  transition:opacity 1.2s .2s,transform 1.2s .2s;
-  position:relative;z-index:1;
-}
-.story-h .accent{
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.story-p{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:19px;color:var(--text-bright);font-weight:400; 
-  margin-top:20px;max-width:540px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity 1s .5s,transform 1s .5s;
-  position:relative;z-index:1;
-}
-.in-view .story-label, .in-view .story-h, .in-view .story-p{opacity:1;transform:translateY(0)}
+.story-label{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:32px;opacity:0;transform:translateY(16px);transition:opacity 1s,transform 1s;position:relative;z-index:1}
+.story-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(38px,6vw,88px);line-height:1;letter-spacing:1px;max-width:920px;opacity:0;transform:translateY(24px);transition:opacity 1.2s .2s,transform 1.2s .2s;position:relative;z-index:1}
+.story-h .accent{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.story-p{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:var(--text-bright);margin-top:20px;max-width:580px;opacity:0;transform:translateY(16px);transition:opacity 1s .5s,transform 1s .5s;position:relative;z-index:1}
+.in-view .story-label,.in-view .story-h,.in-view .story-p{opacity:1;transform:translateY(0)}
 
-/* ─── PROBLEM ─── */
+/* ════════════════ MOMENTUM / IMPACT ════════════════ */
 #problem{
-  min-height:100vh;
-  background:var(--ink-mid);
+  min-height:100vh;background:var(--ink-mid);
   display:flex;justify-content:center;align-items:center;
+  padding:120px 72px;overflow:hidden
 }
-.prob-inner{width:100%;max-width:860px}
-.prob-line{
-  display:block;font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(40px,7vw,96px);letter-spacing:2px;line-height:1;
-  color:var(--text-dim); opacity:0.6; transform:translateX(0);
-  transition:opacity .8s,transform .8s,color .8s;
-  position:relative;padding-left:56px;
+.momentum-inner{width:100%;max-width:1100px}
+.momentum-top{
+  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:6px;
+  text-transform:uppercase;color:var(--orange);margin-bottom:48px;
+  display:flex;align-items:center;gap:16px;
+  opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s
 }
-.prob-line::before{
-  content:'//';position:absolute;left:0;
-  font-size:.5em;color:var(--orange);opacity:0;
-  transition:opacity .5s .2s;letter-spacing:0;
+.momentum-top::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(188,82,37,.4),transparent)}
+.momentum-inner.lit .momentum-top{opacity:1;transform:translateY(0)}
+.momentum-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:48px}
+.mstat{
+  padding:48px 40px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s
 }
-.prob-line.lit{color:#FFF;opacity:1;}
-.prob-line.lit::before{opacity:1}
-.prob-seam{
-  height:1px;background:linear-gradient(90deg,var(--orange),rgba(217,95,26,0));
-  width:0;margin:28px 0;transition:width 1.1s cubic-bezier(.23,1,.32,1);
-}
-.prob-seam.in-view{width:100%}
-.prob-resolve{
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(24px,3.5vw,52px);letter-spacing:2px;
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  opacity:0.4; transition:opacity 1s .3s;
-}
-.prob-resolve.in-view{opacity:1}
+.mstat:nth-child(2){transition-delay:.15s}
+.mstat:nth-child(3){transition-delay:.3s}
+.momentum-inner.lit .mstat{opacity:1;transform:translateY(0)}
+.mstat-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(52px,6vw,88px);line-height:1;letter-spacing:-2px;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.mstat-label{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-bottom:12px}
+.mstat-desc{font-size:14px;line-height:1.7;color:var(--text-muted)}
+.mstat-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.23,1,.32,1)}
+.momentum-inner.lit .mstat-bar{transform:scaleX(1)}
+.mstat:hover{background:rgba(188,82,37,.04)}
+.momentum-tagline{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:48px;opacity:0;transform:translateY(20px);transition:opacity .8s .4s,transform .8s .4s}
+.momentum-inner.lit .momentum-tagline{opacity:1;transform:translateY(0)}
+.mtag-left{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:.5px}
+.mtag-left .accent{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mtag-right{font-size:16px;line-height:1.85;color:var(--text-bright)}
+.mtag-cta{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;border-bottom:1px solid rgba(188,82,37,.3);padding-bottom:2px;transition:color .3s,border-color .3s}
+.mtag-cta:hover{color:var(--orange-light);border-color:var(--orange-light)}
 
-
-/* ─── ATHLETES ─── */
+/* ════════════════ ATHLETES ════════════════ */
 #athletes{
-  background:var(--ink-mid);
-  min-height:100vh; 
-  display:flex; flex-direction:column; justify-content:center;
-  padding: 60px 72px; 
+  background:var(--ink-mid);height:100vh;min-height:700px;
+  display:flex;flex-direction:column;padding:0;overflow:hidden;position:relative
 }
-.sec-header{
-  margin-bottom: 16px; 
-  display:flex;justify-content:space-between;align-items:flex-end;
-}
-.sec-eyebrow{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--chrome);margin-bottom:8px;
-}
-.sec-h{
-  font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(32px,4vw,48px); 
-  letter-spacing:1px;color:#FFF;line-height:1;
-}
+.athletes-header{padding:28px 72px 0;display:flex;justify-content:space-between;align-items:flex-end;flex-shrink:0;position:relative;z-index:10}
+.sec-eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:6px}
+.sec-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.5vw,44px);letter-spacing:1px;color:#FFF;line-height:1}
+.tab-row{display:flex;gap:2px;flex-shrink:0;position:relative;z-index:10;padding:16px 72px 0}
+.tab{padding:7px 18px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;background:transparent;border:1px solid var(--text-dim);color:var(--text-muted);cursor:none;transition:all .3s ease}
+.tab:hover{background:var(--orange);color:#FFF;border-color:var(--orange)}
+.tab.on{background:var(--metal);border-color:transparent;color:#FFF}
+.athlete-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.athlete-ghost-name{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(80px,14vw,180px);letter-spacing:-4px;color:rgba(188,82,37,.05);white-space:nowrap;pointer-events:none;user-select:none}
+.atrack{display:flex;align-items:flex-end;justify-content:center;gap:16px;position:relative;z-index:2;width:100%;padding:0 40px;height:100%}
+.athlete-card{flex-shrink:0;position:relative;overflow:hidden;cursor:none;border:1px solid rgba(255,255,255,.05);transition:all .55s cubic-bezier(.23,1,.32,1);background:var(--ink-lift)}
+.athlete-card.pos-center{width:280px;height:calc(100vh - 200px);max-height:560px;border-color:rgba(188,82,37,.5);box-shadow:0 20px 60px rgba(188,82,37,.25),0 0 0 1px rgba(188,82,37,.2);z-index:5}
+.athlete-card.pos-adj{width:200px;height:calc(100vh - 280px);max-height:430px;opacity:.75;z-index:4}
+.athlete-card.pos-adj2{width:150px;height:calc(100vh - 340px);max-height:340px;opacity:.45;z-index:3}
+.athlete-card.pos-far{width:110px;height:calc(100vh - 380px);max-height:270px;opacity:.25;z-index:2}
+.athlete-card.pos-hidden{opacity:0;width:80px;height:200px;pointer-events:none;z-index:1}
+.ac-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .55s cubic-bezier(.23,1,.32,1),filter .55s;filter:grayscale(.3) brightness(.8)}
+.athlete-card.pos-center .ac-img{filter:grayscale(0) brightness(.9)}
+.athlete-card:hover .ac-img{transform:scale(1.04)}
+.ac-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,.85) 30%,rgba(5,6,10,.2) 55%,transparent 100%)}
+.ac-bottom-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.athlete-card.pos-center .ac-bottom-line{transform:scaleX(1)}
+.ac-info{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:28px 22px;opacity:0;transition:opacity .4s}
+.athlete-card.pos-center .ac-info{opacity:1}
+.ac-sport{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.ac-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:.5px;line-height:1;color:#FFF;margin-bottom:4px}
+.ac-role{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:14px;font-style:italic;font-family:'Playfair Display',serif}
+.ac-desc{font-size:12px;line-height:1.65;color:rgba(255,255,255,.65);border-top:1px solid rgba(188,82,37,.25);padding-top:12px}
+.ac-mini-name{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);z-index:3;transition:opacity .3s}
+.athlete-card.pos-center .ac-mini-name{opacity:0}
+.atrack-nav{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:16px}
+.atrack-arrow{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#FFF;display:flex;align-items:center;justify-content:center;cursor:none;transition:all .3s;font-size:14px}
+.atrack-arrow:hover{background:var(--orange);border-color:var(--orange)}
+.atrack-dots{display:flex;gap:5px;align-items:center}
+.atrack-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s}
+.atrack-dot.on{width:16px;border-radius:2px;background:var(--orange)}
 
-.athlete-showcase {
-  position:relative;width:100%;
-  display:flex; flex-direction:column; align-items:center;
-}
-.showcase-ghost {
-  position:absolute;top:10px;left:50%;transform:translateX(-50%);
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(100px, 15vw, 200px);color:rgba(217,95,26,0.03); 
-  white-space:nowrap;pointer-events:none;z-index:0;
-  transition:opacity 0.4s ease, transform 0.4s ease;
-}
+/* ════════════════ PORTFOLIO ════════════════ */
+#portfolio{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:80px 72px}
+.port-header-wrap{margin-bottom:40px;text-align:center}
+.port-nav-list{display:flex;justify-content:center;gap:clamp(16px,3.5vw,52px);list-style:none;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:20px;margin-bottom:52px;position:relative;z-index:10}
+.port-nav-item{font-family:'Rajdhani',sans-serif;font-size:clamp(14px,1.8vw,22px);font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;cursor:none;padding:8px 0;position:relative;transition:color .3s}
+.port-nav-item::after{content:'';position:absolute;bottom:-21px;left:0;width:100%;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .4s ease}
+.port-nav-item.active{color:#FFF}
+.port-nav-item.active::after{transform:scaleX(1)}
+.port-content-area{width:100%;display:grid;flex-grow:1}
+.port-panel{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s ease;display:flex;align-items:center;justify-content:center}
+.port-panel.active{opacity:1;visibility:visible;z-index:2}
+.port-panel-inner{position:relative;z-index:2;width:100%;max-width:1100px;display:flex;align-items:center;gap:80px}
+.port-panel-left{flex:0 0 45%}
+.port-panel-right{flex:0 0 55%}
+.port-logo-wrap{height:60px;display:flex;align-items:center;margin-bottom:28px}
+.port-logo-wrap img{height:100%;width:auto;object-fit:contain;display:block}
+.port-logo-fallback{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:3px;text-transform:uppercase;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:none}
+/* show fallback when img errors */
+.port-logo-wrap img.err{display:none}
+.port-logo-wrap img.err + .port-logo-fallback{display:block}
+.port-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,4.5vw,60px);letter-spacing:1px;line-height:1;color:#FFF}
+.port-h .x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.port-p{font-size:16px;line-height:1.75;color:var(--text-bright);margin:20px 0 24px}
+.pf-item{display:flex;align-items:center;gap:12px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);margin-bottom:8px}
+.pf-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.port-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;border-bottom:1px solid rgba(188,82,37,.3);padding-bottom:2px;transition:color .3s}
+.port-link:hover{color:var(--orange-light)}
 
-.showcase-info-top {
-  position:relative;z-index:2;text-align:center;
-  display:flex;flex-direction:column;align-items:center;
-  transition:opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.si-badge {
-  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;padding:4px 12px;
-  border:1px solid rgba(217,95,26,0.3);background:rgba(5,6,10,0.6);
-  backdrop-filter:blur(8px);color:var(--orange-light);margin-bottom:8px;
-}
-.si-sport {
-  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:var(--chrome);margin-bottom:4px;
-}
-.si-name {
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(28px, 4vw, 42px);line-height:1;letter-spacing:1px; 
-  color:#FFF;margin-bottom:6px;
-}
-.si-role {font-size:15px;color:var(--text-bright);font-style:italic;font-family:'Playfair Display',serif;}
+/* ════════════════ PRODUCTIONS / IP ════════════════ */
+#ip{height:100vh;min-height:700px;padding:0;background:var(--ink);position:relative;display:flex}
+.ip-bg-slider{position:absolute;inset:0;z-index:0}
+.ip-slide-bg{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;background-size:cover;background-position:center}
+.ip-bg-1{background-image:url('whos the boss.png')}
+.ip-bg-2{background:radial-gradient(circle at 60% 40%,rgba(58,80,200,.28),var(--ink) 80%)}
+.ip-bg-3{background:radial-gradient(circle at 60% 40%,rgba(80,180,80,.22),var(--ink) 80%)}
+.ip-slide-bg.active{opacity:1}
+.ip-bg-slider::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,6,10,.92) 0%,rgba(5,6,10,.5) 50%,rgba(5,6,10,.2) 100%),linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 40%)}
+.ip-content-overlay{position:relative;z-index:2;width:100%;padding:120px 72px;display:flex;justify-content:space-between;align-items:flex-end}
+.ip-main-info{max-width:50%;opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.23,1,.32,1)}
+.ip-main-info.active{opacity:1;transform:translateY(0)}
+.ip-sec-title{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:20px}
+.ip-hero-tag{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FFF;background:var(--orange);padding:6px 14px;margin-bottom:16px}
+.ip-hero-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(40px,6vw,80px);line-height:1;text-transform:uppercase;color:#FFF;margin-bottom:20px;text-shadow:0 4px 20px rgba(0,0,0,.5);cursor:pointer;display:inline-block}
+.ip-hero-title:hover{color:var(--orange-light)}
+.ip-hero-desc{font-size:15px;line-height:1.7;color:var(--text-bright);max-width:500px}
+.ip-link-box{margin-top:24px}
+.ip-watch-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;background:#FFF;color:#000;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:12px;text-decoration:none;transition:all .3s ease}
+.ip-watch-btn:hover{background:var(--orange);color:#FFF}
+.ip-thumbnails{display:flex;gap:14px;margin-bottom:10px}
+.nf-thumb{width:160px;height:90px;background:var(--ink-lift);border:1px solid rgba(255,255,255,.1);cursor:none;position:relative;overflow:hidden;opacity:.45;transition:all .4s cubic-bezier(.23,1,.32,1)}
+.nf-thumb:hover,.nf-thumb.active{opacity:1;border-color:var(--orange);transform:translateY(-5px)}
+.nf-thumb-bg{position:absolute;inset:0;opacity:1;background-size:cover;background-position:center}
+.nf-thumb-title{position:absolute;bottom:8px;left:12px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;color:#FFF;z-index:2}
+.nf-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8),transparent 60%);z-index:1}
+.nf-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--orange);width:0;z-index:3}
+.nf-thumb.active .nf-progress{animation:nfTimer 5s linear forwards}
+@keyframes nfTimer{from{width:0}to{width:100%}}
 
-.showcase-rotary-wrapper {
-  position: relative;
-  width: 100%;
-  height: 320px; 
-  margin: 16px 0;
-  z-index: 5;
+/* ════════════════ TEAM PREVIEW ════════════════ */
+#team-preview{
+  background:var(--ink);padding:120px 72px;
+  border-top:1px solid rgba(255,255,255,.04)
 }
-.rotary-track {
-  position:absolute; top:130px; 
-  left:50%; width:0; height:0;
-}
-.rotary-item {
-  position:absolute;top:0; left:0;
-  width:140px; height:210px; 
-  background:var(--ink-lift);border:1px solid rgba(255,255,255,0.04);
-  cursor:none;overflow:hidden;display:flex; align-items:center; justify-content:center;
-  transform-origin:center center;transition:all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.rotary-item.active {
-  border-color:rgba(217,95,26,0.6);
-  box-shadow:0 15px 40px rgba(217,95,26,0.3);
-}
-.ri-img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(1); opacity: 0.4; transition: opacity 0.6s ease, filter 0.6s ease;
-}
-.rotary-item.active .ri-img {
-  filter: grayscale(0.2); opacity: 0.8;
-}
-.ri-overlay {
-  position: absolute; inset: 0; 
-  background: linear-gradient(to top, rgba(5,6,10,0.8) 0%, transparent 60%);
-  z-index: 1;
-}
-.ri-init {
-  position:relative;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:48px;letter-spacing:2px;color:rgba(255,255,255,0.15); 
-}
-
-.scroll-btn{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.1);
-  color:#FFF;display:flex;align-items:center;justify-content:center;
-  z-index:20;cursor:none;backdrop-filter:blur(10px);
-  transition:all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.athlete-nav-btn.prev-btn { left: 0; }
-.athlete-nav-btn.next-btn { right: 0; }
-
-.showcase-info-bottom {
-  position: relative;
-  z-index: 10;
-  display: flex; flex-direction: column; align-items: center;
-}
-.si-desc-box {
-  padding: 16px 24px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.03), transparent);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-top: 1px solid rgba(217,95,26,0.4); 
-  border-radius: 4px;
-  max-width: 560px;
-  text-align: center;
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-bright);
-}
-.si-cta {
-  display:inline-flex;align-items:center;gap:8px;
+.team-preview-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
+.team-preview-link{
   font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
-  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--orange);
+  text-decoration:none;border-bottom:1px solid rgba(188,82,37,.3);
+  padding-bottom:2px;transition:color .3s;cursor:none
 }
-.tab-row{display:flex;gap:2px;margin-bottom:24px; position:relative; z-index: 10;}
-.tab{
-  padding:8px 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:2.5px;text-transform:uppercase;background:transparent;
-  border:1px solid var(--text-dim);color:var(--text-muted);
-  cursor:none;transition:all .3s ease;
+.team-preview-link:hover{color:var(--orange-light)}
+/* 3-column founder cards */
+.team-founders{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px}
+/* remaining team in horizontal scroll */
+.team-scroll-row{
+  display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  padding-bottom:4px
 }
-.tab:hover {background:var(--orange);color:#FFF;border-color:var(--orange);}
-.tab.on{background:var(--metal);border-color:transparent;color:#FFF;}
+.team-scroll-row::-webkit-scrollbar{display:none}
+.tcard{
+  position:relative;overflow:hidden;cursor:none;background:var(--ink-lift);
+  border:1px solid rgba(255,255,255,.04);flex-shrink:0;
+  transition:border-color .4s
+}
+.tcard:hover{border-color:rgba(188,82,37,.25)}
+.tcard.founder{height:380px;width:100%}
+.tcard.member{height:240px;width:180px}
+.tc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(.25) brightness(.82);transition:transform .5s cubic-bezier(.23,1,.32,1),filter .5s}
+.tcard:hover .tc-img{transform:scale(1.04);filter:grayscale(0) brightness(.9)}
+.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,.97) 0%,rgba(5,6,10,.5) 40%,transparent 100%)}
+.tc-badge{position:absolute;top:16px;left:16px;z-index:3;font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(188,82,37,.4);background:rgba(5,6,10,.6);backdrop-filter:blur(8px);color:var(--orange)}
+.tc-info{position:absolute;bottom:0;left:0;right:0;padding:20px 18px;z-index:3}
+.tc-role{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.tc-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:.5px;color:#FFF}
+.tc-title{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+.tc-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.tcard:hover .tc-line{transform:scaleX(1)}
 
+/* ════════════════ WHY / DIFFERENCE — premium photo layout ════════════════ */
+#why{background:var(--ink-mid);padding:120px 72px}
+.why-header{margin-bottom:64px}
+.why-eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.why-h{
+  font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:clamp(40px,5vw,72px);letter-spacing:1px;line-height:.95;
+  text-transform:uppercase;color:#FFF
+}
+.why-h .accent{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* 2-col layout: left=text pillars, right=photo mosaic */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.why-pillars{display:flex;flex-direction:column;gap:0}
+.why-card{
+  padding:36px 40px;position:relative;
+  border-left:1px solid rgba(255,255,255,.06);
+  cursor:none;transition:border-color .4s,background .4s;
+}
+.why-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--metal);transform:scaleY(0);transform-origin:top;
+  transition:transform .5s cubic-bezier(.23,1,.32,1)
+}
+.why-card:hover::before{transform:scaleY(1)}
+.why-card:hover{background:rgba(188,82,37,.04);border-color:transparent}
+.wc-num{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:3px;color:var(--orange);opacity:.6;margin-bottom:12px
+}
+.wc-title{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;
+  text-transform:uppercase;letter-spacing:1px;color:#FFF;margin-bottom:10px
+}
+.wc-desc{font-size:14px;line-height:1.75;color:var(--text-bright)}
 
-/* ─── PORTFOLIO ─── */
-#portfolio {
-  min-height: 100vh;
-  background: var(--ink);
-  display: flex;
-  flex-direction: column;
+/* Photo mosaic: right side */
+.why-mosaic{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:260px 180px;
+  gap:3px;position:sticky;top:100px
 }
-.port-header-wrap {
-  margin-bottom: 50px;
-  text-align: center;
+.wm-photo{
+  position:relative;overflow:hidden;background:var(--ink-lift)
 }
-.port-nav-list {
-  display: flex;
-  justify-content: center;
-  gap: clamp(20px, 4vw, 60px);
-  list-style: none;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding-bottom: 24px;
-  margin-bottom: 60px;
-  position: relative;
-  z-index: 10;
-}
-.port-nav-item {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 700;
-  color: rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: none;
-  padding: 10px 0;
-  position: relative;
-}
-.port-nav-item::after {
-  content: ''; position: absolute; bottom: -25px; left: 0; width: 100%; height: 2px;
-  background: var(--orange); transform: scaleX(0); transition: transform 0.4s ease;
-}
-.port-nav-item.active { color: #FFF; }
-.port-nav-item.active::after { transform: scaleX(1); }
+.wm-photo:first-child{grid-row:span 2}
+.wm-photo img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(.2) brightness(.75);transition:transform .6s cubic-bezier(.23,1,.32,1),filter .6s}
+.wm-photo:hover img{transform:scale(1.06);filter:grayscale(0) brightness(.85)}
+.wm-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(188,82,37,.08),transparent 60%)}
+.wm-label{position:absolute;bottom:12px;left:16px;font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4)}
 
-.port-content-area {
-  width: 100%;
-  display: grid; 
-  flex-grow: 1;
-}
-.port-panel {
-  grid-area: 1 / 1; 
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.port-panel.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-}
-
-.port-panel-inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  gap: 80px;
-}
-.port-panel-left { flex: 0 0 45%; }
-.port-panel-right { flex: 0 0 55%; }
-
-.port-h{
-  font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(40px, 5vw, 64px);letter-spacing:1px;line-height:1;color:#FFF;
-}
-.port-h .x{
-  background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.port-p{font-size:16px;line-height:1.75;color:var(--text-bright);font-weight:400; margin-bottom:28px;}
-.pf-item{
-  display:flex;align-items:center;gap:12px;font-family:'Rajdhani',sans-serif;
-  font-size:13px;font-weight:600;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--text-bright);
-  margin-bottom: 8px;
-}
-.pf-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;}
-.port-link {
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;
-  border-bottom:1px solid rgba(217,95,26,0.3);padding-bottom:2px;
-}
-
-
-/* ─── NETFLIX STYLE IP CAROUSEL ─── */
-#ip{
-  height: 100vh; 
-  min-height: 700px;
-  padding: 0; 
-  background:var(--ink);
-  position:relative;
-  display: flex;
-}
-.ip-bg-slider {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.ip-slide-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 1s ease;
-  background-size: cover;
-  background-position: center;
-}
-/* Corrected background filename */
-.ip-bg-1 { background-image: url("whos the boss.jpg"); }
-.ip-bg-2 { background: radial-gradient(circle at 60% 40%, rgba(58,80,200,0.25), var(--ink) 80%); }
-.ip-bg-3 { background: radial-gradient(circle at 60% 40%, rgba(100,200,100,0.2), var(--ink) 80%); }
-
-.ip-slide-bg.active { opacity: 1; }
-.ip-bg-slider::after {
-  content:'';position:absolute;inset:0;
-  background: linear-gradient(to top, rgba(5,6,10,1) 0%, rgba(5,6,10,0.8) 25%, rgba(5,6,10,0.3) 100%);
-}
-
-.ip-content-overlay {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 120px 72px; 
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end; 
-}
-
-.ip-main-info {
-  max-width: 50%;
-  opacity: 0; transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.ip-main-info.active { opacity: 1; transform: translateY(0); }
-
-.ip-sec-title {
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--chrome);margin-bottom:24px;
-}
-.ip-hero-tag {
-  display:inline-block;
-  font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;
-  color:#FFF;background:var(--orange);padding:6px 14px;margin-bottom:16px;
-}
-.ip-hero-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-size: clamp(44px, 6vw, 84px); 
-  line-height: 1;
-  text-transform: uppercase;
-  color: #FFF;
-  margin-bottom: 20px;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  cursor: pointer;
-  display: inline-block;
-}
-.ip-hero-title:hover { color: var(--orange-light); }
-
-.ip-hero-desc {
-  font-size: 16px; line-height: 1.7; color: var(--text-bright);
-  max-width: 540px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-}
-
-.ip-link-box {
-  margin-top: 24px;
-}
-.ip-watch-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 12px 28px; background: #FFF; color: #000;
-  font-family: 'Rajdhani', sans-serif; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
-  text-decoration: none; transition: all 0.3s ease;
-}
-.ip-watch-btn:hover { background: var(--orange); color: #FFF; transform: scale(1.05); }
-
-.ip-thumbnails {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 10px; 
-}
-.nf-thumb {
-  width: 180px; height: 100px;
-  background: var(--ink-lift);
-  border: 1px solid rgba(255,255,255,0.1);
-  cursor: none;
-  position: relative;
-  overflow: hidden;
-  opacity: 0.5;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.nf-thumb:hover, .nf-thumb.active {
-  opacity: 1;
-  border-color: var(--orange);
-  transform: translateY(-5px);
-}
-.nf-thumb-bg {
-  position: absolute; inset: 0; opacity: 1;
-  background-size: cover;
-  background-position: center;
-}
-.nf-thumb-title {
-  position: absolute; bottom: 10px; left: 14px;
-  font-family: 'Rajdhani', sans-serif; font-weight: 700;
-  font-size: 13px; text-transform: uppercase; color: #FFF;
-  z-index: 2;
-}
-.nf-thumb::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
-  z-index: 1;
-}
-.nf-progress {
-  position: absolute; bottom: 0; left: 0; height: 2px;
-  background: var(--orange); width: 0; z-index: 3;
-}
-.nf-thumb.active .nf-progress {
-  animation: nfTimer 5s linear forwards;
-}
-@keyframes nfTimer { from {width:0;} to {width:100%;} }
-
-/* ─── WHY US ─── */
-#why {
-  background: var(--ink-mid);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 50px;
-}
-.bento-card {
-  background: var(--ink-lift);
-  border: 1px solid rgba(255,255,255,0.03);
-  padding: 50px;
-  position: relative;
-  overflow: hidden;
-}
-.bento-num {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 80px;
-  font-weight: 700;
-  line-height: 1;
-  color: rgba(255,255,255,0.02);
-  position: absolute;
-  top: 30px;
-  right: 40px;
-}
-.bento-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-size: 26px;
-  text-transform: uppercase;
-  color: #FFF;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
-}
-.bento-desc {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-bright);
-}
-
-/* ─── CTA / FOOTER ─── */
+/* ════════════════ CTA — interactive ════════════════ */
 #cta{
-  min-height:100vh; position:relative;
+  min-height:100vh;position:relative;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;overflow:hidden;
+  text-align:center;overflow:hidden;padding:80px 40px
 }
-.cta-bg{
-  position:absolute;inset:0;
-  background: linear-gradient(to top,#0d0902,#05060A);
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 120%,rgba(188,82,37,.18),transparent 70%),linear-gradient(to top,#0d0902,#05060A)}
+/* Particle lines */
+.cta-lines{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.cta-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(188,82,37,.3),transparent);animation:ctaLine 8s linear infinite;opacity:0}
+.cta-line:nth-child(1){top:20%;width:60%;left:20%;animation-delay:0s}
+.cta-line:nth-child(2){top:40%;width:40%;left:30%;animation-delay:2s}
+.cta-line:nth-child(3){top:60%;width:70%;left:15%;animation-delay:4s}
+.cta-line:nth-child(4){top:75%;width:50%;left:25%;animation-delay:6s}
+@keyframes ctaLine{0%{opacity:0;transform:scaleX(0) translateX(-100%)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:scaleX(1) translateX(100%)}}
+.cta-content{position:relative;z-index:2}
+.cta-eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--chrome);margin-bottom:20px}
+.cta-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(40px,6vw,88px);letter-spacing:1px;line-height:.95;max-width:900px;text-transform:uppercase}
+.cta-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--text-muted);margin-top:16px}
+.cta-btns{display:flex;gap:14px;justify-content:center;margin-top:44px}
+/* Pulsing ring on CTA button */
+.btn-cta-primary{
+  position:relative;background:var(--orange);color:#FFF;
+  padding:16px 48px;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  border:none;cursor:none;font-family:'Rajdhani',sans-serif;font-weight:700;
+  transition:transform .3s,box-shadow .3s;overflow:visible
 }
-.cta-content{position:relative;z-index:2;padding:0 40px}
-.cta-eyebrow{
-  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:6px;text-transform:uppercase;color:var(--chrome);margin-bottom:24px;
+.btn-cta-primary::after{
+  content:'';position:absolute;inset:-8px;border:1px solid rgba(188,82,37,.4);
+  animation:ringPulse 2s ease-out infinite;pointer-events:none
 }
-.cta-h{
-  font-family:'Rajdhani',sans-serif;font-weight:700; 
-  font-size:clamp(44px,7vw,96px);letter-spacing:1px;line-height:.95;
-  max-width:900px;
+@keyframes ringPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.12);opacity:0}}
+.btn-cta-primary:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(188,82,37,.45)}
+
+/* Footer with video logo */
+.site-footer{
+  background:rgba(5,6,10,.98);
+  border-top:1px solid rgba(255,255,255,.04);
+  padding:48px 72px 32px;
+  display:flex;flex-direction:column;gap:32px;
+  position:relative;z-index:2
 }
-.cta-btns{
-  display:flex;gap:14px;justify-content:center;margin-top:52px;
+.footer-top{display:flex;justify-content:space-between;align-items:center}
+.footer-video-logo{
+  height:56px;width:auto;
+  opacity:.85;
+  /* Video logo rendered as video element */
 }
-.cta-footer{
-  position:absolute;bottom:36px;inset-inline:0;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 72px;z-index:2;
-}
-.cta-logo-sm{
-  font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:18px;letter-spacing:4px;color:rgba(238,236,232,.12);
-}
-.footer-links{display:flex;gap:28px}
-.footer-links a{
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(238,236,232,0.5);text-decoration:none;
-  font-family:'Rajdhani',sans-serif;
-}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 1s,transform 1s;}
+.footer-video-logo-wrap video{height:56px;width:auto;opacity:.85;mix-blend-mode:screen}
+.footer-links-group{display:flex;gap:40px}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;opacity:.7}
+.footer-col a{display:block;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(238,236,232,.3);text-decoration:none;margin-bottom:8px;transition:color .3s}
+.footer-col a:hover{color:var(--orange)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.04);padding-top:24px}
+.footer-copy{font-size:10px;letter-spacing:1.5px;color:rgba(238,236,232,.15);font-family:'Rajdhani',sans-serif}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:rgba(238,236,232,.2)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 1s,transform 1s}
 .reveal.in-view{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
-
 <div id="cx"></div>
 <div id="cr"></div>
 <div id="prog"></div>
 
+<!-- ══ NAV ══ -->
 <nav>
   <a class="logo" href="#">
-    <span class="text-logo">LEGA<span class="logo-x">X</span>Y</span>
+    <!-- Primary: use the actual logo image from repo -->
+    <img src="Legaxy_logo_light.png" alt="Legaxy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <span class="logo-text-fallback">LEGA<span class="logo-x-fb">X</span>Y</span>
   </a>
   <ul>
-    <li><a href="#athletes">Athletes</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
+    <li>
+      <a href="#athletes">Athletes <span class="nav-arr">▾</span></a>
+      <div class="nav-drop">
+        <div class="drop-label">Elite Roster</div>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Harbhajan Singh</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Yuzvendra Chahal</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Bhuvneshwar Kumar</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Ishant Sharma</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Umesh Yadav</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Harshal Patel</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Rahul Tewatia</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Shashank Singh</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Sai Kishore</a>
+        <a href="#athletes" onclick="switchTabByName('elite');return false">Sangram Singh</a>
+        <hr/>
+        <div class="drop-label">Emerging Stars</div>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Vansh Bedi</a>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Mayank Rawat</a>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Tishant Dabla</a>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Shivi Sharma</a>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Avleen Kaur</a>
+        <a href="#athletes" onclick="switchTabByName('rising');return false">Archana</a>
+      </div>
+    </li>
+    <li>
+      <a href="#portfolio">Portfolio <span class="nav-arr">▾</span></a>
+      <div class="nav-drop">
+        <a href="#portfolio" onclick="switchPortfolio(0);return false">Legaxy Elite</a>
+        <a href="#portfolio" onclick="switchPortfolio(1);return false">Legaxy Studio</a>
+        <a href="#portfolio" onclick="switchPortfolio(2);return false">Legaxy Live</a>
+        <a href="#portfolio" onclick="switchPortfolio(3);return false">Legaxy Merch</a>
+        <a href="#portfolio" onclick="switchPortfolio(4);return false">Legaxy Learning</a>
+      </div>
+    </li>
     <li><a href="#ip">Productions</a></li>
-    <li><a href="#why">Difference</a></li>
+    <!-- Legaxy Learning → opens LSA subdomain/repo -->
+    <li><a href="https://[YOUR-USERNAME].github.io/LSA" target="_blank">Legaxy Learning</a></li>
     <li><a href="team/index.html">Team</a></li>
   </ul>
   <button class="nav-btn"><span>Join Legaxy</span></button>
 </nav>
 
+<!-- ══ HERO ══ -->
 <section id="hero">
   <div class="hero-video-container">
     <video autoplay muted loop playsinline>
@@ -781,7 +518,6 @@ section {
     </video>
     <div class="hero-video-overlay"></div>
   </div>
-  
   <div class="hero-content-layer">
     <p class="hero-badge">Next Gen Sportainment Ecosystem</p>
     <h1 class="hero-h1">ELEVATING<br/>SPORTS,<br/><em>FORGING LEGACIES.</em></h1>
@@ -791,57 +527,74 @@ section {
       <button class="btn-outline">Watch Film</button>
     </div>
   </div>
+  <!-- REMOVED hero athlete ticker per request -->
 </section>
 
+<!-- ══ STORY / OUR BELIEF ══ -->
 <section id="story">
   <p class="story-label reveal">Our Belief</p>
-  <h2 class="story-h reveal">We don't manage athletes.<br/>We build <span class="accent">legacies.</span></h2>
-  <p class="story-p reveal">Every champion has a story. We architect the rest of it — from first contract to cultural icon.</p>
+  <h2 class="story-h reveal">We champion athletes.<br/>We build <span class="accent">generational legacies.</span></h2>
+  <p class="story-p reveal">Every champion carries a story worth telling. We give it the structure, the spotlight, and the stage it deserves — from breakthrough moment to cultural icon.</p>
 </section>
 
+<!-- ══ MOMENTUM / IMPACT ══ -->
 <section id="problem">
-  <div class="prob-inner">
-    <span class="prob-line" data-d="0">No Structure</span>
-    <span class="prob-line" data-d="200">No Exposure</span>
-    <span class="prob-line" data-d="400">No Pathways</span>
-    <div class="prob-seam"></div>
-    <div class="prob-resolve">The system is broken. We fix it.</div>
+  <div class="momentum-inner" id="momentumInner">
+    <div class="momentum-top">The Legaxy Impact</div>
+    <div class="momentum-stats">
+      <div class="mstat">
+        <div class="mstat-num">12+</div>
+        <div class="mstat-label">Elite Athletes</div>
+        <div class="mstat-desc">International cricketers, wrestlers, and rising stars represented across India and the UAE.</div>
+        <div class="mstat-bar"></div>
+      </div>
+      <div class="mstat">
+        <div class="mstat-num">5</div>
+        <div class="mstat-label">Verticals</div>
+        <div class="mstat-desc">From talent management and content production to live events, merchandise, and education.</div>
+        <div class="mstat-bar"></div>
+      </div>
+      <div class="mstat">
+        <div class="mstat-num">∞</div>
+        <div class="mstat-label">Possibilities</div>
+        <div class="mstat-desc">A full-stack ecosystem built to take Indian sport and entertainment to the global stage.</div>
+        <div class="mstat-bar"></div>
+      </div>
+    </div>
+    <div class="momentum-tagline">
+      <div class="mtag-left">Structure. Exposure. <span class="accent">Opportunity.</span></div>
+      <div class="mtag-right">
+        <p>India has the talent. The audience. The ambition. What it needed was the ecosystem. LegaXy was built to be exactly that — end-to-end, athlete-first, globally scaled.</p>
+        <div class="mtag-cta" onclick="document.getElementById('athletes').scrollIntoView({behavior:'smooth'})">Meet the Athletes →</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ══ ATHLETES ══ -->
 <section id="athletes">
-  <div class="sec-header reveal">
+  <div class="athletes-header reveal">
     <div>
       <p class="sec-eyebrow">Legaxy Elite Roster</p>
       <h2 class="sec-h">The Athletes</h2>
     </div>
   </div>
-  
   <div class="tab-row reveal">
     <button class="tab on" onclick="switchTab(this,'elite')">Elite Athletes</button>
-    <button class="tab" onclick="switchTab(this,'rising')">Rising Stars</button>
+    <button class="tab" onclick="switchTab(this,'rising')">Emerging Stars</button>
   </div>
-  
-  <div class="athlete-showcase" id="athleteShowcase">
-    <div class="showcase-ghost" id="showcaseGhost"></div>
-    <div class="showcase-info-top" id="showcaseInfoTop">
-      <div class="si-badge" id="siBadge">Elite Roster</div>
-      <div class="si-sport" id="siSport">Cricket</div>
-      <div class="si-name" id="siName">Harbhajan Singh</div>
-      <div class="si-role" id="siRole">India Legend · Spin Icon</div>
-    </div>
-    <div class="showcase-rotary-wrapper">
-        <button class="scroll-btn prev-btn" onclick="rotateAthleteCarousel(-1)">←</button>
-        <div class="rotary-track" id="rotaryTrack"></div>
-        <button class="scroll-btn next-btn" onclick="rotateAthleteCarousel(1)">→</button>
-    </div>
-    <div class="showcase-info-bottom" id="showcaseInfoBottom">
-      <div class="si-desc-box" id="siDesc">A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a match-winning temperament.</div>
-      <div class="si-cta" style="margin-top:16px;">View Profile →</div>
+  <div class="athlete-stage" id="athleteStage">
+    <div class="athlete-ghost-name" id="athleteGhostName"></div>
+    <div class="atrack" id="atrack"></div>
+    <div class="atrack-nav">
+      <button class="atrack-arrow" onclick="shiftAthletes(-1)">←</button>
+      <div class="atrack-dots" id="atrackDots"></div>
+      <button class="atrack-arrow" onclick="shiftAthletes(1)">→</button>
     </div>
   </div>
 </section>
 
+<!-- ══ PORTFOLIO ══ -->
 <section id="portfolio">
   <div class="port-header-wrap reveal">
     <p class="sec-eyebrow">Our Ecosystem</p>
@@ -855,18 +608,23 @@ section {
     <li class="port-nav-item" data-target="4">LEARNING</li>
   </ul>
   <div class="port-content-area" id="portPanelsArea">
-    
+
     <div class="port-panel active">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <div class="port-logo-wrap">
+            <img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite"
+                 onerror="this.classList.add('err')">
+            <div class="port-logo-fallback">LEGAXY ELITE</div>
+          </div>
           <h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We provide end-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
+          <p class="port-p">End-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p>
           <div class="pf-item">Financial & Legal Advisory</div>
           <div class="pf-item">PR & Personal Branding</div>
           <div class="pf-item">Endorsement & Equity Deals</div>
+          <div class="pf-item">Concierge & Career Strategy</div>
           <div class="port-link">Explore Elite →</div>
         </div>
       </div>
@@ -875,14 +633,19 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <div class="port-logo-wrap">
+            <img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio"
+                 onerror="this.classList.add('err')">
+            <div class="port-logo-fallback">LEGAXY STUDIO</div>
+          </div>
           <h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">We produce cinematic content that defines careers. From biopics to branded series, podcasts and digital IP — Legaxy Studio creates value at every touchpoint across TV, digital, and BTL.</p>
+          <p class="port-p">Cinematic content that defines careers. From biopics to branded series, podcasts, and digital IP — Legaxy Studio creates value at every touchpoint across TV, digital, and BTL.</p>
           <div class="pf-item">IP Creation & Biopics</div>
-          <div class="pf-item">Branded Content</div>
-          <div class="pf-item">White-label Production</div>
+          <div class="pf-item">Branded Content Production</div>
+          <div class="pf-item">Web & TV Series</div>
+          <div class="pf-item">White-label Content</div>
           <div class="port-link">Explore Studio →</div>
         </div>
       </div>
@@ -891,14 +654,19 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Live_blue.png" alt="Legaxy Live Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <div class="port-logo-wrap">
+            <img src="Legaxy%20Live_blue.png" alt="Legaxy Live"
+                 onerror="this.classList.add('err')">
+            <div class="port-logo-fallback">LEGAXY LIVE</div>
+          </div>
           <h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle. We create award shows, concerts, and professional leagues that define the sports calendar.</p>
+          <p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle — award shows, concerts, professional leagues, and immersive fan activations.</p>
           <div class="pf-item">Large-scale Sports Leagues</div>
           <div class="pf-item">Concerts & Award Shows</div>
-          <div class="pf-item">Global Tours</div>
+          <div class="pf-item">Global Tours & Promotions</div>
+          <div class="pf-item">NGO & Govt. Sport Partnerships</div>
           <div class="port-link">Explore Live →</div>
         </div>
       </div>
@@ -907,14 +675,19 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <div class="port-logo-wrap">
+            <img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch"
+                 onerror="this.classList.add('err')">
+            <div class="port-logo-fallback">LEGAXY MERCH</div>
+          </div>
           <h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Unlocking the potential of sports IP through licensing, franchising, and digital collectibles. We bridge the gap between icons and fans through premium merchandise and Web3 experiences.</p>
-          <div class="pf-item">Team Logo Licensing</div>
-          <div class="pf-item">NFTs & Digital Avatars</div>
-          <div class="pf-item">Fan Zones & Pop-ups</div>
+          <p class="port-p">Unlocking the power of sports IP through licensing, franchising, and digital collectibles — bridging icons and fans through premium merchandise and next-gen Web3 experiences.</p>
+          <div class="pf-item">Team Logo & IP Licensing</div>
+          <div class="pf-item">Apparel, Footwear & Accessories</div>
+          <div class="pf-item">NFTs & Web3 Digital Avatars</div>
+          <div class="pf-item">Fan Zones & Pop-up Stores</div>
           <div class="port-link">Explore Merch →</div>
         </div>
       </div>
@@ -923,56 +696,56 @@ section {
     <div class="port-panel">
       <div class="port-panel-inner">
         <div class="port-panel-left">
-          <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning Logo" style="height: 48px; width: auto; margin-bottom: 24px;" />
+          <div class="port-logo-wrap">
+            <img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning"
+                 onerror="this.classList.add('err')">
+            <div class="port-logo-fallback">LEGAXY LEARNING</div>
+          </div>
           <h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2>
         </div>
         <div class="port-panel-right">
-          <p class="port-p">Education-first initiatives delivering mentorship and masterclasses across schools and academies. We leverage athlete experience to nurture the next generation of sporting talent at the grassroots level.</p>
+          <p class="port-p">Education-first initiatives delivering athlete-led masterclasses and structured mentorship across schools and sports academies — nurturing the next generation from the grassroots up.</p>
           <div class="pf-item">Athlete-led Masterclasses</div>
-          <div class="pf-item">Mentorship Modules</div>
-          <div class="pf-item">Youth Development Initiatives</div>
-          <div class="port-link">Explore Learning →</div>
+          <div class="pf-item">School & Academy Programmes</div>
+          <div class="pf-item">Structured Mentorship Modules</div>
+          <div class="pf-item">Underprivileged Youth Initiatives</div>
+          <div class="port-link">Visit Legaxy Learning →</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ══ PRODUCTIONS / IP ══ -->
 <section id="ip">
   <div class="ip-bg-slider" id="ipBgSlider">
     <div class="ip-slide-bg ip-bg-1 active"></div>
     <div class="ip-slide-bg ip-bg-2"></div>
     <div class="ip-slide-bg ip-bg-3"></div>
   </div>
-  
   <div class="ip-content-overlay">
     <div class="ip-main-info active" id="ipHeroInfo">
       <p class="ip-sec-title">Original Productions</p>
       <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
       <h2 class="ip-hero-title" id="ipHeroTitle" onclick="openProduction()">Who's The Boss?</h2>
-      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra. A one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with current cricketers.</p>
-      
+      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra — a one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with India's top cricketers.</p>
       <div class="ip-link-box" id="ipLinkBox">
-         <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="ip-watch-btn">
-            Watch Now <span style="margin-left:8px;">▶</span>
-         </a>
+        <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="ip-watch-btn">Watch Now ▶</a>
       </div>
     </div>
-
     <div class="ip-thumbnails">
       <div class="nf-thumb active" data-ip-index="0">
-        <!-- Fix: whos the boss.jpg -->
-        <div class="nf-thumb-bg" style="background-image: url('whos the boss.jpg');"></div>
+        <div class="nf-thumb-bg" style="background-image:url('whos the boss.png')"></div>
         <span class="nf-thumb-title">Who's The Boss</span>
         <div class="nf-progress"></div>
       </div>
       <div class="nf-thumb" data-ip-index="1">
-        <div class="nf-thumb-bg" style="background: radial-gradient(circle, #3A50C8, transparent);"></div>
+        <div class="nf-thumb-bg" style="background:radial-gradient(circle,#3A50C8,transparent)"></div>
         <span class="nf-thumb-title">The Unheard Story</span>
         <div class="nf-progress"></div>
       </div>
       <div class="nf-thumb" data-ip-index="2">
-        <div class="nf-thumb-bg" style="background: radial-gradient(circle, #64C864, transparent);"></div>
+        <div class="nf-thumb-bg" style="background:radial-gradient(circle,#64C864,transparent)"></div>
         <span class="nf-thumb-title">Legaxy Awards</span>
         <div class="nf-progress"></div>
       </div>
@@ -980,223 +753,374 @@ section {
   </div>
 </section>
 
-<section id="why">
-  <div class="reveal" style="text-align: center;">
-    <p class="sec-eyebrow">Why Legaxy</p>
-    <h2 class="sec-h">The Difference</h2>
+<!-- ══ TEAM PREVIEW SECTION ══ -->
+<section id="team-preview">
+  <div class="team-preview-header reveal">
+    <div>
+      <p class="sec-eyebrow">The Architects</p>
+      <h2 class="sec-h">Meet The Team</h2>
+    </div>
+    <a href="team/index.html" class="team-preview-link">View Full Team →</a>
   </div>
-  <div class="bento-grid reveal">
-    <div class="bento-card">
-      <div class="bento-num">01</div>
-      <h3 class="bento-title">Leaders in Management</h3>
-      <p class="bento-desc">Experience crafting lasting careers across industries. We know what it takes to build an icon from the ground up.</p>
+  <!-- Founders row -->
+  <div class="team-founders reveal">
+    <div class="tcard founder">
+      <img src="team/amitesh.jpeg" class="tc-img" alt="Amitesh Shah"
+           onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-badge">Founder</div>
+      <div class="tc-info">
+        <div class="tc-role">Founder & CEO</div>
+        <div class="tc-name">Amitesh Shah</div>
+        <div class="tc-title">Ex-CEO Da One Group · COO Yuvraj Singh Group</div>
+      </div>
+      <div class="tc-line"></div>
     </div>
-    <div class="bento-card">
-      <div class="bento-num">02</div>
-      <h3 class="bento-title">Personalised Approach</h3>
-      <p class="bento-desc">Tailored strategies that accelerate success and ensure long-term growth for every athlete we represent.</p>
+    <div class="tcard founder">
+      <img src="team/aneesh.jpeg" class="tc-img" alt="Aneesh Gautam"
+           onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-badge">Co-Founder</div>
+      <div class="tc-info">
+        <div class="tc-role">Co-Founder & Director Talent</div>
+        <div class="tc-name">Aneesh Gautam</div>
+        <div class="tc-title">Ex-VP YouWeCan Sports · Cornerstone</div>
+      </div>
+      <div class="tc-line"></div>
     </div>
-    <div class="bento-card">
-      <div class="bento-num">03</div>
-      <h3 class="bento-title">Brand Alliances</h3>
-      <p class="bento-desc">Strategic partnerships with global brands that align with talent identity, creating authentic collaborations.</p>
+    <div class="tcard founder">
+      <img src="team/pawan.jpeg" class="tc-img" alt="Pawan Kumar Sharma"
+           onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-badge">Co-Founder</div>
+      <div class="tc-info">
+        <div class="tc-role">Co-Founder & Board Member</div>
+        <div class="tc-name">Pawan Kumar Sharma</div>
+        <div class="tc-title">Ex-Disney · Star · Network18 · B4U</div>
+      </div>
+      <div class="tc-line"></div>
     </div>
-    <div class="bento-card">
-      <div class="bento-num">04</div>
-      <h3 class="bento-title">Global Reach</h3>
-      <p class="bento-desc">Deep roots in India combined with a worldwide footprint, bridging the gap across all markets.</p>
+  </div>
+  <!-- Team scroll row -->
+  <div class="team-scroll-row" style="margin-top:2px">
+    <div class="tcard member">
+      <img src="team/prateek.png" class="tc-img" alt="Prateek Pawar" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">VP — Brands & Partnerships</div><div class="tc-name">Prateek Pawar</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member">
+      <img src="team/priyank.jpeg" class="tc-img" alt="Priyank Tehlan" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">VP — IPs & Sports Education</div><div class="tc-name">Priyank Tehlan</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member">
+      <img src="team/sukriti.jpeg" class="tc-img" alt="Sukriti Kapil" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">Social Media & PR</div><div class="tc-name">Sukriti Kapil</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member">
+      <img src="team/amandeep.jpeg" class="tc-img" alt="Amandeep Singh" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">Assoc. VP — Sports Alliances</div><div class="tc-name">Amandeep Singh</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member">
+      <img src="team/siraj.jpeg" class="tc-img" alt="Mohammed Sirajuddin" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">Global Strategy & Expansion</div><div class="tc-name">Mohammed Sirajuddin</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member">
+      <img src="team/priyadarshi.png" class="tc-img" alt="Priyadarshi Mishra" onerror="this.style.opacity='0'">
+      <div class="tc-overlay"></div>
+      <div class="tc-info"><div class="tc-role">Founding Advisor</div><div class="tc-name">Priyadarshi Mishra</div></div>
+      <div class="tc-line"></div>
+    </div>
+    <div class="tcard member" style="background:rgba(188,82,37,.06);border:1px dashed rgba(188,82,37,.2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);text-align:center">View All<br/>Team Members</div>
+      <a href="team/index.html" style="font-family:'Rajdhani',sans-serif;font-size:20px;color:var(--orange);text-decoration:none">→</a>
     </div>
   </div>
 </section>
 
+<!-- ══ WHY / THE DIFFERENCE — premium photo layout ══ -->
+<section id="why">
+  <div class="why-header reveal">
+    <div class="why-eyebrow">Why Legaxy</div>
+    <h2 class="why-h">THE <span class="accent">DIFFERENCE</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-pillars">
+      <div class="why-card reveal">
+        <div class="wc-num">01</div>
+        <div class="wc-title">Leaders in Celebrity & Sports Management</div>
+        <div class="wc-desc">A team carrying decades of experience crafting lasting careers — from Da One Group and YouWeCan Sports to Disney, Star, and Network18. We know what it takes to build an icon.</div>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.1s">
+        <div class="wc-num">02</div>
+        <div class="wc-title">Personalised Approach</div>
+        <div class="wc-desc">Tailored strategies that accelerate success and ensure long-term financial and personal growth — built around each athlete's unique identity, goals, and trajectory.</div>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.2s">
+        <div class="wc-num">03</div>
+        <div class="wc-title">World-Class Brand Alliances</div>
+        <div class="wc-desc">Strategic partnerships with top-tier global brands that authentically align with talent identity — creating endorsements and collaborations that outlast seasons.</div>
+      </div>
+      <div class="why-card reveal" style="transition-delay:.3s">
+        <div class="wc-num">04</div>
+        <div class="wc-title">Global Reach, Local Insight</div>
+        <div class="wc-desc">Deep roots in India's sports and entertainment ecosystem combined with a worldwide operational footprint spanning the UAE, Europe, and beyond.</div>
+      </div>
+    </div>
+    <!-- Photo mosaic: uses team/athlete photos from repo -->
+    <div class="why-mosaic reveal" style="transition-delay:.2s">
+      <div class="wm-photo">
+        <img src="harbhajan.jpeg" alt="Legaxy" onerror="this.parentElement.style.background='var(--ink-lift)'">
+        <div class="wm-overlay"></div>
+        <div class="wm-label">Legaxy Elite</div>
+      </div>
+      <div class="wm-photo">
+        <img src="team/amitesh.jpeg" alt="Leadership" onerror="this.parentElement.style.background='var(--ink-lift)'">
+        <div class="wm-overlay"></div>
+        <div class="wm-label">Leadership</div>
+      </div>
+      <div class="wm-photo">
+        <img src="shashank.webp" alt="Athletes" onerror="this.parentElement.style.background='var(--ink-lift)'">
+        <div class="wm-overlay"></div>
+        <div class="wm-label">Athletes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA — interactive ══ -->
 <section id="cta">
   <div class="cta-bg"></div>
+  <div class="cta-lines">
+    <div class="cta-line"></div>
+    <div class="cta-line"></div>
+    <div class="cta-line"></div>
+    <div class="cta-line"></div>
+  </div>
   <div class="cta-content reveal">
     <p class="cta-eyebrow">The Ecosystem Awaits</p>
-    <h2 class="cta-h">BUILD A SPORTS CULTURE.</h2>
+    <h2 class="cta-h">BUILD A SPORTS<br/>CULTURE.<br/>NOT JUST A PROGRAM.</h2>
+    <p class="cta-sub">Join the athletes, brands, and creators shaping the future of Indian sport.</p>
     <div class="cta-btns">
-      <button class="btn-gold">Enter the Ecosystem</button>
-    </div>
-  </div>
-  <div class="cta-footer">
-    <div class="cta-logo-sm">LEGAXY</div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="#">Contact</a>
-      <a href="team/index.html">Team</a>
+      <button class="btn-cta-primary">Enter the Ecosystem</button>
+      <button class="btn-outline">View Portfolio</button>
     </div>
   </div>
 </section>
 
+<!-- ══ FOOTER WITH VIDEO LOGO ══ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-video-logo-wrap">
+      <video autoplay muted loop playsinline style="height:56px;width:auto;opacity:.85;mix-blend-mode:screen">
+        <source src="videologo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <h4>Verticals</h4>
+        <a href="#portfolio" onclick="switchPortfolio(0)">Legaxy Elite</a>
+        <a href="#portfolio" onclick="switchPortfolio(1)">Legaxy Studio</a>
+        <a href="#portfolio" onclick="switchPortfolio(2)">Legaxy Live</a>
+        <a href="#portfolio" onclick="switchPortfolio(3)">Legaxy Merch</a>
+        <a href="https://[YOUR-USERNAME].github.io/LSA" target="_blank">Legaxy Learning</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#story">Our Story</a>
+        <a href="team/index.html">The Team</a>
+        <a href="#ip">Productions</a>
+        <a href="#athletes">Athletes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello@legaxy.org">hello@legaxy.org</a>
+        <a href="https://legaxy.org" target="_blank">legaxy.org</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Legaxy. All rights reserved.</div>
+    <div class="footer-tagline">Where Talent Becomes Legacy.</div>
+    <div class="footer-copy">Gurugram · Dubai · Global</div>
+  </div>
+</footer>
+
 <script>
-const cx=document.getElementById('cx');
-const cr=document.getElementById('cr');
+/* ── Cursor ── */
+const cx=document.getElementById('cx'),cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cx.style.left=mx+'px';cx.style.top=my+'px'});
 (function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
 
-const prog=document.getElementById('prog');
+/* ── Progress ── */
 window.addEventListener('scroll',()=>{
-  const pct=scrollY/(document.body.scrollHeight-innerHeight)*100;
-  prog.style.width=pct+'%';
+  document.getElementById('prog').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
 },{passive:true});
 
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')});
-},{threshold:.18});
-document.querySelectorAll('.reveal,.story-wrap,.prob-seam,.prob-resolve').forEach(el=>io.observe(el));
+/* ── Observers ── */
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const stObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')}),{threshold:.25});
+document.querySelectorAll('#story').forEach(el=>stObs.observe(el));
+const momObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('lit')}),{threshold:.12});
+const momEl=document.getElementById('momentumInner');
+if(momEl)momObs.observe(momEl);
 
-/* Problem lines Observer */
-const plines=document.querySelectorAll('.prob-line');
-const pObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      plines.forEach(l=>{
-        const d=parseInt(l.dataset.d)||0;
-        setTimeout(()=>l.classList.add('lit'),d);
-      });
-      document.querySelector('.prob-seam').classList.add('in-view');
-      document.querySelector('.prob-resolve').classList.add('in-view');
-    }
-  });
-},{threshold:.10}); 
-const prob=document.getElementById('problem');
-if(prob)pObs.observe(prob);
-
-/* Semi-Circle Athlete Carousel */
+/* ── Athletes ── */
 const eliteRoster=[
-  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend',img:'harbhajan.jpeg',desc:'A legendary figure in Indian cricket history, bringing an unmatched legacy of spin-bowling mastery and a match-winning temperament.'},
-  {name:'Yuzvendra Chahal',sport:'Cricket',role:'India Leg-Spinner',img:'chahal.jpeg',desc:'India\'s premier leg-spinner and tactical genius, renowned for deceiving the world\'s best batters in high-pressure white-ball encounters.'},
-  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · IPL Star',img:'bhuvneshwar.jpeg',desc:'A maestro of swing bowling. His calm execution and pinpoint precision have made him one of the most reliable pacers of his generation.'},
-  {name:'Ishant Sharma',sport:'Cricket',role:'India Pacer · DC Veteran',img:'ishant.jpeg',desc:'A towering presence and veteran of Indian fast bowling, carrying the immense experience of over a hundred Test matches.'},
-  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',img:'umesh.jpeg',desc:'Pace, raw power, and an imposing run-up. Known for providing crucial breakthroughs and thriving aggressively with the new ball.'},
-  {name:'Harshal Patel',sport:'Cricket',role:'India & RCB · Death Bowler',img:'harshal.webp',desc:'The master of death bowling and variations. His calculated slower balls and deceptive dip make him a lethal asset in the final overs.'},
-  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · All-rounder',img:'tewatia.jpeg',desc:'A charismatic all-rounder who has authored some of the most miraculous finishes in modern T20 franchise history.'},
-  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Emerging Star',img:'shashank.webp',desc:'A dynamic and explosive middle-order batter, rapidly carving out a reputation for finishing games with breathtaking power hitting.'},
-  {name:'Sai Kishore',sport:'Cricket',role:'GT · Left-arm Spinner',img:'sai.jpg',desc:'A tall, highly accurate left-arm spinner combining discipline with sharp bounce to suffocate scoring rates in crucial middle overs.'},
-  {name:'Mayank Dagar',sport:'Cricket',role:'RR · Qatar Airways',img:'mayankdagar.jpeg',desc:'An electrifying fielder and a highly effective left-arm spinner, continuously rising through the ranks as a vital white-ball specialist.'},
-  {name:'Sangram Singh',sport:'Wrestling',role:'India Champion',img:'sangram.webp',desc:'A celebrated champion and inspirational icon in Indian wrestling, inspiring the next generation through resilience.'}
+  {name:'Harbhajan Singh',sport:'Cricket',role:'India Legend · 103 Tests',img:'harbhajan.jpeg',desc:'400+ international wickets. The Turbanator redefined spin bowling for a generation and became one of India\'s most iconic sporting personalities.'},
+  {name:'Yuzvendra Chahal',sport:'Cricket',role:'India Leg-Spinner · T20 Specialist',img:'chahal.jpeg',desc:'India\'s sharpest white-ball weapon. His ability to turn matches with a single over and outwit the world\'s best batters sets him apart.'},
+  {name:'Bhuvneshwar Kumar',sport:'Cricket',role:'India Pacer · Swing Master',img:'bhuvneshwar.jpeg',desc:'A maestro of swing and seam. Pinpoint precision at the death, a cool head under pressure, and 200+ IPL wickets to his name.'},
+  {name:'Ishant Sharma',sport:'Cricket',role:'India Test Pacer · 105 Tests',img:'ishant.jpeg',desc:'India\'s most experienced fast bowler of the modern era. His towering frame and sharp bouncer have unsettled the best in the world.'},
+  {name:'Umesh Yadav',sport:'Cricket',role:'India Pacer · Powerplay Specialist',img:'umesh.jpeg',desc:'Raw pace, a dangerous new-ball spell, and an aggressive mindset that makes him lethal in the powerplay. A proven match-winner.'},
+  {name:'Harshal Patel',sport:'Cricket',role:'RCB & India · Death Bowling Maestro',img:'harshal.webp',desc:'The art of the slower ball reinvented. His variety at the death makes him one of the IPL\'s finest and most feared closers.'},
+  {name:'Rahul Tewatia',sport:'Cricket',role:'Gujarat Titans · Finisher',img:'tewatia.jpeg',desc:'The man who turns the impossible into inevitable. Author of some of T20 cricket\'s most dramatic finishes — he thrives when the stakes are highest.'},
+  {name:'Shashank Singh',sport:'Cricket',role:'PBKS · Power Hitter',img:'shashank.webp',desc:'A middle-order destroyer with one of the highest strike rates in the IPL death overs. Explosive, fearless, and increasingly dominant.'},
+  {name:'Sai Kishore',sport:'Cricket',role:'Gujarat Titans · Left-arm Spinner',img:'sai.jpg',desc:'Accuracy, variation, and sharp bounce — one of cricket\'s most complete left-arm spinners, suffocating run rates in the middle overs.'},
+  {name:'Mayank Dagar',sport:'Cricket',role:'Rajasthan Royals · Spinner',img:'mayankdagar.jpeg',desc:'A left-arm spinning all-rounder bringing control and bite — continuing to rise as a key white-ball asset for the Rajasthan Royals.'},
+  {name:'Sangram Singh',sport:'Wrestling',role:'India · National Champion',img:'sangram.webp',desc:'A decorated wrestling champion and one of India\'s most inspiring sporting personalities — embodying everything LegaXy stands for.'},
 ];
 const risingRoster=[
-  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Rising Prospect',img:'vansh.png',desc:'A high-potential rising prospect, blending natural athleticism with a sharp cricketing brain to dominate the youth circuit.'},
-  {name:'Vathsal Govind',sport:'Cricket',role:'Emerging India Talent',img:'vathsal.jpeg',desc:'An emerging talent showcasing exceptional technique and temperament, marked as a future cornerstone of the batting order.'},
-  {name:'Mayank Rawat',sport:'Cricket',role:'India U23 · Star Batter',img:'mayank.jpeg',desc:'A powerful star in the making, possessing the rare ability to aggressively dismantle bowling attacks.'},
-  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · Allrounder',img:'tishant.jpeg',desc:'A highly versatile youth-circuit all-rounder, consistently delivering impactful performances with both bat and ball.'},
-  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',img:'shivi.png',desc:'An aggressive and fast-improving pace bowler, generating impressive speed and leading the charge for women\'s cricket.'},
-  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',img:'avleen.jpeg',desc:'A sharply focused prodigy in the shooting arena, demonstrating elite composure and consistency.'},
-  {name:'Archana',sport:'Athletics',role:'Emerging Track Star',img:'archana.jpeg',desc:'An explosive emerging track star. Her sheer pace, dedication, and explosive acceleration highlight her as a premier athlete to watch.'},
-  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National',img:'krish.jpeg',desc:'A highly promising national-level talent, refining his all-round game and consistently turning heads in competitive age-group tournaments.'},
-  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Pacer',img:'yash.jpeg',desc:'A resilient and technically gifted top-order anchor, capable of building massive innings and stabilizing the crease under pressure.'},
-  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Rising Fast Bowler',img:'agamjyot.jpeg',desc:'A fiery rising fast bowler who brings raw pace, intimidating bounce, and an attacking mindset to every spell.'},
-  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',img:'abhiraj.jpeg',desc:'A highly stylish and dependable batter, recognized for his expansive stroke play and steady consistency in the local circuits.'},
-  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging',img:'aarav.jpeg',desc:'A young, determined prodigy making swift strides. His unwavering focus and natural flair earmark him as a future game-changer.'}
+  {name:'Vansh Bedi',sport:'Cricket',role:'CSK · Emerging Bat',img:'vansh.png',desc:'Son of the legendary Bishan Bedi, Vansh is carving his own legacy. A composed top-order batter with textbook technique and elite temperament.'},
+  {name:'Vathsal Govind',sport:'Cricket',role:'India U-19 · Top Order',img:'vathsal.jpeg',desc:'A technically refined batter who has drawn comparisons to the greats for his discipline and clarity of thought at the crease.'},
+  {name:'Mayank Rawat',sport:'Cricket',role:'India U-23 · Power Batter',img:'mayank.jpeg',desc:'A destructive stroke-maker with the X-factor to dismantle any bowling attack. His domestic numbers mark him as a future IPL regular.'},
+  {name:'Tishant Dabla',sport:'Cricket',role:'Youth Circuit · All-rounder',img:'tishant.jpeg',desc:'A genuine match-winner with both bat and ball. Tishant\'s all-round consistency at youth level is turning heads at the national selectors\' level.'},
+  {name:'Shivi Sharma',sport:'Cricket',role:'Delhi Women · Fast Bowler',img:'shivi.png',desc:'Generating genuine pace rare in women\'s cricket, Shivi is at the forefront of a new wave of pace bowling talent for India\'s women\'s side.'},
+  {name:'Avleen Kaur',sport:'Shooting',role:'India Junior · Top 10 Asia',img:'avleen.jpeg',desc:'A sharpshooting prodigy with elite composure and a mental fortitude well beyond her years — a future Olympic prospect.'},
+  {name:'Archana',sport:'Athletics',role:'Track & Field · Sprinter',img:'archana.jpeg',desc:'Explosive off the blocks and relentless in the drive — bringing raw speed and world-class acceleration to India\'s athletics programme.'},
+  {name:'Krish Sharma',sport:'Cricket',role:'Under-19 National · All-rounder',img:'krish.jpeg',desc:'A well-rounded cricketer who consistently delivers match-defining performances at age-group level — a future national setup star.'},
+  {name:'Yash Dubey',sport:'Cricket',role:'Madhya Pradesh · Batter',img:'yash.jpeg',desc:'A stylish and dependable top-order anchor whose ability to construct long innings under pressure has made him a cornerstone of his state side.'},
+  {name:'Agamjyot Singh',sport:'Cricket',role:'Punjab · Fast Bowler',img:'agamjyot.jpeg',desc:'Raw pace, intimidating bounce, and the aggression of a seasoned new-ball bowler — one of Punjab\'s most exciting pace prospects.'},
+  {name:'Abhiraj Vashisht',sport:'Cricket',role:'Delhi Circuit · Batter',img:'abhiraj.jpeg',desc:'Expansive stroke play, rock-solid technique, and the composure to build big innings — steadily climbing the domestic rungs with authority.'},
+  {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging Prodigy',img:'aarav.jpeg',desc:'A young talent with extraordinary natural flair. His focus, coachability, and hunger to learn mark him as a future champion in the making.'},
 ];
 
-let currentAthleteIndex = 0;
-let currentRoster = eliteRoster;
-let currentTab = 'elite';
+let currentRoster=eliteRoster,currentAthleteIndex=0,currentTab='elite';
 
-function renderAthletes(roster) {
-  currentRoster = roster;
-  currentAthleteIndex = 0; 
-  const track = document.getElementById('rotaryTrack');
-  track.innerHTML = roster.map((a, i) => `
-    <div class="rotary-item" onclick="setAthleteIndex(${i})">
-      <img src="${a.img}" class="ri-img" alt="${a.name}" onerror="this.style.display='none'">
-      <div class="ri-overlay"></div>
-      <div class="ri-init">${a.init}</div>
-    </div>
-  `).join('');
-  updateAthleteCarousel(true); 
+function renderAthleteCards(){
+  const stage=document.getElementById('atrack');
+  stage.innerHTML='';
+  currentRoster.forEach((a,i)=>{
+    const card=document.createElement('div');
+    card.className='athlete-card';
+    card.dataset.idx=i;
+    card.innerHTML=`
+      <img src="${a.img}" class="ac-img" alt="${a.name}" onerror="this.style.opacity='0'">
+      <div class="ac-overlay"></div>
+      <div class="ac-bottom-line"></div>
+      <div class="ac-info">
+        <div class="ac-sport">${a.sport}</div>
+        <div class="ac-name">${a.name}</div>
+        <div class="ac-role">${a.role}</div>
+        <div class="ac-desc">${a.desc}</div>
+      </div>
+      <div class="ac-mini-name">${a.name.split(' ')[0]}</div>
+    `;
+    card.addEventListener('click',()=>setAthleteIndex(i));
+    stage.appendChild(card);
+  });
+  renderDots();
+  updateCardPositions();
 }
-
-function switchTab(el, type){
+function getPositionClass(offset){
+  const a=Math.abs(offset);
+  if(a===0)return 'pos-center';
+  if(a===1)return 'pos-adj';
+  if(a===2)return 'pos-adj2';
+  if(a===3)return 'pos-far';
+  return 'pos-hidden';
+}
+function updateCardPositions(){
+  const cards=document.querySelectorAll('.athlete-card');
+  const n=currentRoster.length;
+  cards.forEach((card,i)=>{
+    card.classList.remove('pos-center','pos-adj','pos-adj2','pos-far','pos-hidden');
+    let offset=i-currentAthleteIndex;
+    if(offset>n/2)offset-=n;
+    if(offset<-n/2)offset+=n;
+    card.classList.add(getPositionClass(offset));
+    card.style.order=offset;
+  });
+  const ghost=document.getElementById('athleteGhostName');
+  if(ghost)ghost.textContent=currentRoster[currentAthleteIndex].name.split(' ')[0].toUpperCase();
+}
+function renderDots(){
+  const dots=document.getElementById('atrackDots');
+  dots.innerHTML='';
+  currentRoster.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='atrack-dot'+(i===currentAthleteIndex?' on':'');
+    d.addEventListener('click',()=>setAthleteIndex(i));
+    dots.appendChild(d);
+  });
+}
+function setAthleteIndex(idx){currentAthleteIndex=idx;updateCardPositions();renderDots()}
+function shiftAthletes(dir){
+  currentAthleteIndex=(currentAthleteIndex+dir+currentRoster.length)%currentRoster.length;
+  updateCardPositions();renderDots();
+}
+function switchTab(el,type){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
-  currentTab = type;
-  renderAthletes(type==='elite'?eliteRoster:risingRoster);
+  currentTab=type;currentAthleteIndex=0;
+  currentRoster=type==='elite'?eliteRoster:risingRoster;
+  renderAthleteCards();
 }
-
-function setAthleteIndex(idx) { currentAthleteIndex = idx; updateAthleteCarousel(); }
-function rotateAthleteCarousel(dir) {
-  currentAthleteIndex = (currentAthleteIndex + dir + currentRoster.length) % currentRoster.length;
-  updateAthleteCarousel();
+function switchTabByName(type){
+  currentTab=type;currentAthleteIndex=0;
+  currentRoster=type==='elite'?eliteRoster:risingRoster;
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===(type==='elite'?0:1)));
+  renderAthleteCards();
+  setTimeout(()=>document.getElementById('athletes').scrollIntoView({behavior:'smooth'}),100);
 }
+setInterval(()=>shiftAthletes(1),4500);
+renderAthleteCards();
 
-function updateAthleteCarousel(instant = false) {
-  const items = document.querySelectorAll('.rotary-item');
-  const R = 700; 
-  const angleStep = 14; 
-  
-  items.forEach((item, i) => {
-    const offset = i - currentAthleteIndex;
-    const angleRad = offset * angleStep * (Math.PI / 180);
-    const x = R * Math.sin(angleRad);
-    const y = -R * Math.cos(angleRad) + R; 
-    const dist = Math.abs(offset);
-    item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${dist===0?1.2:0.8})`;
-    item.style.opacity = dist === 0 ? 1 : 0.5;
-    item.classList.toggle('active', dist === 0);
-  });
-  updateAthleteInfo();
+/* ── Portfolio ── */
+function switchPortfolio(idx){
+  document.querySelectorAll('.port-nav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
+  document.querySelectorAll('.port-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
 }
-
-function updateAthleteInfo() {
-  const data = currentRoster[currentAthleteIndex];
-  document.getElementById('siBadge').textContent = currentTab === 'elite' ? 'Elite Roster' : 'Rising Star';
-  document.getElementById('siName').textContent = data.name;
-  document.getElementById('siRole').textContent = data.role;
-  document.getElementById('siDesc').textContent = data.desc;
-}
-renderAthletes(eliteRoster);
-
-/* Portfolio Vertical Nav */
-document.querySelectorAll('.port-nav-item').forEach(item => {
-  item.addEventListener('mouseenter', () => {
-    const idx = item.dataset.target;
-    document.querySelectorAll('.port-nav-item').forEach(n => n.classList.remove('active'));
-    document.querySelectorAll('.port-panel').forEach(p => p.classList.remove('active'));
-    item.classList.add('active');
-    document.querySelectorAll('.port-panel')[idx].classList.add('active');
-  });
+document.querySelectorAll('.port-nav-item').forEach(item=>{
+  item.addEventListener('mouseenter',()=>switchPortfolio(parseInt(item.dataset.target)));
 });
 
-/* IP Slider */
-const ipData = [
-  { tag: "Talk Show", title: "Who's The Boss?", desc: "Starring Harbhajan Singh & Geeta Basra. A talk show blending behind-the-scenes banter and real conversations.", link: "https://www.youtube.com/@WhosTheBossShow" },
-  { tag: "Docuseries", title: "The Unheard Story", desc: "Cinematic athlete documentaries capturing the journeys of India's sports icons.", link: "#" },
-  { tag: "Live Event IP", title: "Legaxy Awards", desc: "The definitive annual celebration of Indian sport.", link: "#" }
+/* ── IP Slider ── */
+const ipData=[
+  {tag:'Talk Show',title:"Who's The Boss?",desc:"Starring Harbhajan Singh & Geeta Basra — a one-of-a-kind show blending behind-the-scenes banter and real conversations with India's top cricketers.",link:'https://www.youtube.com/@WhosTheBossShow'},
+  {tag:'Docuseries',title:'The Unheard Story',desc:'Cinematic athlete documentaries capturing the journeys of India\'s sports icons — from the dressing room to the world stage.',link:'#'},
+  {tag:'Live Event IP',title:'Legaxy Awards',desc:'The definitive annual celebration of Indian sport — honouring excellence, courage, and legacy across every discipline.',link:'#'},
 ];
-let ipIndex = 0;
-
-function setIp(idx) {
-  ipIndex = idx;
-  document.querySelectorAll('.nf-thumb').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.ip-slide-bg').forEach(b => b.classList.remove('active'));
+let ipIndex=0;
+function setIp(idx){
+  ipIndex=idx;
+  document.querySelectorAll('.nf-thumb').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ip-slide-bg').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.nf-thumb')[idx].classList.add('active');
   document.querySelectorAll('.ip-slide-bg')[idx].classList.add('active');
-  
-  const info = ipData[idx];
-  document.getElementById('ipHeroTag').textContent = info.tag;
-  document.getElementById('ipHeroTitle').textContent = info.title;
-  document.getElementById('ipHeroDesc').textContent = info.desc;
-  
-  const linkBox = document.getElementById('ipLinkBox');
-  if (info.link !== "#") {
-      linkBox.style.display = "block";
-      linkBox.querySelector('a').href = info.link;
-  } else {
-      linkBox.style.display = "none";
-  }
+  const info=ipData[idx];
+  document.getElementById('ipHeroTag').textContent=info.tag;
+  document.getElementById('ipHeroTitle').textContent=info.title;
+  document.getElementById('ipHeroDesc').textContent=info.desc;
+  const lb=document.getElementById('ipLinkBox');
+  lb.style.display=info.link!=='#'?'block':'none';
+  if(info.link!=='#')lb.querySelector('a').href=info.link;
 }
-
-function openProduction() {
-    const link = ipData[ipIndex].link;
-    if (link !== "#") window.open(link, '_blank');
-}
-
-document.querySelectorAll('.nf-thumb').forEach((t, i) => t.addEventListener('mouseenter', () => setIp(i)));
-setInterval(() => setIp((ipIndex + 1) % 3), 5000);
+function openProduction(){const l=ipData[ipIndex].link;if(l!=='#')window.open(l,'_blank')}
+document.querySelectorAll('.nf-thumb').forEach((t,i)=>t.addEventListener('mouseenter',()=>setIp(i)));
+setInterval(()=>setIp((ipIndex+1)%3),5000);
 </script>
 </body>
 </html>
