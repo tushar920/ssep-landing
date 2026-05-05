@@ -174,12 +174,12 @@ nav>ul>li:hover .nav-drop{display:block}
 .port-nav-item::after{content:'';position:absolute;bottom:-17px;left:0;width:100%;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .4s ease}
 .port-nav-item.active{color:#FFF}
 .port-nav-item.active::after{transform:scaleX(1)}
-.port-content-area{width:100%;display:grid;flex-grow:1;min-height:0}
-.port-panel{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s ease;display:flex;align-items:center;justify-content:center;padding:20px 0}
+.port-content-area{width:100%;display:grid;flex-grow:1;min-height:0;align-items:stretch}
+.port-panel{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s ease;display:flex;align-items:center;justify-content:center;padding:0}
 .port-panel.active{opacity:1;visibility:visible;z-index:2}
-.port-panel-inner{position:relative;z-index:2;width:100%;max-width:1100px;display:flex;align-items:center;gap:56px}
-.port-panel-left{flex:0 0 44%}
-.port-panel-right{flex:0 0 56%;padding-left:24px;border-left:1px solid rgba(255,255,255,.07)}
+.port-panel-inner{position:relative;z-index:2;width:100%;max-width:1140px;display:flex;align-items:stretch;gap:0}
+.port-panel-left{flex:0 0 44%;padding:40px 48px 40px 0;display:flex;flex-direction:column;justify-content:center}
+.port-panel-right{flex:0 0 56%;padding:40px 0 40px 48px;border-left:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:center}
 .port-logo-wrap{height:44px;display:flex;align-items:center;margin-bottom:16px}
 .port-logo-wrap img{height:100%;width:auto;object-fit:contain;display:block}
 .port-logo-fallback{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:3px;text-transform:uppercase;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:none}
@@ -228,7 +228,7 @@ nav>ul>li:hover .nav-drop{display:block}
 /* ══ PARTNERSHIPS / BRAND SCROLL ══ */
 #partnerships{
   background:var(--ink);
-  padding:40px 0;
+  padding:52px 0;
   border-top:1px solid rgba(255,255,255,.04);
   border-bottom:1px solid rgba(255,255,255,.04);
   overflow:hidden;
@@ -243,7 +243,7 @@ nav>ul>li:hover .nav-drop{display:block}
   background:linear-gradient(to left,var(--ink),transparent);z-index:2;pointer-events:none;
 }
 .partners-header{
-  text-align:center;padding:0 72px;margin-bottom:28px;
+  text-align:center;padding:0 72px;margin-bottom:36px;
 }
 .partners-header .sec-eyebrow{display:block;margin-bottom:8px}
 .partners-header h3{
@@ -252,7 +252,7 @@ nav>ul>li:hover .nav-drop{display:block}
   text-transform:uppercase;color:#FFF;
 }
 /* Two-row infinite scroll marquee */
-.partners-track-wrap{display:flex;flex-direction:column;gap:16px}
+.partners-track-wrap{display:flex;flex-direction:column;gap:0}
 .partners-track{
   display:flex;gap:0;
   width:max-content;
@@ -264,17 +264,17 @@ nav>ul>li:hover .nav-drop{display:block}
 /* Each partner tile */
 .partner-tile{
   display:flex;align-items:center;justify-content:center;
-  padding:0 32px;height:72px;flex-shrink:0;
-  border-right:1px solid rgba(255,255,255,.06);
+  padding:0 44px;height:88px;flex-shrink:0;
+  border-right:1px solid rgba(255,255,255,.07);
   position:relative;cursor:none;
   transition:background .3s;
-  min-width:180px;
+  min-width:220px;
 }
 .partner-tile:hover{background:rgba(188,82,37,.06)}
 .partner-name{
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:14px;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,.38);
+  font-size:15px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.36);
   transition:color .3s;
   text-align:center;
   white-space:nowrap;
@@ -288,104 +288,109 @@ nav>ul>li:hover .nav-drop{display:block}
 }
 .partner-tile-inner{display:flex;flex-direction:column;align-items:center;gap:0}
 
-/* ══ LSA SECTION — tab system ══ */
+/* ══ LSA SECTION — rebuilt ══ */
 #lsa-section{
   height:100vh;background:var(--ink);
-  display:grid;grid-template-columns:42% 58%;
-  overflow:hidden;
+  display:grid;grid-template-columns:50% 50%;
+  overflow:hidden;border-top:1px solid rgba(255,255,255,.04);
 }
 
-/* LEFT COLUMN */
+/* ── LEFT ── */
 .lsa-left{
-  padding:52px 40px 48px 72px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  position:relative;border-right:1px solid rgba(255,255,255,.05);
+  padding:60px 48px 60px 72px;
+  display:flex;flex-direction:column;
+  justify-content:center;gap:24px;
+  position:relative;
+  border-right:1px solid rgba(255,255,255,.06);
   overflow:hidden;
 }
 .lsa-left::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 90% 80% at -10% 50%,rgba(188,82,37,.09),transparent 60%);
-  pointer-events:none;z-index:0;
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 100% 80% at -5% 50%,rgba(188,82,37,.1),transparent 60%);
+  pointer-events:none;
 }
-.lsa-left>*{position:relative;z-index:1;}
-
-.lsa-top{}
+.lsa-left>*{position:relative;z-index:1}
+.lsa-top-row{display:flex;align-items:center;gap:12px}
 .lsa-pill{
-  display:inline-block;
   font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
   letter-spacing:5px;text-transform:uppercase;
   background:var(--orange);color:#FFF;
-  padding:4px 12px;margin-bottom:10px;width:fit-content;
+  padding:4px 12px;white-space:nowrap;
 }
 .lsa-kicker{
   font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--chrome-dim);margin-bottom:14px;font-weight:500;
+  text-transform:uppercase;color:var(--chrome-dim);font-weight:500;
 }
 .lsa-h{
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(26px,2.8vw,42px);letter-spacing:1px;line-height:.97;
-  text-transform:uppercase;color:#FFF;margin-bottom:12px;
+  font-size:clamp(32px,3.6vw,52px);letter-spacing:0px;line-height:.95;
+  text-transform:uppercase;color:#FFF;
 }
 .lsa-accent{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.lsa-p{font-size:13px;line-height:1.7;color:var(--text-bright);max-width:380px;margin-bottom:0;font-weight:400}
-
-.lsa-middle{}
-/* Stat row */
-.lsa-stats{display:flex;gap:10px;margin-bottom:0}
-.lsa-stat{
-  padding:10px 14px;background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.07);flex:1;text-align:center;
-  transition:border-color .3s;
+.lsa-p{
+  font-size:14px;line-height:1.72;color:var(--text-bright);
+  max-width:420px;font-weight:400;
 }
-.lsa-stat:hover{border-color:rgba(188,82,37,.3)}
-.lsa-sn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;
+/* Inline stats — horizontal strip */
+.lsa-stats{
+  display:flex;gap:2px;
+}
+.lsa-stat{
+  flex:1;padding:14px 16px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  text-align:center;
+  transition:border-color .3s,background .3s;
+}
+.lsa-stat:hover{border-color:rgba(188,82,37,.3);background:rgba(188,82,37,.04)}
+.lsa-sn{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:24px;
   background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;line-height:1;margin-bottom:2px}
-.lsa-sl{font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--chrome-dim);font-weight:500}
-
-/* Feature pills row */
+  background-clip:text;line-height:1;margin-bottom:2px;
+}
+.lsa-sl{
+  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--chrome-dim);font-weight:500;
+}
+/* 4 feature pills in 2x2 grid */
 .lsa-feats-row{
-  display:flex;gap:8px;flex-wrap:wrap;
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
 }
 .lsa-feat-pill{
-  display:flex;align-items:center;gap:6px;
-  padding:7px 12px;border:1px solid rgba(255,255,255,.07);
-  background:rgba(255,255,255,.025);
+  display:flex;align-items:center;gap:8px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.02);
   font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--chrome-dim);font-weight:500;
   transition:border-color .3s,color .3s;
 }
-.lsa-feat-pill:hover{border-color:rgba(188,82,37,.35);color:var(--orange)}
-.lsa-feat-pill span{font-size:13px}
-
-.lsa-bottom{}
+.lsa-feat-pill:hover{border-color:rgba(188,82,37,.3);color:var(--orange)}
+.lsa-feat-pill span{font-size:13px;flex-shrink:0}
+/* CTAs */
 .lsa-ctas{display:flex;gap:10px}
 .lsa-btn{display:inline-block;text-decoration:none;padding:10px 24px;font-size:10px}
 .lsa-btn-o{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:10px 24px;font-size:10px}
 
-/* RIGHT COLUMN — tab system */
+/* ── RIGHT ── */
 .lsa-right{
   display:flex;flex-direction:column;
-  background:var(--ink-mid);
-  overflow:hidden;
+  background:var(--ink-mid);overflow:hidden;
 }
-
-/* Tab buttons row */
+/* Tab buttons */
 .lsa-tab-row{
   display:grid;grid-template-columns:repeat(3,1fr);
   border-bottom:1px solid rgba(255,255,255,.07);
   flex-shrink:0;
 }
 .lsa-tab{
-  padding:16px 10px;
+  padding:14px 8px;
   font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;
+  letter-spacing:1.5px;text-transform:uppercase;
   color:var(--chrome-dim);text-align:center;
-  cursor:none;transition:all .3s;
-  border-right:1px solid rgba(255,255,255,.05);
-  position:relative;background:transparent;border-bottom:none;
-  border-top:none;border-left:none;
+  cursor:none;transition:all .25s;
+  border:none;border-right:1px solid rgba(255,255,255,.06);
+  background:transparent;position:relative;
 }
 .lsa-tab:last-child{border-right:none}
 .lsa-tab::after{
@@ -393,106 +398,81 @@ nav>ul>li:hover .nav-drop{display:block}
   background:var(--metal);transform:scaleX(0);transform-origin:left;
   transition:transform .4s cubic-bezier(.23,1,.32,1);
 }
-.lsa-tab.active{color:#FFF;background:rgba(188,82,37,.05)}
+.lsa-tab.active{color:#FFF;background:rgba(188,82,37,.06)}
 .lsa-tab.active::after{transform:scaleX(1)}
-.lsa-tab:hover:not(.active){color:rgba(255,255,255,.7);background:rgba(255,255,255,.02)}
-.lsa-tab-stage{
-  font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--orange);display:block;margin-bottom:3px;font-weight:600;
-}
-.lsa-tab-title{
-  font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;
-  text-transform:uppercase;letter-spacing:1px;display:block;
-}
+.lsa-tab:hover:not(.active){color:rgba(255,255,255,.65);background:rgba(255,255,255,.02)}
+.lsa-tab-stage{font-size:8px;letter-spacing:2.5px;color:var(--orange);display:block;margin-bottom:2px;font-weight:600;font-family:'Rajdhani',sans-serif;text-transform:uppercase}
+.lsa-tab-title{font-size:12px;font-weight:700;font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:1px;display:block}
 
-/* Tab content panels */
-.lsa-panels{
-  flex:1;position:relative;overflow:hidden;min-height:0;
-}
+/* Panels container */
+.lsa-panels{flex:1;position:relative;min-height:0;overflow:hidden}
 .lsa-panel{
   position:absolute;inset:0;
-  display:grid;grid-template-columns:1fr 1fr;
+  display:flex;flex-direction:column;
   opacity:0;visibility:hidden;
-  transition:opacity .5s ease,visibility .5s ease;
+  transition:opacity .45s ease,visibility .45s ease;
 }
 .lsa-panel.active{opacity:1;visibility:visible;z-index:2}
 
-/* Panel left: image */
+/* Image takes top 55% of panel */
 .lsa-panel-img{
-  position:relative;overflow:hidden;
+  flex:0 0 52%;position:relative;overflow:hidden;
   background:var(--ink-lift);
 }
 .lsa-panel-img img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  filter:brightness(.75) saturate(.9);
-  transition:transform .6s cubic-bezier(.23,1,.32,1),filter .6s;
+  width:100%;height:100%;object-fit:cover;object-position:center 30%;
+  filter:brightness(.72) saturate(.85);
+  transition:transform .7s cubic-bezier(.23,1,.32,1),filter .5s;
 }
-.lsa-panel.active .lsa-panel-img img{transform:scale(1.03)}
-.lsa-panel:hover .lsa-panel-img img{filter:brightness(.85) saturate(1)}
+.lsa-panel.active .lsa-panel-img img{transform:scale(1.04)}
 .lsa-panel-img-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to right,transparent 50%,var(--ink-mid) 100%),
-             linear-gradient(to top,rgba(5,6,10,.7) 0%,transparent 40%);
+  background:
+    linear-gradient(to bottom,rgba(5,6,10,0) 40%,var(--ink-mid) 100%),
+    linear-gradient(to right,rgba(5,6,10,.3),transparent 60%);
 }
-/* Number watermark on image */
 .lsa-panel-num{
-  position:absolute;bottom:16px;left:20px;z-index:2;
+  position:absolute;top:14px;right:18px;z-index:2;
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:100px;line-height:1;letter-spacing:-4px;
-  color:rgba(255,255,255,.08);user-select:none;
+  font-size:64px;line-height:1;letter-spacing:-3px;
+  color:rgba(255,255,255,.07);user-select:none;
 }
 
-/* Panel right: info */
+/* Info takes bottom 45% */
 .lsa-panel-info{
-  padding:36px 32px 32px 28px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  overflow:hidden;
+  flex:1;padding:20px 28px 18px;
+  display:flex;gap:24px;align-items:flex-start;
+  background:var(--ink-mid);
+  border-top:1px solid rgba(255,255,255,.05);
 }
+.lsa-panel-info-left{flex:0 0 auto}
 .lsa-panel-tag{
-  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:4px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:8px;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--orange);margin-bottom:4px;font-weight:600;
 }
 .lsa-panel-title{
   font-family:'Rajdhani',sans-serif;font-weight:700;
-  font-size:clamp(22px,2.2vw,32px);letter-spacing:1px;
-  text-transform:uppercase;color:#FFF;line-height:.97;margin-bottom:6px;
+  font-size:20px;letter-spacing:1px;
+  text-transform:uppercase;color:#FFF;line-height:1;margin-bottom:3px;
 }
 .lsa-panel-sub{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:12px;color:var(--chrome-dim);margin-bottom:16px;
+  font-size:11px;color:var(--chrome-dim);
 }
+.lsa-panel-info-right{flex:1}
 .lsa-panel-desc{
-  font-size:13px;line-height:1.72;color:var(--text-bright);
-  font-weight:400;margin-bottom:20px;flex:1;
+  font-size:12px;line-height:1.68;color:var(--text-bright);
+  font-weight:400;margin-bottom:12px;
 }
-/* Key skills list */
-.lsa-skills{display:flex;flex-direction:column;gap:7px}
+.lsa-skills{display:flex;flex-wrap:wrap;gap:5px}
 .lsa-skill{
-  display:flex;align-items:center;gap:10px;
-  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
-  letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);
+  font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 9px;border:1px solid rgba(255,255,255,.1);
+  color:var(--chrome-dim);
+  transition:border-color .3s,color .3s;
 }
-.lsa-skill::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--orange);flex-shrink:0;
-}
-
-/* Feature bar at bottom of right column */
-.lsa-feature-bar{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid rgba(255,255,255,.06);
-  flex-shrink:0;
-}
-.lsa-feat{
-  padding:14px 10px;text-align:center;
-  font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--chrome-dim);
-  border-right:1px solid rgba(255,255,255,.05);
-  transition:background .3s,color .3s;font-weight:500;
-}
-.lsa-feat:last-child{border-right:none}
-.lsa-feat:hover{background:rgba(188,82,37,.08);color:var(--orange)}
-.lsa-feat-icon{font-size:14px;margin-bottom:4px;display:block}
+.lsa-panel.active .lsa-skill:hover{border-color:rgba(188,82,37,.4);color:var(--orange)}
 
 /* ══ WHY / DIFFERENCE — no photos, data/stat aesthetic ══ */
 #why{background:var(--ink-mid);padding:48px 72px;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
@@ -744,6 +724,188 @@ nav>ul>li:hover .nav-drop{display:block}
   </div>
 </section>
 
+
+
+<!-- LSA / LEGAXY LEARNING -->
+<section id="lsa-section">
+
+  <!-- LEFT: Brand info -->
+  <div class="lsa-left reveal">
+    <div class="lsa-top-row">
+      <div class="lsa-pill">LEGAXY LEARNING</div>
+      <div class="lsa-kicker">School Sports Education Program</div>
+    </div>
+    <h2 class="lsa-h">WHERE SCHOOL<br/>SPORTS BECOME<br/><span class="lsa-accent">A SYSTEM.</span></h2>
+    <p class="lsa-p">A structured, outcome-driven program transforming school physical education into measurable growth, competitive excellence, and a thriving sports culture.</p>
+    <div class="lsa-stats">
+      <div class="lsa-stat"><div class="lsa-sn">8+</div><div class="lsa-sl">Sports</div></div>
+      <div class="lsa-stat"><div class="lsa-sn">1–10</div><div class="lsa-sl">Classes</div></div>
+      <div class="lsa-stat"><div class="lsa-sn">100%</div><div class="lsa-sl">Managed</div></div>
+    </div>
+    <div class="lsa-feats-row">
+      <div class="lsa-feat-pill"><span>📋</span>Structured Curriculum</div>
+      <div class="lsa-feat-pill"><span>🎯</span>Pro Coaching</div>
+      <div class="lsa-feat-pill"><span>📊</span>Performance Tracking</div>
+      <div class="lsa-feat-pill"><span>🏅</span>8+ Sports</div>
+    </div>
+    <div class="lsa-ctas">
+      <a href="https://tushar920.github.io/LSA/" target="_blank" class="btn-gold lsa-btn">Explore Program →</a>
+      <a href="https://tushar920.github.io/LSA/#schools" target="_blank" class="btn-outline lsa-btn-o">Partner With Us</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: Tab system with images -->
+  <div class="lsa-right reveal" style="transition-delay:.15s">
+
+    <!-- Tab buttons -->
+    <div class="lsa-tab-row">
+      <button class="lsa-tab active" onclick="lsaTab(0,this)">
+        <span class="lsa-tab-stage">Classes 1–3</span>
+        <span class="lsa-tab-title">Foundation</span>
+      </button>
+      <button class="lsa-tab" onclick="lsaTab(1,this)">
+        <span class="lsa-tab-stage">Classes 4–7</span>
+        <span class="lsa-tab-title">Development</span>
+      </button>
+      <button class="lsa-tab" onclick="lsaTab(2,this)">
+        <span class="lsa-tab-stage">Classes 8–10</span>
+        <span class="lsa-tab-title">Performance</span>
+      </button>
+    </div>
+
+    <!-- Tab panels -->
+    <div class="lsa-panels">
+
+      <!-- Panel 1: Foundation -->
+      <div class="lsa-panel active" data-lsa-panel="0">
+        <div class="lsa-panel-img">
+          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80&auto=format" alt="Foundation" onerror="this.parentElement.style.background='linear-gradient(135deg,#0d0a04,#1a1208)'">
+          <div class="lsa-panel-img-overlay"></div>
+          <div class="lsa-panel-num">01</div>
+        </div>
+        <div class="lsa-panel-info">
+          <div class="lsa-panel-info-left">
+            <div class="lsa-panel-tag">Classes 1–3</div>
+            <div class="lsa-panel-title">Foundation</div>
+            <div class="lsa-panel-sub">Movement First</div>
+          </div>
+          <div class="lsa-panel-info-right">
+            <div class="lsa-panel-desc">Balance, coordination and spatial awareness through fun, play-based multi-sport sessions. Building the movement base every champion needs.</div>
+            <div class="lsa-skills">
+              <div class="lsa-skill">Motor Development</div>
+              <div class="lsa-skill">Multi-Sport Play</div>
+              <div class="lsa-skill">Team Behaviour</div>
+              <div class="lsa-skill">Confidence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Development -->
+      <div class="lsa-panel" data-lsa-panel="1">
+        <div class="lsa-panel-img">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80&auto=format" alt="Development" onerror="this.parentElement.style.background='linear-gradient(135deg,#04060d,#080f1a)'">
+          <div class="lsa-panel-img-overlay"></div>
+          <div class="lsa-panel-num">02</div>
+        </div>
+        <div class="lsa-panel-info">
+          <div class="lsa-panel-info-left">
+            <div class="lsa-panel-tag">Classes 4–7</div>
+            <div class="lsa-panel-title">Development</div>
+            <div class="lsa-panel-sub">Skill Building</div>
+          </div>
+          <div class="lsa-panel-info-right">
+            <div class="lsa-panel-desc">Structured technique and tactical IQ across cricket, football, basketball and badminton. Teamwork and competitive mindset become core habits.</div>
+            <div class="lsa-skills">
+              <div class="lsa-skill">Technique</div>
+              <div class="lsa-skill">Tactical IQ</div>
+              <div class="lsa-skill">Competitive Mindset</div>
+              <div class="lsa-skill">Intra-School Games</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Performance -->
+      <div class="lsa-panel" data-lsa-panel="2">
+        <div class="lsa-panel-img">
+          <img src="https://images.unsplash.com/photo-1551958219-acbc595d558d?w=800&q=80&auto=format" alt="Performance" onerror="this.parentElement.style.background='linear-gradient(135deg,#04060a,#0a1008)'">
+          <div class="lsa-panel-img-overlay"></div>
+          <div class="lsa-panel-num">03</div>
+        </div>
+        <div class="lsa-panel-info">
+          <div class="lsa-panel-info-left">
+            <div class="lsa-panel-tag">Classes 8–10</div>
+            <div class="lsa-panel-title">Performance</div>
+            <div class="lsa-panel-sub">Excel & Compete</div>
+          </div>
+          <div class="lsa-panel-info-right">
+            <div class="lsa-panel-desc">Advanced tactics, elite conditioning and formal competitive pathways — inter-school tournaments, talent identification and high-performance development tracks.</div>
+            <div class="lsa-skills">
+              <div class="lsa-skill">Advanced Tactics</div>
+              <div class="lsa-skill">Talent ID</div>
+              <div class="lsa-skill">Inter-School Leagues</div>
+              <div class="lsa-skill">Elite Tracks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </div><!-- /lsa-panels -->
+
+  </div><!-- /lsa-right -->
+</section>
+
+<!-- WHY / THE DIFFERENCE — data aesthetic, no photos -->
+<section id="why">
+  <div class="why-header reveal">
+    <div class="why-eyebrow">Why Legaxy</div>
+    <h2 class="why-h">THE <span class="accent">DIFFERENCE</span></h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="wc-ghost">01</div>
+      <div class="wc-top">
+        <div class="wc-num">01</div>
+        <div class="wc-stat">20+</div>
+      </div>
+      <div class="wc-title">Leaders in Sports Management</div>
+      <div class="wc-desc">Combined decades of experience from Da One Group, YouWeCan Sports, Disney, Star India, and Network18 — crafting careers for India's biggest names in sport and entertainment.</div>
+      <div class="wc-bar"></div>
+    </div>
+    <div class="why-card reveal" style="transition-delay:.1s">
+      <div class="wc-ghost">02</div>
+      <div class="wc-top">
+        <div class="wc-num">02</div>
+        <div class="wc-stat">1:1</div>
+      </div>
+      <div class="wc-title">Personalised Approach</div>
+      <div class="wc-desc">Tailored strategies built around each athlete's unique identity, goals, and career stage — ensuring long-term financial and personal growth that scales with the individual.</div>
+      <div class="wc-bar"></div>
+    </div>
+    <div class="why-card reveal" style="transition-delay:.2s">
+      <div class="wc-ghost">03</div>
+      <div class="wc-top">
+        <div class="wc-num">03</div>
+        <div class="wc-stat">50+</div>
+      </div>
+      <div class="wc-title">World-Class Brand Alliances</div>
+      <div class="wc-desc">Strategic partnerships with India's biggest brands — from RuPay and Mumbai Indians to Kinder Joy and Amar Ujala — creating authentic collaborations that outlast seasons.</div>
+      <div class="wc-bar"></div>
+    </div>
+    <div class="why-card reveal" style="transition-delay:.3s">
+      <div class="wc-ghost">04</div>
+      <div class="wc-top">
+        <div class="wc-num">04</div>
+        <div class="wc-stat">2+</div>
+      </div>
+      <div class="wc-title">Global Reach, Local Insight</div>
+      <div class="wc-desc">Operating across India &amp; the UAE with a growing international footprint — taking Indian talent and culture to audiences beyond borders.</div>
+      <div class="wc-bar"></div>
+    </div>
+  </div>
+</section>
+
 <!-- PARTNERSHIPS — auto-scrolling logo ticker -->
 <section id="partnerships">
   <div class="partners-header reveal">
@@ -795,191 +957,6 @@ nav>ul>li:hover .nav-drop{display:block}
       <div class="partner-tile"><div class="partner-name">Kinder Joy</div></div>
       <div class="partner-tile"><div class="partner-name">Amar Ujala</div></div>
       <div class="partner-tile"><div class="partner-name">Mumbai Indians</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- LSA / LEGAXY LEARNING -->
-<section id="lsa-section">
-
-  <!-- LEFT: Brand info + stats -->
-  <div class="lsa-left reveal">
-    <div class="lsa-top">
-      <div class="lsa-pill">LEGAXY LEARNING</div>
-      <div class="lsa-kicker">School Sports Education Program</div>
-      <h2 class="lsa-h">WHERE SCHOOL<br/>SPORTS BECOME<br/><span class="lsa-accent">A SYSTEM.</span></h2>
-      <p class="lsa-p">A structured, outcome-driven sports program transforming physical education into measurable growth and competitive excellence for Classes 1–10.</p>
-    </div>
-    <div class="lsa-middle">
-      <div class="lsa-stats">
-        <div class="lsa-stat"><div class="lsa-sn">8+</div><div class="lsa-sl">Sports</div></div>
-        <div class="lsa-stat"><div class="lsa-sn">1–10</div><div class="lsa-sl">Classes</div></div>
-        <div class="lsa-stat"><div class="lsa-sn">100%</div><div class="lsa-sl">Managed</div></div>
-      </div>
-    </div>
-    <div class="lsa-feats-row" style="margin-bottom:0">
-      <div class="lsa-feat-pill"><span>📋</span>Structured Curriculum</div>
-      <div class="lsa-feat-pill"><span>🎯</span>Pro Coaching</div>
-      <div class="lsa-feat-pill"><span>📊</span>Performance Tracking</div>
-      <div class="lsa-feat-pill"><span>🏅</span>8+ Sports</div>
-    </div>
-    <div class="lsa-bottom">
-      <div class="lsa-ctas">
-        <a href="https://tushar920.github.io/LSA/" target="_blank" class="btn-gold lsa-btn">Explore Program →</a>
-        <a href="https://tushar920.github.io/LSA/#schools" target="_blank" class="btn-outline lsa-btn-o">Partner With Us</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT: Tab system with images -->
-  <div class="lsa-right reveal" style="transition-delay:.15s">
-
-    <!-- Tab buttons -->
-    <div class="lsa-tab-row">
-      <button class="lsa-tab active" onclick="lsaTab(0,this)">
-        <span class="lsa-tab-stage">Classes 1–3</span>
-        <span class="lsa-tab-title">Foundation</span>
-      </button>
-      <button class="lsa-tab" onclick="lsaTab(1,this)">
-        <span class="lsa-tab-stage">Classes 4–7</span>
-        <span class="lsa-tab-title">Development</span>
-      </button>
-      <button class="lsa-tab" onclick="lsaTab(2,this)">
-        <span class="lsa-tab-stage">Classes 8–10</span>
-        <span class="lsa-tab-title">Performance</span>
-      </button>
-    </div>
-
-    <!-- Tab panels -->
-    <div class="lsa-panels">
-
-      <!-- Panel 1: Foundation -->
-      <div class="lsa-panel active" data-lsa-panel="0">
-        <div class="lsa-panel-img">
-          <!-- Sports kids image - using a sports photo reference -->
-          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=75&auto=format"
-               alt="Foundation — Movement First"
-               onerror="this.parentElement.style.background='linear-gradient(135deg,#0d0a04,#1a1208)'">
-          <div class="lsa-panel-img-overlay"></div>
-          <div class="lsa-panel-num">01</div>
-        </div>
-        <div class="lsa-panel-info">
-          <div>
-            <div class="lsa-panel-tag">Classes 1–3</div>
-            <div class="lsa-panel-title">Foundation</div>
-            <div class="lsa-panel-sub">Movement First</div>
-            <div class="lsa-panel-desc">Balance, coordination, and spatial awareness built through fun, play-based multi-sport sessions. This phase is about movement joy — creating athletes who love sport before they understand it.</div>
-          </div>
-          <div class="lsa-skills">
-            <div class="lsa-skill">Gross Motor Development</div>
-            <div class="lsa-skill">Multi-Sport Exposure</div>
-            <div class="lsa-skill">Team Behaviour & Play</div>
-            <div class="lsa-skill">Confidence Through Sport</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel 2: Development -->
-      <div class="lsa-panel" data-lsa-panel="1">
-        <div class="lsa-panel-img">
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=75&auto=format"
-               alt="Development — Skill Building"
-               onerror="this.parentElement.style.background='linear-gradient(135deg,#04060d,#080f1a)'">
-          <div class="lsa-panel-img-overlay"></div>
-          <div class="lsa-panel-num">02</div>
-        </div>
-        <div class="lsa-panel-info">
-          <div>
-            <div class="lsa-panel-tag">Classes 4–7</div>
-            <div class="lsa-panel-title">Development</div>
-            <div class="lsa-panel-sub">Skill Building</div>
-            <div class="lsa-panel-desc">Structured sport technique and tactical IQ across cricket, football, basketball, badminton, and athletics. Teamwork, discipline, and competitive mindset become core habits in every session.</div>
-          </div>
-          <div class="lsa-skills">
-            <div class="lsa-skill">Sport-Specific Technique</div>
-            <div class="lsa-skill">Tactical Awareness</div>
-            <div class="lsa-skill">Competitive Mindset</div>
-            <div class="lsa-skill">Intra-School Tournaments</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel 3: Performance -->
-      <div class="lsa-panel" data-lsa-panel="2">
-        <div class="lsa-panel-img">
-          <img src="https://images.unsplash.com/photo-1551958219-acbc595d558d?w=600&q=75&auto=format"
-               alt="Performance — Excel and Compete"
-               onerror="this.parentElement.style.background='linear-gradient(135deg,#04060a,#0a1008)'">
-          <div class="lsa-panel-img-overlay"></div>
-          <div class="lsa-panel-num">03</div>
-        </div>
-        <div class="lsa-panel-info">
-          <div>
-            <div class="lsa-panel-tag">Classes 8–10</div>
-            <div class="lsa-panel-title">Performance</div>
-            <div class="lsa-panel-sub">Excel & Compete</div>
-            <div class="lsa-panel-desc">Advanced tactics, elite conditioning, and formal competitive pathways — inter-school tournaments, talent identification camps, and structured high-performance tracks for serious athletes.</div>
-          </div>
-          <div class="lsa-skills">
-            <div class="lsa-skill">Advanced Tactical Play</div>
-            <div class="lsa-skill">Talent Identification</div>
-            <div class="lsa-skill">Inter-School Leagues</div>
-            <div class="lsa-skill">Elite Development Tracks</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /lsa-panels -->
-
-  </div><!-- /lsa-right -->
-</section>
-
-<!-- WHY / THE DIFFERENCE — data aesthetic, no photos -->
-<section id="why">
-  <div class="why-header reveal">
-    <div class="why-eyebrow">Why Legaxy</div>
-    <h2 class="why-h">THE <span class="accent">DIFFERENCE</span></h2>
-  </div>
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="wc-ghost">01</div>
-      <div class="wc-top">
-        <div class="wc-num">01</div>
-        <div class="wc-stat">20+</div>
-      </div>
-      <div class="wc-title">Leaders in Sports Management</div>
-      <div class="wc-desc">Combined decades of experience from Da One Group, YouWeCan Sports, Disney, Star India, and Network18 — crafting careers for India's biggest names in sport and entertainment.</div>
-      <div class="wc-bar"></div>
-    </div>
-    <div class="why-card reveal" style="transition-delay:.1s">
-      <div class="wc-ghost">02</div>
-      <div class="wc-top">
-        <div class="wc-num">02</div>
-        <div class="wc-stat">1:1</div>
-      </div>
-      <div class="wc-title">Personalised Approach</div>
-      <div class="wc-desc">Tailored strategies built around each athlete's unique identity, goals, and career stage — ensuring long-term financial and personal growth that scales with the individual.</div>
-      <div class="wc-bar"></div>
-    </div>
-    <div class="why-card reveal" style="transition-delay:.2s">
-      <div class="wc-ghost">03</div>
-      <div class="wc-top">
-        <div class="wc-num">03</div>
-        <div class="wc-stat">50+</div>
-      </div>
-      <div class="wc-title">World-Class Brand Alliances</div>
-      <div class="wc-desc">Strategic partnerships with India's biggest brands — from RuPay and Mumbai Indians to Kinder Joy and Amar Ujala — creating authentic collaborations that outlast seasons.</div>
-      <div class="wc-bar"></div>
-    </div>
-    <div class="why-card reveal" style="transition-delay:.3s">
-      <div class="wc-ghost">04</div>
-      <div class="wc-top">
-        <div class="wc-num">04</div>
-        <div class="wc-stat">🌏</div>
-      </div>
-      <div class="wc-title">Global Reach, Local Insight</div>
-      <div class="wc-desc">Deep roots across India's sports and entertainment ecosystem with a growing UAE and international footprint — taking Indian talent and culture to the world stage.</div>
-      <div class="wc-bar"></div>
     </div>
   </div>
 </section>
