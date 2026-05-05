@@ -137,16 +137,31 @@ nav>ul>li:hover .nav-drop{display:block}
   padding-bottom:8px;
 }
 .athlete-ghost-name{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(60px,12vw,150px);letter-spacing:-4px;color:rgba(188,82,37,.05);white-space:nowrap;pointer-events:none;user-select:none}
-.atrack{display:flex;align-items:flex-end;justify-content:center;gap:14px;position:relative;z-index:2;width:100%;padding:0 32px;height:100%}
+.atrack{position:relative;width:100%;height:100%;overflow:hidden}
 /* Card sizes calibrated so centre card fits comfortably in ~75% of viewport height */
-.athlete-card{flex-shrink:0;position:relative;overflow:hidden;cursor:none;border:1px solid rgba(255,255,255,.05);transition:all .5s cubic-bezier(.23,1,.32,1);background:var(--ink-lift)}
-.athlete-card.pos-center{width:220px;height:86%;max-height:520px;border-color:rgba(188,82,37,.5);box-shadow:0 16px 48px rgba(188,82,37,.22),0 0 0 1px rgba(188,82,37,.15);z-index:5}
-.athlete-card.pos-adj{width:160px;height:68%;max-height:410px;opacity:.72;z-index:4}
-.athlete-card.pos-adj2{width:120px;height:52%;max-height:310px;opacity:.42;z-index:3}
-.athlete-card.pos-far{width:88px;height:38%;max-height:230px;opacity:.2;z-index:2}
-.athlete-card.pos-hidden{opacity:0;width:60px;height:100px;pointer-events:none;z-index:1}
+.athlete-card{
+  position:absolute;
+  bottom:0;left:50%;
+  overflow:hidden;cursor:none;
+  background:var(--ink-lift);
+  border:1px solid rgba(255,255,255,.05);
+  transform-origin:bottom center;
+  transition:
+    transform 0.65s cubic-bezier(0.4,0,0.2,1),
+    width 0.65s cubic-bezier(0.4,0,0.2,1),
+    height 0.65s cubic-bezier(0.4,0,0.2,1),
+    opacity 0.55s ease,
+    box-shadow 0.55s ease,
+    border-color 0.4s ease;
+  will-change:transform,width,height,opacity;
+}
+.athlete-card.pos-center{width:220px;height:86%;max-height:520px;transform:translateX(-50%);border-color:rgba(188,82,37,.5);box-shadow:0 16px 48px rgba(188,82,37,.22),0 0 0 1px rgba(188,82,37,.15);z-index:5;opacity:1}
+.athlete-card.pos-adj-l{width:160px;height:68%;max-height:410px;transform:translateX(calc(-50% - 234px));opacity:.72;z-index:4}.athlete-card.pos-adj-r{width:160px;height:68%;max-height:410px;transform:translateX(calc(-50% + 234px));opacity:.72;z-index:4}
+.athlete-card.pos-adj2-l{width:120px;height:52%;max-height:310px;transform:translateX(calc(-50% - 414px));opacity:.42;z-index:3}.athlete-card.pos-adj2-r{width:120px;height:52%;max-height:310px;transform:translateX(calc(-50% + 414px));opacity:.42;z-index:3}
+.athlete-card.pos-far-l{width:88px;height:38%;max-height:230px;transform:translateX(calc(-50% - 562px));opacity:.2;z-index:2}.athlete-card.pos-far-r{width:88px;height:38%;max-height:230px;transform:translateX(calc(-50% + 562px));opacity:.2;z-index:2}
+.athlete-card.pos-hidden{opacity:0;width:60px;height:100px;pointer-events:none;z-index:1;transform:translateX(calc(-50% - 700px))}.athlete-card.pos-hidden-r{opacity:0;width:60px;height:100px;pointer-events:none;z-index:1;transform:translateX(calc(-50% + 700px))}
 .ac-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s cubic-bezier(.23,1,.32,1),filter .5s;filter:grayscale(.35) brightness(.78)}
-.athlete-card.pos-center .ac-img{filter:grayscale(0) brightness(.88)}
+.athlete-card.pos-center .ac-img{filter:grayscale(0) brightness(.9)}
 .athlete-card:hover .ac-img{transform:scale(1.04)}
 .ac-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,.8) 28%,rgba(5,6,10,.15) 52%,transparent 100%)}
 .ac-bottom-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
@@ -167,7 +182,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .atrack-dot.on{width:14px;border-radius:2px;background:var(--orange)}
 
 /* ══ PORTFOLIO ══ */
-#portfolio{height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:36px 72px;overflow:hidden}
+#portfolio{height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:48px 72px;overflow:hidden}
 .port-header-wrap{margin-bottom:12px;text-align:center;font-family:'Rajdhani',sans-serif}
 .port-nav-list{display:flex;justify-content:center;gap:clamp(14px,3vw,48px);list-style:none;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:12px;margin-bottom:0px;position:relative;z-index:10}
 .port-nav-item{font-family:'Rajdhani',sans-serif;font-size:clamp(13px,1.6vw,20px);font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:2px;cursor:none;padding:6px 0;position:relative;transition:color .3s}
@@ -204,7 +219,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .ip-bg-3{background:radial-gradient(circle at 60% 40%,rgba(80,180,80,.22),var(--ink) 80%)}
 .ip-slide-bg.active{opacity:1}
 .ip-bg-slider::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,6,10,.93) 0%,rgba(5,6,10,.52) 50%,rgba(5,6,10,.22) 100%),linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 40%)}
-.ip-content-overlay{position:relative;z-index:2;width:100%;padding:120px 72px;display:flex;justify-content:space-between;align-items:flex-end}
+.ip-content-overlay{position:relative;z-index:2;width:100%;padding:80px 72px;display:flex;justify-content:space-between;align-items:flex-end}
 .ip-main-info{max-width:50%;opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.23,1,.32,1)}
 .ip-main-info.active{opacity:1;transform:translateY(0)}
 .ip-sec-title{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:18px;font-weight:500}
@@ -291,15 +306,32 @@ nav>ul>li:hover .nav-drop{display:block}
 /* ══ LSA SECTION — rebuilt ══ */
 #lsa-section{
   height:100vh;background:var(--ink);
-  display:grid;grid-template-columns:50% 50%;
+  display:grid;
+  grid-template-columns:50% 50%;
+  grid-template-rows:auto 1fr;
   overflow:hidden;border-top:1px solid rgba(255,255,255,.04);
+}
+/* Header bar spans full width */
+.lsa-header-bar{
+  grid-column:1 / -1;
+  display:grid;grid-template-columns:50% 50%;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  background:var(--ink);
+}
+.lsa-header-left{
+  padding:18px 48px 18px 72px;
+  display:flex;align-items:center;gap:16px;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.lsa-header-right{
+  display:grid;grid-template-columns:repeat(3,1fr);
 }
 
 /* ── LEFT ── */
 .lsa-left{
-  padding:60px 48px 60px 72px;
+  padding:40px 48px 40px 72px;
   display:flex;flex-direction:column;
-  justify-content:center;gap:24px;
+  justify-content:center;gap:20px;
   position:relative;
   border-right:1px solid rgba(255,255,255,.06);
   overflow:hidden;
@@ -310,7 +342,6 @@ nav>ul>li:hover .nav-drop{display:block}
   pointer-events:none;
 }
 .lsa-left>*{position:relative;z-index:1}
-.lsa-top-row{display:flex;align-items:center;gap:12px}
 .lsa-pill{
   font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;
   letter-spacing:5px;text-transform:uppercase;
@@ -377,14 +408,10 @@ nav>ul>li:hover .nav-drop{display:block}
   display:flex;flex-direction:column;
   background:var(--ink-mid);overflow:hidden;
 }
-/* Tab buttons */
-.lsa-tab-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border-bottom:1px solid rgba(255,255,255,.07);
-  flex-shrink:0;
-}
+/* Tabs live in the header bar */
+.lsa-tab-row{display:contents}/* overridden by lsa-header-right grid */
 .lsa-tab{
-  padding:14px 8px;
+  padding:16px 10px;
   font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
   letter-spacing:1.5px;text-transform:uppercase;
   color:var(--chrome-dim);text-align:center;
@@ -401,7 +428,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .lsa-tab.active{color:#FFF;background:rgba(188,82,37,.06)}
 .lsa-tab.active::after{transform:scaleX(1)}
 .lsa-tab:hover:not(.active){color:rgba(255,255,255,.65);background:rgba(255,255,255,.02)}
-.lsa-tab-stage{font-size:8px;letter-spacing:2.5px;color:var(--orange);display:block;margin-bottom:2px;font-weight:600;font-family:'Rajdhani',sans-serif;text-transform:uppercase}
+.lsa-tab-stage{font-size:8px;letter-spacing:2.5px;color:var(--orange);display:block;margin-bottom:3px;font-weight:600;font-family:'Rajdhani',sans-serif;text-transform:uppercase}
 .lsa-tab-title{font-size:12px;font-weight:700;font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:1px;display:block}
 
 /* Panels container */
@@ -446,10 +473,7 @@ nav>ul>li:hover .nav-drop{display:block}
   border-top:1px solid rgba(255,255,255,.05);
 }
 .lsa-panel-info-left{flex:0 0 auto}
-.lsa-panel-tag{
-  font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--orange);margin-bottom:4px;font-weight:600;
-}
+.lsa-panel-tag{display:none}
 .lsa-panel-title{
   font-family:'Rajdhani',sans-serif;font-weight:700;
   font-size:20px;letter-spacing:1px;
@@ -461,15 +485,15 @@ nav>ul>li:hover .nav-drop{display:block}
 }
 .lsa-panel-info-right{flex:1}
 .lsa-panel-desc{
-  font-size:12px;line-height:1.68;color:var(--text-bright);
-  font-weight:400;margin-bottom:12px;
+  font-size:14px;line-height:1.7;color:var(--text-bright);
+  font-weight:400;margin-bottom:14px;
 }
 .lsa-skills{display:flex;flex-wrap:wrap;gap:5px}
 .lsa-skill{
-  font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:600;
+  font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;
   letter-spacing:1.5px;text-transform:uppercase;
-  padding:4px 9px;border:1px solid rgba(255,255,255,.1);
-  color:var(--chrome-dim);
+  padding:5px 12px;border:1px solid rgba(255,255,255,.12);
+  color:var(--chrome);
   transition:border-color .3s,color .3s;
 }
 .lsa-panel.active .lsa-skill:hover{border-color:rgba(188,82,37,.4);color:var(--orange)}
@@ -729,12 +753,30 @@ nav>ul>li:hover .nav-drop{display:block}
 <!-- LSA / LEGAXY LEARNING -->
 <section id="lsa-section">
 
-  <!-- LEFT: Brand info -->
-  <div class="lsa-left reveal">
-    <div class="lsa-top-row">
+  <!-- HEADER BAR: pill+kicker LEFT | tabs RIGHT -->
+  <div class="lsa-header-bar">
+    <div class="lsa-header-left">
       <div class="lsa-pill">LEGAXY LEARNING</div>
       <div class="lsa-kicker">School Sports Education Program</div>
     </div>
+    <div class="lsa-header-right">
+      <button class="lsa-tab active" onclick="lsaTab(0,this)">
+        <span class="lsa-tab-stage">Classes 1–3</span>
+        <span class="lsa-tab-title">Foundation</span>
+      </button>
+      <button class="lsa-tab" onclick="lsaTab(1,this)">
+        <span class="lsa-tab-stage">Classes 4–7</span>
+        <span class="lsa-tab-title">Development</span>
+      </button>
+      <button class="lsa-tab" onclick="lsaTab(2,this)">
+        <span class="lsa-tab-stage">Classes 8–10</span>
+        <span class="lsa-tab-title">Performance</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- LEFT: Brand info -->
+  <div class="lsa-left reveal">
     <h2 class="lsa-h">WHERE SCHOOL<br/>SPORTS BECOME<br/><span class="lsa-accent">A SYSTEM.</span></h2>
     <p class="lsa-p">A structured, outcome-driven program transforming school physical education into measurable growth, competitive excellence, and a thriving sports culture.</p>
     <div class="lsa-stats">
@@ -754,24 +796,8 @@ nav>ul>li:hover .nav-drop{display:block}
     </div>
   </div>
 
-  <!-- RIGHT: Tab system with images -->
+  <!-- RIGHT: Tab panels -->
   <div class="lsa-right reveal" style="transition-delay:.15s">
-
-    <!-- Tab buttons -->
-    <div class="lsa-tab-row">
-      <button class="lsa-tab active" onclick="lsaTab(0,this)">
-        <span class="lsa-tab-stage">Classes 1–3</span>
-        <span class="lsa-tab-title">Foundation</span>
-      </button>
-      <button class="lsa-tab" onclick="lsaTab(1,this)">
-        <span class="lsa-tab-stage">Classes 4–7</span>
-        <span class="lsa-tab-title">Development</span>
-      </button>
-      <button class="lsa-tab" onclick="lsaTab(2,this)">
-        <span class="lsa-tab-stage">Classes 8–10</span>
-        <span class="lsa-tab-title">Performance</span>
-      </button>
-    </div>
 
     <!-- Tab panels -->
     <div class="lsa-panels">
@@ -1072,11 +1098,30 @@ function renderAthleteCards(){
   });
   renderDots();updateCardPositions();
 }
-function getPositionClass(offset){const a=Math.abs(offset);if(a===0)return 'pos-center';if(a===1)return 'pos-adj';if(a===2)return 'pos-adj2';if(a===3)return 'pos-far';return 'pos-hidden';}
+function getPositionClass(offset){
+  if(offset===0)return 'pos-center';
+  if(offset===-1)return 'pos-adj-l';
+  if(offset===1)return 'pos-adj-r';
+  if(offset===-2)return 'pos-adj2-l';
+  if(offset===2)return 'pos-adj2-r';
+  if(offset===-3)return 'pos-far-l';
+  if(offset===3)return 'pos-far-r';
+  if(offset<0)return 'pos-hidden';
+  return 'pos-hidden-r';
+}
 function updateCardPositions(){
   const cards=document.querySelectorAll('.athlete-card'),n=currentRoster.length;
-  cards.forEach((card,i)=>{card.classList.remove('pos-center','pos-adj','pos-adj2','pos-far','pos-hidden');let offset=i-currentAthleteIndex;if(offset>n/2)offset-=n;if(offset<-n/2)offset+=n;card.classList.add(getPositionClass(offset));card.style.order=offset;});
-  const ghost=document.getElementById('athleteGhostName');if(ghost)ghost.textContent=currentRoster[currentAthleteIndex].name.split(' ')[0].toUpperCase();
+  const allPos=['pos-center','pos-adj-l','pos-adj-r','pos-adj2-l','pos-adj2-r','pos-far-l','pos-far-r','pos-hidden','pos-hidden-r'];
+  cards.forEach((card,i)=>{
+    allPos.forEach(c=>card.classList.remove(c));
+    let offset=i-currentAthleteIndex;
+    if(offset>n/2)offset-=n;
+    if(offset<-n/2)offset+=n;
+    card.classList.add(getPositionClass(offset));
+    card.style.order=''; // clear any old order
+  });
+  const ghost=document.getElementById('athleteGhostName');
+  if(ghost)ghost.textContent=currentRoster[currentAthleteIndex].name.split(' ')[0].toUpperCase();
 }
 function renderDots(){const dots=document.getElementById('atrackDots');dots.innerHTML='';currentRoster.forEach((_,i)=>{const d=document.createElement('div');d.className='atrack-dot'+(i===currentAthleteIndex?' on':'');d.addEventListener('click',()=>setAthleteIndex(i));dots.appendChild(d);});}
 function setAthleteIndex(idx){currentAthleteIndex=idx;updateCardPositions();renderDots();}
