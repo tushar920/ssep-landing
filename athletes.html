@@ -27,23 +27,13 @@
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
-
-/* ── Custom cursor ── */
 #cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
 #cx{width:8px;height:8px;background:var(--orange);transition:width .25s,height .25s}
 #cr{width:30px;height:30px;border:1px solid rgba(188,82,37,.5);transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s}
 body:has(a:hover,button:hover,[data-hover]:hover) #cx{width:14px;height:14px}
 body:has(a:hover,button:hover,[data-hover]:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
 #prog{position:fixed;top:0;left:0;height:1px;z-index:9999;background:var(--metal);width:0}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;inset-inline:0;z-index:2000;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 52px;height:72px;
-  background:linear-gradient(to bottom,rgba(5,6,10,.97) 0%,rgba(5,6,10,.85) 100%);
-  border-bottom:1px solid rgba(255,255,255,.04);
-}
+nav{position:fixed;top:0;inset-inline:0;z-index:2000;display:flex;justify-content:space-between;align-items:center;padding:0 52px;height:72px;background:linear-gradient(to bottom,rgba(5,6,10,.97) 0%,rgba(5,6,10,.85) 100%);border-bottom:1px solid rgba(255,255,255,.04)}
 .logo{display:flex;align-items:center;text-decoration:none;height:52px}
 .logo img{height:100%;width:auto;object-fit:contain;display:block;filter:brightness(1.15)}
 .logo-text-fallback{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none}
@@ -56,17 +46,7 @@ nav{
 .nav-type-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:4px}
 .nav-type-btn{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 18px;cursor:none;border:none;background:transparent;color:var(--chrome-dim);transition:all .3s}
 .nav-type-btn.active{background:var(--orange);color:#FFF}
-
-/* ── ATHLETE SELECTOR PANEL ── */
-#selector{
-  position:fixed;top:72px;left:0;bottom:0;width:300px;
-  background:rgba(5,6,10,.96);backdrop-filter:blur(24px);
-  border-right:1px solid rgba(188,82,37,.12);
-  z-index:1500;overflow-y:auto;
-  transform:translateX(-100%);
-  transition:transform .5s cubic-bezier(.23,1,.32,1);
-  display:flex;flex-direction:column;
-}
+#selector{position:fixed;top:72px;left:0;bottom:0;width:300px;background:rgba(5,6,10,.96);backdrop-filter:blur(24px);border-right:1px solid rgba(188,82,37,.12);z-index:1500;overflow-y:auto;transform:translateX(-100%);transition:transform .5s cubic-bezier(.23,1,.32,1);display:flex;flex-direction:column}
 #selector.open{transform:translateX(0)}
 #selector::-webkit-scrollbar{width:3px}
 #selector::-webkit-scrollbar-track{background:transparent}
@@ -86,50 +66,14 @@ nav{
 .sel-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sel-sport{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-top:2px}
 .sel-tag{font-size:10px;color:var(--text-dim);font-style:italic;font-family:'Playfair Display',serif;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* ── TOGGLE SELECTOR BUTTON ── */
-#selToggle{
-  position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:1600;
-  width:28px;height:72px;
-  background:rgba(188,82,37,.85);
-  border:none;border-radius:0 4px 4px 0;
-  cursor:none;display:flex;align-items:center;justify-content:center;
-  transition:left .5s cubic-bezier(.23,1,.32,1),background .3s;
-  writing-mode:vertical-rl;
-  font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FFF;
-}
-#selector.open ~ #selToggle,
-#selToggle.shifted{left:300px}
-
-/* ── MAIN CONTENT AREA ── */
-#mainContent{
-  margin-left:0;margin-top:72px;
-  transition:margin-left .5s cubic-bezier(.23,1,.32,1);
-  min-height:calc(100vh - 72px);
-}
+#selToggle{position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:1600;width:28px;height:72px;background:rgba(188,82,37,.85);border:none;border-radius:0 4px 4px 0;cursor:none;display:flex;align-items:center;justify-content:center;transition:left .5s cubic-bezier(.23,1,.32,1),background .3s;writing-mode:vertical-rl;font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FFF}
+#selector.open~#selToggle,#selToggle.shifted{left:300px}
+#mainContent{margin-left:0;margin-top:72px;transition:margin-left .5s cubic-bezier(.23,1,.32,1);min-height:calc(100vh - 72px)}
 #mainContent.shifted{margin-left:300px}
-
-/* ── ATHLETE HERO ── */
-.ap-hero{
-  position:relative;height:92vh;min-height:600px;
-  overflow:hidden;display:flex;align-items:flex-end;
-}
-.ap-hero-bg{
-  position:absolute;inset:0;z-index:0;
-  background-size:cover;background-position:top center;
-  filter:brightness(.55);
-  transition:background-image .8s ease;
-}
-.ap-hero-grain{
-  position:absolute;inset:0;z-index:1;opacity:.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.ap-hero-overlay{
-  position:absolute;inset:0;z-index:2;
-  background:
-    linear-gradient(to right, rgba(5,6,10,.9) 0%, rgba(5,6,10,.2) 60%, transparent 100%),
-    linear-gradient(to top, rgba(5,6,10,1) 0%, rgba(5,6,10,.5) 30%, transparent 70%);
-}
+.ap-hero{position:relative;height:92vh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end}
+.ap-hero-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:top center;filter:brightness(.55);transition:background-image .8s ease}
+.ap-hero-grain{position:absolute;inset:0;z-index:1;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ap-hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to right,rgba(5,6,10,.9) 0%,rgba(5,6,10,.2) 60%,transparent 100%),linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,.5) 30%,transparent 70%)}
 .ap-hero-content{position:relative;z-index:10;padding:0 72px 64px;width:100%;display:flex;justify-content:space-between;align-items:flex-end}
 .ap-hero-left{max-width:640px}
 .ap-hero-badge{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin-bottom:12px;opacity:0;animation:apFade .8s .2s forwards}
@@ -145,23 +89,15 @@ nav{
 .ap-qs-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;line-height:1;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .ap-qs-label{font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--chrome-dim);margin-top:3px}
 @keyframes apFade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── GHOST NAME watermark ── */
 .ap-ghost{position:absolute;bottom:0;right:0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(80px,18vw,220px);line-height:.8;letter-spacing:-8px;color:rgba(188,82,37,.06);pointer-events:none;user-select:none;z-index:3}
-
-/* ── SECTION WRAPPER ── */
 .ap-section{padding:80px 72px;border-top:1px solid rgba(255,255,255,.04);position:relative;z-index:1}
 .ap-section-eyebrow{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;display:flex;align-items:center;gap:14px}
 .ap-section-eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
 .ap-section-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,48px);letter-spacing:.5px;line-height:1;color:#FFF;margin-bottom:24px}
-
-/* ── BIO SECTION ── */
 #apBio{background:var(--ink-mid)}
 .bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
-.bio-left{}
 .bio-portrait{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:grayscale(.2) brightness(.9);border:1px solid rgba(188,82,37,.15)}
 .bio-portrait-fallback{width:100%;aspect-ratio:3/4;background:var(--ink-lift);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;color:var(--orange)}
-.bio-right{}
 .bio-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;line-height:1.6;color:var(--text-bright);margin-bottom:24px;border-left:2px solid var(--orange);padding-left:24px}
 .bio-body{font-size:15px;line-height:1.85;color:var(--text-muted)}
 .bio-vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:32px}
@@ -169,39 +105,25 @@ nav{
 .bio-vital:hover{border-color:rgba(188,82,37,.25)}
 .bv-label{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-bottom:5px}
 .bv-value{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;color:#FFF;letter-spacing:.5px}
-
-/* ── STATS SECTION (Elite only) ── */
 #apStats{background:var(--ink)}
 .stats-format-tabs{display:flex;gap:2px;margin-bottom:40px}
-.sft-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:10px 28px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--chrome-dim);cursor:none;transition:all .3s;position:relative;overflow:hidden}
-.sft-btn::before{content:'';position:absolute;inset:0;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.23,1,.32,1);z-index:-1}
+.sft-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:10px 28px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--chrome-dim);cursor:none;transition:all .3s}
 .sft-btn:hover{color:#FFF;border-color:var(--orange)}
 .sft-btn.active{background:var(--orange);color:#FFF;border-color:transparent}
 .stats-panel{display:none;animation:statsFade .5s ease}
 .stats-panel.active{display:block}
 @keyframes statsFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .stat-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:48px}
-.stat-card{
-  padding:28px 24px;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden;
-  transition:background .3s,border-color .3s,transform .3s;
-}
+.stat-card{padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;transition:background .3s,border-color .3s,transform .3s}
 .stat-card:hover{background:rgba(188,82,37,.06);border-color:rgba(188,82,37,.25);transform:translateY(-4px)}
 .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
 .stat-card:hover::after{transform:scaleX(1)}
-.sc-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,4vw,52px);line-height:1;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;counter-increment:none}
+.sc-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,4vw,52px);line-height:1;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .sc-label{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px;font-weight:500}
 .sc-sub{font-size:12px;color:var(--text-dim);margin-top:4px;font-style:italic;font-family:'Playfair Display',serif}
-/* animated counter */
-.sc-num[data-count]{transition:none}
-/* chart */
-.stats-chart-area{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:32px;position:relative}
+.stats-chart-area{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:32px}
 .stats-chart-label{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--chrome-dim);margin-bottom:20px}
 .chart-canvas-wrap{height:240px;position:relative}
-
-/* ── CAREER TIMELINE ── */
 #apTimeline{background:var(--ink-mid)}
 .timeline{position:relative;padding-left:0}
 .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(188,82,37,.4) 10%,rgba(188,82,37,.4) 90%,transparent)}
@@ -209,49 +131,27 @@ nav{
 .tl-item.revealed{opacity:1;transform:translateX(0)}
 .tl-item::before{content:'';position:absolute;left:-5px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 3px rgba(188,82,37,.2),0 0 16px rgba(188,82,37,.4)}
 .tl-year{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;color:var(--orange);padding-top:4px}
-.tl-body{}
 .tl-event{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:.5px;color:#FFF;margin-bottom:4px}
 .tl-desc{font-size:13px;line-height:1.7;color:var(--text-muted)}
 .tl-badge{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border:1px solid rgba(188,82,37,.35);color:rgba(255,179,122,.85);margin-top:6px}
-
-/* ── ACHIEVEMENTS ── */
-#apAchievements{background:var(--ink)}
 .achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.achievement-card{
-  padding:32px;
-  background:rgba(255,255,255,.02);
-  border:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden;
-  transition:background .3s,border-color .3s;
-}
+.achievement-card{padding:32px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;transition:background .3s,border-color .3s}
 .achievement-card:hover{background:rgba(188,82,37,.05);border-color:rgba(188,82,37,.2)}
 .ach-icon{font-size:28px;margin-bottom:16px;display:block}
 .ach-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;letter-spacing:.5px;color:#FFF;margin-bottom:6px}
 .ach-year{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
 .ach-desc{font-size:13px;line-height:1.65;color:var(--text-muted)}
 .ach-ghost{position:absolute;bottom:-10px;right:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:64px;line-height:1;color:rgba(255,255,255,.025);pointer-events:none}
-
-/* ── BRANDS ── */
-#apBrands{background:var(--ink-mid)}
 .brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px}
-.brand-tile{
-  padding:28px 24px;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.05);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-  transition:background .3s,border-color .3s;cursor:none;min-height:100px;
-}
+.brand-tile{padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:background .3s,border-color .3s;cursor:none;min-height:100px}
 .brand-tile:hover{background:rgba(188,82,37,.08);border-color:rgba(188,82,37,.3)}
 .brand-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;transition:color .3s}
 .brand-tile:hover .brand-name{color:#FFF}
 .brand-category{font-size:10px;color:var(--text-dim);font-style:italic;font-family:'Playfair Display',serif}
-
-/* ── GALLERY ── */
-#apGallery{background:var(--ink)}
 .gallery-reel{display:flex;gap:2px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:rgba(188,82,37,.3) transparent}
 .gallery-reel::-webkit-scrollbar{height:3px}
 .gallery-reel::-webkit-scrollbar-thumb{background:rgba(188,82,37,.3)}
-.gal-frame{flex-shrink:0;overflow:hidden;position:relative;cursor:none}
+.gal-frame{flex-shrink:0;overflow:hidden;position:relative;cursor:none;background:var(--ink-lift)}
 .gal-frame img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s}
 .gal-frame:hover img{transform:scale(1.06);filter:brightness(.85)}
 .gal-tall{width:240px;height:360px}
@@ -259,16 +159,8 @@ nav{
 .gal-sq{width:240px;height:240px}
 .gal-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(5,6,10,.85));padding:16px 14px 14px;font-size:11px;color:rgba(255,255,255,.7);font-style:italic;font-family:'Playfair Display',serif;opacity:0;transition:opacity .3s}
 .gal-frame:hover .gal-caption{opacity:1}
-
-/* ── EMERGING: JOURNEY / PLAY STYLE / etc ── */
-.emerging-content{display:none}
 .emerging-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.em-card{
-  padding:36px 32px;
-  background:rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.05);
-  transition:background .3s,border-color .3s;
-}
+.em-card{padding:36px 32px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);transition:background .3s,border-color .3s}
 .em-card:hover{background:rgba(188,82,37,.05);border-color:rgba(188,82,37,.2)}
 .em-card-icon{font-size:20px;margin-bottom:16px;display:block;opacity:.8}
 .em-card-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
@@ -278,30 +170,18 @@ nav{
 .em-goals-list{list-style:none}
 .em-goals-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;line-height:1.6;color:var(--text-bright);display:flex;align-items:flex-start;gap:10px}
 .em-goals-list li::before{content:'◆';color:var(--orange);font-size:6px;flex-shrink:0;margin-top:5px}
-
-/* ── NO ATHLETE SELECTED ── */
-.ap-empty{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:calc(100vh - 72px);
-  text-align:center;padding:40px;
-}
+.ap-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 72px);text-align:center;padding:40px}
 .ap-empty-ghost{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(60px,15vw,160px);letter-spacing:-6px;color:rgba(188,82,37,.06);margin-bottom:20px;line-height:1}
 .ap-empty-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:32px;letter-spacing:2px;text-transform:uppercase;color:#FFF;margin-bottom:10px}
 .ap-empty-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--text-muted)}
 .ap-empty-arrow{margin-top:24px;font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(-6px)}}
-
-/* ── FOOTER ── */
 .ap-footer{padding:32px 72px;background:var(--ink-mid);border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center}
 .ap-footer-logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .ap-footer-back{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);text-decoration:none;cursor:none;transition:color .3s}
 .ap-footer-back:hover{color:var(--orange-light)}
-
-/* ── REVEAL ── */
 .reveal-on-scroll{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s}
 .reveal-on-scroll.visible{opacity:1;transform:translateY(0)}
-
-/* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:0 20px}
   .ap-hero-content{padding:0 24px 48px;flex-direction:column;align-items:flex-start;gap:24px}
@@ -314,7 +194,7 @@ nav{
   .emerging-grid{grid-template-columns:1fr}
   .tl-item{grid-template-columns:80px 1fr;gap:16px}
   #selector{width:260px}
-  #selector.open ~ #selToggle, #selToggle.shifted{left:260px}
+  #selector.open~#selToggle,#selToggle.shifted{left:260px}
   .ap-footer{padding:24px}
 }
 @media(max-width:600px){
@@ -330,8 +210,6 @@ nav{
 <div id="cx"></div>
 <div id="cr"></div>
 <div id="prog"></div>
-
-<!-- NAV -->
 <nav>
   <a class="logo" href="index.html">
     <img src="Legaxy_logo_light.png" alt="Legaxy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -345,8 +223,6 @@ nav{
     <a class="nav-back" href="index.html">Back to Home</a>
   </div>
 </nav>
-
-<!-- ATHLETE SELECTOR SIDEBAR -->
 <div id="selector">
   <div class="sel-header">
     <div class="sel-label">Select Athlete</div>
@@ -362,22 +238,14 @@ nav{
   </div>
 </div>
 <button id="selToggle" onclick="toggleSelector()">◀ ATHLETES</button>
-
-<!-- MAIN CONTENT -->
 <div id="mainContent">
-
-  <!-- EMPTY STATE -->
   <div id="apEmpty" class="ap-empty">
     <div class="ap-ghost ap-empty-ghost">LEGAXY</div>
     <div class="ap-empty-title">Select an Athlete</div>
     <div class="ap-empty-sub">Explore the full roster — elite cricketers and emerging stars</div>
     <div class="ap-empty-arrow">← Open Roster Panel</div>
   </div>
-
-  <!-- ATHLETE PROFILE (hidden until selected) -->
   <div id="apProfile" style="display:none">
-
-    <!-- HERO -->
     <section class="ap-hero" id="apHeroSection">
       <div class="ap-hero-bg" id="apHeroBg"></div>
       <div class="ap-hero-grain"></div>
@@ -393,15 +261,13 @@ nav{
         <div class="ap-hero-right" id="apHeroStats"></div>
       </div>
     </section>
-
-    <!-- BIO -->
     <section class="ap-section" id="apBio">
       <div class="ap-section-eyebrow">Profile</div>
       <div class="ap-section-title">About</div>
       <div class="bio-grid">
         <div class="bio-left">
           <img class="bio-portrait" id="bioPic" src="" alt="" onerror="this.style.display='none';document.getElementById('bioPicFallback').style.display='flex'">
-          <div class="bio-portrait-fallback" id="bioPicFallback" style="display:none" id="bioPicFallback"></div>
+          <div class="bio-portrait-fallback" id="bioPicFallback" style="display:none"></div>
         </div>
         <div class="bio-right">
           <div class="bio-intro" id="bioIntro"></div>
@@ -410,853 +276,1035 @@ nav{
         </div>
       </div>
     </section>
-
-    <!-- STATS (elite only) -->
     <section class="ap-section" id="apStats" style="display:none">
       <div class="ap-section-eyebrow">Performance</div>
       <div class="ap-section-title">Career Statistics</div>
       <div class="stats-format-tabs" id="statsTabs"></div>
       <div id="statsPanels"></div>
     </section>
-
-    <!-- EMERGING PROFILE CARDS -->
     <section class="ap-section" id="apEmerging" style="display:none">
       <div class="ap-section-eyebrow">Athlete Profile</div>
       <div class="ap-section-title">The Journey</div>
       <div class="emerging-grid" id="emergingGrid"></div>
     </section>
-
-    <!-- ACHIEVEMENTS -->
     <section class="ap-section" id="apAchievements">
       <div class="ap-section-eyebrow reveal-on-scroll">Honours</div>
       <div class="ap-section-title reveal-on-scroll">Achievements</div>
       <div class="achievements-grid" id="achievementsGrid"></div>
     </section>
-
-    <!-- TIMELINE -->
     <section class="ap-section" id="apTimeline" style="background:var(--ink-mid)">
       <div class="ap-section-eyebrow reveal-on-scroll">Milestones</div>
       <div class="ap-section-title reveal-on-scroll">Career Timeline</div>
       <div class="timeline" id="timelineList" style="padding-left:32px"></div>
     </section>
-
-    <!-- BRANDS -->
     <section class="ap-section" id="apBrands">
       <div class="ap-section-eyebrow reveal-on-scroll">Associations</div>
       <div class="ap-section-title reveal-on-scroll">Brand Partners</div>
       <div class="brands-grid" id="brandsGrid"></div>
     </section>
-
-    <!-- GALLERY -->
     <section class="ap-section" id="apGallery" style="background:var(--ink-mid)">
       <div class="ap-section-eyebrow reveal-on-scroll">Visuals</div>
       <div class="ap-section-title reveal-on-scroll">Gallery</div>
       <div class="gallery-reel" id="galleryReel"></div>
     </section>
-
     <footer class="ap-footer">
       <div class="ap-footer-logo">LEGAXY © 2025</div>
       <a class="ap-footer-back" href="index.html">← Back to Legaxy.com</a>
     </footer>
-
-  </div><!-- /apProfile -->
-</div><!-- /mainContent -->
+  </div>
+</div>
 
 <script>
-/* ══════════════════════════════════════════
-   ATHLETE DATA
-══════════════════════════════════════════ */
 const ATHLETES = {
   elite: [
     {
-      id: 'harbhajan',
-      name: 'Harbhajan Singh',
-      highlight: 'HARBHAJAN',
-      sport: 'Cricket',
-      role: 'Off-Spin Bowler · Former Indian National Team',
-      subtitle: 'The Turbanator. One of India\'s greatest ever spin bowlers.',
-      img: 'harbhajan.jpeg',
-      tags: ['India', 'IPL', 'Test Cricket', 'Hall of Fame'],
-      heroStats: [
-        {num:'703', label:'Test Wkts'},
-        {num:'417', label:'ODI Wkts'},
-        {num:'25', label:'Seasons'},
-      ],
-      intro: 'A cricketing legend whose career spanned over two decades, Harbhajan Singh redefined the art of off-spin bowling for a generation of Indian fans.',
-      body: 'Born on July 3, 1980, in Jalandhar, Punjab, Harbhajan Singh made his international debut at just 17 years of age. Known as "The Turbanator," he played a defining role in India\'s historic wins across formats — most notably the 2001 Test series against Australia where he claimed 32 wickets including India\'s first-ever Test hat-trick. A World Cup winner in 2011, he played a vital role in India\'s golden era under MS Dhoni.',
-      vitals: [
-        {label:'Born', value:'3 July 1980'},
-        {label:'Birthplace', value:'Jalandhar, Punjab'},
-        {label:'Role', value:'Off-Spin Bowler'},
-        {label:'Bat', value:'Right-Handed'},
-        {label:'Debut', value:'1998 vs Australia'},
-        {label:'Last Match', value:'2021'},
-      ],
-      stats: {
-        Test: {
-          cards: [
-            {num:'103', label:'Tests', sub:'Matches Played'},
-            {num:'417', label:'Wickets', sub:'Career Total'},
-            {num:'32.46', label:'Average', sub:'Bowling Average'},
-            {num:'5.28', label:'Economy', sub:'Runs Per Over'},
-            {num:'25', label:'5-Wicket Hauls', sub:'Five-fers'},
-            {num:'7/120', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'2224', label:'Runs', sub:'Batting Total'},
-            {num:'2', label:'Fifties', sub:'Batting Milestones'},
-          ],
-          chartLabel: 'Wickets per Year — Test Cricket',
-          chartData: {labels:['2000','2002','2004','2006','2008','2010','2012','2014','2016'],data:[32,55,42,61,78,58,40,29,22]},
+      id:'harbhajan',name:'Harbhajan Singh',highlight:'HARBHAJAN',sport:'Cricket',
+      role:'Off-Spin Bowler · Former Indian National Team',
+      subtitle:'The Turbanator. One of India\'s greatest off-spin bowlers of all time.',
+      img:'harbhajan.jpeg',tags:['India','IPL','Test Cricket','Hall of Fame'],
+      heroStats:[{num:'417',label:'Test Wkts'},{num:'269',label:'ODI Wkts'},{num:'25',label:'Seasons'}],
+      intro:'A cricketing legend whose career spanned over two decades, Harbhajan Singh redefined the art of off-spin bowling and became a symbol of Indian cricket\'s resurgence on the world stage.',
+      body:'Born on July 3, 1980, in Jalandhar, Punjab, Harbhajan Singh made his international debut at just 17. Known as "The Turbanator," he starred in India\'s historic 2001 series win over Australia with 32 wickets and the country\'s first-ever Test hat-trick. A World Cup winner in both 2007 T20 and 2011 ODI formats, he played a defining role in India\'s golden era under MS Dhoni. He retired from all forms of cricket in December 2021 and was inducted into the ICC Hall of Fame in 2022.',
+      vitals:[{label:'Born',value:'3 July 1980'},{label:'Birthplace',value:'Jalandhar, Punjab'},{label:'Role',value:'Off-Spin Bowler'},{label:'Bat',value:'Right-Handed'},{label:'Int\'l Debut',value:'1998 vs Australia'},{label:'Last Match',value:'Dec 2021'}],
+      stats:{
+        Test:{
+          cards:[{num:'103',label:'Tests',sub:'Matches Played'},{num:'417',label:'Wickets',sub:'Career Total'},{num:'32.46',label:'Average',sub:'Bowling Avg'},{num:'5.28',label:'Economy',sub:'Runs Per Over'},{num:'25',label:'5-Wicket Hauls',sub:'Five-fers'},{num:'7/120',label:'Best Figures',sub:'Best Innings'},{num:'2224',label:'Runs',sub:'Batting Total'},{num:'2',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'Test Wickets by Calendar Year',chartData:{labels:['1999','2001','2003','2005','2007','2009','2011','2013','2015'],data:[22,55,34,42,61,58,38,40,27]}
         },
-        ODI: {
-          cards: [
-            {num:'236', label:'ODIs', sub:'Matches Played'},
-            {num:'269', label:'Wickets', sub:'Career Total'},
-            {num:'33.35', label:'Average', sub:'Bowling Average'},
-            {num:'4.44', label:'Economy', sub:'Runs Per Over'},
-            {num:'3', label:'4-Wicket Hauls', sub:'Four-fers'},
-            {num:'5/31', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'1237', label:'Runs', sub:'Batting Total'},
-            {num:'1', label:'Fifties', sub:'Batting Milestones'},
-          ],
-          chartLabel: 'Wickets per Year — ODI Cricket',
-          chartData: {labels:['2000','2003','2005','2007','2009','2011','2013','2015'],data:[18,30,24,38,42,36,28,18]},
+        ODI:{
+          cards:[{num:'236',label:'ODIs',sub:'Matches Played'},{num:'269',label:'Wickets',sub:'Career Total'},{num:'33.35',label:'Average',sub:'Bowling Avg'},{num:'4.44',label:'Economy',sub:'Runs Per Over'},{num:'3',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/31',label:'Best Figures',sub:'Best Innings'},{num:'1237',label:'Runs',sub:'Batting Total'},{num:'1',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2000','2003','2005','2007','2009','2011','2013','2015'],data:[18,30,24,38,42,36,28,18]}
         },
-        T20I: {
-          cards: [
-            {num:'28', label:'T20Is', sub:'Matches Played'},
-            {num:'25', label:'Wickets', sub:'Career Total'},
-            {num:'29.76', label:'Average', sub:'Bowling Average'},
-            {num:'7.12', label:'Economy', sub:'Runs Per Over'},
-            {num:'2', label:'3-Wicket Hauls', sub:'Three-fers'},
-            {num:'4/12', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'98', label:'Runs', sub:'Batting Total'},
-            {num:'0', label:'Fifties', sub:'Batting Milestones'},
-          ],
-          chartLabel: 'T20I Career Overview',
-          chartData: {labels:['2007','2009','2010','2012','2014','2016'],data:[6,4,5,5,3,2]},
+        T20I:{
+          cards:[{num:'28',label:'T20Is',sub:'Matches Played'},{num:'25',label:'Wickets',sub:'Career Total'},{num:'29.76',label:'Average',sub:'Bowling Avg'},{num:'7.12',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/12',label:'Best Figures',sub:'Best Innings'},{num:'98',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'T20I Wickets by Year',chartData:{labels:['2007','2009','2010','2012','2014','2016'],data:[6,4,5,5,3,2]}
         },
-        IPL: {
-          cards: [
-            {num:'163', label:'IPL Games', sub:'Matches Played'},
-            {num:'150', label:'Wickets', sub:'Career Total'},
-            {num:'26.85', label:'Average', sub:'Bowling Average'},
-            {num:'7.05', label:'Economy', sub:'Runs Per Over'},
-            {num:'4', label:'4-Wicket Hauls', sub:'Four-fers'},
-            {num:'5/18', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'408', label:'Runs', sub:'Batting Total'},
-            {num:'1', label:'IPL Titles', sub:'Championships Won'},
-          ],
-          chartLabel: 'IPL Wickets by Season',
-          chartData: {labels:['2008','2010','2012','2014','2016','2018','2021'],data:[18,20,14,16,18,12,10]},
-        },
+        IPL:{
+          cards:[{num:'163',label:'IPL Matches',sub:'Games Played'},{num:'150',label:'Wickets',sub:'Career Total'},{num:'26.85',label:'Average',sub:'Bowling Avg'},{num:'7.05',label:'Economy',sub:'Runs Per Over'},{num:'4',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/18',label:'Best Figures',sub:'Best Innings'},{num:'408',label:'Runs',sub:'Batting Total'},{num:'1',label:'IPL Titles',sub:'Championships'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2008','2010','2012','2014','2016','2018','2021'],data:[18,20,14,16,18,12,10]}
+        }
       },
-      achievements: [
-        {icon:'🏆', title:'ICC World Cup Winner', year:'2011', desc:'Part of India\'s iconic World Cup winning squad at home. A career pinnacle moment.'},
-        {icon:'⭐', title:'ICC World T20 Winner', year:'2007', desc:'Member of India\'s inaugural T20 World Cup triumph in South Africa.'},
-        {icon:'🎯', title:'India\'s First Test Hat-Trick', year:'2001', desc:'Historical three-in-three against Australia in Kolkata — a defining cricketing moment.'},
-        {icon:'📜', title:'ICC Test Hall of Fame', year:'2022', desc:'Inducted into the Hall of Fame in recognition of exceptional Test career.'},
-        {icon:'🏏', title:'Border-Gavaskar Trophy Hero', year:'2001', desc:'32 wickets in the 2001 series against Australia, turning the tide of world cricket.'},
-        {icon:'🌟', title:'Wisden Cricketer of the Year', year:'2002', desc:'Named among Wisden\'s finest, cementing global recognition.'},
+      achievements:[
+        {icon:'🏆',title:'ICC ODI World Cup Winner',year:'2011',desc:'Part of India\'s iconic World Cup winning squad at home. A career pinnacle.'},
+        {icon:'⭐',title:'ICC World T20 Winner',year:'2007',desc:'Member of India\'s inaugural T20 World Cup triumph in South Africa.'},
+        {icon:'🎯',title:'India\'s First Test Hat-Trick',year:'2001',desc:'Three in three vs Australia in Kolkata — a defining moment in cricket history.'},
+        {icon:'📜',title:'ICC Hall of Fame',year:'2022',desc:'Inducted in recognition of an extraordinary Test career and global impact.'},
+        {icon:'🏏',title:'Border-Gavaskar Trophy Hero',year:'2001',desc:'32 wickets in the 2001 series, turning the tide of world cricket decisively.'},
+        {icon:'🌟',title:'Wisden Cricketer of the Year',year:'2002',desc:'Named among Wisden\'s finest, cementing his global standing.'}
       ],
-      timeline: [
-        {year:'1998', event:'International Debut', desc:'Made his Test debut for India vs Australia at age 17.', badge:'Debut'},
-        {year:'2001', event:'Historic Hat-Trick', desc:'First Indian to claim a Test hat-trick. 32 wickets vs Australia in the series.', badge:'Milestone'},
-        {year:'2007', event:'T20 World Cup', desc:'Key member of India\'s first ICC T20 World Cup winning squad.', badge:'Champion'},
-        {year:'2011', event:'ODI World Cup', desc:'World Cup glory at home. India lifted the trophy on home soil.', badge:'Champion'},
-        {year:'2018', event:'CSK IPL Title', desc:'Won the IPL title with Chennai Super Kings under MS Dhoni.', badge:'IPL'},
-        {year:'2021', event:'Final IPL Season', desc:'Played his final IPL season with Kolkata Knight Riders.', badge:'Farewell'},
-        {year:'2022', event:'ICC Hall of Fame', desc:'Inducted into the prestigious ICC Cricket Hall of Fame.', badge:'Legend'},
+      timeline:[
+        {year:'1998',event:'International Debut',desc:'Test debut for India vs Australia in Sharjah at age 17.',badge:'Debut'},
+        {year:'2001',event:'Historic Hat-Trick',desc:'First Indian Test hat-trick. 32 wickets in the Border-Gavaskar series.',badge:'Milestone'},
+        {year:'2007',event:'T20 World Cup',desc:'Key member of India\'s first ICC T20 World Cup winning squad.',badge:'Champion'},
+        {year:'2011',event:'ODI World Cup',desc:'World Cup glory on home soil. India\'s most celebrated sporting moment.',badge:'Champion'},
+        {year:'2018',event:'CSK IPL Title',desc:'IPL title with Chennai Super Kings under MS Dhoni.',badge:'IPL'},
+        {year:'2021',event:'Retirement',desc:'Announced retirement from all forms of cricket, ending a 23-year career.',badge:'Farewell'},
+        {year:'2022',event:'ICC Hall of Fame',desc:'Inducted into the prestigious ICC Cricket Hall of Fame.',badge:'Legend'}
       ],
-      brands: [
-        {name:'Star Sports', category:'Broadcasting'},
-        {name:'Lay\'s', category:'Food & Beverage'},
-        {name:'Who\'s The Boss?', category:'LegaXy Production'},
-        {name:'Punjab Kings', category:'IPL Franchise'},
-        {name:'Bridgestone', category:'Automotive'},
-        {name:'Sony Entertainment', category:'Media'},
+      brands:[
+        {name:'Star Sports',category:'Broadcasting'},{name:'Lay\'s India',category:'Food & Beverage'},
+        {name:'Who\'s The Boss?',category:'LegaXy Production'},{name:'Pepsi',category:'Beverages'},
+        {name:'Bridgestone',category:'Automotive'},{name:'Sony Entertainment',category:'Media'},
+        {name:'Punjab Kings',category:'IPL Franchise'},{name:'Boost',category:'Sports Nutrition'}
       ],
-      gallery: [
-        {type:'tall', src:'harbhajan.jpeg', caption:'The Turbanator in action'},
-      ],
+      gallery:[
+        {type:'tall',src:'harbhajan.jpeg',caption:'The Turbanator — a career defined by fire and flair'},
+        {type:'sq',src:'harbhajan.jpeg',caption:'Harbhajan Singh at LegaXy\'s Who\'s The Boss? production'},
+        {type:'wide',src:'harbhajan.jpeg',caption:'Two decades of Indian cricket legacy'}
+      ]
     },
-
     {
-      id: 'chahal',
-      name: 'Yuzvendra Chahal',
-      highlight: 'CHAHAL',
-      sport: 'Cricket',
-      role: 'Leg-Spin Bowler · Indian National Team',
-      subtitle: 'India\'s premier wrist-spinner. Master of deception.',
-      img: 'chahal.jpeg',
-      tags: ['India', 'IPL', 'White-Ball Specialist', 'Leg-Spin'],
-      heroStats: [
-        {num:'96', label:'ODI Wkts'},
-        {num:'96', label:'T20I Wkts'},
-        {num:'10+', label:'IPL Seasons'},
-      ],
-      intro: 'Yuzvendra Chahal is one of the most potent white-ball spinners of his generation — a cricketer whose guile, variation, and relentless pressure have made him India\'s most consistent wicket-taker across limited-overs cricket.',
-      body: 'Born on July 23, 1990, in Jind, Haryana, Chahal began his career as a chess player before dedicating himself fully to cricket. He became a fixture in India\'s limited-overs setup, known for his googly, leg-break, and ability to attack the stumps. His partnership with Kuldeep Yadav formed the fearsome "Kulcha" spin combination that tormented batsmen worldwide.',
-      vitals: [
-        {label:'Born', value:'23 July 1990'},
-        {label:'Birthplace', value:'Jind, Haryana'},
-        {label:'Role', value:'Leg-Spin Bowler'},
-        {label:'Bat', value:'Right-Handed'},
-        {label:'Debut', value:'2016 vs Zimbabwe'},
-        {label:'IPL Team', value:'Rajasthan Royals'},
-      ],
-      stats: {
-        Test: {
-          cards: [
-            {num:'0', label:'Tests', sub:'Yet to Debut'},
-            {num:'—', label:'Wickets', sub:'—'},
-            {num:'—', label:'Average', sub:'—'},
-            {num:'—', label:'Economy', sub:'—'},
-            {num:'—', label:'5-Wicket Hauls', sub:'—'},
-            {num:'—', label:'Best Figures', sub:'—'},
-            {num:'—', label:'Runs', sub:'—'},
-            {num:'—', label:'Fifty', sub:'—'},
-          ],
-          chartLabel: 'No Test career data',
-          chartData: {labels:[], data:[]},
+      id:'chahal',name:'Yuzvendra Chahal',highlight:'CHAHAL',sport:'Cricket',
+      role:'Leg-Spin Bowler · Indian National Team',
+      subtitle:'India\'s premier wrist-spinner. Master of flight, dip, and deception.',
+      img:'chahal.jpeg',tags:['India','IPL','White-Ball','Leg-Spin'],
+      heroStats:[{num:'96',label:'ODI Wkts'},{num:'96',label:'T20I Wkts'},{num:'187+',label:'IPL Wkts'}],
+      intro:'Yuzvendra Chahal is the most potent white-ball spinner of his generation — a cricketer whose guile and relentless pressure have made him India\'s most consistent wicket-taker in limited-overs cricket.',
+      body:'Born on July 23, 1990, in Jind, Haryana, Chahal began his career as a competitive chess player before devoting himself fully to cricket. His googly, leg-break variation, and attacking line have tormented batsmen worldwide. The "Kulcha" spin duo with Kuldeep Yadav was one of cricket\'s most feared partnerships. In IPL 2022 he claimed the Purple Cap with 27 wickets, cementing his status as the finest leg-spinner in the format.',
+      vitals:[{label:'Born',value:'23 July 1990'},{label:'Birthplace',value:'Jind, Haryana'},{label:'Role',value:'Leg-Spin Bowler'},{label:'Bat',value:'Right-Handed'},{label:'Int\'l Debut',value:'2016 vs Zimbabwe'},{label:'IPL Team',value:'Rajasthan Royals'}],
+      stats:{
+        Test:{
+          cards:[{num:'0',label:'Tests',sub:'Yet to Debut'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Average',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Five-fers',sub:'—'},{num:'—',label:'Best Figures',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],
+          chartLabel:'No Test career data available',chartData:{labels:[],data:[]}
         },
-        ODI: {
-          cards: [
-            {num:'72', label:'ODIs', sub:'Matches Played'},
-            {num:'96', label:'Wickets', sub:'Career Total'},
-            {num:'27.83', label:'Average', sub:'Bowling Average'},
-            {num:'5.19', label:'Economy', sub:'Runs Per Over'},
-            {num:'5', label:'4-Wicket Hauls', sub:'Four-fers'},
-            {num:'6/42', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'101', label:'Runs', sub:'Batting Total'},
-            {num:'0', label:'Fifties', sub:'Batting Milestones'},
-          ],
-          chartLabel: 'Wickets per Year — ODI Cricket',
-          chartData: {labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[10,22,28,18,8,12,10,8]},
+        ODI:{
+          cards:[{num:'72',label:'ODIs',sub:'Matches Played'},{num:'96',label:'Wickets',sub:'Career Total'},{num:'27.83',label:'Average',sub:'Bowling Avg'},{num:'5.19',label:'Economy',sub:'Runs Per Over'},{num:'5',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'6/42',label:'Best Figures',sub:'Best Innings'},{num:'101',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[10,22,28,18,8,12,10,8]}
         },
-        T20I: {
-          cards: [
-            {num:'80', label:'T20Is', sub:'Matches Played'},
-            {num:'96', label:'Wickets', sub:'Career Total'},
-            {num:'23.35', label:'Average', sub:'Bowling Average'},
-            {num:'7.68', label:'Economy', sub:'Runs Per Over'},
-            {num:'3', label:'3-Wicket Hauls', sub:'Three-fers'},
-            {num:'6/25', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'46', label:'Runs', sub:'Batting Total'},
-            {num:'0', label:'Fifties', sub:'—'},
-          ],
-          chartLabel: 'T20I Wickets per Year',
-          chartData: {labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[8,16,18,20,12,10,14,8]},
+        T20I:{
+          cards:[{num:'80',label:'T20Is',sub:'Matches Played'},{num:'96',label:'Wickets',sub:'Career Total'},{num:'23.35',label:'Average',sub:'Bowling Avg'},{num:'7.68',label:'Economy',sub:'Runs Per Over'},{num:'3',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'6/25',label:'Best Figures',sub:'Best Innings'},{num:'46',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'T20I Wickets by Calendar Year',chartData:{labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[8,16,18,20,12,10,14,8]}
         },
-        IPL: {
-          cards: [
-            {num:'150+', label:'IPL Games', sub:'Matches Played'},
-            {num:'187+', label:'Wickets', sub:'Career Total'},
-            {num:'23.85', label:'Average', sub:'Bowling Average'},
-            {num:'8.16', label:'Economy', sub:'Runs Per Over'},
-            {num:'8', label:'4-Wicket Hauls', sub:'Four-fers'},
-            {num:'5/40', label:'Best Figures', sub:'Single Innings Best'},
-            {num:'187+', label:'Wickets', sub:'Most for RCB & RR'},
-            {num:'1', label:'Purple Cap', sub:'Most Wickets in Season'},
-          ],
-          chartLabel: 'IPL Wickets by Season',
-          chartData: {labels:['2014','2016','2017','2018','2019','2021','2022','2023'],data:[6,21,23,22,18,14,27,16]},
-        },
+        IPL:{
+          cards:[{num:'155+',label:'IPL Matches',sub:'Games Played'},{num:'187+',label:'Wickets',sub:'Career Total'},{num:'23.85',label:'Average',sub:'Bowling Avg'},{num:'8.16',label:'Economy',sub:'Runs Per Over'},{num:'8',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/40',label:'Best Figures',sub:'Best Innings'},{num:'1',label:'Purple Cap',sub:'Most Wkts in Season'},{num:'27',label:'IPL 2022 Wkts',sub:'Purple Cap Season'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2014','2016','2017','2018','2019','2021','2022','2023'],data:[6,21,23,22,18,14,27,16]}
+        }
       },
-      achievements: [
-        {icon:'🎯', title:'Purple Cap', year:'2022', desc:'Highest wicket-taker in IPL 2022 with 27 wickets — the coveted Purple Cap.'},
-        {icon:'🏆', title:'Asia Cup Winner', year:'2018', desc:'Key contributor to India\'s Asia Cup triumph.'},
-        {icon:'🌟', title:'India\'s Leading T20I Wicket-Taker', year:'2023', desc:'Joint most wickets for India in T20Is — a lasting legacy.'},
-        {icon:'⭐', title:'ICC T20I Best Figures', year:'2023', desc:'6/25 remains one of the best T20I bowling analyses ever recorded.'},
-        {icon:'📜', title:'Wisden India Cricketer of the Year', year:'2019', desc:'Recognised as India\'s best cricketer of the calendar year.'},
-        {icon:'🏏', title:'Rajasthan Royals IPL Regular', year:'2022', desc:'Became the cornerstone of RR\'s bowling attack, leading them to the finals.'},
+      achievements:[
+        {icon:'🎯',title:'Purple Cap — IPL 2022',year:'2022',desc:'27 wickets in a single IPL season for Rajasthan Royals. The coveted Purple Cap.'},
+        {icon:'🏆',title:'Asia Cup Winner',year:'2018',desc:'Key contributor to India\'s Asia Cup triumph with match-winning spells.'},
+        {icon:'🌟',title:'India\'s Leading T20I Wicket-Taker',year:'2023',desc:'Joint-most wickets for India in T20I cricket — a lasting statistical legacy.'},
+        {icon:'⭐',title:'ICC T20I Best Figures',year:'2023',desc:'6/25 vs Afghanistan — one of the finest T20I bowling analyses ever.'},
+        {icon:'📜',title:'Wisden India Cricketer of the Year',year:'2019',desc:'Recognised as India\'s standout cricketer of the calendar year.'},
+        {icon:'🏏',title:'RR IPL Finals',year:'2022',desc:'Cornerstone of Rajasthan Royals\' run to the IPL 2022 final.'}
       ],
-      timeline: [
-        {year:'2010', event:'IPL Debut', desc:'Began his IPL journey with Mumbai Indians as a teenager.', badge:'Debut'},
-        {year:'2016', event:'India Call-Up', desc:'Made his T20I debut for India vs Zimbabwe; ODI debut followed.', badge:'International'},
-        {year:'2017', event:'Kulcha Partnership', desc:'The "Kulcha" spin duo with Kuldeep Yadav dominated white-ball cricket.', badge:'Milestone'},
-        {year:'2019', event:'World Cup Selection', desc:'Part of India\'s 2019 ICC Cricket World Cup squad.', badge:'World Cup'},
-        {year:'2022', event:'Purple Cap — IPL 2022', desc:'27 wickets in a single IPL season. Dominant campaign with Rajasthan Royals.', badge:'Record'},
-        {year:'2023', event:'Best T20I Figures', desc:'6/25 against Afghanistan — joint best bowling figures in T20I history.', badge:'Record'},
+      timeline:[
+        {year:'2010',event:'IPL Debut',desc:'Began his IPL journey with Mumbai Indians as a teenager.',badge:'Debut'},
+        {year:'2016',event:'India Call-Up',desc:'T20I debut vs Zimbabwe; ODI debut followed shortly after.',badge:'International'},
+        {year:'2017',event:'Kulcha Partnership',desc:'The feared "Kulcha" spin duo with Kuldeep Yadav dominated globally.',badge:'Milestone'},
+        {year:'2019',event:'World Cup Squad',desc:'Selected for India\'s 2019 ICC Cricket World Cup campaign.',badge:'World Cup'},
+        {year:'2022',event:'Purple Cap',desc:'27 wickets in IPL 2022 — the best of any bowler that season.',badge:'Record'},
+        {year:'2023',event:'Best T20I Figures',desc:'6/25 vs Afghanistan — joint best T20I bowling figures in history.',badge:'Record'}
       ],
-      brands: [
-        {name:'Rajasthan Royals', category:'IPL Franchise'},
-        {name:'Puma', category:'Sports Apparel'},
-        {name:'GoDaddy', category:'Technology'},
-        {name:'Myntra', category:'Fashion'},
-        {name:'Star Sports', category:'Broadcasting'},
-        {name:'Dream11', category:'Fantasy Sports'},
+      brands:[
+        {name:'Rajasthan Royals',category:'IPL Franchise'},{name:'Puma',category:'Sports Apparel'},
+        {name:'GoDaddy',category:'Technology'},{name:'Myntra',category:'Fashion'},
+        {name:'Star Sports',category:'Broadcasting'},{name:'Dream11',category:'Fantasy Sports'}
       ],
-      gallery: [
-        {type:'tall', src:'chahal.jpeg', caption:'Yuzvendra Chahal — wrist-spin wizard'},
-      ],
+      gallery:[
+        {type:'tall',src:'chahal.jpeg',caption:'Yuzvendra Chahal — wrist-spin wizard'},
+        {type:'sq',src:'chahal.jpeg',caption:'The Purple Cap season — IPL 2022'},
+        {type:'wide',src:'chahal.jpeg',caption:'India\'s most dangerous white-ball weapon'}
+      ]
     },
+    {
+      id:'bhuvi',name:'Bhuvneshwar Kumar',highlight:'BHUVI',sport:'Cricket',
+      role:'Right-Arm Swing Bowler · Indian National Team',
+      subtitle:'The Master of Swing. India\'s most complete fast-medium bowler.',
+      img:'bhuvi.jpeg',tags:['India','IPL','Swing Bowling','Test & White-Ball'],
+      heroStats:[{num:'140+',label:'Test Wkts'},{num:'166',label:'ODI Wkts'},{num:'90+',label:'T20I Wkts'}],
+      intro:'Bhuvneshwar Kumar has been the cornerstone of Indian pace bowling across all three formats — a cricketer defined by his ability to swing the ball both ways with pinpoint accuracy.',
+      body:'Born on February 5, 1990, in Meerut, Uttar Pradesh, Bhuvneshwar Kumar made his international debut in 2012 and quickly became India\'s first-choice swing bowler. His ability to take the new ball, bowl in the powerplay, and execute yorkers in death overs made him invaluable across formats. His stint as Sunrisers Hyderabad captain in the IPL showcased his leadership alongside his bowling prowess.',
+      vitals:[{label:'Born',value:'5 Feb 1990'},{label:'Birthplace',value:'Meerut, U.P.'},{label:'Role',value:'Right-Arm Fast-Medium'},{label:'Bat',value:'Right-Handed'},{label:'Int\'l Debut',value:'2012 vs Pakistan'},{label:'IPL Team',value:'Sunrisers Hyderabad'}],
+      stats:{
+        Test:{
+          cards:[{num:'63',label:'Tests',sub:'Matches Played'},{num:'141',label:'Wickets',sub:'Career Total'},{num:'26.94',label:'Average',sub:'Bowling Avg'},{num:'2.89',label:'Economy',sub:'Runs Per Over'},{num:'5',label:'5-Wicket Hauls',sub:'Five-fers'},{num:'6/82',label:'Best Figures',sub:'Best Innings'},{num:'1416',label:'Runs',sub:'Batting Total'},{num:'1',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'Test Wickets by Calendar Year',chartData:{labels:['2013','2014','2015','2016','2017','2018','2019','2021'],data:[16,26,18,14,12,22,18,15]}
+        },
+        ODI:{
+          cards:[{num:'128',label:'ODIs',sub:'Matches Played'},{num:'166',label:'Wickets',sub:'Career Total'},{num:'26.14',label:'Average',sub:'Bowling Avg'},{num:'4.74',label:'Economy',sub:'Runs Per Over'},{num:'4',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/42',label:'Best Figures',sub:'Best Innings'},{num:'776',label:'Runs',sub:'Batting Total'},{num:'2',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2013','2015','2016','2017','2018','2019','2021','2022'],data:[14,20,22,24,16,18,20,22]}
+        },
+        T20I:{
+          cards:[{num:'88',label:'T20Is',sub:'Matches Played'},{num:'93',label:'Wickets',sub:'Career Total'},{num:'23.27',label:'Average',sub:'Bowling Avg'},{num:'7.13',label:'Economy',sub:'Runs Per Over'},{num:'4',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'5/24',label:'Best Figures',sub:'Best Innings'},{num:'239',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'T20I Wickets by Calendar Year',chartData:{labels:['2012','2014','2016','2017','2018','2019','2021','2022'],data:[8,12,16,14,10,12,18,13]}
+        },
+        IPL:{
+          cards:[{num:'175+',label:'IPL Matches',sub:'Games Played'},{num:'155+',label:'Wickets',sub:'Career Total'},{num:'24.72',label:'Average',sub:'Bowling Avg'},{num:'7.28',label:'Economy',sub:'Runs Per Over'},{num:'4',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/19',label:'Best Figures',sub:'Best Innings'},{num:'560+',label:'Runs',sub:'Batting Total'},{num:'1',label:'Purple Cap',sub:'2016 Season'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2012','2014','2016','2017','2018','2019','2021','2022'],data:[12,18,26,16,12,18,14,16]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'Purple Cap — IPL 2016',year:'2016',desc:'Led the wicket charts with 23 wickets for Sunrisers Hyderabad.'},
+        {icon:'⭐',title:'Asia Cup Winner',year:'2018',desc:'Player of the Match performances in the Asia Cup tri-series.'},
+        {icon:'🎯',title:'Best T20I Figures — India',year:'2017',desc:'5/24 against Pakistan — among India\'s finest T20I bowling performances.'},
+        {icon:'🌟',title:'ICC ODI Team of the Year',year:'2017',desc:'Named in the ICC\'s best ODI XI based on consistent world-class performances.'},
+        {icon:'📜',title:'SRH IPL Captain',year:'2019',desc:'Led Sunrisers Hyderabad with distinction in the IPL.'},
+        {icon:'🏏',title:'100 Test Wickets',year:'2018',desc:'Reached the milestone of 100 Test wickets — a mark of true Test class.'}
+      ],
+      timeline:[
+        {year:'2012',event:'International Debut',desc:'ODI debut vs Pakistan in Asia Cup. Immediately impressed with swing.',badge:'Debut'},
+        {year:'2013',event:'Test Debut',desc:'First Test cap vs Australia. Established himself as India\'s lead swing bowler.',badge:'Test'},
+        {year:'2016',event:'IPL Purple Cap',year:'2016',desc:'23 wickets for SRH — led them to the IPL title.',badge:'Record'},
+        {year:'2017',event:'ICC ODI Team of the Year',desc:'Named among the world\'s best ODI bowlers by ICC.',badge:'Award'},
+        {year:'2019',event:'World Cup Campaign',desc:'Part of India\'s World Cup squad — key early-overs bowler.',badge:'World Cup'},
+        {year:'2022',event:'T20 World Cup',desc:'Central to India\'s T20 World Cup campaign in Australia.',badge:'Tournament'}
+      ],
+      brands:[
+        {name:'Sunrisers Hyderabad',category:'IPL Franchise'},{name:'MRF',category:'Cricket Equipment'},
+        {name:'Star Sports',category:'Broadcasting'},{name:'Fastrack',category:'Accessories'},
+        {name:'LIC',category:'Insurance'},{name:'Jio',category:'Telecom'}
+      ],
+      gallery:[
+        {type:'tall',src:'bhuvi.jpeg',caption:'Bhuvneshwar Kumar — poetry in motion'},
+        {type:'sq',src:'bhuvi.jpeg',caption:'The swing master at work'},
+        {type:'wide',src:'bhuvi.jpeg',caption:'India\'s most reliable fast-medium option across all formats'}
+      ]
+    },
+    {
+      id:'ishant',name:'Ishant Sharma',highlight:'ISHANT',sport:'Cricket',
+      role:'Right-Arm Fast Bowler · Former Indian National Team',
+      subtitle:'105 Tests of relentless pace. India\'s most-capped fast bowler.',
+      img:'ishant.jpeg',tags:['India','Test Cricket','Fast Bowling','IPL'],
+      heroStats:[{num:'105',label:'Tests'},{num:'311',label:'Test Wkts'},{num:'14',label:'IPL Seasons'}],
+      intro:'Ishant Sharma became one of Indian cricket\'s most reliable pace pillars — his 105 Test appearances make him the most-capped fast bowler India has ever produced.',
+      body:'Born on September 2, 1988, in Delhi, Ishant Sharma made his Test debut at 18 and immediately announced himself with a spell that troubled Ricky Ponting in Australia. Over a 14-year international career, he evolved from raw pace to a canny, experienced operator capable of troubling the world\'s best batsmen. His ability to bowl long spells in Indian conditions made him irreplaceable in the Test setup.',
+      vitals:[{label:'Born',value:'2 Sep 1988'},{label:'Birthplace',value:'Delhi'},{label:'Role',value:'Right-Arm Fast'},{label:'Bat',value:'Right-Handed'},{label:'Test Debut',value:'2007 vs Bangladesh'},{label:'Last Test',value:'2021'}],
+      stats:{
+        Test:{
+          cards:[{num:'105',label:'Tests',sub:'Matches Played'},{num:'311',label:'Wickets',sub:'Career Total'},{num:'32.72',label:'Average',sub:'Bowling Avg'},{num:'3.35',label:'Economy',sub:'Runs Per Over'},{num:'11',label:'5-Wicket Hauls',sub:'Five-fers'},{num:'7/74',label:'Best Figures',sub:'Best Innings'},{num:'1461',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'Test Wickets by Calendar Year',chartData:{labels:['2008','2010','2012','2014','2016','2018','2019','2021'],data:[24,36,28,38,32,40,44,34]}
+        },
+        ODI:{
+          cards:[{num:'80',label:'ODIs',sub:'Matches Played'},{num:'115',label:'Wickets',sub:'Career Total'},{num:'33.94',label:'Average',sub:'Bowling Avg'},{num:'5.02',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'4/49',label:'Best Figures',sub:'Best Innings'},{num:'263',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2008','2010','2012','2014','2016','2018'],data:[18,22,16,20,18,21]}
+        },
+        T20I:{
+          cards:[{num:'14',label:'T20Is',sub:'Matches Played'},{num:'8',label:'Wickets',sub:'Career Total'},{num:'45.25',label:'Average',sub:'Bowling Avg'},{num:'8.30',label:'Economy',sub:'Runs Per Over'},{num:'0',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'2/17',label:'Best Figures',sub:'Best Innings'},{num:'14',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'T20I Career Overview',chartData:{labels:['2008','2011','2012','2014','2017'],data:[2,2,2,1,1]}
+        },
+        IPL:{
+          cards:[{num:'120+',label:'IPL Matches',sub:'Games Played'},{num:'87+',label:'Wickets',sub:'Career Total'},{num:'31.45',label:'Average',sub:'Bowling Avg'},{num:'8.02',label:'Economy',sub:'Runs Per Over'},{num:'1',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'4/37',label:'Best Figures',sub:'Best Innings'},{num:'128',label:'Runs',sub:'Batting Total'},{num:'1',label:'IPL Title',sub:'DC 2021 Final'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2008','2010','2012','2014','2016','2018','2020','2022'],data:[6,8,10,6,8,7,8,6]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'ODI World Cup Winner',year:'2011',desc:'Part of India\'s historic World Cup winning squad at home.'},
+        {icon:'⭐',title:'T20 World Cup Winner',year:'2007',desc:'Member of India\'s inaugural T20 World Cup triumph.'},
+        {icon:'🎯',title:'300 Test Wickets',year:'2021',desc:'Became only the 8th Indian to claim 300 Test wickets.'},
+        {icon:'🌟',title:'Most-Capped Indian Fast Bowler',year:'2021',desc:'105 Tests — a record for an Indian pace bowler that may stand for decades.'},
+        {icon:'📜',title:'Wisden India Cricketer of the Year',year:'2011',desc:'Honoured by Wisden for exceptional bowling performances.'},
+        {icon:'🏏',title:'England Tour Hero',year:'2021',desc:'Key wicket-taker in India\'s historic series win in England.'}
+      ],
+      timeline:[
+        {year:'2007',event:'Test Debut',desc:'Debut vs Bangladesh — immediately impressed with raw pace and movement.',badge:'Debut'},
+        {year:'2007',event:'T20 World Cup',desc:'Part of India\'s inaugural T20 World Cup winning squad in South Africa.',badge:'Champion'},
+        {year:'2011',event:'ODI World Cup',desc:'World Cup medal at home — career highlight as part of India\'s golden generation.',badge:'Champion'},
+        {year:'2014',event:'England Series',desc:'5-wicket haul at Lord\'s — one of India\'s finest fast-bowling displays abroad.',badge:'Milestone'},
+        {year:'2021',event:'300 Test Wickets',desc:'Crossed the 300-wicket milestone vs England in the Test series.',badge:'Record'},
+        {year:'2021',event:'England Test Series Win',desc:'Played a key role in India\'s historic 2-1 series win in England.',badge:'Victory'}
+      ],
+      brands:[
+        {name:'Delhi Capitals',category:'IPL Franchise'},{name:'MRF',category:'Cricket Equipment'},
+        {name:'Puma',category:'Sports Apparel'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Tata Motors',category:'Automotive'},{name:'Adidas',category:'Sports Brand'}
+      ],
+      gallery:[
+        {type:'tall',src:'ishant.jpeg',caption:'Ishant Sharma — India\'s enduring pace pillar'},
+        {type:'sq',src:'ishant.jpeg',caption:'105 Tests of grit and craft'},
+        {type:'wide',src:'ishant.jpeg',caption:'The veteran at work — England 2021'}
+      ]
+    },
+    {
+      id:'umesh',name:'Umesh Yadav',highlight:'UMESH',sport:'Cricket',
+      role:'Right-Arm Fast Bowler · Indian National Team',
+      subtitle:'Raw pace. Big heart. One of India\'s most potent pace weapons.',
+      img:'umesh.jpeg',tags:['India','Test Cricket','IPL','Express Pace'],
+      heroStats:[{num:'155+',label:'Test Wkts'},{num:'134',label:'ODI Wkts'},{num:'145+',label:'IPL Wkts'}],
+      intro:'Umesh Yadav brings express pace and aggression in equal measure — a fast bowler who has repeatedly produced match-winning performances at the highest level of the game.',
+      body:'Born on October 25, 1987, in Nagpur, Maharashtra, Umesh Yadav rose from humble beginnings to become one of India\'s most feared pacemen. Consistently clocking over 145 km/h, he combined raw speed with the ability to swing the ball. His IPL career has seen him become one of the most wicket-taking pace bowlers in the competition\'s history.',
+      vitals:[{label:'Born',value:'25 Oct 1987'},{label:'Birthplace',value:'Nagpur, Maharashtra'},{label:'Role',value:'Right-Arm Fast'},{label:'Bat',value:'Right-Handed'},{label:'Int\'l Debut',value:'2010 vs Zimbabwe'},{label:'IPL Team',value:'Kolkata Knight Riders'}],
+      stats:{
+        Test:{
+          cards:[{num:'58',label:'Tests',sub:'Matches Played'},{num:'155',label:'Wickets',sub:'Career Total'},{num:'30.24',label:'Average',sub:'Bowling Avg'},{num:'3.73',label:'Economy',sub:'Runs Per Over'},{num:'6',label:'5-Wicket Hauls',sub:'Five-fers'},{num:'7/66',label:'Best Figures',sub:'Best Innings'},{num:'528',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'Test Wickets by Calendar Year',chartData:{labels:['2011','2013','2015','2017','2019','2021','2022'],data:[18,20,24,28,26,24,15]}
+        },
+        ODI:{
+          cards:[{num:'73',label:'ODIs',sub:'Matches Played'},{num:'134',label:'Wickets',sub:'Career Total'},{num:'29.35',label:'Average',sub:'Bowling Avg'},{num:'5.27',label:'Economy',sub:'Runs Per Over'},{num:'3',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'4/34',label:'Best Figures',sub:'Best Innings'},{num:'222',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2010','2012','2014','2016','2018','2020'],data:[16,22,20,18,24,14]}
+        },
+        T20I:{
+          cards:[{num:'8',label:'T20Is',sub:'Matches Played'},{num:'9',label:'Wickets',sub:'Career Total'},{num:'25.33',label:'Average',sub:'Bowling Avg'},{num:'8.05',label:'Economy',sub:'Runs Per Over'},{num:'0',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'2/24',label:'Best Figures',sub:'Best Innings'},{num:'8',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'T20I Career Overview',chartData:{labels:['2012','2014','2019'],data:[3,4,2]}
+        },
+        IPL:{
+          cards:[{num:'175+',label:'IPL Matches',sub:'Games Played'},{num:'145+',label:'Wickets',sub:'Career Total'},{num:'27.42',label:'Average',sub:'Bowling Avg'},{num:'8.52',label:'Economy',sub:'Runs Per Over'},{num:'4',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/31',label:'Best Figures',sub:'Best Innings'},{num:'240',label:'Runs',sub:'Batting Total'},{num:'1',label:'IPL Title',sub:'KKR 2012'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2010','2012','2014','2016','2018','2020','2022'],data:[14,18,16,20,14,18,15]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'KKR IPL Title',year:'2012',desc:'Part of Kolkata Knight Riders\' first IPL championship-winning squad.'},
+        {icon:'⭐',title:'Fastest Indian Delivery',year:'2014',desc:'Clocked 155 km/h — among the fastest ever by an Indian bowler.'},
+        {icon:'🎯',title:'7-Wicket Haul vs Bangladesh',year:'2017',desc:'7/66 in Hyderabad — one of India\'s best individual Test bowling efforts.'},
+        {icon:'🌟',title:'100 Test Wickets',year:'2019',desc:'Joined the elite club of Indian pacemen with a century of Test wickets.'},
+        {icon:'📜',title:'England Series Hero',year:'2014',desc:'Key wicket-taker in India\'s pace-friendly campaign in England.'},
+        {icon:'🏏',title:'Champions Trophy Squad',year:'2017',desc:'Part of India\'s Champions Trophy 2017 runners-up squad.'}
+      ],
+      timeline:[
+        {year:'2010',event:'International Debut',desc:'ODI debut vs Zimbabwe. Express pace immediately caught attention.',badge:'Debut'},
+        {year:'2011',event:'Test Debut',desc:'First Test cap — pace clocked above 145 km/h in his early spells.',badge:'Test'},
+        {year:'2012',event:'IPL Title',desc:'Won the IPL with Kolkata Knight Riders in their first title season.',badge:'Champion'},
+        {year:'2014',event:'Pace Record',desc:'Clocked 155 km/h in international cricket — fastest by an Indian.',badge:'Record'},
+        {year:'2017',event:'7-Wicket Haul',desc:'Destroyed Bangladesh with 7/66 — career-best Test figures.',badge:'Milestone'},
+        {year:'2022',event:'Test Recall',desc:'Earned Test recall at 34 — demonstrated remarkable longevity.',badge:'Return'}
+      ],
+      brands:[
+        {name:'Kolkata Knight Riders',category:'IPL Franchise'},{name:'Adidas',category:'Sports Apparel'},
+        {name:'Star Sports',category:'Broadcasting'},{name:'Ceat Tyres',category:'Automotive'},
+        {name:'SBI',category:'Banking'},{name:'Reebok',category:'Sportswear'}
+      ],
+      gallery:[
+        {type:'tall',src:'umesh.jpeg',caption:'Umesh Yadav — raw pace in its purest form'},
+        {type:'sq',src:'umesh.jpeg',caption:'Generating speed and swing'},
+        {type:'wide',src:'umesh.jpeg',caption:'Nagpur\'s finest delivering at international level'}
+      ]
+    },
+    {
+      id:'harshal',name:'Harshal Patel',highlight:'HARSHAL',sport:'Cricket',
+      role:'Right-Arm Fast-Medium · Indian National Team',
+      subtitle:'Death-over specialist. IPL\'s most creative wicket-taker.',
+      img:'harshal.jpeg',tags:['India','IPL','Death Bowling','Variations'],
+      heroStats:[{num:'32',label:'T20I Wkts'},{num:'32',label:'ODI Wkts'},{num:'100+',label:'IPL Wkts'}],
+      intro:'Harshal Patel disrupted T20 cricket with an arsenal of cutters, slower balls, and perfectly-executed yorkers — rising from domestic cricket\'s shadows to become India\'s most-feared death bowler.',
+      body:'Born on July 23, 1990, in Saoli, Maharashtra, Harshal Patel\'s journey to the top was long and hard. After years on the domestic circuit, he burst into IPL consciousness with a record-breaking 2021 season for Royal Challengers Bangalore, where he claimed 32 wickets — a single-season record. His international debut followed and he became a vital cog in India\'s T20 plans.',
+      vitals:[{label:'Born',value:'23 Jul 1990'},{label:'Birthplace',value:'Saoli, Maharashtra'},{label:'Role',value:'Right-Arm Fast-Medium'},{label:'Bat',value:'Right-Handed'},{label:'IPL Debut',value:'2012'},{label:'India Debut',value:'2021 vs NZ'}],
+      stats:{
+        Test:{
+          cards:[{num:'0',label:'Tests',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Average',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Five-fers',sub:'—'},{num:'—',label:'Best Figures',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifties',sub:'—'}],
+          chartLabel:'No Test career data',chartData:{labels:[],data:[]}
+        },
+        ODI:{
+          cards:[{num:'21',label:'ODIs',sub:'Matches Played'},{num:'32',label:'Wickets',sub:'Career Total'},{num:'24.18',label:'Average',sub:'Bowling Avg'},{num:'5.12',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/25',label:'Best Figures',sub:'Best Innings'},{num:'45',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'ODI Wickets by Calendar Year',chartData:{labels:['2021','2022','2023'],data:[12,14,6]}
+        },
+        T20I:{
+          cards:[{num:'41',label:'T20Is',sub:'Matches Played'},{num:'32',label:'Wickets',sub:'Career Total'},{num:'28.65',label:'Average',sub:'Bowling Avg'},{num:'8.55',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/25',label:'Best Figures',sub:'Best Innings'},{num:'42',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],
+          chartLabel:'T20I Wickets by Year',chartData:{labels:['2021','2022','2023'],data:[12,14,6]}
+        },
+        IPL:{
+          cards:[{num:'100+',label:'IPL Matches',sub:'Games Played'},{num:'107+',label:'Wickets',sub:'Career Total'},{num:'23.25',label:'Average',sub:'Bowling Avg'},{num:'8.89',label:'Economy',sub:'Runs Per Over'},{num:'3',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/27',label:'Best Figures',sub:'Best Innings'},{num:'1',label:'Purple Cap',sub:'IPL 2021'},{num:'32',label:'2021 Season Wkts',sub:'Season Record'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2013','2015','2018','2019','2021','2022','2023'],data:[4,6,10,8,32,14,18]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'IPL Purple Cap & Record',year:'2021',desc:'32 wickets in IPL 2021 — a single-season record for wickets in an IPL season.'},
+        {icon:'⭐',title:'India T20I Debut',year:'2021',desc:'International debut vs New Zealand following his historic IPL season.'},
+        {icon:'🎯',title:'T20 World Cup Squad',year:'2022',desc:'Selected for India\'s 2022 T20 World Cup squad in Australia.'},
+        {icon:'🌟',title:'Most Economical in IPL 2021',year:'2021',desc:'Combined economy and wickets to be statistically the best bowler of the season.'},
+        {icon:'📜',title:'Domestic Cricket Excellence',year:'2019',desc:'Led Haryana\'s bowling attack with distinction in the Ranji Trophy.'},
+        {icon:'🏏',title:'RCB Fan Favourite',year:'2021',desc:'Became a legend of Royal Challengers Bangalore fans across India.'}
+      ],
+      timeline:[
+        {year:'2012',event:'IPL Debut',desc:'Made his first IPL appearance — a long journey to recognition began.',badge:'Debut'},
+        {year:'2019',event:'Domestic Breakthrough',desc:'Outstanding Ranji Trophy season put him back in the selectors\' crosshairs.',badge:'Milestone'},
+        {year:'2021',event:'IPL Record Season',desc:'32 wickets — a record for most wickets in a single IPL season.',badge:'Record'},
+        {year:'2021',event:'India Debut',desc:'International debut vs New Zealand T20I series, following the IPL record.',badge:'International'},
+        {year:'2022',event:'T20 World Cup',desc:'Represented India at the T20 World Cup in Australia.',badge:'Tournament'},
+        {year:'2023',event:'RCB Stalwart',desc:'Continued to anchor RCB\'s bowling attack as their death-overs specialist.',badge:'Career'}
+      ],
+      brands:[
+        {name:'Royal Challengers Bangalore',category:'IPL Franchise'},{name:'Dream11',category:'Fantasy Sports'},
+        {name:'Star Sports',category:'Broadcasting'},{name:'Gillette',category:'Personal Care'},
+        {name:'BoAt',category:'Consumer Electronics'},{name:'Noise',category:'Wearables'}
+      ],
+      gallery:[
+        {type:'tall',src:'harshal.jpeg',caption:'Harshal Patel — the craftsman of death bowling'},
+        {type:'sq',src:'harshal.jpeg',caption:'IPL 2021 — a season for the history books'},
+        {type:'wide',src:'harshal.jpeg',caption:'32 wickets. One season. One record.'}
+      ]
+    },
+    {
+      id:'tewatia',name:'Rahul Tewatia',highlight:'TEWATIA',sport:'Cricket',
+      role:'All-Rounder · Gujarat Titans · Indian T20 Squad',
+      subtitle:'The match-winner. Six-hitting all-rounder with ice in his veins.',
+      img:'tewatia.jpeg',tags:['IPL','All-Rounder','GT','Leg-Spin'],
+      heroStats:[{num:'150+',label:'IPL Games'},{num:'70+',label:'IPL Wkts'},{num:'1200+',label:'IPL Runs'}],
+      intro:'Rahul Tewatia has built one of the most remarkable IPL careers in recent memory — a genuine match-winner who can rescue a chase with the bat or take vital wickets with his leg-spin.',
+      body:'Born on August 12, 1993, in Faridabad, Haryana, Tewatia made history in IPL 2020 by hitting five sixes in an over off Sheldon Cottrell to rescue Rajasthan Royals. That moment defined his ability to perform under pressure. After moving to Gujarat Titans, he has been central to their IPL success, winning the title in their debut season.',
+      vitals:[{label:'Born',value:'12 Aug 1993'},{label:'Birthplace',value:'Faridabad, Haryana'},{label:'Role',value:'All-Rounder'},{label:'Bat',value:'Left-Handed'},{label:'Bowl',value:'Right-Arm Leg-Spin'},{label:'IPL Team',value:'Gujarat Titans'}],
+      stats:{
+        Test:{cards:[{num:'—',label:'Tests',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Average',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Five-fers',sub:'—'},{num:'—',label:'Best Figures',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifties',sub:'—'}],chartLabel:'No Test career data',chartData:{labels:[],data:[]}},
+        ODI:{cards:[{num:'0',label:'ODIs',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Average',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Four-fers',sub:'—'},{num:'—',label:'Best Figures',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifties',sub:'—'}],chartLabel:'No ODI career data',chartData:{labels:[],data:[]}},
+        T20I:{cards:[{num:'3',label:'T20Is',sub:'Matches Played'},{num:'2',label:'Wickets',sub:'Career Total'},{num:'28.50',label:'Average',sub:'Bowling Avg'},{num:'7.60',label:'Economy',sub:'Runs Per Over'},{num:'0',label:'3-Wicket Hauls',sub:'—'},{num:'1/14',label:'Best Figures',sub:'Best Innings'},{num:'28',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],chartLabel:'T20I Career Overview',chartData:{labels:['2021','2022'],data:[1,1]}},
+        IPL:{
+          cards:[{num:'150+',label:'IPL Matches',sub:'Games Played'},{num:'70+',label:'Wickets',sub:'Career Total'},{num:'30.12',label:'Average',sub:'Bowling Avg'},{num:'8.42',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/36',label:'Best Figures',sub:'Best Innings'},{num:'1200+',label:'Runs',sub:'Batting Total'},{num:'1',label:'IPL Title',sub:'GT 2022'}],
+          chartLabel:'IPL Runs & Wickets by Season',chartData:{labels:['2014','2016','2018','2020','2021','2022','2023'],data:[4,6,10,16,14,18,15]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'IPL Champion',year:'2022',desc:'Won the IPL in Gujarat Titans\' debut season as a key all-round performer.'},
+        {icon:'⭐',title:'Five Sixes in an Over',year:'2020',desc:'Hit five consecutive sixes off Sheldon Cottrell — one of the greatest IPL moments.'},
+        {icon:'🎯',title:'India T20I Debut',year:'2021',desc:'Named in India\'s T20I squad following consistent IPL excellence.'},
+        {icon:'🌟',title:'IPL Finisher of the Year',year:'2021',desc:'Consistently delivered match-winning cameos for GT batting at No. 6.'},
+        {icon:'📜',title:'Syed Mushtaq Ali Trophy Hero',year:'2020',desc:'Outstanding domestic T20 tournament put him in IPL contention.'},
+        {icon:'🏏',title:'Haryana Ranji Trophy Regular',year:'2019',desc:'Established himself as Haryana\'s premier all-rounder in first-class cricket.'}
+      ],
+      timeline:[
+        {year:'2014',event:'IPL Debut',desc:'First IPL appearance — a journey that would eventually bring iconic moments.',badge:'Debut'},
+        {year:'2020',event:'The 5-Sixes Over',desc:'Iconic five sixes off Cottrell — transformed his career overnight.',badge:'Icon'},
+        {year:'2021',event:'Gujarat Titans Signing',desc:'Joined the newly formed Gujarat Titans as a key all-round asset.',badge:'Career'},
+        {year:'2021',event:'India T20I Debut',desc:'First T20I cap for India — a deserved recognition of IPL form.',badge:'International'},
+        {year:'2022',event:'IPL Title',desc:'Won the IPL in GT\'s debut season with match-winning contributions.',badge:'Champion'},
+        {year:'2024',event:'GT Core Asset',desc:'Retained as one of Gujarat Titans\' most important players.',badge:'Now'}
+      ],
+      brands:[
+        {name:'Gujarat Titans',category:'IPL Franchise'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Dream11',category:'Fantasy Sports'},{name:'Jio Cinema',category:'Streaming'},
+        {name:'Adidas',category:'Sports Apparel'},{name:'Noise',category:'Wearables'}
+      ],
+      gallery:[
+        {type:'tall',src:'tewatia.jpeg',caption:'Rahul Tewatia — clutch is his middle name'},
+        {type:'sq',src:'tewatia.jpeg',caption:'Five sixes. One over. Immortality.'},
+        {type:'wide',src:'tewatia.jpeg',caption:'Gujarat Titans\' IPL title-winning all-rounder'}
+      ]
+    },
+    {
+      id:'shashank',name:'Shashank Singh',highlight:'SHASHANK',sport:'Cricket',
+      role:'Right-Hand Batsman · PBKS · India T20 Squad',
+      subtitle:'The quiet finisher. Power-hitting pedigree from Chhattisgarh.',
+      img:'shashank.jpeg',tags:['IPL','Punjab Kings','Finisher','Power Hitter'],
+      heroStats:[{num:'200+',label:'Dom. Matches'},{num:'55+',label:'T20 Avg'},{num:'160+',label:'T20 SR'}],
+      intro:'Shashank Singh emerged as one of domestic cricket\'s most lethal finishers — a compact batsman with enormous power and the temperament to win games from impossible positions.',
+      body:'Born on October 23, 1991, in Raipur, Chhattisgarh, Shashank Singh spent years honing his craft in domestic cricket before earning his IPL breakthrough. His ability to clear the ropes from balls outside off stump and his calm under pressure make him one of the most valuable lower-middle-order batsmen in Indian white-ball cricket.',
+      vitals:[{label:'Born',value:'23 Oct 1991'},{label:'Birthplace',value:'Raipur, Chhattisgarh'},{label:'Role',value:'Right-Hand Batsman'},{label:'Bat',value:'Right-Handed'},{label:'Bowl',value:'Right-Arm Off-Spin'},{label:'IPL Team',value:'Punjab Kings'}],
+      stats:{
+        Test:{cards:[{num:'—',label:'Tests',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Five-fers',sub:'—'},{num:'—',label:'Best',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],chartLabel:'No Test career data',chartData:{labels:[],data:[]}},
+        ODI:{cards:[{num:'—',label:'ODIs',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Four-fers',sub:'—'},{num:'—',label:'Best',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],chartLabel:'No ODI career data',chartData:{labels:[],data:[]}},
+        T20I:{cards:[{num:'10+',label:'T20Is',sub:'Matches Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Bowl Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Three-fers',sub:'—'},{num:'—',label:'Best Bowl',sub:'—'},{num:'280+',label:'Runs',sub:'Batting Total'},{num:'2',label:'Fifties',sub:'Batting Milestones'}],chartLabel:'T20I Runs by Year',chartData:{labels:['2023','2024'],data:[120,160]}},
+        IPL:{
+          cards:[{num:'60+',label:'IPL Matches',sub:'Games Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Bowl Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Four-fers',sub:'—'},{num:'—',label:'Best Bowl',sub:'—'},{num:'900+',label:'Runs',sub:'Batting Total'},{num:'5',label:'Fifties',sub:'Batting Milestones'}],
+          chartLabel:'IPL Runs by Season',chartData:{labels:['2021','2022','2023','2024'],data:[120,180,260,340]}
+        }
+      },
+      achievements:[
+        {icon:'⭐',title:'India T20I Debut',year:'2023',desc:'Earned a T20I cap after years of outstanding domestic performance.'},
+        {icon:'🏆',title:'IPL Breakthrough',year:'2023',desc:'Career-defining IPL season with Punjab Kings — emerging as a top finisher.'},
+        {icon:'🎯',title:'Vijay Hazare Trophy Performer',year:'2022',desc:'One of the standout batsmen in the 2022 Vijay Hazare Trophy.'},
+        {icon:'🌟',title:'Chhattisgarh Cricket Icon',year:'2023',desc:'Became the most successful cricketer from Chhattisgarh at national level.'},
+        {icon:'📜',title:'Syed Mushtaq Ali Hero',year:'2022',desc:'Match-winning performances in the national T20 championship.'},
+        {icon:'🏏',title:'IPL 2024 Star',year:'2024',desc:'Continued to deliver match-winning performances for PBKS at No. 6.'}
+      ],
+      timeline:[
+        {year:'2011',event:'Domestic Debut',desc:'Began first-class career for Chhattisgarh — a long journey starts.',badge:'Start'},
+        {year:'2019',event:'IPL First Contract',desc:'Secured an IPL contract after years on the domestic fringes.',badge:'Milestone'},
+        {year:'2022',event:'Vijay Hazare Excellence',desc:'Outstanding one-day season earned wider recognition.',badge:'Breakthrough'},
+        {year:'2023',event:'India T20I Debut',desc:'First T20I cap for India — a dream fulfilled.',badge:'International'},
+        {year:'2024',event:'PBKS Retained',desc:'Retained by Punjab Kings as a core finisher for their batting lineup.',badge:'Career'}
+      ],
+      brands:[
+        {name:'Punjab Kings',category:'IPL Franchise'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Jio Cinema',category:'Streaming'},{name:'Dream11',category:'Fantasy Sports'},
+        {name:'Puma',category:'Sports Apparel'},{name:'LegaXy',category:'Management'}
+      ],
+      gallery:[
+        {type:'tall',src:'shashank.jpeg',caption:'Shashank Singh — power from Chhattisgarh'},
+        {type:'sq',src:'shashank.jpeg',caption:'Punjab Kings\' match-winner'},
+        {type:'wide',src:'shashank.jpeg',caption:'The quiet force reshaping Indian T20 cricket'}
+      ]
+    },
+    {
+      id:'saikishor',name:'Sai Kishore',highlight:'KISHORE',sport:'Cricket',
+      role:'Left-Arm Spin Bowler · Gujarat Titans',
+      subtitle:'Deceptive flight. Probing accuracy. The spinner the IPL came to respect.',
+      img:'saikishor.jpeg',tags:['IPL','Left-Arm Spin','GT','Tamil Nadu'],
+      heroStats:[{num:'80+',label:'IPL Wkts'},{num:'60+',label:'Dom. FC Wkts'},{num:'7.2',label:'IPL Economy'}],
+      intro:'Sai Kishore has carved out a unique space in T20 cricket with his classical left-arm spin — proving that flight, turn, and variation can still be devastating in the modern game.',
+      body:'Born on October 28, 1995, in Chennai, Tamil Nadu, R. Sai Kishore developed as a traditional left-arm spinner through the Tamil Nadu domestic setup. His ability to bowl attacking lines in the powerplay and in the middle overs, combined with the ability to keep batsmen guessing, earned him an IPL debut with CSK and later made him a key asset for Gujarat Titans.',
+      vitals:[{label:'Born',value:'28 Oct 1995'},{label:'Birthplace',value:'Chennai, Tamil Nadu'},{label:'Role',value:'Left-Arm Spin'},{label:'Bat',value:'Right-Handed'},{label:'IPL Team',value:'Gujarat Titans'},{label:'Domestic',value:'Tamil Nadu'}],
+      stats:{
+        Test:{cards:[{num:'—',label:'Tests',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Five-fers',sub:'—'},{num:'—',label:'Best',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],chartLabel:'No Test career data',chartData:{labels:[],data:[]}},
+        ODI:{cards:[{num:'—',label:'ODIs',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Four-fers',sub:'—'},{num:'—',label:'Best',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],chartLabel:'No ODI career data',chartData:{labels:[],data:[]}},
+        T20I:{cards:[{num:'—',label:'T20Is',sub:'Not Played'},{num:'—',label:'Wickets',sub:'—'},{num:'—',label:'Avg',sub:'—'},{num:'—',label:'Economy',sub:'—'},{num:'—',label:'Three-fers',sub:'—'},{num:'—',label:'Best',sub:'—'},{num:'—',label:'Runs',sub:'—'},{num:'—',label:'Fifty',sub:'—'}],chartLabel:'No T20I career data',chartData:{labels:[],data:[]}},
+        IPL:{
+          cards:[{num:'70+',label:'IPL Matches',sub:'Games Played'},{num:'80+',label:'Wickets',sub:'Career Total'},{num:'26.14',label:'Average',sub:'Bowling Avg'},{num:'7.22',label:'Economy',sub:'Runs Per Over'},{num:'3',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/20',label:'Best Figures',sub:'Best Innings'},{num:'62',label:'Runs',sub:'Batting Total'},{num:'1',label:'IPL Title',sub:'GT 2022'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2019','2020','2021','2022','2023','2024'],data:[8,10,14,22,18,16]}
+        }
+      },
+      achievements:[
+        {icon:'🏆',title:'IPL Champion — GT',year:'2022',desc:'Won the IPL in Gujarat Titans\' debut season as a key spin resource.'},
+        {icon:'⭐',title:'Tamil Nadu Vijay Hazare Trophy',year:'2021',desc:'Key architect of Tamil Nadu\'s domestic one-day title campaign.'},
+        {icon:'🎯',title:'GT\'s Most Economical Bowler',year:'2022',desc:'Consistently the most miserly bowler for GT through the title-winning run.'},
+        {icon:'🌟',title:'Ranji Trophy All-Rounder',year:'2021',desc:'Contributed vital runs and wickets in Tamil Nadu\'s Ranji Trophy campaign.'},
+        {icon:'📜',title:'CSK IPL Debut',year:'2019',desc:'Selected by MS Dhoni\'s Chennai Super Kings — a mark of quality.'},
+        {icon:'🏏',title:'Gujarat Titans Stalwart',year:'2023',desc:'Established himself as one of GT\'s most reliable bowling options.'}
+      ],
+      timeline:[
+        {year:'2017',event:'Tamil Nadu Debut',desc:'Made his first-class debut for Tamil Nadu — impressing with control and turn.',badge:'Debut'},
+        {year:'2019',event:'CSK IPL Signing',desc:'Selected by Chennai Super Kings — a dream debut for a Chennai boy.',badge:'IPL'},
+        {year:'2021',event:'Vijay Hazare Title',desc:'Played a pivotal role in Tamil Nadu\'s domestic trophy win.',badge:'Champion'},
+        {year:'2022',event:'IPL Title with GT',desc:'Won the IPL in Gujarat Titans\' historic debut season.',badge:'Champion'},
+        {year:'2024',event:'GT Retained',desc:'Retained as a cornerstone of Gujarat Titans\' spin bowling plans.',badge:'Career'}
+      ],
+      brands:[
+        {name:'Gujarat Titans',category:'IPL Franchise'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Jio Cinema',category:'Streaming'},{name:'Dream11',category:'Fantasy Sports'},
+        {name:'MRF',category:'Cricket Equipment'},{name:'LegaXy',category:'Management'}
+      ],
+      gallery:[
+        {type:'tall',src:'saikishor.jpeg',caption:'Sai Kishore — flight and deception'},
+        {type:'sq',src:'saikishor.jpeg',caption:'IPL 2022 title-winner with Gujarat Titans'},
+        {type:'wide',src:'saikishor.jpeg',caption:'Classical spin in the modern T20 era'}
+      ]
+    },
+    {
+      id:'sangram',name:'Sangram Singh',highlight:'SANGRAM',sport:'Wrestling',
+      role:'Professional Wrestler · WWE · Commonwealth Champion',
+      subtitle:'India\'s wrestling ambassador. 40+ national titles. A legend in the ring.',
+      img:'sangram.jpeg',tags:['Wrestling','WWE','Commonwealth','National Champion'],
+      heroStats:[{num:'40+',label:'Nat\'l Titles'},{num:'WWE',label:'Signed'},{num:'25',label:'Int\'l Medals'}],
+      intro:'Sangram Singh is India\'s most celebrated professional wrestler — a record-holder, Commonwealth Games champion, and one of the few Indian sportspeople to make a mark on the global WWE stage.',
+      body:'Born on December 7, 1982, in Rohtak, Haryana, Sangram Singh began wrestling at the age of seven. His discipline, training philosophy, and results made him India\'s most decorated amateur wrestler before crossing over into sports entertainment with WWE. He has won over 40 national titles and multiple international medals, inspiring a generation of wrestlers across India.',
+      vitals:[{label:'Born',value:'7 Dec 1982'},{label:'Birthplace',value:'Rohtak, Haryana'},{label:'Sport',value:'Freestyle Wrestling'},{label:'Height',value:'6\'2"'},{label:'Weight Class',value:'Heavyweight'},{label:'WWE Signed',value:'2016'}],
+      stats:{
+        Test:{cards:[{num:'40+',label:'National Titles',sub:'Across Career'},{num:'25+',label:'International Medals',sub:'Total'},{num:'6\'2"',label:'Height',sub:'Frame'},{num:'130kg',label:'Competition Wt.',sub:'Heavyweight'},{num:'2016',label:'WWE Debut Year',sub:'Sports Entertainment'},{num:'15+',label:'Years',sub:'Elite Competition'},{num:'1000+',label:'Athletes Mentored',sub:'Through Academy'},{num:'1',label:'Commonwealth Medal',sub:'Games Representation'}],
+          chartLabel:'Titles Won by Year',chartData:{labels:['2005','2007','2009','2011','2013','2015','2017','2019'],data:[4,5,6,7,8,6,4,3]}
+        },
+        ODI:{cards:[{num:'—',label:'Not Applicable',sub:'Wrestling Sport'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Career not applicable to this format',chartData:{labels:[],data:[]}},
+        T20I:{cards:[{num:'—',label:'Not Applicable',sub:'Wrestling Sport'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Career not applicable to this format',chartData:{labels:[],data:[]}},
+        IPL:{cards:[{num:'—',label:'Not Applicable',sub:'Wrestling Sport'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Career not applicable to this format',chartData:{labels:[],data:[]}}
+      },
+      achievements:[
+        {icon:'🏆',title:'40+ National Titles',year:'2019',desc:'Most decorated Indian wrestler in domestic competition — a record standing strong.'},
+        {icon:'⭐',title:'WWE Appearance',year:'2016',desc:'Became one of the very few Indians to perform on the world\'s biggest wrestling platform.'},
+        {icon:'🎯',title:'Commonwealth Games Representative',year:'2010',desc:'Represented India at the Commonwealth Games in wrestling.'},
+        {icon:'🌟',title:'Arjuna Award Nominee',year:'2015',desc:'Nominated for India\'s highest sporting honour for sustained excellence.'},
+        {icon:'📜',title:'Haryana Wrestling Icon',year:'2020',desc:'Recognised as one of Haryana\'s all-time sporting legends.'},
+        {icon:'🏏',title:'LegaXy Ambassador',year:'2023',desc:'Joined LegaXy as a flagship athlete — bridging combat sport and entertainment.'}
+      ],
+      timeline:[
+        {year:'1989',event:'Wrestling Begins',desc:'Started wrestling at age 7 in Rohtak under his father\'s guidance.',badge:'Start'},
+        {year:'2003',event:'National Debut',desc:'First national championship — the beginning of a historic run of titles.',badge:'Debut'},
+        {year:'2010',event:'Commonwealth Games',desc:'Represented India on the grandest multi-sport stage in wrestling.',badge:'International'},
+        {year:'2016',event:'WWE Appearance',desc:'Appeared on WWE programming — a landmark for Indian wrestling globally.',badge:'Global'},
+        {year:'2019',event:'40+ National Titles',desc:'Surpassed 40 national championships — India\'s undisputed wrestling king.',badge:'Record'},
+        {year:'2023',event:'LegaXy Signing',desc:'Became a flagship athlete with LegaXy\'s expanding sports ecosystem.',badge:'LegaXy'}
+      ],
+      brands:[
+        {name:'LegaXy',category:'Athlete Management'},{name:'WWEIndia',category:'Sports Entertainment'},
+        {name:'Puma',category:'Sportswear'},{name:'Haryana Sports',category:'Government'},
+        {name:'Star Sports',category:'Broadcasting'},{name:'Lays',category:'Snacks'}
+      ],
+      gallery:[
+        {type:'tall',src:'sangram.jpeg',caption:'Sangram Singh — India\'s wrestling colossus'},
+        {type:'sq',src:'sangram.jpeg',caption:'40+ national titles and counting'},
+        {type:'wide',src:'sangram.jpeg',caption:'From Rohtak mats to the world stage'}
+      ]
+    },
+    {
+      id:'umran',name:'Umran Malik',highlight:'UMRAN',sport:'Cricket',
+      role:'Right-Arm Fast Bowler · India · J&K',
+      subtitle:'155 km/h. The fastest Indian bowler of his generation.',
+      img:'umran.jpeg',tags:['India','Pace','J&K','SRH','Express Fast'],
+      heroStats:[{num:'155',label:'km/h Speed'},{num:'22',label:'T20I Wkts'},{num:'2',label:'Test Caps'}],
+      intro:'Umran Malik stunned the cricketing world with raw speed that India had never seen before — a bowler who regularly touched 155 km/h and set the IPL ablaze with sheer pace.',
+      body:'Born on November 22, 1999, in Jammu, Jammu & Kashmir, Umran Malik rose from obscurity to international recognition in under two years. A replacement player for SRH in IPL 2021, he took the competition by storm with a succession of deliveries clocked at 150+ km/h. His international debut followed and he became a symbol of hope for pace bowling from non-traditional cricket states in India.',
+      vitals:[{label:'Born',value:'22 Nov 1999'},{label:'Birthplace',value:'Jammu, J&K'},{label:'Role',value:'Right-Arm Fast'},{label:'Bat',value:'Right-Handed'},{label:'IPL Team',value:'Sunrisers Hyderabad'},{label:'India Debut',value:'2022 vs Ireland'}],
+      stats:{
+        Test:{cards:[{num:'2',label:'Tests',sub:'Matches Played'},{num:'3',label:'Wickets',sub:'Career Total'},{num:'45.67',label:'Average',sub:'Bowling Avg'},{num:'3.72',label:'Economy',sub:'Runs Per Over'},{num:'0',label:'Five-fers',sub:'—'},{num:'2/54',label:'Best Figures',sub:'Best Innings'},{num:'4',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],chartLabel:'Test Career Overview (Early Career)',chartData:{labels:['2023'],data:[3]}},
+        ODI:{cards:[{num:'5',label:'ODIs',sub:'Matches Played'},{num:'5',label:'Wickets',sub:'Career Total'},{num:'39.20',label:'Average',sub:'Bowling Avg'},{num:'6.24',label:'Economy',sub:'Runs Per Over'},{num:'0',label:'Four-fers',sub:'—'},{num:'2/43',label:'Best Figures',sub:'Best Innings'},{num:'0',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],chartLabel:'ODI Career Overview',chartData:{labels:['2022','2023'],data:[2,3]}},
+        T20I:{cards:[{num:'26',label:'T20Is',sub:'Matches Played'},{num:'22',label:'Wickets',sub:'Career Total'},{num:'28.72',label:'Average',sub:'Bowling Avg'},{num:'8.74',label:'Economy',sub:'Runs Per Over'},{num:'1',label:'3-Wicket Hauls',sub:'Three-fers'},{num:'4/14',label:'Best Figures',sub:'Best Innings'},{num:'6',label:'Runs',sub:'Batting Total'},{num:'0',label:'Fifties',sub:'—'}],chartLabel:'T20I Wickets by Year',chartData:{labels:['2022','2023'],data:[16,6]}},
+        IPL:{
+          cards:[{num:'50+',label:'IPL Matches',sub:'Games Played'},{num:'60+',label:'Wickets',sub:'Career Total'},{num:'25.12',label:'Average',sub:'Bowling Avg'},{num:'9.05',label:'Economy',sub:'Runs Per Over'},{num:'2',label:'4-Wicket Hauls',sub:'Four-fers'},{num:'5/25',label:'Best Figures',sub:'Best Innings'},{num:'1',label:'Purple Cap',sub:'IPL 2022 Top 3'},{num:'22',label:'2022 Season Wkts',sub:'Season Total'}],
+          chartLabel:'IPL Wickets by Season',chartData:{labels:['2021','2022','2023','2024'],data:[14,22,18,12]}
+        }
+      },
+      achievements:[
+        {icon:'⚡',title:'Fastest Indian Bowler',year:'2022',desc:'Regularly clocking 150-155 km/h — the fastest sustained pace by an Indian.'},
+        {icon:'⭐',title:'India T20I Debut',year:'2022',desc:'International debut vs Ireland — fast-tracked after two IPL seasons.'},
+        {icon:'🎯',title:'IPL 2022 Top Wicket-Taker',year:'2022',desc:'22 wickets for SRH — in contention for Purple Cap with his raw pace.'},
+        {icon:'🌟',title:'J&K Cricket Pioneer',year:'2022',desc:'First cricketer from Jammu & Kashmir to represent India internationally.'},
+        {icon:'📜',title:'IPL Emerging Player',year:'2022',desc:'Named among the IPL\'s best emerging players based on raw potential.'},
+        {icon:'🏏',title:'Test Debut',year:'2023',desc:'Earned Test cap — the ultimate validation of genuine fast bowling ability.'}
+      ],
+      timeline:[
+        {year:'2021',event:'IPL Replacement Discovery',desc:'Entered IPL as replacement — 150+ km/h deliveries shocked the world.',badge:'Discovery'},
+        {year:'2022',event:'India T20I Debut',desc:'First international cap — debut vs Ireland T20I series.',badge:'International'},
+        {year:'2022',event:'T20 World Cup Squad',desc:'Named in India\'s T20 World Cup squad as a pace option.',badge:'Tournament'},
+        {year:'2022',event:'22 IPL Wickets',desc:'Finished IPL 2022 as SRH\'s leading wicket-taker with raw express pace.',badge:'Record'},
+        {year:'2023',event:'Test Debut',desc:'First Test cap for India — an extraordinary rise from J&K cricket.',badge:'Test'},
+        {year:'2024',event:'SRH Returns',desc:'Continues as SRH\'s express pace option with potential still sky-high.',badge:'Future'}
+      ],
+      brands:[
+        {name:'Sunrisers Hyderabad',category:'IPL Franchise'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Dream11',category:'Fantasy Sports'},{name:'Puma',category:'Sports Apparel'},
+        {name:'Jio Cinema',category:'Streaming'},{name:'LegaXy',category:'Management'}
+      ],
+      gallery:[
+        {type:'tall',src:'umran.jpeg',caption:'Umran Malik — 155 km/h and rising'},
+        {type:'sq',src:'umran.jpeg',caption:'J&K\'s gift to Indian pace bowling'},
+        {type:'wide',src:'umran.jpeg',caption:'The fastest Indian bowler of his generation'}
+      ]
+    },
+    {
+      id:'niranjan',name:'Niranjan Mukundan',highlight:'NIRANJAN',sport:'Swimming',
+      role:'Professional Swimmer · India · Commonwealth Games',
+      subtitle:'India\'s fastest in water. Rewriting the record books stroke by stroke.',
+      img:'niranjan.jpeg',tags:['Swimming','India','Commonwealth','National Record'],
+      heroStats:[{num:'8',label:'Nat\'l Records'},{num:'CWG',label:'Represented'},{num:'50m',label:'Butterfly'},],
+      intro:'Niranjan Mukundan is India\'s most accomplished competitive swimmer of the modern era — a multiple national record-holder whose butterfly and freestyle achievements have elevated Indian swimming globally.',
+      body:'Born in Kerala, Niranjan Mukundan took up competitive swimming as a child and rose through India\'s aquatics ranks to become one of its finest international representatives. A multiple national record-holder in butterfly events, he has represented India at Commonwealth Games and Asian Games, inspiring the next generation of Indian swimmers.',
+      vitals:[{label:'Born',value:'Kerala, India'},{label:'Specialty',value:'Butterfly & Freestyle'},{label:'Event',value:'50m / 100m'},{label:'Org',value:'Swimming Federation of India'},{label:'Int\'l Meets',value:'CWG, Asian Games'},{label:'Managed By',value:'LegaXy'}],
+      stats:{
+        Test:{cards:[{num:'8+',label:'National Records',sub:'Across Career'},{num:'4',label:'Int\'l Meets',sub:'Represented India'},{num:'50m',label:'Main Event',sub:'Butterfly'},{num:'<24s',label:'50m Best',sub:'Butterfly Time'},{num:'10+',label:'National Golds',sub:'Championships'},{num:'CWG',label:'Games',sub:'Represented'},{num:'15+',label:'Years',sub:'Elite Swimming'},{num:'1',label:'Arjuna Nominee',sub:'Nomination'}],
+          chartLabel:'National Championship Podiums by Year',chartData:{labels:['2015','2016','2017','2018','2019','2020','2022','2023'],data:[3,4,5,5,6,4,5,6]}
+        },
+        ODI:{cards:[{num:'—',label:'Not Applicable',sub:'Swimming'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Not applicable',chartData:{labels:[],data:[]}},
+        T20I:{cards:[{num:'—',label:'Not Applicable',sub:'Swimming'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Not applicable',chartData:{labels:[],data:[]}},
+        IPL:{cards:[{num:'—',label:'Not Applicable',sub:'Swimming'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'},{num:'—',label:'—',sub:'—'}],chartLabel:'Not applicable',chartData:{labels:[],data:[]}}
+      },
+      achievements:[
+        {icon:'🏊',title:'8 National Records',year:'2023',desc:'Holds multiple Indian national records in butterfly events — a dominant force.'},
+        {icon:'🌟',title:'Commonwealth Games Representation',year:'2018',desc:'Represented India at the Commonwealth Games in Gold Coast, Australia.'},
+        {icon:'⭐',title:'Asian Games Squad',year:'2018',desc:'Part of India\'s swimming contingent at the Asian Games.'},
+        {icon:'🎯',title:'National Championship Gold',year:'2022',desc:'Multiple gold medals at the National Aquatics Championship.'},
+        {icon:'📜',title:'LegaXy Multi-Sport Pioneer',year:'2023',desc:'Became LegaXy\'s first non-cricket athlete — opening new doors for Indian sport.'},
+        {icon:'🏆',title:'Swimming Federation of India Award',year:'2022',desc:'Recognised by the SFI for sustained excellence in international representation.'}
+      ],
+      timeline:[
+        {year:'2010',event:'National Junior Debut',desc:'First national-level appearance — began rising through India\'s swimming ranks.',badge:'Start'},
+        {year:'2015',event:'Senior National Champion',desc:'First senior national championship gold medal in butterfly.',badge:'Milestone'},
+        {year:'2018',event:'Commonwealth Games',desc:'Represented India at the Gold Coast Commonwealth Games.',badge:'International'},
+        {year:'2018',event:'Asian Games',desc:'Part of India\'s swimming team at the Jakarta Asian Games.',badge:'International'},
+        {year:'2022',event:'National Record',desc:'Broke the Indian national record in the 50m butterfly event.',badge:'Record'},
+        {year:'2023',event:'LegaXy Partnership',desc:'Joined LegaXy as the flagship multi-sport athlete — a landmark moment.',badge:'LegaXy'}
+      ],
+      brands:[
+        {name:'LegaXy',category:'Athlete Management'},{name:'Speedo',category:'Swimwear'},
+        {name:'Swimming Federation India',category:'Governing Body'},{name:'Star Sports',category:'Broadcasting'},
+        {name:'Reliance Foundation',category:'Sports Philanthropy'},{name:'Kerala Tourism',category:'Government'}
+      ],
+      gallery:[
+        {type:'tall',src:'niranjan.jpeg',caption:'Niranjan Mukundan — India\'s fastest in water'},
+        {type:'sq',src:'niranjan.jpeg',caption:'National record-holder in butterfly'},
+        {type:'wide',src:'niranjan.jpeg',caption:'Representing India at the Commonwealth Games'}
+      ]
+    }
   ],
 
   emerging: [
     {
-      id: 'vansh',
-      name: 'Vansh Bedi',
-      highlight: 'VANSH',
-      sport: 'Cricket',
-      role: 'All-Rounder · Delhi Premier League',
-      subtitle: 'Explosive bat. Crafty seam. The complete young package.',
-      img: 'vansh.jpeg',
-      tags: ['Delhi', 'All-Rounder', 'Emerging'],
-      heroStats: [
-        {num:'U-23', label:'Age Group'},
-        {num:'DPL', label:'League'},
-        {num:'2024', label:'Breaking Out'},
-      ],
-      intro: 'Vansh Bedi is a dynamic young cricketer with the rare ability to impact matches with both bat and ball — a genuine all-round talent being groomed for India\'s future.',
-      body: 'Growing up in Delhi, Vansh developed his game at the grassroots level under the watch of dedicated coaches. His natural athleticism and competitive instinct make him a standout at every level he plays.',
-      vitals: [
-        {label:'Based In', value:'Delhi, India'},
-        {label:'Role', value:'All-Rounder'},
-        {label:'Bat', value:'Right-Handed'},
-        {label:'Bowl', value:'Right-Arm Medium'},
-        {label:'League', value:'Delhi Premier League'},
-        {label:'Managed By', value:'LegaXy'},
-      ],
-      emerging: {
-        journey: 'Vansh\'s journey began on the dusty grounds of Delhi, where his love for the game was forged through years of early-morning practice sessions and inter-district competitions. His selection into the Delhi Premier League marked a pivotal turning point.',
-        playStyle: 'An aggressive top-order batsman who times the ball beautifully and can shift gears at will. With the ball, he generates sharp movement off the seam and surprises batsmen with nip-backers.',
-        strengths: ['Explosive Batting', 'Seam Movement', 'Athletic Fielding', 'Match Intelligence', 'Temperament Under Pressure'],
-        trainingPhilosophy: 'Vansh believes in quality over quantity — each net session is purposeful, structured around specific match scenarios. He works closely with video analysts to study opponents and refine his game.',
-        goals: [
-          'Represent Delhi Ranji Trophy squad within 2 years',
-          'Establish himself as a genuine T20 match-winner',
-          'Sign with an IPL franchise by 2026',
-          'Develop his off-spin as a third bowling option',
-        ],
-        overview: 'A high-ceiling all-rounder whose combination of raw power with the bat and clever seam bowling make him one of the most exciting prospects in Delhi cricket. Under LegaXy\'s management, his career trajectory is being carefully structured for maximum impact.',
+      id:'vansh',name:'Vansh Bedi',highlight:'VANSH',sport:'Cricket',
+      role:'All-Rounder · Delhi Premier League',
+      subtitle:'Explosive bat. Crafty seam. The complete young package.',
+      img:'vansh.jpeg',tags:['Delhi','All-Rounder','Emerging'],
+      heroStats:[{num:'U-23',label:'Age Group'},{num:'DPL',label:'League'},{num:'2024',label:'Breaking Out'}],
+      intro:'Vansh Bedi is a dynamic young cricketer with the rare ability to impact matches with both bat and ball — a genuine all-round talent being groomed for India\'s future.',
+      body:'Growing up in Delhi, Vansh developed his game at the grassroots level under the watch of dedicated coaches. His natural athleticism and competitive instinct make him a standout at every level he plays. His seam bowling and aggressive batting offer a combination that selectors at every level have noticed.',
+      vitals:[{label:'Based In',value:'Delhi, India'},{label:'Role',value:'All-Rounder'},{label:'Bat',value:'Right-Handed'},{label:'Bowl',value:'Right-Arm Medium'},{label:'League',value:'Delhi Premier League'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Vansh\'s journey began on the dusty grounds of Delhi, where his love for the game was forged through early-morning practice sessions and inter-district competitions. His selection into the Delhi Premier League marked the pivotal turning point that brought his talent to a national audience.',
+        playStyle:'An aggressive top-order batsman who times the ball beautifully and can shift gears at will. With the ball, he generates sharp movement off the seam and consistently surprises batsmen with late nip-backers. His fielding adds a third dimension to his value.',
+        strengths:['Explosive Batting','Seam Movement','Athletic Fielding','Match Intelligence','Temperament Under Pressure'],
+        trainingPhilosophy:'Vansh believes in quality over quantity — each net session is purposeful and structured around specific match scenarios. He works closely with video analysts to study opponents, and dedicates two sessions per week to specific skill refinement rather than general practice.',
+        goals:['Represent Delhi in the Ranji Trophy within 2 years','Establish himself as a genuine T20 match-winner','Sign with an IPL franchise by 2026','Develop off-spin as a third bowling option'],
+        overview:'A high-ceiling all-rounder whose combination of raw batting power and clever seam bowling make him one of the most exciting prospects in Delhi cricket. Under LegaXy\'s management, his career trajectory is being carefully structured for maximum impact at the highest level.'
       },
-      achievements: [
-        {icon:'🌟', title:'DPL Player to Watch', year:'2024', desc:'Highlighted as one of the Delhi Premier League\'s most exciting emerging talents.'},
-        {icon:'🏏', title:'Inter-District Championship', year:'2023', desc:'Outstanding all-round performance in Delhi\'s inter-district tournament.'},
-        {icon:'⚡', title:'LegaXy Rising Star', year:'2024', desc:'Signed with LegaXy for full athlete management and brand development.'},
+      achievements:[
+        {icon:'🌟',title:'DPL Player to Watch',year:'2024',desc:'Highlighted as one of the Delhi Premier League\'s most exciting emerging talents.'},
+        {icon:'🏏',title:'Inter-District Championship',year:'2023',desc:'Outstanding all-round performance in Delhi\'s inter-district tournament.'},
+        {icon:'⚡',title:'LegaXy Rising Star',year:'2024',desc:'Signed with LegaXy for full athlete management and brand development.'}
       ],
-      timeline: [
-        {year:'2018', event:'Club Cricket Debut', desc:'Began competitive cricket at district level in Delhi.', badge:'Start'},
-        {year:'2022', event:'DPL Selection', desc:'Selected for the Delhi Premier League squad.', badge:'Milestone'},
-        {year:'2023', event:'LegaXy Partnership', desc:'Joined LegaXy\'s elite emerging athlete programme.', badge:'Career'},
-        {year:'2024', event:'Breakout Season', desc:'Standout performances across formats draw national attention.', badge:'Now'},
+      timeline:[
+        {year:'2018',event:'Club Cricket Debut',desc:'Began competitive cricket at district level in Delhi.',badge:'Start'},
+        {year:'2022',event:'DPL Selection',desc:'Selected for the Delhi Premier League squad — first taste of elite cricket.',badge:'Milestone'},
+        {year:'2023',event:'LegaXy Partnership',desc:'Joined LegaXy\'s elite emerging athlete programme.',badge:'Career'},
+        {year:'2024',event:'Breakout Season',desc:'Standout performances across formats draw national attention.',badge:'Now'}
       ],
-      brands: [
-        {name:'LegaXy', category:'Athlete Management'},
-        {name:'Delhi Capitals', category:'IPL Affiliate'},
-      ],
-      gallery: [
-        {type:'tall', src:'vansh.jpeg', caption:'Vansh Bedi — the future of Delhi cricket'},
-      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'Delhi Capitals',category:'IPL Affiliate'},{name:'MRF',category:'Equipment'}],
+      gallery:[{type:'tall',src:'vansh.jpeg',caption:'Vansh Bedi — the future of Delhi cricket'},{type:'sq',src:'vansh.jpeg',caption:'All-round brilliance in the making'}]
     },
     {
-      id: 'aarav',
-      name: 'Aarav Gautam',
-      highlight: 'AARAV',
-      sport: 'Cricket',
-      role: 'Batsman · Harsha CC',
-      subtitle: 'Natural flair. Unshakeable focus. A future champion in the making.',
-      img: 'aarav.jpeg',
-      tags: ['Club Cricket', 'Batsman', 'Emerging'],
-      heroStats: [
-        {num:'U-19', label:'Age Group'},
-        {num:'Harsha CC', label:'Club'},
-        {num:'Rising', label:'Status'},
-      ],
-      intro: 'Aarav Gautam possesses a rare combination of natural talent and mental fortitude — qualities that mark him as an athlete with a ceiling far beyond where he currently stands.',
-      body: 'Training out of Harsha Cricket Club, Aarav has shown exceptional composure and shot-making ability from a very young age. His coaches describe him as someone who absorbs information quickly and applies it with precision — a true student of the game.',
-      vitals: [
-        {label:'Club', value:'Harsha CC'},
-        {label:'Role', value:'Top-Order Batsman'},
-        {label:'Bat', value:'Right-Handed'},
-        {label:'Style', value:'Elegant Stroke-Maker'},
-        {label:'Managed By', value:'LegaXy'},
-        {label:'Aspiration', value:'IPL & India'},
-      ],
-      emerging: {
-        journey: 'Aarav\'s story is one of quiet determination. Discovered through a club tournament by LegaXy scouts, his natural technique and calm head stood out immediately. He\'s spent the past two years sharpening his game with some of the best coaches in India.',
-        playStyle: 'A classical right-handed batsman who plays close to his body and drives through the covers with exceptional timing. Has the instinct to accelerate when needed — a rare blend of technique and aggression.',
-        strengths: ['Technical Batting', 'Concentration', 'Coachability', 'Shot Selection', 'Mental Resilience'],
-        trainingPhilosophy: 'Aarav approaches every training session like a match. He focuses heavily on footwork and keeping his head still — fundamentals that he credits with building his consistency. Meditation is a key part of his routine.',
-        goals: [
-          'Break into Delhi Under-23 squad',
-          'Make his DPL debut in the 2025 season',
-          'Develop into a 360-degree T20 player',
-          'Represent India at U-19 level',
-        ],
-        overview: 'Aarav represents the next generation of Indian batting talent — technically orthodox, mentally strong, and with the temperament to perform on any stage. LegaXy is investing deeply in his development trajectory.',
+      id:'mayank',name:'Mayank Rawat',highlight:'MAYANK',sport:'Cricket',
+      role:'Wicketkeeper-Batsman · Delhi Premier League',
+      subtitle:'Quick hands. Aggressive intent. The keeper-batter who changes games.',
+      img:'mayank.jpeg',tags:['Delhi','Wicketkeeper','Emerging','DPL'],
+      heroStats:[{num:'U-23',label:'Age Group'},{num:'WK-Bat',label:'Role'},{num:'DPL',label:'Playing In'}],
+      intro:'Mayank Rawat brings the rare combination of elite wicket-keeping and explosive batting — a game-changer behind the stumps and at the top of the order.',
+      body:'Hailing from Delhi, Mayank Rawat trained from a young age as a wicketkeeper-batsman under the influence of the Delhi cricket infrastructure. His aggressive approach at the top of the order, combined with immaculate glove-work, has made him one of the most sought-after young players in Delhi\'s emerging tier.',
+      vitals:[{label:'Based In',value:'Delhi, India'},{label:'Role',value:'Wicketkeeper-Batsman'},{label:'Bat',value:'Right-Handed'},{label:'League',value:'Delhi Premier League'},{label:'Style',value:'Aggressive Opener'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Mayank grew up watching Dhoni and dreamed of a career behind the stumps. He trained through Delhi\'s under-16 and under-19 system, gradually earning recognition for both his wicket-keeping sharpness and his ability to accelerate powerplay scoring. The DPL gave him the stage his talent deserved.',
+        playStyle:'An explosive right-handed opener who targets the first six overs with intent. Behind the stumps, he is razor-sharp with quick reflexes, standing up to spinners and generating stumpings that lesser keepers would miss. His 360-degree hitting and improvisation make him exceptionally difficult to bowl to.',
+        strengths:['Glove Work','Explosive Opening','Stumping Reflexes','T20 Acceleration','Counter-Attacking Mindset'],
+        trainingPhilosophy:'Mayank divides his training into two disciplines: keeping-specific drills with an emphasis on reactions and footwork, and batting sessions focused on powerplay exploitation. He studies opposition bowling loads and adapts his pre-match preparation accordingly.',
+        goals:['Break into Delhi Ranji Trophy squad as keeper-bat','Earn IPL contract by 2025','Develop into a consistent T20 opener','Represent India A in white-ball cricket'],
+        overview:'A complete wicketkeeper-batsman with exceptional upside. Mayank\'s double role gives him a unique selection advantage, and LegaXy is working to maximise his brand visibility alongside his on-field development.'
       },
-      achievements: [
-        {icon:'🏆', title:'Club Championship Performer', year:'2023', desc:'Match-winning innings across several club tournaments in the Delhi region.'},
-        {icon:'🌟', title:'LegaXy Emerging Star', year:'2024', desc:'Identified and signed by LegaXy as a priority emerging athlete.'},
-        {icon:'🎯', title:'Coach\'s Player Award', year:'2024', desc:'Recognised by coaching staff for exceptional attitude and improvement.'},
+      achievements:[
+        {icon:'🧤',title:'DPL Best Keeper Nomination',year:'2024',desc:'Nominated for best wicketkeeper in the Delhi Premier League 2024 edition.'},
+        {icon:'⚡',title:'Fastest Fifty — DPL',year:'2024',desc:'Scored the fastest half-century of the DPL season with explosive batting.'},
+        {icon:'🌟',title:'LegaXy Emerging Star',year:'2024',desc:'Signed with LegaXy as part of the emerging athlete development programme.'}
       ],
-      timeline: [
-        {year:'2020', event:'Cricket Academy Enrolment', desc:'Joined Harsha Cricket Club\'s junior development programme.', badge:'Start'},
-        {year:'2022', event:'First Competitive Season', desc:'Scored three consecutive fifties in district-level matches.', badge:'Milestone'},
-        {year:'2024', event:'LegaXy Partnership', desc:'Signed with LegaXy for career management and professional exposure.', badge:'Career'},
-        {year:'2025', event:'DPL Target', desc:'Earmarked for Delhi Premier League debut season.', badge:'Next'},
+      timeline:[
+        {year:'2017',event:'Delhi U-16 Squad',desc:'Selected for Delhi\'s under-16 cricket programme.',badge:'Youth'},
+        {year:'2020',event:'Delhi U-23 Training',desc:'Elevated to Delhi\'s under-23 keeping group after standout performances.',badge:'Progress'},
+        {year:'2023',event:'DPL Debut',desc:'Made his DPL debut — showcased aggressive batting and sharp keeping.',badge:'Debut'},
+        {year:'2024',event:'LegaXy Signing',desc:'Partnered with LegaXy for career management and professional development.',badge:'Career'}
       ],
-      brands: [
-        {name:'LegaXy', category:'Athlete Management'},
-        {name:'Harsha CC', category:'Club Cricket'},
-      ],
-      gallery: [
-        {type:'tall', src:'aarav.jpeg', caption:'Aarav Gautam — classical elegance'},
-      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'Delhi Capitals',category:'IPL Affiliate'},{name:'SG Cricket',category:'Equipment'}],
+      gallery:[{type:'tall',src:'mayank.jpeg',caption:'Mayank Rawat — hands of lightning, bat of fire'},{type:'sq',src:'mayank.jpeg',caption:'Delhi\'s explosive keeper-batter'}]
     },
+    {
+      id:'tishant',name:'Tishant Dabla',highlight:'TISHANT',sport:'Cricket',
+      role:'Right-Arm Fast Bowler · Delhi Premier League',
+      subtitle:'Express pace. Smart lines. A seam bowler built for the highest stage.',
+      img:'tishant.jpeg',tags:['Delhi','Fast Bowling','DPL','Emerging'],
+      heroStats:[{num:'140+',label:'km/h Speed'},{num:'U-23',label:'Age Group'},{num:'DPL',label:'Playing In'}],
+      intro:'Tishant Dabla has all the attributes that Indian pace bowling scouts dream of — height, speed, rhythm, and an ability to move the ball in both directions at express pace.',
+      body:'Growing up in Delhi, Tishant Dabla was identified early as a raw pace talent by coaches who noticed his natural ability to generate steep bounce and swing. Standing tall, he uses his frame to extract disconcerting steep bounce that troubles even experienced batsmen. Under LegaXy\'s guidance, his technique and fitness are being refined for the long haul.',
+      vitals:[{label:'Based In',value:'Delhi, India'},{label:'Role',value:'Right-Arm Fast'},{label:'Height',value:'6\'1"'},{label:'Bowl',value:'Right-Arm Fast-Medium'},{label:'League',value:'Delhi Premier League'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Tishant grew up watching India\'s pace legends and was determined to be more than a support act. He trained through harsh Delhi summers, developing his run-up, rhythm, and variations in district-level cricket before breaking into DPL conversations. His raw pace drew attention from state selectors.',
+        playStyle:'A genuine fast bowler who operates at 140+ km/h with the ability to shape the ball both ways. His height generates steep bounce that troubles top-order batsmen, and his late swing is difficult to pick from the hand. At the death, his yorker accuracy is improving rapidly.',
+        strengths:['Express Pace','Seam Movement','Steep Bounce','Death Overs Learning','Physical Conditioning'],
+        trainingPhilosophy:'Tishant\'s approach is centred on bowling the right lengths relentlessly. He spends significant time with a bowling machine simulating high-pressure match situations. A strict gym regimen underpins his pace, while sprint and flexibility work maintains rhythm over long spells.',
+        goals:['Break into the Delhi Ranji Trophy first XI','Exceed 145 km/h consistently','Earn an IPL auction spot by 2026','Develop a reliable slower ball as a match-changing variation'],
+        overview:'Tishant Dabla represents the new wave of Delhi pace bowling. With the physical attributes and the attitude to go with them, LegaXy has identified him as a long-term investment — a bowler with genuine international potential.'
+      },
+      achievements:[
+        {icon:'⚡',title:'Fastest Bowler — DPL 2024',year:'2024',desc:'Clocked the tournament\'s highest speed readings in the Delhi Premier League.'},
+        {icon:'🎯',title:'Best Bowling Analysis — District League',year:'2023',desc:'Took 5 wickets in an innings in Delhi\'s district cricket championship.'},
+        {icon:'🌟',title:'LegaXy Emerging Star',year:'2024',desc:'Signed with LegaXy as a priority fast bowling development case.'}
+      ],
+      timeline:[
+        {year:'2019',event:'District Cricket',desc:'Made his mark in Delhi\'s district-level competition with pace and bounce.',badge:'Start'},
+        {year:'2022',event:'State Trials',desc:'Invited to Delhi state trials after consistent wicket-taking in district cricket.',badge:'Progress'},
+        {year:'2023',event:'DPL Contract',desc:'Earned his first DPL contract — step into professional T20 cricket.',badge:'Debut'},
+        {year:'2024',event:'LegaXy Signing',desc:'Partnership with LegaXy to accelerate his path to professional cricket.',badge:'Career'}
+      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'SG Cricket',category:'Equipment'},{name:'MRF',category:'Balls & Equipment'}],
+      gallery:[{type:'tall',src:'tishant.jpeg',caption:'Tishant Dabla — Delhi\'s pace weapon in the making'},{type:'sq',src:'tishant.jpeg',caption:'Height, speed, and hunger'}]
+    },
+    {
+      id:'shivi',name:'Shivi Sharma',highlight:'SHIVI',sport:'Cricket',
+      role:'Right-Hand Batsman · Women\'s Cricket · Delhi',
+      subtitle:'Graceful. Powerful. Pioneering women\'s cricket in India\'s capital.',
+      img:'shivi.jpeg',tags:['Women\'s Cricket','Delhi','Batsman','Emerging'],
+      heroStats:[{num:'U-23',label:'Age Group'},{num:'Delhi',value:'State'},{num:'WIPL',label:'Target'}],
+      intro:'Shivi Sharma is at the forefront of the new wave of women\'s cricket talent emerging from Delhi — a technically accomplished batter with the temperament to perform on the biggest stages.',
+      body:'Shivi Sharma developed her game through Delhi\'s women\'s cricket academies, showing early signs of an exceptional player with a compact technique and a strong off-side game. Her journey mirrors the rapid growth of women\'s cricket in India — and she is determined to be part of the generation that takes the sport to a new level.',
+      vitals:[{label:'Based In',value:'Delhi, India'},{label:'Role',value:'Right-Hand Batsman'},{label:'Bat',value:'Right-Handed'},{label:'Category',value:'Women\'s Cricket'},{label:'Target',value:'WIPL & India Women'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Growing up in Delhi during the boom of women\'s cricket following India\'s 2017 ODI World Cup final, Shivi was inspired by Smriti Mandhana and Harmanpreet Kaur. She channelled that inspiration into dedicated training, working her way through Delhi\'s women\'s cricket structure to become one of its leading batting talents.',
+        playStyle:'A right-handed batter who plays the ball late and drives beautifully through the covers. Her compact technique works equally well in Test-style first-class cricket and T20 acceleration. She reads the game maturely beyond her years, rotating strike and building platforms before shifting gears.',
+        strengths:['Technical Batting','Cover Drive','Game Awareness','Mental Composure','Leadership Instincts'],
+        trainingPhilosophy:'Shivi trains with a strong emphasis on game simulation — playing match-like scenarios in the nets rather than repetitive drills. She works with a sports psychologist on mental preparation, believing that the mindset separates good players from great ones.',
+        goals:['Represent India Women A in the next selection cycle','Break into WIPL (Women\'s IPL) playing group','Score a century in senior state cricket','Inspire girls in Delhi to pursue cricket professionally'],
+        overview:'Shivi Sharma represents the future of women\'s cricket in Northern India. With LegaXy\'s backing, she has access to world-class coaching, media exposure, and brand building that positions her for a serious professional career in an era when women\'s cricket has never had more opportunity.'
+      },
+      achievements:[
+        {icon:'🌟',title:'Delhi Women\'s Cricket Top Scorer',year:'2024',desc:'Highest run-scorer in Delhi Women\'s inter-state tournament.'},
+        {icon:'⭐',title:'Under-23 India A Aspirant',year:'2024',desc:'Shortlisted for India Women A trials — a major recognition of talent.'},
+        {icon:'🏏',title:'LegaXy Emerging Star',year:'2024',desc:'Joined LegaXy as the programme\'s first female cricket athlete.'}
+      ],
+      timeline:[
+        {year:'2019',event:'Delhi U-16 Women',desc:'Made her debut in Delhi\'s women\'s under-16 squad.',badge:'Youth'},
+        {year:'2022',event:'Senior Delhi Debut',desc:'Promoted to Delhi\'s senior women\'s cricket squad.',badge:'Milestone'},
+        {year:'2023',event:'Tournament Century',desc:'Scored her first senior century in inter-state competition.',badge:'Achievement'},
+        {year:'2024',event:'LegaXy Signing',desc:'Became LegaXy\'s first female cricket athlete — a pioneering moment.',badge:'Pioneer'}
+      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'Nike',category:'Sports Apparel'},{name:'BCI',category:'Women\'s Cricket'}],
+      gallery:[{type:'tall',src:'shivi.jpeg',caption:'Shivi Sharma — batting for the future of women\'s cricket'},{type:'sq',src:'shivi.jpeg',caption:'Delhi\'s finest emerging women\'s cricketer'}]
+    },
+    {
+      id:'avleen',name:'Avleen Kaur',highlight:'AVLEEN',sport:'Cricket',
+      role:'Left-Hand Bat · Women\'s Cricket · Punjab',
+      subtitle:'Silky left-hander. Born to open the batting.',
+      img:'avleen.jpeg',tags:['Women\'s Cricket','Punjab','Left-Hand','Opener'],
+      heroStats:[{num:'Left-Hand',label:'Batter'},{num:'Punjab',label:'State'},{num:'WIPL',label:'Target'}],
+      intro:'Avleen Kaur is a graceful left-handed opener whose wristy strokeplay and temperament mark her as one of Punjab\'s most promising women\'s cricket talents.',
+      body:'Hailing from Punjab, Avleen Kaur developed her distinctive left-handed technique through the state\'s women\'s cricket academy. Blessed with natural timing and a fluid bat-swing, she models her game on the classical left-handers who have graced international cricket. Her ability to rotate strike and accelerate at will makes her the ideal T20 opening batter.',
+      vitals:[{label:'Based In',value:'Punjab, India'},{label:'Role',value:'Left-Hand Opening Bat'},{label:'Bat',value:'Left-Handed'},{label:'Category',value:'Women\'s Cricket'},{label:'Target',value:'India Women'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Avleen grew up in a cricket-loving Punjabi family and first picked up a bat at age six. She moved through Punjab\'s district and state cricket system with quiet consistency — not flashy, but relentlessly effective. Her century for Punjab Women A turned heads and put her firmly in the national conversation.',
+        playStyle:'A classical left-handed opener who drives through extra-cover with effortless timing. Her wristy flicks off her pads are a signature shot. She has the ability to bat long in 50-over cricket and to switch into T20 mode seamlessly — a rare quality in emerging players.',
+        strengths:['Left-Handed Elegance','Wrist-Play','Opening Partnership Building','Tempo Control','Consistent Technique'],
+        trainingPhilosophy:'Avleen focuses on building innings — her training sessions are often long batting sessions designed to simulate bowling changes and match pressure over extended periods. She pairs this with targeted short-game work to sharpen her T20 finishing ability.',
+        goals:['Play in the Women\'s IPL (WIPL)','Earn an India Women A cap within 18 months','Develop pull and hook shots against short-pitched bowling','Inspire more girls from Punjab to pursue cricket'],
+        overview:'Avleen Kaur is a technically polished, mentally tough opener who brings a different flavour to women\'s cricket in India. Under LegaXy\'s programme, she is developing the holistic skills — media, brand, and mindset — needed to thrive as a professional athlete in women\'s cricket\'s fastest-growing era.'
+      },
+      achievements:[
+        {icon:'🌟',title:'Punjab Women A Century',year:'2023',desc:'Scored a century for Punjab Women A — the innings that announced her nationally.'},
+        {icon:'⭐',title:'North Zone Women\'s Cricket Award',year:'2023',desc:'Recognised as the best batter in North Zone inter-state competition.'},
+        {icon:'🏏',title:'LegaXy Emerging Star',year:'2024',desc:'Signed with LegaXy as part of the women\'s cricket development initiative.'}
+      ],
+      timeline:[
+        {year:'2018',event:'Punjab U-16 Women',desc:'Selected for Punjab\'s women\'s under-16 programme.',badge:'Youth'},
+        {year:'2021',event:'Punjab Senior Debut',desc:'First senior appearance for Punjab Women in inter-state cricket.',badge:'Senior'},
+        {year:'2023',event:'Century — Punjab A',desc:'Landmark century in Punjab A fixtures — talent confirmed.',badge:'Milestone'},
+        {year:'2024',event:'LegaXy Partnership',desc:'Joined LegaXy\'s emerging women\'s cricket initiative.',badge:'Career'}
+      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'Adidas',category:'Sports Apparel'},{name:'BCI',category:'Women\'s Cricket'}],
+      gallery:[{type:'tall',src:'avleen.jpeg',caption:'Avleen Kaur — silky left-handed elegance'},{type:'sq',src:'avleen.jpeg',caption:'Punjab\'s finest opening batter'}]
+    },
+    {
+      id:'archana',name:'Archana',highlight:'ARCHANA',sport:'Cricket',
+      role:'Right-Arm Off-Spin Bowler · Women\'s Cricket',
+      subtitle:'Disciplined flight. Relentless accuracy. A spinner who builds pressure relentlessly.',
+      img:'archana.jpeg',tags:['Women\'s Cricket','Off-Spin','Emerging','India Women Target'],
+      heroStats:[{num:'Off-Spin',label:'Specialty'},{num:'U-23',label:'Age Group'},{num:'India A',label:'Target'}],
+      intro:'Archana is a disciplined right-arm off-spin bowler who combines classical flight and turn with the intelligence to read match situations far beyond her years.',
+      body:'A product of India\'s grassroots women\'s cricket network, Archana developed her off-spin bowling through rigorous practice and a deep love for the technical craft of spin. Her ability to control line, length, and trajectory has made her one of the most effective young spinners in her state circuit, with India Women A firmly in her sights.',
+      vitals:[{label:'Role',value:'Right-Arm Off-Spin'},{label:'Category',value:'Women\'s Cricket'},{label:'Bat',value:'Right-Handed'},{label:'Strength',value:'Control & Variation'},{label:'Target',value:'India Women A'},{label:'Managed By',value:'LegaXy'}],
+      emerging:{
+        journey:'Archana\'s cricketing journey began with a simple off-spin action taught to her by her school coach, who recognised an unusual natural ability to spin the ball. From school tournaments to state selection, every level revealed a young bowler with a maturity and control that belied her age. LegaXy saw the same quality.',
+        playStyle:'A classical off-spin bowler who relies on flight, dip, and sharp turn to trouble batsmen. She bowls with a high action and consistently lands on a nagging length. Her ability to set up batsmen — pitching the ball slightly fuller before the faster arm ball — shows a tactical mind that is still developing.',
+        strengths:['Accurate Off-Spin','Tactical Bowling','Flight & Dip','Pressure Building','Reading Batsmen'],
+        trainingPhilosophy:'Archana\'s training is built around repetition of the fundamentals — flight, line, and length. She spends significant time working on her stock ball before introducing variations. Her mentor emphasises that in women\'s cricket, control and consistency remain the highest virtues for a spinner.',
+        goals:['Earn a place in India Women A squad','Develop doosra and carrom ball as match-changing options','Become a regular match-winner in the Domestic Women\'s circuit','Represent India in a major ICC tournament'],
+        overview:'Archana is one of the most technically refined young off-spinners in Indian women\'s cricket. Her quiet determination, consistent improvements, and bowling intelligence place her on a trajectory that LegaXy is committed to supporting — from domestic excellence to international representation.'
+      },
+      achievements:[
+        {icon:'🎯',title:'State Women\'s Best Bowler',year:'2023',desc:'Named best bowler in her state women\'s cricket circuit with outstanding figures.'},
+        {icon:'🌟',title:'5-Wicket Haul — Inter-State',year:'2023',desc:'Five-wicket haul in inter-state women\'s cricket — a standout performance.'},
+        {icon:'⭐',title:'LegaXy Emerging Star',year:'2024',desc:'Signed with LegaXy as a specialist spinner in the women\'s cricket programme.'}
+      ],
+      timeline:[
+        {year:'2019',event:'School Cricket Discovery',desc:'Spotted by a coach at school level for natural off-spin ability.',badge:'Discovery'},
+        {year:'2021',event:'State Junior Women',desc:'Selected for state women\'s junior cricket squad.',badge:'Youth'},
+        {year:'2023',event:'Senior State Debut',desc:'Graduated to senior women\'s state cricket — five-wicket haul on debut.',badge:'Debut'},
+        {year:'2024',event:'LegaXy Signing',desc:'Joined LegaXy\'s women\'s cricket development programme.',badge:'Career'}
+      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'BCI',category:'Women\'s Cricket'},{name:'SG Cricket',category:'Equipment'}],
+      gallery:[{type:'tall',src:'archana.jpeg',caption:'Archana — spin bowling with heart and craft'},{type:'sq',src:'archana.jpeg',caption:'India Women A firmly in sight'}]
+    },
+    {
+      id:'aarav',name:'Aarav Gautam',highlight:'AARAV',sport:'Cricket',
+      role:'Batsman · Harsha CC',
+      subtitle:'Natural flair. Unshakeable focus. A future champion in the making.',
+      img:'aarav.jpeg',tags:['Club Cricket','Batsman','Emerging'],
+      heroStats:[{num:'U-19',label:'Age Group'},{num:'Harsha CC',label:'Club'},{num:'Rising',label:'Status'}],
+      intro:'Aarav Gautam possesses a rare combination of natural talent and mental fortitude — qualities that mark him as an athlete with a ceiling far beyond where he currently stands.',
+      body:'Training out of Harsha Cricket Club, Aarav has shown exceptional composure and shot-making ability from a very young age. His coaches describe him as someone who absorbs information quickly and applies it with precision — a true student of the game who is always thinking, always improving.',
+      vitals:[{label:'Club',value:'Harsha CC'},{label:'Role',value:'Top-Order Batsman'},{label:'Bat',value:'Right-Handed'},{label:'Style',value:'Elegant Stroke-Maker'},{label:'Managed By',value:'LegaXy'},{label:'Aspiration',value:'IPL & India'}],
+      emerging:{
+        journey:'Aarav\'s story is one of quiet determination. Discovered through a club tournament by LegaXy scouts, his natural technique and calm head stood out immediately. He has spent the past two years sharpening his game with some of India\'s best coaches, absorbing lessons at a pace that marks genuine talent.',
+        playStyle:'A classical right-handed batsman who plays close to his body and drives through the covers with exceptional timing. Has the instinct to accelerate when needed without compromising technique — a rare blend of orthodox elegance and modern aggression.',
+        strengths:['Technical Batting','Concentration','Coachability','Shot Selection','Mental Resilience'],
+        trainingPhilosophy:'Aarav approaches every training session like a match. He focuses heavily on footwork and keeping his head still — fundamentals he credits with his growing consistency. Meditation is a key part of his pre-match routine, helping him stay calm when the pressure is highest.',
+        goals:['Break into Delhi Under-23 squad','Make his DPL debut in the 2025 season','Develop into a 360-degree T20 player','Represent India at U-19 level'],
+        overview:'Aarav represents the next generation of Indian batting talent — technically orthodox, mentally strong, and with the temperament to perform on any stage. LegaXy is investing deeply in his development trajectory and believes he has the qualities to forge a long professional career.'
+      },
+      achievements:[
+        {icon:'🏆',title:'Club Championship Performer',year:'2023',desc:'Match-winning innings across multiple club tournaments in the Delhi region.'},
+        {icon:'🌟',title:'LegaXy Emerging Star',year:'2024',desc:'Identified and signed by LegaXy as a priority emerging batting talent.'},
+        {icon:'🎯',title:'Coach\'s Player Award',year:'2024',desc:'Recognised by coaching staff for exceptional attitude and rapid improvement.'}
+      ],
+      timeline:[
+        {year:'2020',event:'Cricket Academy Enrolment',desc:'Joined Harsha Cricket Club\'s junior development programme.',badge:'Start'},
+        {year:'2022',event:'First Competitive Season',desc:'Scored three consecutive fifties in district-level matches.',badge:'Milestone'},
+        {year:'2024',event:'LegaXy Partnership',desc:'Signed with LegaXy for career management and professional coaching access.',badge:'Career'},
+        {year:'2025',event:'DPL Target',desc:'Earmarked for Delhi Premier League debut — the next step in his journey.',badge:'Next'}
+      ],
+      brands:[{name:'LegaXy',category:'Athlete Management'},{name:'Harsha CC',category:'Club Cricket'},{name:'SG Cricket',category:'Equipment'}],
+      gallery:[{type:'tall',src:'aarav.jpeg',caption:'Aarav Gautam — classical elegance, future champion'},{type:'sq',src:'aarav.jpeg',caption:'A student of the game'}]
+    }
   ]
 };
 
-/* ══════════════════════════════════════════
-   STATE
-══════════════════════════════════════════ */
-let currentMode = 'elite';
-let currentAthlete = null;
-let selectorOpen = false;
-let activeCharts = [];
+/* ══ STATE ══ */
+let currentMode='elite',currentAthlete=null,selectorOpen=false,activeCharts=[];
 
-/* ══════════════════════════════════════════
-   CURSOR
-══════════════════════════════════════════ */
-const cx = document.getElementById('cx');
-const cr = document.getElementById('cr');
-document.addEventListener('mousemove', e => {
-  cx.style.top = e.clientY + 'px';
-  cx.style.left = e.clientX + 'px';
-  cr.style.top = e.clientY + 'px';
-  cr.style.left = e.clientX + 'px';
-});
+/* ══ CURSOR ══ */
+const cx=document.getElementById('cx'),cr=document.getElementById('cr');
+document.addEventListener('mousemove',e=>{cx.style.top=e.clientY+'px';cx.style.left=e.clientX+'px';cr.style.top=e.clientY+'px';cr.style.left=e.clientX+'px'});
 
-/* ══════════════════════════════════════════
-   PROGRESS BAR
-══════════════════════════════════════════ */
-window.addEventListener('scroll', () => {
-  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  document.getElementById('prog').style.width = pct + '%';
-});
+/* ══ PROGRESS ══ */
+window.addEventListener('scroll',()=>{document.getElementById('prog').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'});
 
-/* ══════════════════════════════════════════
-   SELECTOR
-══════════════════════════════════════════ */
-function buildSelector() {
-  const elList = document.getElementById('selEliteList');
-  const emList = document.getElementById('selEmergingList');
-  elList.innerHTML = '';
-  emList.innerHTML = '';
-
-  ATHLETES.elite.forEach(a => {
-    elList.appendChild(makeSelCard(a, 'elite'));
-  });
-  ATHLETES.emerging.forEach(a => {
-    emList.appendChild(makeSelCard(a, 'emerging'));
-  });
+/* ══ SELECTOR BUILD ══ */
+function buildSelector(){
+  const el=document.getElementById('selEliteList'),em=document.getElementById('selEmergingList');
+  el.innerHTML='';em.innerHTML='';
+  ATHLETES.elite.forEach(a=>el.appendChild(makeSelCard(a,'elite')));
+  ATHLETES.emerging.forEach(a=>em.appendChild(makeSelCard(a,'emerging')));
+}
+function makeSelCard(a,type){
+  const d=document.createElement('div');
+  d.className='sel-card';d.dataset.id=a.id;d.dataset.type=type;d.setAttribute('data-hover','');
+  const init=a.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+  d.innerHTML=`<div style="position:relative;flex-shrink:0"><img class="sel-thumb" src="${a.img}" alt="${a.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sel-thumb-fallback" style="display:none">${init}</div></div><div class="sel-info"><div class="sel-name">${a.name}</div><div class="sel-sport">${a.sport}</div><div class="sel-tag">${a.role.split('·')[0].trim()}</div></div>`;
+  d.addEventListener('click',()=>loadAthlete(a,type));return d;
+}
+function filterSelector(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('.sel-card').forEach(c=>{c.style.display=c.querySelector('.sel-name').textContent.toLowerCase().includes(q)?'':'none'});
+}
+function toggleSelector(){
+  selectorOpen=!selectorOpen;
+  document.getElementById('selector').classList.toggle('open',selectorOpen);
+  document.getElementById('selToggle').classList.toggle('shifted',selectorOpen);
+  document.getElementById('selToggle').textContent=selectorOpen?'▶ CLOSE':'◀ ATHLETES';
+  document.getElementById('mainContent').classList.toggle('shifted',selectorOpen);
+}
+function setMode(mode){
+  currentMode=mode;
+  document.getElementById('btnElite').classList.toggle('active',mode==='elite');
+  document.getElementById('btnEmerging').classList.toggle('active',mode==='emerging');
+  document.getElementById('selEliteGroup').style.display=mode==='elite'?'':'none';
+  document.getElementById('selEmergingGroup').style.display=mode==='emerging'?'':'none';
+  if(!selectorOpen)toggleSelector();
 }
 
-function makeSelCard(a, type) {
-  const div = document.createElement('div');
-  div.className = 'sel-card';
-  div.dataset.id = a.id;
-  div.dataset.type = type;
-  div.setAttribute('data-hover', '');
-
-  const initials = a.name.split(' ').map(w => w[0]).join('').slice(0, 2);
-
-  div.innerHTML = `
-    <div style="position:relative;flex-shrink:0">
-      <img class="sel-thumb" src="${a.img}" alt="${a.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="sel-thumb-fallback" style="display:none">${initials}</div>
-    </div>
-    <div class="sel-info">
-      <div class="sel-name">${a.name}</div>
-      <div class="sel-sport">${a.sport}</div>
-      <div class="sel-tag">${a.role.split('·')[0].trim()}</div>
-    </div>
-  `;
-  div.addEventListener('click', () => loadAthlete(a, type));
-  return div;
-}
-
-function filterSelector(query) {
-  const q = query.toLowerCase();
-  document.querySelectorAll('.sel-card').forEach(card => {
-    const name = card.querySelector('.sel-name').textContent.toLowerCase();
-    card.style.display = name.includes(q) ? '' : 'none';
-  });
-}
-
-function toggleSelector() {
-  selectorOpen = !selectorOpen;
-  document.getElementById('selector').classList.toggle('open', selectorOpen);
-  document.getElementById('selToggle').classList.toggle('shifted', selectorOpen);
-  document.getElementById('selToggle').textContent = selectorOpen ? '▶ CLOSE' : '◀ ATHLETES';
-  document.getElementById('mainContent').classList.toggle('shifted', selectorOpen);
-}
-
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('btnElite').classList.toggle('active', mode === 'elite');
-  document.getElementById('btnEmerging').classList.toggle('active', mode === 'emerging');
-
-  document.getElementById('selEliteGroup').style.display = mode === 'elite' ? '' : 'none';
-  document.getElementById('selEmergingGroup').style.display = mode === 'emerging' ? '' : 'none';
-
-  if (!selectorOpen) toggleSelector();
-}
-
-/* ══════════════════════════════════════════
-   LOAD ATHLETE
-══════════════════════════════════════════ */
-function loadAthlete(a, type) {
-  currentAthlete = a;
-
-  // Mark active in selector
-  document.querySelectorAll('.sel-card').forEach(c => c.classList.remove('active'));
+/* ══ LOAD ATHLETE ══ */
+function loadAthlete(a,type){
+  currentAthlete=a;
+  document.querySelectorAll('.sel-card').forEach(c=>c.classList.remove('active'));
   document.querySelector(`.sel-card[data-id="${a.id}"]`)?.classList.add('active');
+  document.getElementById('apEmpty').style.display='none';
+  document.getElementById('apProfile').style.display='block';
+  activeCharts.forEach(c=>c.destroy());activeCharts=[];
 
-  document.getElementById('apEmpty').style.display = 'none';
-  const profile = document.getElementById('apProfile');
-  profile.style.display = 'block';
-
-  // Destroy existing charts
-  activeCharts.forEach(c => c.destroy());
-  activeCharts = [];
-
-  // HERO
-  const bg = document.getElementById('apHeroBg');
-  bg.style.backgroundImage = `url('${a.img}')`;
-  bg.style.backgroundPosition = 'top center';
-
-  document.getElementById('apGhostName').textContent = a.highlight;
-  document.getElementById('apHeroBadge').textContent = `${a.sport} · ${type === 'elite' ? 'Elite Roster' : 'Emerging Star'}`;
-  const nameEl = document.getElementById('apHeroName');
-  const parts = a.name.split(' ');
-  nameEl.innerHTML = parts.slice(0, -1).join(' ') + '<span class="highlight"> ' + parts[parts.length-1] + '</span>';
-  document.getElementById('apHeroSubtitle').textContent = a.subtitle;
-
-  const tagsEl = document.getElementById('apHeroTags');
-  tagsEl.innerHTML = a.tags.map(t => `<span class="ap-tag">${t}</span>`).join('');
-
-  const heroStats = document.getElementById('apHeroStats');
-  heroStats.innerHTML = a.heroStats.map(s => `<div class="ap-quick-stat"><div class="ap-qs-num">${s.num}</div><div class="ap-qs-label">${s.label}</div></div>`).join('');
+  // Hero
+  document.getElementById('apHeroBg').style.backgroundImage=`url('${a.img}')`;
+  document.getElementById('apGhostName').textContent=a.highlight;
+  document.getElementById('apHeroBadge').textContent=`${a.sport} · ${type==='elite'?'Elite Roster':'Emerging Star'}`;
+  const parts=a.name.split(' ');
+  document.getElementById('apHeroName').innerHTML=parts.slice(0,-1).join(' ')+'<span class="highlight"> '+parts[parts.length-1]+'</span>';
+  document.getElementById('apHeroSubtitle').textContent=a.subtitle;
+  document.getElementById('apHeroTags').innerHTML=a.tags.map(t=>`<span class="ap-tag">${t}</span>`).join('');
+  document.getElementById('apHeroStats').innerHTML=a.heroStats.map(s=>`<div class="ap-quick-stat"><div class="ap-qs-num">${s.num}</div><div class="ap-qs-label">${s.label}</div></div>`).join('');
 
   // Re-trigger hero animations
-  [document.getElementById('apHeroBadge'), nameEl, document.getElementById('apHeroSubtitle'), tagsEl, heroStats].forEach(el => {
-    el.style.animation = 'none';
-    el.offsetHeight; // reflow
-    el.style.animation = '';
+  ['apHeroBadge','apHeroName','apHeroSubtitle','apHeroTags','apHeroStats'].forEach(id=>{
+    const el=document.getElementById(id);el.style.animation='none';el.offsetHeight;el.style.animation='';
   });
 
-  // BIO
-  document.getElementById('bioPic').src = a.img;
-  document.getElementById('bioPic').alt = a.name;
-  document.getElementById('bioPic').style.display = '';
-  document.getElementById('bioPicFallback').style.display = 'none';
-  document.getElementById('bioPicFallback').textContent = a.name.split(' ').map(w=>w[0]).join('');
-  document.getElementById('bioIntro').textContent = a.intro;
-  document.getElementById('bioBody').textContent = a.body;
-  document.getElementById('bioVitals').innerHTML = a.vitals.map(v => `<div class="bio-vital"><div class="bv-label">${v.label}</div><div class="bv-value">${v.value}</div></div>`).join('');
+  // Bio
+  const pic=document.getElementById('bioPic');
+  pic.src=a.img;pic.alt=a.name;pic.style.display='';
+  document.getElementById('bioPicFallback').style.display='none';
+  document.getElementById('bioPicFallback').textContent=a.name.split(' ').map(w=>w[0]).join('');
+  document.getElementById('bioIntro').textContent=a.intro;
+  document.getElementById('bioBody').textContent=a.body;
+  document.getElementById('bioVitals').innerHTML=a.vitals.map(v=>`<div class="bio-vital"><div class="bv-label">${v.label}</div><div class="bv-value">${v.value}</div></div>`).join('');
 
-  // ELITE vs EMERGING sections
-  const statsSection = document.getElementById('apStats');
-  const emergingSection = document.getElementById('apEmerging');
+  // Stats vs Emerging
+  const statsSection=document.getElementById('apStats'),emergSection=document.getElementById('apEmerging');
+  if(type==='elite'){statsSection.style.display='';emergSection.style.display='none';buildStatsTabs(a.stats);}
+  else{statsSection.style.display='none';emergSection.style.display='';buildEmergingCards(a.emerging);}
 
-  if (type === 'elite') {
-    statsSection.style.display = '';
-    emergingSection.style.display = 'none';
-    buildStatsTabs(a.stats);
-  } else {
-    statsSection.style.display = 'none';
-    emergingSection.style.display = '';
-    buildEmergingCards(a.emerging);
-  }
+  // Achievements
+  document.getElementById('achievementsGrid').innerHTML=a.achievements.map(ac=>`<div class="achievement-card reveal-on-scroll"><span class="ach-icon">${ac.icon}</span><div class="ach-year">${ac.year}</div><div class="ach-title">${ac.title}</div><div class="ach-desc">${ac.desc}</div><div class="ach-ghost">${ac.icon}</div></div>`).join('');
 
-  // ACHIEVEMENTS
-  document.getElementById('achievementsGrid').innerHTML = a.achievements.map(ac => `
-    <div class="achievement-card reveal-on-scroll">
-      <span class="ach-icon">${ac.icon}</span>
-      <div class="ach-year">${ac.year}</div>
-      <div class="ach-title">${ac.title}</div>
-      <div class="ach-desc">${ac.desc}</div>
-      <div class="ach-ghost">${ac.icon}</div>
-    </div>
-  `).join('');
+  // Timeline
+  document.getElementById('timelineList').innerHTML=a.timeline.map((t,i)=>`<div class="tl-item" style="transition-delay:${i*.1}s"><div class="tl-year">${t.year}</div><div class="tl-body"><div class="tl-event">${t.event}</div><div class="tl-desc">${t.desc}</div><span class="tl-badge">${t.badge}</span></div></div>`).join('');
 
-  // TIMELINE
-  document.getElementById('timelineList').innerHTML = a.timeline.map((t, i) => `
-    <div class="tl-item" style="transition-delay:${i * 0.1}s">
-      <div class="tl-year">${t.year}</div>
-      <div class="tl-body">
-        <div class="tl-event">${t.event}</div>
-        <div class="tl-desc">${t.desc}</div>
-        <span class="tl-badge">${t.badge}</span>
-      </div>
-    </div>
-  `).join('');
+  // Brands
+  document.getElementById('brandsGrid').innerHTML=a.brands.map(b=>`<div class="brand-tile reveal-on-scroll" data-hover=""><div class="brand-name">${b.name}</div><div class="brand-category">${b.category}</div></div>`).join('');
 
-  // BRANDS
-  document.getElementById('brandsGrid').innerHTML = a.brands.map(b => `
-    <div class="brand-tile reveal-on-scroll" data-hover="">
-      <div class="brand-name">${b.name}</div>
-      <div class="brand-category">${b.category}</div>
-    </div>
-  `).join('');
+  // Gallery
+  document.getElementById('galleryReel').innerHTML=a.gallery.map(g=>`<div class="gal-frame gal-${g.type}" data-hover=""><img src="${g.src}" alt="${g.caption}" onerror="this.parentElement.style.background='#12131E'"><div class="gal-caption">${g.caption}</div></div>`).join('');
 
-  // GALLERY
-  document.getElementById('galleryReel').innerHTML = a.gallery.map(g => `
-    <div class="gal-frame gal-${g.type}" data-hover="">
-      <img src="${g.src}" alt="${g.caption}" onerror="this.parentElement.style.background='#12131E'">
-      <div class="gal-caption">${g.caption}</div>
-    </div>
-  `).join('');
-
-  // Scroll to top
-  window.scrollTo({top: 0, behavior: 'smooth'});
-
-  // Re-init scroll reveal
-  setTimeout(initReveal, 300);
-  setTimeout(animateTimeline, 600);
-  setTimeout(animateCounters, 800);
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveal,300);
+  setTimeout(animateTimeline,600);
+  setTimeout(animateCounters,800);
 }
 
-/* ══════════════════════════════════════════
-   STATS TABS
-══════════════════════════════════════════ */
-function buildStatsTabs(statsData) {
-  const formats = Object.keys(statsData);
-  const tabsEl = document.getElementById('statsTabs');
-  const panelsEl = document.getElementById('statsPanels');
-
-  tabsEl.innerHTML = formats.map((f, i) => `
-    <button class="sft-btn ${i===0?'active':''}" onclick="activateStatTab('${f}', this)">${f}</button>
-  `).join('');
-
-  panelsEl.innerHTML = formats.map((f, i) => {
-    const s = statsData[f];
-    return `
-      <div class="stats-panel ${i===0?'active':''}" id="panel_${f}">
-        <div class="stat-cards-grid">
-          ${s.cards.map(c => `
-            <div class="stat-card">
-              <div class="sc-num" data-target="${c.num}">${c.num}</div>
-              <div class="sc-label">${c.label}</div>
-              <div class="sc-sub">${c.sub}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="stats-chart-area">
-          <div class="stats-chart-label">${s.chartLabel}</div>
-          <div class="chart-canvas-wrap">
-            <canvas id="chart_${f}"></canvas>
-          </div>
-        </div>
-      </div>
-    `;
+/* ══ STATS TABS ══ */
+function buildStatsTabs(statsData){
+  const formats=Object.keys(statsData),tabs=document.getElementById('statsTabs'),panels=document.getElementById('statsPanels');
+  tabs.innerHTML=formats.map((f,i)=>`<button class="sft-btn ${i===0?'active':''}" onclick="activateStatTab('${f}',this)">${f}</button>`).join('');
+  panels.innerHTML=formats.map((f,i)=>{
+    const s=statsData[f];
+    return `<div class="stats-panel ${i===0?'active':''}" id="panel_${f}"><div class="stat-cards-grid">${s.cards.map(c=>`<div class="stat-card"><div class="sc-num" data-target="${c.num}">${c.num}</div><div class="sc-label">${c.label}</div><div class="sc-sub">${c.sub}</div></div>`).join('')}</div><div class="stats-chart-area"><div class="stats-chart-label">${s.chartLabel}</div><div class="chart-canvas-wrap"><canvas id="chart_${f}"></canvas></div></div></div>`;
   }).join('');
-
-  // Draw chart for first active tab
-  setTimeout(() => {
-    formats.forEach((f, i) => {
-      if (i === 0) drawChart(f, statsData[f].chartData);
-    });
-  }, 100);
-
-  // Store all chart data for lazy drawing
-  tabsEl._statsData = statsData;
+  tabs._statsData=statsData;
+  setTimeout(()=>drawChart(formats[0],statsData[formats[0]].chartData),100);
 }
-
-function activateStatTab(format, btn) {
-  document.querySelectorAll('.sft-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.stats-panel').forEach(p => p.classList.remove('active'));
+function activateStatTab(format,btn){
+  document.querySelectorAll('.sft-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.stats-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('panel_' + format)?.classList.add('active');
-
-  const statsData = document.getElementById('statsTabs')._statsData;
-  if (statsData && statsData[format]) {
-    setTimeout(() => drawChart(format, statsData[format].chartData), 60);
-  }
-
+  document.getElementById('panel_'+format)?.classList.add('active');
+  const sd=document.getElementById('statsTabs')._statsData;
+  if(sd&&sd[format])setTimeout(()=>drawChart(format,sd[format].chartData),60);
   animateCounters();
 }
-
-function drawChart(format, chartData) {
-  const canvas = document.getElementById('chart_' + format);
-  if (!canvas || !chartData.labels.length) return;
-
-  // Destroy if exists
-  const existing = Chart.getChart(canvas);
-  if (existing) existing.destroy();
-
-  const chart = new Chart(canvas, {
-    type: 'bar',
-    data: {
-      labels: chartData.labels,
-      datasets: [{
-        data: chartData.data,
-        backgroundColor: 'rgba(188,82,37,0.25)',
-        borderColor: 'rgba(188,82,37,0.8)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(188,82,37,0.5)',
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {display: false},
-        tooltip: {
-          backgroundColor: 'rgba(5,6,10,0.95)',
-          borderColor: 'rgba(188,82,37,0.3)',
-          borderWidth: 1,
-          titleColor: '#FFB37A',
-          bodyColor: '#E4E2DE',
-          titleFont: {family: 'Rajdhani', weight: '700', size: 12},
-          bodyFont: {family: 'Barlow', size: 12},
-        }
-      },
-      scales: {
-        x: {
-          grid: {color: 'rgba(255,255,255,0.04)'},
-          ticks: {color: 'rgba(154,154,164,0.8)', font: {family: 'Rajdhani', size: 11, weight: '600'}},
-          border: {color: 'rgba(255,255,255,0.06)'},
-        },
-        y: {
-          grid: {color: 'rgba(255,255,255,0.04)'},
-          ticks: {color: 'rgba(154,154,164,0.8)', font: {family: 'Rajdhani', size: 11}},
-          border: {color: 'rgba(255,255,255,0.06)'},
-        }
-      },
-      animation: {duration: 800, easing: 'easeOutQuart'},
-    }
+function drawChart(format,chartData){
+  const canvas=document.getElementById('chart_'+format);
+  if(!canvas||!chartData.labels.length)return;
+  const existing=Chart.getChart(canvas);if(existing)existing.destroy();
+  const chart=new Chart(canvas,{
+    type:'bar',
+    data:{labels:chartData.labels,datasets:[{data:chartData.data,backgroundColor:'rgba(188,82,37,0.25)',borderColor:'rgba(188,82,37,0.8)',borderWidth:1,hoverBackgroundColor:'rgba(188,82,37,0.5)'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(5,6,10,0.95)',borderColor:'rgba(188,82,37,0.3)',borderWidth:1,titleColor:'#FFB37A',bodyColor:'#E4E2DE',titleFont:{family:'Rajdhani',weight:'700',size:12},bodyFont:{family:'Barlow',size:12}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(154,154,164,0.8)',font:{family:'Rajdhani',size:11,weight:'600'}},border:{color:'rgba(255,255,255,0.06)'}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(154,154,164,0.8)',font:{family:'Rajdhani',size:11}},border:{color:'rgba(255,255,255,0.06)'}}},animation:{duration:800,easing:'easeOutQuart'}}
   });
   activeCharts.push(chart);
 }
 
-/* ══════════════════════════════════════════
-   EMERGING CARDS
-══════════════════════════════════════════ */
-function buildEmergingCards(em) {
-  const grid = document.getElementById('emergingGrid');
-  grid.innerHTML = `
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">🛤️</span>
-      <div class="em-card-title">The Journey</div>
-      <div class="em-card-body">${em.journey}</div>
-    </div>
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">🎯</span>
-      <div class="em-card-title">Play Style</div>
-      <div class="em-card-body">${em.playStyle}</div>
-    </div>
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">⚡</span>
-      <div class="em-card-title">Key Strengths</div>
-      <div class="em-card-body">
-        <div class="em-strengths">${em.strengths.map(s => `<span class="em-strength-pill">${s}</span>`).join('')}</div>
-      </div>
-    </div>
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">🧠</span>
-      <div class="em-card-title">Training Philosophy</div>
-      <div class="em-card-body">${em.trainingPhilosophy}</div>
-    </div>
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">🎖️</span>
-      <div class="em-card-title">Goals</div>
-      <div class="em-card-body">
-        <ul class="em-goals-list">${em.goals.map(g => `<li>${g}</li>`).join('')}</ul>
-      </div>
-    </div>
-    <div class="em-card reveal-on-scroll">
-      <span class="em-card-icon">📋</span>
-      <div class="em-card-title">Professional Overview</div>
-      <div class="em-card-body">${em.overview}</div>
-    </div>
-  `;
+/* ══ EMERGING CARDS ══ */
+function buildEmergingCards(em){
+  document.getElementById('emergingGrid').innerHTML=`
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">🛤️</span><div class="em-card-title">The Journey</div><div class="em-card-body">${em.journey}</div></div>
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">🎯</span><div class="em-card-title">Play Style</div><div class="em-card-body">${em.playStyle}</div></div>
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">⚡</span><div class="em-card-title">Key Strengths</div><div class="em-card-body"><div class="em-strengths">${em.strengths.map(s=>`<span class="em-strength-pill">${s}</span>`).join('')}</div></div></div>
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">🧠</span><div class="em-card-title">Training Philosophy</div><div class="em-card-body">${em.trainingPhilosophy}</div></div>
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">🎖️</span><div class="em-card-title">Goals</div><div class="em-card-body"><ul class="em-goals-list">${em.goals.map(g=>`<li>${g}</li>`).join('')}</ul></div></div>
+    <div class="em-card reveal-on-scroll"><span class="em-card-icon">📋</span><div class="em-card-title">Professional Overview</div><div class="em-card-body">${em.overview}</div></div>`;
 }
 
-/* ══════════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════════ */
-function initReveal() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  }, {threshold: 0.12});
-  document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-    el.classList.remove('visible');
-    obs.observe(el);
-  });
+/* ══ SCROLL REVEAL ══ */
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal-on-scroll').forEach(el=>{el.classList.remove('visible');obs.observe(el)});
 }
-
-function animateTimeline() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('revealed');
-        obs.unobserve(e.target);
-      }
-    });
-  }, {threshold: 0.1});
-  document.querySelectorAll('.tl-item').forEach(el => obs.observe(el));
+function animateTimeline(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');obs.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.tl-item').forEach(el=>obs.observe(el));
 }
-
-function animateCounters() {
-  document.querySelectorAll('.sc-num').forEach(el => {
-    const raw = el.dataset.target || el.textContent;
-    const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
-    if (isNaN(num) || num === 0) return;
-    let start = 0;
-    const dur = 1200;
-    const step = ts => {
-      if (!start) start = ts;
-      const pct = Math.min((ts - start) / dur, 1);
-      const ease = 1 - Math.pow(1 - pct, 3);
-      const val = raw.replace(/[0-9.]+/, v => {
-        const orig = parseFloat(v);
-        return (orig * ease).toFixed(orig % 1 !== 0 ? 2 : 0);
-      });
-      el.textContent = val;
-      if (pct < 1) requestAnimationFrame(step);
-      else el.textContent = raw;
-    };
+function animateCounters(){
+  document.querySelectorAll('.sc-num').forEach(el=>{
+    const raw=el.dataset.target||el.textContent;
+    const num=parseFloat(raw.replace(/[^0-9.]/g,''));
+    if(isNaN(num)||num===0)return;
+    let start=0;const dur=1200;
+    const step=ts=>{if(!start)start=ts;const pct=Math.min((ts-start)/dur,1),ease=1-Math.pow(1-pct,3);
+      el.textContent=raw.replace(/[0-9.]+/,v=>{const o=parseFloat(v);return(o*ease).toFixed(o%1!==0?2:0)});
+      if(pct<1)requestAnimationFrame(step);else el.textContent=raw;};
     requestAnimationFrame(step);
   });
 }
 
-/* ══════════════════════════════════════════
-   URL PARAMS — deep link support
-══════════════════════════════════════════ */
-function checkUrlParams() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('athlete');
-  const type = params.get('type') || 'elite';
-
-  if (id) {
-    const roster = type === 'emerging' ? ATHLETES.emerging : ATHLETES.elite;
-    const a = roster.find(x => x.id === id);
-    if (a) {
-      setMode(type);
-      loadAthlete(a, type);
-      return;
-    }
-  }
-  // Auto-open selector if no athlete selected
-  setTimeout(() => {
-    if (!currentAthlete) toggleSelector();
-  }, 600);
+/* ══ URL PARAMS ══ */
+function checkUrlParams(){
+  const p=new URLSearchParams(window.location.search),id=p.get('athlete'),type=p.get('type')||'elite';
+  if(id){const roster=type==='emerging'?ATHLETES.emerging:ATHLETES.elite,a=roster.find(x=>x.id===id);if(a){setMode(type);loadAthlete(a,type);return;}}
+  setTimeout(()=>{if(!currentAthlete)toggleSelector()},600);
 }
 
-/* ══════════════════════════════════════════
-   INIT
-══════════════════════════════════════════ */
-buildSelector();
-setMode('elite');
-checkUrlParams();
+buildSelector();setMode('elite');checkUrlParams();
 </script>
 </body>
 </html>
