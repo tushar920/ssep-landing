@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Athletes — Legaxy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange-light:#FFB37A;
+  --orange:#BC5225;
+  --orange-dark:#7A3010;
+  --chrome:#C8C8D0;
+  --chrome-dim:#9A9AA4;
+  --ink:#05060A;
+  --ink-mid:#0B0C14;
+  --ink-lift:#12131E;
+  --text:#F0EEEA;
+  --text-muted:#9A9AA4;
+  --text-dim:#4A4A52;
+  --text-bright:#E4E2DE;
+  --metal:linear-gradient(135deg,var(--orange-light) 0%,var(--orange) 40%,var(--orange-dark) 70%,var(--orange) 100%);
+  --metal-text:linear-gradient(90deg,var(--orange-light),var(--orange),var(--orange-dark),var(--orange),var(--orange-light));
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
+
+/* ── Custom cursor ── */
+#cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
+#cx{width:8px;height:8px;background:var(--orange);transition:width .25s,height .25s}
+#cr{width:30px;height:30px;border:1px solid rgba(188,82,37,.5);transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s}
+body:has(a:hover,button:hover,[data-hover]:hover) #cx{width:14px;height:14px}
+body:has(a:hover,button:hover,[data-hover]:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+#prog{position:fixed;top:0;left:0;height:1px;z-index:9999;background:var(--metal);width:0}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;inset-inline:0;z-index:2000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 52px;height:72px;
+  background:linear-gradient(to bottom,rgba(5,6,10,.97) 0%,rgba(5,6,10,.85) 100%);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.logo{display:flex;align-items:center;text-decoration:none;height:52px}
+.logo img{height:100%;width:auto;object-fit:contain;display:block;filter:brightness(1.15)}
+.logo-text-fallback{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none}
+.logo-x-fb{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-back{display:flex;align-items:center;gap:10px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;cursor:none;transition:color .3s}
+.nav-back:hover{color:var(--orange)}
+.nav-back::before{content:'←';font-size:14px;transition:transform .3s}
+.nav-back:hover::before{transform:translateX(-4px)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-type-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:4px}
+.nav-type-btn{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 18px;cursor:none;border:none;background:transparent;color:var(--chrome-dim);transition:all .3s}
+.nav-type-btn.active{background:var(--orange);color:#FFF}
+
+/* ── ATHLETE SELECTOR PANEL ── */
+#selector{
+  position:fixed;top:72px;left:0;bottom:0;width:300px;
+  background:rgba(5,6,10,.96);backdrop-filter:blur(24px);
+  border-right:1px solid rgba(188,82,37,.12);
+  z-index:1500;overflow-y:auto;
+  transform:translateX(-100%);
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+  display:flex;flex-direction:column;
+}
+#selector.open{transform:translateX(0)}
+#selector::-webkit-scrollbar{width:3px}
+#selector::-webkit-scrollbar-track{background:transparent}
+#selector::-webkit-scrollbar-thumb{background:rgba(188,82,37,.3)}
+.sel-header{padding:24px 24px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.sel-label{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.sel-search{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Barlow',sans-serif;font-size:13px;padding:9px 14px;outline:none;transition:border-color .3s}
+.sel-search:focus{border-color:rgba(188,82,37,.5)}
+.sel-search::placeholder{color:var(--text-dim)}
+.sel-section-title{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--chrome-dim);padding:16px 24px 8px;border-top:1px solid rgba(255,255,255,.04)}
+.sel-card{display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:none;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.03)}
+.sel-card:hover{background:rgba(188,82,37,.07)}
+.sel-card.active{background:rgba(188,82,37,.12);border-right:2px solid var(--orange)}
+.sel-thumb{width:44px;height:56px;object-fit:cover;object-position:top;filter:grayscale(.4)}
+.sel-thumb-fallback{width:44px;height:56px;background:var(--ink-lift);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--orange);flex-shrink:0}
+.sel-info{flex:1;min-width:0}
+.sel-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sel-sport{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-top:2px}
+.sel-tag{font-size:10px;color:var(--text-dim);font-style:italic;font-family:'Playfair Display',serif;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── TOGGLE SELECTOR BUTTON ── */
+#selToggle{
+  position:fixed;top:50%;left:0;transform:translateY(-50%);z-index:1600;
+  width:28px;height:72px;
+  background:rgba(188,82,37,.85);
+  border:none;border-radius:0 4px 4px 0;
+  cursor:none;display:flex;align-items:center;justify-content:center;
+  transition:left .5s cubic-bezier(.23,1,.32,1),background .3s;
+  writing-mode:vertical-rl;
+  font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#FFF;
+}
+#selector.open ~ #selToggle,
+#selToggle.shifted{left:300px}
+
+/* ── MAIN CONTENT AREA ── */
+#mainContent{
+  margin-left:0;margin-top:72px;
+  transition:margin-left .5s cubic-bezier(.23,1,.32,1);
+  min-height:calc(100vh - 72px);
+}
+#mainContent.shifted{margin-left:300px}
+
+/* ── ATHLETE HERO ── */
+.ap-hero{
+  position:relative;height:92vh;min-height:600px;
+  overflow:hidden;display:flex;align-items:flex-end;
+}
+.ap-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:top center;
+  filter:brightness(.55);
+  transition:background-image .8s ease;
+}
+.ap-hero-grain{
+  position:absolute;inset:0;z-index:1;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.ap-hero-overlay{
+  position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(to right, rgba(5,6,10,.9) 0%, rgba(5,6,10,.2) 60%, transparent 100%),
+    linear-gradient(to top, rgba(5,6,10,1) 0%, rgba(5,6,10,.5) 30%, transparent 70%);
+}
+.ap-hero-content{position:relative;z-index:10;padding:0 72px 64px;width:100%;display:flex;justify-content:space-between;align-items:flex-end}
+.ap-hero-left{max-width:640px}
+.ap-hero-badge{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin-bottom:12px;opacity:0;animation:apFade .8s .2s forwards}
+.ap-hero-badge::before{content:'';width:28px;height:1px;background:var(--orange)}
+.ap-hero-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(52px,8vw,108px);line-height:.9;letter-spacing:-2px;color:#FFF;text-shadow:0 4px 32px rgba(0,0,0,.6);opacity:0;animation:apFade .9s .35s forwards}
+.ap-hero-name .highlight{display:block;background:var(--metal-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200%;animation:shineText 4s linear infinite}
+@keyframes shineText{0%{background-position:200%}100%{background-position:-200%}}
+.ap-hero-subtitle{font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:rgba(240,238,234,.8);margin-top:10px;opacity:0;animation:apFade .9s .5s forwards}
+.ap-hero-tags{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;opacity:0;animation:apFade .9s .65s forwards}
+.ap-tag{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border:1px solid rgba(188,82,37,.4);color:rgba(255,179,122,.9)}
+.ap-hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px;opacity:0;animation:apFade .9s .8s forwards}
+.ap-quick-stat{text-align:center;background:rgba(5,6,10,.7);backdrop-filter:blur(12px);border:1px solid rgba(188,82,37,.2);padding:14px 22px;min-width:100px}
+.ap-qs-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:28px;line-height:1;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ap-qs-label{font-family:'Rajdhani',sans-serif;font-size:8px;letter-spacing:2.5px;text-transform:uppercase;color:var(--chrome-dim);margin-top:3px}
+@keyframes apFade{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── GHOST NAME watermark ── */
+.ap-ghost{position:absolute;bottom:0;right:0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(80px,18vw,220px);line-height:.8;letter-spacing:-8px;color:rgba(188,82,37,.06);pointer-events:none;user-select:none;z-index:3}
+
+/* ── SECTION WRAPPER ── */
+.ap-section{padding:80px 72px;border-top:1px solid rgba(255,255,255,.04);position:relative;z-index:1}
+.ap-section-eyebrow{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;display:flex;align-items:center;gap:14px}
+.ap-section-eyebrow::before{content:'';width:24px;height:1px;background:var(--orange)}
+.ap-section-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,48px);letter-spacing:.5px;line-height:1;color:#FFF;margin-bottom:24px}
+
+/* ── BIO SECTION ── */
+#apBio{background:var(--ink-mid)}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.bio-left{}
+.bio-portrait{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;filter:grayscale(.2) brightness(.9);border:1px solid rgba(188,82,37,.15)}
+.bio-portrait-fallback{width:100%;aspect-ratio:3/4;background:var(--ink-lift);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:48px;font-weight:700;color:var(--orange)}
+.bio-right{}
+.bio-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;line-height:1.6;color:var(--text-bright);margin-bottom:24px;border-left:2px solid var(--orange);padding-left:24px}
+.bio-body{font-size:15px;line-height:1.85;color:var(--text-muted)}
+.bio-vitals{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:32px}
+.bio-vital{padding:16px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);transition:border-color .3s}
+.bio-vital:hover{border-color:rgba(188,82,37,.25)}
+.bv-label{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-bottom:5px}
+.bv-value{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;color:#FFF;letter-spacing:.5px}
+
+/* ── STATS SECTION (Elite only) ── */
+#apStats{background:var(--ink)}
+.stats-format-tabs{display:flex;gap:2px;margin-bottom:40px}
+.sft-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:10px 28px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--chrome-dim);cursor:none;transition:all .3s;position:relative;overflow:hidden}
+.sft-btn::before{content:'';position:absolute;inset:0;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.23,1,.32,1);z-index:-1}
+.sft-btn:hover{color:#FFF;border-color:var(--orange)}
+.sft-btn.active{background:var(--orange);color:#FFF;border-color:transparent}
+.stats-panel{display:none;animation:statsFade .5s ease}
+.stats-panel.active{display:block}
+@keyframes statsFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.stat-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:48px}
+.stat-card{
+  padding:28px 24px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s,transform .3s;
+}
+.stat-card:hover{background:rgba(188,82,37,.06);border-color:rgba(188,82,37,.25);transform:translateY(-4px)}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.stat-card:hover::after{transform:scaleX(1)}
+.sc-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,4vw,52px);line-height:1;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;counter-increment:none}
+.sc-label{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px;font-weight:500}
+.sc-sub{font-size:12px;color:var(--text-dim);margin-top:4px;font-style:italic;font-family:'Playfair Display',serif}
+/* animated counter */
+.sc-num[data-count]{transition:none}
+/* chart */
+.stats-chart-area{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);padding:32px;position:relative}
+.stats-chart-label{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--chrome-dim);margin-bottom:20px}
+.chart-canvas-wrap{height:240px;position:relative}
+
+/* ── CAREER TIMELINE ── */
+#apTimeline{background:var(--ink-mid)}
+.timeline{position:relative;padding-left:0}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(188,82,37,.4) 10%,rgba(188,82,37,.4) 90%,transparent)}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:32px;margin-bottom:48px;position:relative;padding-left:32px;opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s}
+.tl-item.revealed{opacity:1;transform:translateX(0)}
+.tl-item::before{content:'';position:absolute;left:-5px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 3px rgba(188,82,37,.2),0 0 16px rgba(188,82,37,.4)}
+.tl-year{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;color:var(--orange);padding-top:4px}
+.tl-body{}
+.tl-event{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:.5px;color:#FFF;margin-bottom:4px}
+.tl-desc{font-size:13px;line-height:1.7;color:var(--text-muted)}
+.tl-badge{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border:1px solid rgba(188,82,37,.35);color:rgba(255,179,122,.85);margin-top:6px}
+
+/* ── ACHIEVEMENTS ── */
+#apAchievements{background:var(--ink)}
+.achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.achievement-card{
+  padding:32px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s;
+}
+.achievement-card:hover{background:rgba(188,82,37,.05);border-color:rgba(188,82,37,.2)}
+.ach-icon{font-size:28px;margin-bottom:16px;display:block}
+.ach-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;letter-spacing:.5px;color:#FFF;margin-bottom:6px}
+.ach-year{font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.ach-desc{font-size:13px;line-height:1.65;color:var(--text-muted)}
+.ach-ghost{position:absolute;bottom:-10px;right:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:64px;line-height:1;color:rgba(255,255,255,.025);pointer-events:none}
+
+/* ── BRANDS ── */
+#apBrands{background:var(--ink-mid)}
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:2px}
+.brand-tile{
+  padding:28px 24px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.05);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  transition:background .3s,border-color .3s;cursor:none;min-height:100px;
+}
+.brand-tile:hover{background:rgba(188,82,37,.08);border-color:rgba(188,82,37,.3)}
+.brand-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:center;transition:color .3s}
+.brand-tile:hover .brand-name{color:#FFF}
+.brand-category{font-size:10px;color:var(--text-dim);font-style:italic;font-family:'Playfair Display',serif}
+
+/* ── GALLERY ── */
+#apGallery{background:var(--ink)}
+.gallery-reel{display:flex;gap:2px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;scrollbar-color:rgba(188,82,37,.3) transparent}
+.gallery-reel::-webkit-scrollbar{height:3px}
+.gallery-reel::-webkit-scrollbar-thumb{background:rgba(188,82,37,.3)}
+.gal-frame{flex-shrink:0;overflow:hidden;position:relative;cursor:none}
+.gal-frame img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s}
+.gal-frame:hover img{transform:scale(1.06);filter:brightness(.85)}
+.gal-tall{width:240px;height:360px}
+.gal-wide{width:400px;height:240px}
+.gal-sq{width:240px;height:240px}
+.gal-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(5,6,10,.85));padding:16px 14px 14px;font-size:11px;color:rgba(255,255,255,.7);font-style:italic;font-family:'Playfair Display',serif;opacity:0;transition:opacity .3s}
+.gal-frame:hover .gal-caption{opacity:1}
+
+/* ── EMERGING: JOURNEY / PLAY STYLE / etc ── */
+.emerging-content{display:none}
+.emerging-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.em-card{
+  padding:36px 32px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.05);
+  transition:background .3s,border-color .3s;
+}
+.em-card:hover{background:rgba(188,82,37,.05);border-color:rgba(188,82,37,.2)}
+.em-card-icon{font-size:20px;margin-bottom:16px;display:block;opacity:.8}
+.em-card-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.em-card-body{font-size:14px;line-height:1.8;color:var(--text-bright)}
+.em-strengths{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.em-strength-pill{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border:1px solid rgba(188,82,37,.3);color:rgba(255,179,122,.85)}
+.em-goals-list{list-style:none}
+.em-goals-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;line-height:1.6;color:var(--text-bright);display:flex;align-items:flex-start;gap:10px}
+.em-goals-list li::before{content:'◆';color:var(--orange);font-size:6px;flex-shrink:0;margin-top:5px}
+
+/* ── NO ATHLETE SELECTED ── */
+.ap-empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 72px);
+  text-align:center;padding:40px;
+}
+.ap-empty-ghost{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(60px,15vw,160px);letter-spacing:-6px;color:rgba(188,82,37,.06);margin-bottom:20px;line-height:1}
+.ap-empty-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:32px;letter-spacing:2px;text-transform:uppercase;color:#FFF;margin-bottom:10px}
+.ap-empty-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--text-muted)}
+.ap-empty-arrow{margin-top:24px;font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(-6px)}}
+
+/* ── FOOTER ── */
+.ap-footer{padding:32px 72px;background:var(--ink-mid);border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center}
+.ap-footer-logo{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.ap-footer-back{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);text-decoration:none;cursor:none;transition:color .3s}
+.ap-footer-back:hover{color:var(--orange-light)}
+
+/* ── REVEAL ── */
+.reveal-on-scroll{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s}
+.reveal-on-scroll.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .ap-hero-content{padding:0 24px 48px;flex-direction:column;align-items:flex-start;gap:24px}
+  .ap-hero-right{flex-direction:row;align-items:flex-start;opacity:1!important}
+  .ap-section{padding:48px 24px}
+  .bio-grid{grid-template-columns:1fr;gap:32px}
+  .bio-portrait{max-height:320px;width:60%}
+  .stat-cards-grid{grid-template-columns:repeat(2,1fr)}
+  .achievements-grid{grid-template-columns:1fr 1fr}
+  .emerging-grid{grid-template-columns:1fr}
+  .tl-item{grid-template-columns:80px 1fr;gap:16px}
+  #selector{width:260px}
+  #selector.open ~ #selToggle, #selToggle.shifted{left:260px}
+  .ap-footer{padding:24px}
+}
+@media(max-width:600px){
+  .stat-cards-grid{grid-template-columns:1fr 1fr}
+  .achievements-grid{grid-template-columns:1fr}
+  .brands-grid{grid-template-columns:repeat(2,1fr)}
+  .bio-vitals{grid-template-columns:1fr 1fr}
+  .ap-hero-name{font-size:clamp(40px,12vw,72px)}
+}
+</style>
+</head>
+<body>
+<div id="cx"></div>
+<div id="cr"></div>
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">
+    <img src="Legaxy_logo_light.png" alt="Legaxy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <span class="logo-text-fallback">LEGA<span class="logo-x-fb">X</span>Y</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-type-toggle">
+      <button class="nav-type-btn active" id="btnElite" onclick="setMode('elite')">Elite</button>
+      <button class="nav-type-btn" id="btnEmerging" onclick="setMode('emerging')">Emerging</button>
+    </div>
+    <a class="nav-back" href="index.html">Back to Home</a>
+  </div>
+</nav>
+
+<!-- ATHLETE SELECTOR SIDEBAR -->
+<div id="selector">
+  <div class="sel-header">
+    <div class="sel-label">Select Athlete</div>
+    <input class="sel-search" type="text" id="selSearch" placeholder="Search athletes…" oninput="filterSelector(this.value)">
+  </div>
+  <div id="selEliteGroup">
+    <div class="sel-section-title">Elite Roster</div>
+    <div id="selEliteList"></div>
+  </div>
+  <div id="selEmergingGroup">
+    <div class="sel-section-title">Emerging Stars</div>
+    <div id="selEmergingList"></div>
+  </div>
+</div>
+<button id="selToggle" onclick="toggleSelector()">◀ ATHLETES</button>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
+  <!-- EMPTY STATE -->
+  <div id="apEmpty" class="ap-empty">
+    <div class="ap-ghost ap-empty-ghost">LEGAXY</div>
+    <div class="ap-empty-title">Select an Athlete</div>
+    <div class="ap-empty-sub">Explore the full roster — elite cricketers and emerging stars</div>
+    <div class="ap-empty-arrow">← Open Roster Panel</div>
+  </div>
+
+  <!-- ATHLETE PROFILE (hidden until selected) -->
+  <div id="apProfile" style="display:none">
+
+    <!-- HERO -->
+    <section class="ap-hero" id="apHeroSection">
+      <div class="ap-hero-bg" id="apHeroBg"></div>
+      <div class="ap-hero-grain"></div>
+      <div class="ap-hero-overlay"></div>
+      <div class="ap-ghost" id="apGhostName"></div>
+      <div class="ap-hero-content">
+        <div class="ap-hero-left">
+          <div class="ap-hero-badge" id="apHeroBadge"></div>
+          <h1 class="ap-hero-name" id="apHeroName"></h1>
+          <div class="ap-hero-subtitle" id="apHeroSubtitle"></div>
+          <div class="ap-hero-tags" id="apHeroTags"></div>
+        </div>
+        <div class="ap-hero-right" id="apHeroStats"></div>
+      </div>
+    </section>
+
+    <!-- BIO -->
+    <section class="ap-section" id="apBio">
+      <div class="ap-section-eyebrow">Profile</div>
+      <div class="ap-section-title">About</div>
+      <div class="bio-grid">
+        <div class="bio-left">
+          <img class="bio-portrait" id="bioPic" src="" alt="" onerror="this.style.display='none';document.getElementById('bioPicFallback').style.display='flex'">
+          <div class="bio-portrait-fallback" id="bioPicFallback" style="display:none" id="bioPicFallback"></div>
+        </div>
+        <div class="bio-right">
+          <div class="bio-intro" id="bioIntro"></div>
+          <div class="bio-body" id="bioBody"></div>
+          <div class="bio-vitals" id="bioVitals"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS (elite only) -->
+    <section class="ap-section" id="apStats" style="display:none">
+      <div class="ap-section-eyebrow">Performance</div>
+      <div class="ap-section-title">Career Statistics</div>
+      <div class="stats-format-tabs" id="statsTabs"></div>
+      <div id="statsPanels"></div>
+    </section>
+
+    <!-- EMERGING PROFILE CARDS -->
+    <section class="ap-section" id="apEmerging" style="display:none">
+      <div class="ap-section-eyebrow">Athlete Profile</div>
+      <div class="ap-section-title">The Journey</div>
+      <div class="emerging-grid" id="emergingGrid"></div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="ap-section" id="apAchievements">
+      <div class="ap-section-eyebrow reveal-on-scroll">Honours</div>
+      <div class="ap-section-title reveal-on-scroll">Achievements</div>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="ap-section" id="apTimeline" style="background:var(--ink-mid)">
+      <div class="ap-section-eyebrow reveal-on-scroll">Milestones</div>
+      <div class="ap-section-title reveal-on-scroll">Career Timeline</div>
+      <div class="timeline" id="timelineList" style="padding-left:32px"></div>
+    </section>
+
+    <!-- BRANDS -->
+    <section class="ap-section" id="apBrands">
+      <div class="ap-section-eyebrow reveal-on-scroll">Associations</div>
+      <div class="ap-section-title reveal-on-scroll">Brand Partners</div>
+      <div class="brands-grid" id="brandsGrid"></div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="ap-section" id="apGallery" style="background:var(--ink-mid)">
+      <div class="ap-section-eyebrow reveal-on-scroll">Visuals</div>
+      <div class="ap-section-title reveal-on-scroll">Gallery</div>
+      <div class="gallery-reel" id="galleryReel"></div>
+    </section>
+
+    <footer class="ap-footer">
+      <div class="ap-footer-logo">LEGAXY © 2025</div>
+      <a class="ap-footer-back" href="index.html">← Back to Legaxy.com</a>
+    </footer>
+
+  </div><!-- /apProfile -->
+</div><!-- /mainContent -->
+
+<script>
+/* ══════════════════════════════════════════
+   ATHLETE DATA
+══════════════════════════════════════════ */
+const ATHLETES = {
+  elite: [
+    {
+      id: 'harbhajan',
+      name: 'Harbhajan Singh',
+      highlight: 'HARBHAJAN',
+      sport: 'Cricket',
+      role: 'Off-Spin Bowler · Former Indian National Team',
+      subtitle: 'The Turbanator. One of India\'s greatest ever spin bowlers.',
+      img: 'harbhajan.jpeg',
+      tags: ['India', 'IPL', 'Test Cricket', 'Hall of Fame'],
+      heroStats: [
+        {num:'703', label:'Test Wkts'},
+        {num:'417', label:'ODI Wkts'},
+        {num:'25', label:'Seasons'},
+      ],
+      intro: 'A cricketing legend whose career spanned over two decades, Harbhajan Singh redefined the art of off-spin bowling for a generation of Indian fans.',
+      body: 'Born on July 3, 1980, in Jalandhar, Punjab, Harbhajan Singh made his international debut at just 17 years of age. Known as "The Turbanator," he played a defining role in India\'s historic wins across formats — most notably the 2001 Test series against Australia where he claimed 32 wickets including India\'s first-ever Test hat-trick. A World Cup winner in 2011, he played a vital role in India\'s golden era under MS Dhoni.',
+      vitals: [
+        {label:'Born', value:'3 July 1980'},
+        {label:'Birthplace', value:'Jalandhar, Punjab'},
+        {label:'Role', value:'Off-Spin Bowler'},
+        {label:'Bat', value:'Right-Handed'},
+        {label:'Debut', value:'1998 vs Australia'},
+        {label:'Last Match', value:'2021'},
+      ],
+      stats: {
+        Test: {
+          cards: [
+            {num:'103', label:'Tests', sub:'Matches Played'},
+            {num:'417', label:'Wickets', sub:'Career Total'},
+            {num:'32.46', label:'Average', sub:'Bowling Average'},
+            {num:'5.28', label:'Economy', sub:'Runs Per Over'},
+            {num:'25', label:'5-Wicket Hauls', sub:'Five-fers'},
+            {num:'7/120', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'2224', label:'Runs', sub:'Batting Total'},
+            {num:'2', label:'Fifties', sub:'Batting Milestones'},
+          ],
+          chartLabel: 'Wickets per Year — Test Cricket',
+          chartData: {labels:['2000','2002','2004','2006','2008','2010','2012','2014','2016'],data:[32,55,42,61,78,58,40,29,22]},
+        },
+        ODI: {
+          cards: [
+            {num:'236', label:'ODIs', sub:'Matches Played'},
+            {num:'269', label:'Wickets', sub:'Career Total'},
+            {num:'33.35', label:'Average', sub:'Bowling Average'},
+            {num:'4.44', label:'Economy', sub:'Runs Per Over'},
+            {num:'3', label:'4-Wicket Hauls', sub:'Four-fers'},
+            {num:'5/31', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'1237', label:'Runs', sub:'Batting Total'},
+            {num:'1', label:'Fifties', sub:'Batting Milestones'},
+          ],
+          chartLabel: 'Wickets per Year — ODI Cricket',
+          chartData: {labels:['2000','2003','2005','2007','2009','2011','2013','2015'],data:[18,30,24,38,42,36,28,18]},
+        },
+        T20I: {
+          cards: [
+            {num:'28', label:'T20Is', sub:'Matches Played'},
+            {num:'25', label:'Wickets', sub:'Career Total'},
+            {num:'29.76', label:'Average', sub:'Bowling Average'},
+            {num:'7.12', label:'Economy', sub:'Runs Per Over'},
+            {num:'2', label:'3-Wicket Hauls', sub:'Three-fers'},
+            {num:'4/12', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'98', label:'Runs', sub:'Batting Total'},
+            {num:'0', label:'Fifties', sub:'Batting Milestones'},
+          ],
+          chartLabel: 'T20I Career Overview',
+          chartData: {labels:['2007','2009','2010','2012','2014','2016'],data:[6,4,5,5,3,2]},
+        },
+        IPL: {
+          cards: [
+            {num:'163', label:'IPL Games', sub:'Matches Played'},
+            {num:'150', label:'Wickets', sub:'Career Total'},
+            {num:'26.85', label:'Average', sub:'Bowling Average'},
+            {num:'7.05', label:'Economy', sub:'Runs Per Over'},
+            {num:'4', label:'4-Wicket Hauls', sub:'Four-fers'},
+            {num:'5/18', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'408', label:'Runs', sub:'Batting Total'},
+            {num:'1', label:'IPL Titles', sub:'Championships Won'},
+          ],
+          chartLabel: 'IPL Wickets by Season',
+          chartData: {labels:['2008','2010','2012','2014','2016','2018','2021'],data:[18,20,14,16,18,12,10]},
+        },
+      },
+      achievements: [
+        {icon:'🏆', title:'ICC World Cup Winner', year:'2011', desc:'Part of India\'s iconic World Cup winning squad at home. A career pinnacle moment.'},
+        {icon:'⭐', title:'ICC World T20 Winner', year:'2007', desc:'Member of India\'s inaugural T20 World Cup triumph in South Africa.'},
+        {icon:'🎯', title:'India\'s First Test Hat-Trick', year:'2001', desc:'Historical three-in-three against Australia in Kolkata — a defining cricketing moment.'},
+        {icon:'📜', title:'ICC Test Hall of Fame', year:'2022', desc:'Inducted into the Hall of Fame in recognition of exceptional Test career.'},
+        {icon:'🏏', title:'Border-Gavaskar Trophy Hero', year:'2001', desc:'32 wickets in the 2001 series against Australia, turning the tide of world cricket.'},
+        {icon:'🌟', title:'Wisden Cricketer of the Year', year:'2002', desc:'Named among Wisden\'s finest, cementing global recognition.'},
+      ],
+      timeline: [
+        {year:'1998', event:'International Debut', desc:'Made his Test debut for India vs Australia at age 17.', badge:'Debut'},
+        {year:'2001', event:'Historic Hat-Trick', desc:'First Indian to claim a Test hat-trick. 32 wickets vs Australia in the series.', badge:'Milestone'},
+        {year:'2007', event:'T20 World Cup', desc:'Key member of India\'s first ICC T20 World Cup winning squad.', badge:'Champion'},
+        {year:'2011', event:'ODI World Cup', desc:'World Cup glory at home. India lifted the trophy on home soil.', badge:'Champion'},
+        {year:'2018', event:'CSK IPL Title', desc:'Won the IPL title with Chennai Super Kings under MS Dhoni.', badge:'IPL'},
+        {year:'2021', event:'Final IPL Season', desc:'Played his final IPL season with Kolkata Knight Riders.', badge:'Farewell'},
+        {year:'2022', event:'ICC Hall of Fame', desc:'Inducted into the prestigious ICC Cricket Hall of Fame.', badge:'Legend'},
+      ],
+      brands: [
+        {name:'Star Sports', category:'Broadcasting'},
+        {name:'Lay\'s', category:'Food & Beverage'},
+        {name:'Who\'s The Boss?', category:'LegaXy Production'},
+        {name:'Punjab Kings', category:'IPL Franchise'},
+        {name:'Bridgestone', category:'Automotive'},
+        {name:'Sony Entertainment', category:'Media'},
+      ],
+      gallery: [
+        {type:'tall', src:'harbhajan.jpeg', caption:'The Turbanator in action'},
+      ],
+    },
+
+    {
+      id: 'chahal',
+      name: 'Yuzvendra Chahal',
+      highlight: 'CHAHAL',
+      sport: 'Cricket',
+      role: 'Leg-Spin Bowler · Indian National Team',
+      subtitle: 'India\'s premier wrist-spinner. Master of deception.',
+      img: 'chahal.jpeg',
+      tags: ['India', 'IPL', 'White-Ball Specialist', 'Leg-Spin'],
+      heroStats: [
+        {num:'96', label:'ODI Wkts'},
+        {num:'96', label:'T20I Wkts'},
+        {num:'10+', label:'IPL Seasons'},
+      ],
+      intro: 'Yuzvendra Chahal is one of the most potent white-ball spinners of his generation — a cricketer whose guile, variation, and relentless pressure have made him India\'s most consistent wicket-taker across limited-overs cricket.',
+      body: 'Born on July 23, 1990, in Jind, Haryana, Chahal began his career as a chess player before dedicating himself fully to cricket. He became a fixture in India\'s limited-overs setup, known for his googly, leg-break, and ability to attack the stumps. His partnership with Kuldeep Yadav formed the fearsome "Kulcha" spin combination that tormented batsmen worldwide.',
+      vitals: [
+        {label:'Born', value:'23 July 1990'},
+        {label:'Birthplace', value:'Jind, Haryana'},
+        {label:'Role', value:'Leg-Spin Bowler'},
+        {label:'Bat', value:'Right-Handed'},
+        {label:'Debut', value:'2016 vs Zimbabwe'},
+        {label:'IPL Team', value:'Rajasthan Royals'},
+      ],
+      stats: {
+        Test: {
+          cards: [
+            {num:'0', label:'Tests', sub:'Yet to Debut'},
+            {num:'—', label:'Wickets', sub:'—'},
+            {num:'—', label:'Average', sub:'—'},
+            {num:'—', label:'Economy', sub:'—'},
+            {num:'—', label:'5-Wicket Hauls', sub:'—'},
+            {num:'—', label:'Best Figures', sub:'—'},
+            {num:'—', label:'Runs', sub:'—'},
+            {num:'—', label:'Fifty', sub:'—'},
+          ],
+          chartLabel: 'No Test career data',
+          chartData: {labels:[], data:[]},
+        },
+        ODI: {
+          cards: [
+            {num:'72', label:'ODIs', sub:'Matches Played'},
+            {num:'96', label:'Wickets', sub:'Career Total'},
+            {num:'27.83', label:'Average', sub:'Bowling Average'},
+            {num:'5.19', label:'Economy', sub:'Runs Per Over'},
+            {num:'5', label:'4-Wicket Hauls', sub:'Four-fers'},
+            {num:'6/42', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'101', label:'Runs', sub:'Batting Total'},
+            {num:'0', label:'Fifties', sub:'Batting Milestones'},
+          ],
+          chartLabel: 'Wickets per Year — ODI Cricket',
+          chartData: {labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[10,22,28,18,8,12,10,8]},
+        },
+        T20I: {
+          cards: [
+            {num:'80', label:'T20Is', sub:'Matches Played'},
+            {num:'96', label:'Wickets', sub:'Career Total'},
+            {num:'23.35', label:'Average', sub:'Bowling Average'},
+            {num:'7.68', label:'Economy', sub:'Runs Per Over'},
+            {num:'3', label:'3-Wicket Hauls', sub:'Three-fers'},
+            {num:'6/25', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'46', label:'Runs', sub:'Batting Total'},
+            {num:'0', label:'Fifties', sub:'—'},
+          ],
+          chartLabel: 'T20I Wickets per Year',
+          chartData: {labels:['2016','2017','2018','2019','2020','2021','2022','2023'],data:[8,16,18,20,12,10,14,8]},
+        },
+        IPL: {
+          cards: [
+            {num:'150+', label:'IPL Games', sub:'Matches Played'},
+            {num:'187+', label:'Wickets', sub:'Career Total'},
+            {num:'23.85', label:'Average', sub:'Bowling Average'},
+            {num:'8.16', label:'Economy', sub:'Runs Per Over'},
+            {num:'8', label:'4-Wicket Hauls', sub:'Four-fers'},
+            {num:'5/40', label:'Best Figures', sub:'Single Innings Best'},
+            {num:'187+', label:'Wickets', sub:'Most for RCB & RR'},
+            {num:'1', label:'Purple Cap', sub:'Most Wickets in Season'},
+          ],
+          chartLabel: 'IPL Wickets by Season',
+          chartData: {labels:['2014','2016','2017','2018','2019','2021','2022','2023'],data:[6,21,23,22,18,14,27,16]},
+        },
+      },
+      achievements: [
+        {icon:'🎯', title:'Purple Cap', year:'2022', desc:'Highest wicket-taker in IPL 2022 with 27 wickets — the coveted Purple Cap.'},
+        {icon:'🏆', title:'Asia Cup Winner', year:'2018', desc:'Key contributor to India\'s Asia Cup triumph.'},
+        {icon:'🌟', title:'India\'s Leading T20I Wicket-Taker', year:'2023', desc:'Joint most wickets for India in T20Is — a lasting legacy.'},
+        {icon:'⭐', title:'ICC T20I Best Figures', year:'2023', desc:'6/25 remains one of the best T20I bowling analyses ever recorded.'},
+        {icon:'📜', title:'Wisden India Cricketer of the Year', year:'2019', desc:'Recognised as India\'s best cricketer of the calendar year.'},
+        {icon:'🏏', title:'Rajasthan Royals IPL Regular', year:'2022', desc:'Became the cornerstone of RR\'s bowling attack, leading them to the finals.'},
+      ],
+      timeline: [
+        {year:'2010', event:'IPL Debut', desc:'Began his IPL journey with Mumbai Indians as a teenager.', badge:'Debut'},
+        {year:'2016', event:'India Call-Up', desc:'Made his T20I debut for India vs Zimbabwe; ODI debut followed.', badge:'International'},
+        {year:'2017', event:'Kulcha Partnership', desc:'The "Kulcha" spin duo with Kuldeep Yadav dominated white-ball cricket.', badge:'Milestone'},
+        {year:'2019', event:'World Cup Selection', desc:'Part of India\'s 2019 ICC Cricket World Cup squad.', badge:'World Cup'},
+        {year:'2022', event:'Purple Cap — IPL 2022', desc:'27 wickets in a single IPL season. Dominant campaign with Rajasthan Royals.', badge:'Record'},
+        {year:'2023', event:'Best T20I Figures', desc:'6/25 against Afghanistan — joint best bowling figures in T20I history.', badge:'Record'},
+      ],
+      brands: [
+        {name:'Rajasthan Royals', category:'IPL Franchise'},
+        {name:'Puma', category:'Sports Apparel'},
+        {name:'GoDaddy', category:'Technology'},
+        {name:'Myntra', category:'Fashion'},
+        {name:'Star Sports', category:'Broadcasting'},
+        {name:'Dream11', category:'Fantasy Sports'},
+      ],
+      gallery: [
+        {type:'tall', src:'chahal.jpeg', caption:'Yuzvendra Chahal — wrist-spin wizard'},
+      ],
+    },
+  ],
+
+  emerging: [
+    {
+      id: 'vansh',
+      name: 'Vansh Bedi',
+      highlight: 'VANSH',
+      sport: 'Cricket',
+      role: 'All-Rounder · Delhi Premier League',
+      subtitle: 'Explosive bat. Crafty seam. The complete young package.',
+      img: 'vansh.jpeg',
+      tags: ['Delhi', 'All-Rounder', 'Emerging'],
+      heroStats: [
+        {num:'U-23', label:'Age Group'},
+        {num:'DPL', label:'League'},
+        {num:'2024', label:'Breaking Out'},
+      ],
+      intro: 'Vansh Bedi is a dynamic young cricketer with the rare ability to impact matches with both bat and ball — a genuine all-round talent being groomed for India\'s future.',
+      body: 'Growing up in Delhi, Vansh developed his game at the grassroots level under the watch of dedicated coaches. His natural athleticism and competitive instinct make him a standout at every level he plays.',
+      vitals: [
+        {label:'Based In', value:'Delhi, India'},
+        {label:'Role', value:'All-Rounder'},
+        {label:'Bat', value:'Right-Handed'},
+        {label:'Bowl', value:'Right-Arm Medium'},
+        {label:'League', value:'Delhi Premier League'},
+        {label:'Managed By', value:'LegaXy'},
+      ],
+      emerging: {
+        journey: 'Vansh\'s journey began on the dusty grounds of Delhi, where his love for the game was forged through years of early-morning practice sessions and inter-district competitions. His selection into the Delhi Premier League marked a pivotal turning point.',
+        playStyle: 'An aggressive top-order batsman who times the ball beautifully and can shift gears at will. With the ball, he generates sharp movement off the seam and surprises batsmen with nip-backers.',
+        strengths: ['Explosive Batting', 'Seam Movement', 'Athletic Fielding', 'Match Intelligence', 'Temperament Under Pressure'],
+        trainingPhilosophy: 'Vansh believes in quality over quantity — each net session is purposeful, structured around specific match scenarios. He works closely with video analysts to study opponents and refine his game.',
+        goals: [
+          'Represent Delhi Ranji Trophy squad within 2 years',
+          'Establish himself as a genuine T20 match-winner',
+          'Sign with an IPL franchise by 2026',
+          'Develop his off-spin as a third bowling option',
+        ],
+        overview: 'A high-ceiling all-rounder whose combination of raw power with the bat and clever seam bowling make him one of the most exciting prospects in Delhi cricket. Under LegaXy\'s management, his career trajectory is being carefully structured for maximum impact.',
+      },
+      achievements: [
+        {icon:'🌟', title:'DPL Player to Watch', year:'2024', desc:'Highlighted as one of the Delhi Premier League\'s most exciting emerging talents.'},
+        {icon:'🏏', title:'Inter-District Championship', year:'2023', desc:'Outstanding all-round performance in Delhi\'s inter-district tournament.'},
+        {icon:'⚡', title:'LegaXy Rising Star', year:'2024', desc:'Signed with LegaXy for full athlete management and brand development.'},
+      ],
+      timeline: [
+        {year:'2018', event:'Club Cricket Debut', desc:'Began competitive cricket at district level in Delhi.', badge:'Start'},
+        {year:'2022', event:'DPL Selection', desc:'Selected for the Delhi Premier League squad.', badge:'Milestone'},
+        {year:'2023', event:'LegaXy Partnership', desc:'Joined LegaXy\'s elite emerging athlete programme.', badge:'Career'},
+        {year:'2024', event:'Breakout Season', desc:'Standout performances across formats draw national attention.', badge:'Now'},
+      ],
+      brands: [
+        {name:'LegaXy', category:'Athlete Management'},
+        {name:'Delhi Capitals', category:'IPL Affiliate'},
+      ],
+      gallery: [
+        {type:'tall', src:'vansh.jpeg', caption:'Vansh Bedi — the future of Delhi cricket'},
+      ],
+    },
+    {
+      id: 'aarav',
+      name: 'Aarav Gautam',
+      highlight: 'AARAV',
+      sport: 'Cricket',
+      role: 'Batsman · Harsha CC',
+      subtitle: 'Natural flair. Unshakeable focus. A future champion in the making.',
+      img: 'aarav.jpeg',
+      tags: ['Club Cricket', 'Batsman', 'Emerging'],
+      heroStats: [
+        {num:'U-19', label:'Age Group'},
+        {num:'Harsha CC', label:'Club'},
+        {num:'Rising', label:'Status'},
+      ],
+      intro: 'Aarav Gautam possesses a rare combination of natural talent and mental fortitude — qualities that mark him as an athlete with a ceiling far beyond where he currently stands.',
+      body: 'Training out of Harsha Cricket Club, Aarav has shown exceptional composure and shot-making ability from a very young age. His coaches describe him as someone who absorbs information quickly and applies it with precision — a true student of the game.',
+      vitals: [
+        {label:'Club', value:'Harsha CC'},
+        {label:'Role', value:'Top-Order Batsman'},
+        {label:'Bat', value:'Right-Handed'},
+        {label:'Style', value:'Elegant Stroke-Maker'},
+        {label:'Managed By', value:'LegaXy'},
+        {label:'Aspiration', value:'IPL & India'},
+      ],
+      emerging: {
+        journey: 'Aarav\'s story is one of quiet determination. Discovered through a club tournament by LegaXy scouts, his natural technique and calm head stood out immediately. He\'s spent the past two years sharpening his game with some of the best coaches in India.',
+        playStyle: 'A classical right-handed batsman who plays close to his body and drives through the covers with exceptional timing. Has the instinct to accelerate when needed — a rare blend of technique and aggression.',
+        strengths: ['Technical Batting', 'Concentration', 'Coachability', 'Shot Selection', 'Mental Resilience'],
+        trainingPhilosophy: 'Aarav approaches every training session like a match. He focuses heavily on footwork and keeping his head still — fundamentals that he credits with building his consistency. Meditation is a key part of his routine.',
+        goals: [
+          'Break into Delhi Under-23 squad',
+          'Make his DPL debut in the 2025 season',
+          'Develop into a 360-degree T20 player',
+          'Represent India at U-19 level',
+        ],
+        overview: 'Aarav represents the next generation of Indian batting talent — technically orthodox, mentally strong, and with the temperament to perform on any stage. LegaXy is investing deeply in his development trajectory.',
+      },
+      achievements: [
+        {icon:'🏆', title:'Club Championship Performer', year:'2023', desc:'Match-winning innings across several club tournaments in the Delhi region.'},
+        {icon:'🌟', title:'LegaXy Emerging Star', year:'2024', desc:'Identified and signed by LegaXy as a priority emerging athlete.'},
+        {icon:'🎯', title:'Coach\'s Player Award', year:'2024', desc:'Recognised by coaching staff for exceptional attitude and improvement.'},
+      ],
+      timeline: [
+        {year:'2020', event:'Cricket Academy Enrolment', desc:'Joined Harsha Cricket Club\'s junior development programme.', badge:'Start'},
+        {year:'2022', event:'First Competitive Season', desc:'Scored three consecutive fifties in district-level matches.', badge:'Milestone'},
+        {year:'2024', event:'LegaXy Partnership', desc:'Signed with LegaXy for career management and professional exposure.', badge:'Career'},
+        {year:'2025', event:'DPL Target', desc:'Earmarked for Delhi Premier League debut season.', badge:'Next'},
+      ],
+      brands: [
+        {name:'LegaXy', category:'Athlete Management'},
+        {name:'Harsha CC', category:'Club Cricket'},
+      ],
+      gallery: [
+        {type:'tall', src:'aarav.jpeg', caption:'Aarav Gautam — classical elegance'},
+      ],
+    },
+  ]
+};
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let currentMode = 'elite';
+let currentAthlete = null;
+let selectorOpen = false;
+let activeCharts = [];
+
+/* ══════════════════════════════════════════
+   CURSOR
+══════════════════════════════════════════ */
+const cx = document.getElementById('cx');
+const cr = document.getElementById('cr');
+document.addEventListener('mousemove', e => {
+  cx.style.top = e.clientY + 'px';
+  cx.style.left = e.clientX + 'px';
+  cr.style.top = e.clientY + 'px';
+  cr.style.left = e.clientX + 'px';
+});
+
+/* ══════════════════════════════════════════
+   PROGRESS BAR
+══════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+});
+
+/* ══════════════════════════════════════════
+   SELECTOR
+══════════════════════════════════════════ */
+function buildSelector() {
+  const elList = document.getElementById('selEliteList');
+  const emList = document.getElementById('selEmergingList');
+  elList.innerHTML = '';
+  emList.innerHTML = '';
+
+  ATHLETES.elite.forEach(a => {
+    elList.appendChild(makeSelCard(a, 'elite'));
+  });
+  ATHLETES.emerging.forEach(a => {
+    emList.appendChild(makeSelCard(a, 'emerging'));
+  });
+}
+
+function makeSelCard(a, type) {
+  const div = document.createElement('div');
+  div.className = 'sel-card';
+  div.dataset.id = a.id;
+  div.dataset.type = type;
+  div.setAttribute('data-hover', '');
+
+  const initials = a.name.split(' ').map(w => w[0]).join('').slice(0, 2);
+
+  div.innerHTML = `
+    <div style="position:relative;flex-shrink:0">
+      <img class="sel-thumb" src="${a.img}" alt="${a.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="sel-thumb-fallback" style="display:none">${initials}</div>
+    </div>
+    <div class="sel-info">
+      <div class="sel-name">${a.name}</div>
+      <div class="sel-sport">${a.sport}</div>
+      <div class="sel-tag">${a.role.split('·')[0].trim()}</div>
+    </div>
+  `;
+  div.addEventListener('click', () => loadAthlete(a, type));
+  return div;
+}
+
+function filterSelector(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.sel-card').forEach(card => {
+    const name = card.querySelector('.sel-name').textContent.toLowerCase();
+    card.style.display = name.includes(q) ? '' : 'none';
+  });
+}
+
+function toggleSelector() {
+  selectorOpen = !selectorOpen;
+  document.getElementById('selector').classList.toggle('open', selectorOpen);
+  document.getElementById('selToggle').classList.toggle('shifted', selectorOpen);
+  document.getElementById('selToggle').textContent = selectorOpen ? '▶ CLOSE' : '◀ ATHLETES';
+  document.getElementById('mainContent').classList.toggle('shifted', selectorOpen);
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btnElite').classList.toggle('active', mode === 'elite');
+  document.getElementById('btnEmerging').classList.toggle('active', mode === 'emerging');
+
+  document.getElementById('selEliteGroup').style.display = mode === 'elite' ? '' : 'none';
+  document.getElementById('selEmergingGroup').style.display = mode === 'emerging' ? '' : 'none';
+
+  if (!selectorOpen) toggleSelector();
+}
+
+/* ══════════════════════════════════════════
+   LOAD ATHLETE
+══════════════════════════════════════════ */
+function loadAthlete(a, type) {
+  currentAthlete = a;
+
+  // Mark active in selector
+  document.querySelectorAll('.sel-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.sel-card[data-id="${a.id}"]`)?.classList.add('active');
+
+  document.getElementById('apEmpty').style.display = 'none';
+  const profile = document.getElementById('apProfile');
+  profile.style.display = 'block';
+
+  // Destroy existing charts
+  activeCharts.forEach(c => c.destroy());
+  activeCharts = [];
+
+  // HERO
+  const bg = document.getElementById('apHeroBg');
+  bg.style.backgroundImage = `url('${a.img}')`;
+  bg.style.backgroundPosition = 'top center';
+
+  document.getElementById('apGhostName').textContent = a.highlight;
+  document.getElementById('apHeroBadge').textContent = `${a.sport} · ${type === 'elite' ? 'Elite Roster' : 'Emerging Star'}`;
+  const nameEl = document.getElementById('apHeroName');
+  const parts = a.name.split(' ');
+  nameEl.innerHTML = parts.slice(0, -1).join(' ') + '<span class="highlight"> ' + parts[parts.length-1] + '</span>';
+  document.getElementById('apHeroSubtitle').textContent = a.subtitle;
+
+  const tagsEl = document.getElementById('apHeroTags');
+  tagsEl.innerHTML = a.tags.map(t => `<span class="ap-tag">${t}</span>`).join('');
+
+  const heroStats = document.getElementById('apHeroStats');
+  heroStats.innerHTML = a.heroStats.map(s => `<div class="ap-quick-stat"><div class="ap-qs-num">${s.num}</div><div class="ap-qs-label">${s.label}</div></div>`).join('');
+
+  // Re-trigger hero animations
+  [document.getElementById('apHeroBadge'), nameEl, document.getElementById('apHeroSubtitle'), tagsEl, heroStats].forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = '';
+  });
+
+  // BIO
+  document.getElementById('bioPic').src = a.img;
+  document.getElementById('bioPic').alt = a.name;
+  document.getElementById('bioPic').style.display = '';
+  document.getElementById('bioPicFallback').style.display = 'none';
+  document.getElementById('bioPicFallback').textContent = a.name.split(' ').map(w=>w[0]).join('');
+  document.getElementById('bioIntro').textContent = a.intro;
+  document.getElementById('bioBody').textContent = a.body;
+  document.getElementById('bioVitals').innerHTML = a.vitals.map(v => `<div class="bio-vital"><div class="bv-label">${v.label}</div><div class="bv-value">${v.value}</div></div>`).join('');
+
+  // ELITE vs EMERGING sections
+  const statsSection = document.getElementById('apStats');
+  const emergingSection = document.getElementById('apEmerging');
+
+  if (type === 'elite') {
+    statsSection.style.display = '';
+    emergingSection.style.display = 'none';
+    buildStatsTabs(a.stats);
+  } else {
+    statsSection.style.display = 'none';
+    emergingSection.style.display = '';
+    buildEmergingCards(a.emerging);
+  }
+
+  // ACHIEVEMENTS
+  document.getElementById('achievementsGrid').innerHTML = a.achievements.map(ac => `
+    <div class="achievement-card reveal-on-scroll">
+      <span class="ach-icon">${ac.icon}</span>
+      <div class="ach-year">${ac.year}</div>
+      <div class="ach-title">${ac.title}</div>
+      <div class="ach-desc">${ac.desc}</div>
+      <div class="ach-ghost">${ac.icon}</div>
+    </div>
+  `).join('');
+
+  // TIMELINE
+  document.getElementById('timelineList').innerHTML = a.timeline.map((t, i) => `
+    <div class="tl-item" style="transition-delay:${i * 0.1}s">
+      <div class="tl-year">${t.year}</div>
+      <div class="tl-body">
+        <div class="tl-event">${t.event}</div>
+        <div class="tl-desc">${t.desc}</div>
+        <span class="tl-badge">${t.badge}</span>
+      </div>
+    </div>
+  `).join('');
+
+  // BRANDS
+  document.getElementById('brandsGrid').innerHTML = a.brands.map(b => `
+    <div class="brand-tile reveal-on-scroll" data-hover="">
+      <div class="brand-name">${b.name}</div>
+      <div class="brand-category">${b.category}</div>
+    </div>
+  `).join('');
+
+  // GALLERY
+  document.getElementById('galleryReel').innerHTML = a.gallery.map(g => `
+    <div class="gal-frame gal-${g.type}" data-hover="">
+      <img src="${g.src}" alt="${g.caption}" onerror="this.parentElement.style.background='#12131E'">
+      <div class="gal-caption">${g.caption}</div>
+    </div>
+  `).join('');
+
+  // Scroll to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
+  // Re-init scroll reveal
+  setTimeout(initReveal, 300);
+  setTimeout(animateTimeline, 600);
+  setTimeout(animateCounters, 800);
+}
+
+/* ══════════════════════════════════════════
+   STATS TABS
+══════════════════════════════════════════ */
+function buildStatsTabs(statsData) {
+  const formats = Object.keys(statsData);
+  const tabsEl = document.getElementById('statsTabs');
+  const panelsEl = document.getElementById('statsPanels');
+
+  tabsEl.innerHTML = formats.map((f, i) => `
+    <button class="sft-btn ${i===0?'active':''}" onclick="activateStatTab('${f}', this)">${f}</button>
+  `).join('');
+
+  panelsEl.innerHTML = formats.map((f, i) => {
+    const s = statsData[f];
+    return `
+      <div class="stats-panel ${i===0?'active':''}" id="panel_${f}">
+        <div class="stat-cards-grid">
+          ${s.cards.map(c => `
+            <div class="stat-card">
+              <div class="sc-num" data-target="${c.num}">${c.num}</div>
+              <div class="sc-label">${c.label}</div>
+              <div class="sc-sub">${c.sub}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="stats-chart-area">
+          <div class="stats-chart-label">${s.chartLabel}</div>
+          <div class="chart-canvas-wrap">
+            <canvas id="chart_${f}"></canvas>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Draw chart for first active tab
+  setTimeout(() => {
+    formats.forEach((f, i) => {
+      if (i === 0) drawChart(f, statsData[f].chartData);
+    });
+  }, 100);
+
+  // Store all chart data for lazy drawing
+  tabsEl._statsData = statsData;
+}
+
+function activateStatTab(format, btn) {
+  document.querySelectorAll('.sft-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.stats-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel_' + format)?.classList.add('active');
+
+  const statsData = document.getElementById('statsTabs')._statsData;
+  if (statsData && statsData[format]) {
+    setTimeout(() => drawChart(format, statsData[format].chartData), 60);
+  }
+
+  animateCounters();
+}
+
+function drawChart(format, chartData) {
+  const canvas = document.getElementById('chart_' + format);
+  if (!canvas || !chartData.labels.length) return;
+
+  // Destroy if exists
+  const existing = Chart.getChart(canvas);
+  if (existing) existing.destroy();
+
+  const chart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: chartData.labels,
+      datasets: [{
+        data: chartData.data,
+        backgroundColor: 'rgba(188,82,37,0.25)',
+        borderColor: 'rgba(188,82,37,0.8)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(188,82,37,0.5)',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          backgroundColor: 'rgba(5,6,10,0.95)',
+          borderColor: 'rgba(188,82,37,0.3)',
+          borderWidth: 1,
+          titleColor: '#FFB37A',
+          bodyColor: '#E4E2DE',
+          titleFont: {family: 'Rajdhani', weight: '700', size: 12},
+          bodyFont: {family: 'Barlow', size: 12},
+        }
+      },
+      scales: {
+        x: {
+          grid: {color: 'rgba(255,255,255,0.04)'},
+          ticks: {color: 'rgba(154,154,164,0.8)', font: {family: 'Rajdhani', size: 11, weight: '600'}},
+          border: {color: 'rgba(255,255,255,0.06)'},
+        },
+        y: {
+          grid: {color: 'rgba(255,255,255,0.04)'},
+          ticks: {color: 'rgba(154,154,164,0.8)', font: {family: 'Rajdhani', size: 11}},
+          border: {color: 'rgba(255,255,255,0.06)'},
+        }
+      },
+      animation: {duration: 800, easing: 'easeOutQuart'},
+    }
+  });
+  activeCharts.push(chart);
+}
+
+/* ══════════════════════════════════════════
+   EMERGING CARDS
+══════════════════════════════════════════ */
+function buildEmergingCards(em) {
+  const grid = document.getElementById('emergingGrid');
+  grid.innerHTML = `
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">🛤️</span>
+      <div class="em-card-title">The Journey</div>
+      <div class="em-card-body">${em.journey}</div>
+    </div>
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">🎯</span>
+      <div class="em-card-title">Play Style</div>
+      <div class="em-card-body">${em.playStyle}</div>
+    </div>
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">⚡</span>
+      <div class="em-card-title">Key Strengths</div>
+      <div class="em-card-body">
+        <div class="em-strengths">${em.strengths.map(s => `<span class="em-strength-pill">${s}</span>`).join('')}</div>
+      </div>
+    </div>
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">🧠</span>
+      <div class="em-card-title">Training Philosophy</div>
+      <div class="em-card-body">${em.trainingPhilosophy}</div>
+    </div>
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">🎖️</span>
+      <div class="em-card-title">Goals</div>
+      <div class="em-card-body">
+        <ul class="em-goals-list">${em.goals.map(g => `<li>${g}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="em-card reveal-on-scroll">
+      <span class="em-card-icon">📋</span>
+      <div class="em-card-title">Professional Overview</div>
+      <div class="em-card-body">${em.overview}</div>
+    </div>
+  `;
+}
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+    el.classList.remove('visible');
+    obs.observe(el);
+  });
+}
+
+function animateTimeline() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.tl-item').forEach(el => obs.observe(el));
+}
+
+function animateCounters() {
+  document.querySelectorAll('.sc-num').forEach(el => {
+    const raw = el.dataset.target || el.textContent;
+    const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+    if (isNaN(num) || num === 0) return;
+    let start = 0;
+    const dur = 1200;
+    const step = ts => {
+      if (!start) start = ts;
+      const pct = Math.min((ts - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - pct, 3);
+      const val = raw.replace(/[0-9.]+/, v => {
+        const orig = parseFloat(v);
+        return (orig * ease).toFixed(orig % 1 !== 0 ? 2 : 0);
+      });
+      el.textContent = val;
+      if (pct < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ══════════════════════════════════════════
+   URL PARAMS — deep link support
+══════════════════════════════════════════ */
+function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('athlete');
+  const type = params.get('type') || 'elite';
+
+  if (id) {
+    const roster = type === 'emerging' ? ATHLETES.emerging : ATHLETES.elite;
+    const a = roster.find(x => x.id === id);
+    if (a) {
+      setMode(type);
+      loadAthlete(a, type);
+      return;
+    }
+  }
+  // Auto-open selector if no athlete selected
+  setTimeout(() => {
+    if (!currentAthlete) toggleSelector();
+  }, 600);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+buildSelector();
+setMode('elite');
+checkUrlParams();
+</script>
+</body>
+</html>
