@@ -58,7 +58,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .nav-drop a{display:block;padding:7px 20px;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-weight:500;transition:color .2s,background .2s}
 .nav-drop a:hover{color:var(--orange);background:rgba(188,82,37,.07)}
 .nav-drop hr{border:none;border-top:1px solid rgba(255,255,255,.06);margin:5px 0}
-.nav-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;background:transparent;border:1px solid var(--orange);color:var(--orange);padding:9px 22px;cursor:none;margin-left:20px;transition:background .3s,color .3s}
+.nav-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;background:transparent;border:1px solid var(--orange);color:var(--orange);padding:9px 22px;cursor:none;margin-left:20px;transition:background .3s,color .3s;text-decoration:none;display:inline-block}
 .nav-btn:hover{background:var(--orange);color:#FFF}
 
 /* ══ HERO ══ */
@@ -904,6 +904,7 @@ nav>ul>li:hover .nav-drop{display:block}
 <div id="prog"></div>
 
 <!-- NAV -->
+<!-- NAV -->
 <nav>
   <a class="logo" href="#">
     <img src="Legaxy_logo_light.png" alt="Legaxy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -934,21 +935,14 @@ nav>ul>li:hover .nav-drop{display:block}
         <a href="athletes.html?type=emerging">Archana</a>
       </div>
     </li>
-    <li>
-      <a href="#portfolio">Portfolio <span class="nav-arr">▾</span></a>
-      <div class="nav-drop">
-        <a href="#portfolio" onclick="switchPortfolio(0);return false">Legaxy Elite</a>
-        <a href="#portfolio" onclick="switchPortfolio(1);return false">Legaxy Studio</a>
-        <a href="#portfolio" onclick="switchPortfolio(2);return false">Legaxy Live</a>
-        <a href="#portfolio" onclick="switchPortfolio(3);return false">Legaxy Merch</a>
-        <a href="#portfolio" onclick="switchPortfolio(4);return false">Legaxy Learning</a>
-      </div>
-    </li>
-    <li><a href="#ip">Productions</a></li>
+    <li><a href="athletes.html">Elite</a></li>
+    <li><a href="studio.html">Studio</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="merch.html">Merch</a></li>
     <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
     <li><a href="team/index.html">Team</a></li>
   </ul>
-  <a href="careers.html" class="nav-btn"><span>Join Legaxy</span></a>
+  <a href="careers.html" class="nav-btn" style="text-decoration:none"><span>Join Legaxy</span></a>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -957,11 +951,13 @@ nav>ul>li:hover .nav-drop{display:block}
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="athletes.html" onclick="closeMobileMenu()">Athletes</a>
-  <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
-  <a href="#ip" onclick="closeMobileMenu()">Productions</a>
+  <a href="athletes.html" onclick="closeMobileMenu()">Elite</a>
+  <a href="studio.html" onclick="closeMobileMenu()">Studio</a>
+  <a href="live.html" onclick="closeMobileMenu()">Live</a>
+  <a href="merch.html" onclick="closeMobileMenu()">Merch</a>
   <a href="https://tushar920.github.io/LSA/" target="_blank" onclick="closeMobileMenu()">Legaxy Learning</a>
   <a href="team/index.html" onclick="closeMobileMenu()">Team</a>
-  <a href="careers.html" class="mob-cta" onclick="closeMobileMenu()">Join Legaxy →</a>
+  <a href="careers.html" class="mob-cta" style="text-decoration:none" onclick="closeMobileMenu()">Join Legaxy →</a>
 </div>
 
 <!-- HERO -->
@@ -1047,32 +1043,6 @@ nav>ul>li:hover .nav-drop{display:block}
     <div class="port-panel"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY LEARNING</div></div><h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2></div><div class="port-panel-right"><div class="port-ghost-num">05</div><p class="port-p">Education-first initiatives delivering athlete-led masterclasses and structured mentorship across schools and academies — nurturing the next generation from the grassroots up.</p><div class="pf-item">Athlete-led Masterclasses</div><div class="pf-item">School & Academy Programmes</div><div class="pf-item">Structured Mentorship Modules</div><div class="pf-item">Underprivileged Youth Initiatives</div><div class="port-link">Visit Legaxy Learning →</div></div></div></div>
   </div>
 </section>
-
-<!-- PRODUCTIONS / IP -->
-<section id="ip">
-  <div class="ip-bg-slider" id="ipBgSlider">
-    <div class="ip-slide-bg ip-bg-1 active"></div>
-    <div class="ip-slide-bg ip-bg-2"></div>
-    <div class="ip-slide-bg ip-bg-3"></div>
-  </div>
-  <div class="ip-content-overlay">
-    <div class="ip-main-info active" id="ipHeroInfo">
-      <p class="ip-sec-title">Original Productions</p>
-      <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
-      <h2 class="ip-hero-title" id="ipHeroTitle" onclick="openProduction()">Who's The Boss?</h2>
-      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra — a one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with India's top cricketers.</p>
-      <div class="ip-link-box" id="ipLinkBox">
-        <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="ip-watch-btn">Watch Now ▶</a>
-      </div>
-    </div>
-    <div class="ip-thumbnails">
-      <div class="nf-thumb active" data-ip-index="0"><div class="nf-thumb-bg" style="background-image:url('whos the boss.png')"></div><span class="nf-thumb-title">Who's The Boss</span><div class="nf-progress"></div></div>
-      <div class="nf-thumb" data-ip-index="1"><div class="nf-thumb-bg" style="background:radial-gradient(circle,#3A50C8,transparent)"></div><span class="nf-thumb-title">The Unheard Story</span><div class="nf-progress"></div></div>
-      <div class="nf-thumb" data-ip-index="2"><div class="nf-thumb-bg" style="background:radial-gradient(circle,#64C864,transparent)"></div><span class="nf-thumb-title">Legaxy Awards</span><div class="nf-progress"></div></div>
-    </div>
-  </div>
-</section>
-
 
 
 <!-- LSA / LEGAXY LEARNING -->
@@ -1350,7 +1320,6 @@ nav>ul>li:hover .nav-drop{display:block}
         <h4>Company</h4>
         <a href="#story">Our Story</a>
         <a href="team/index.html">The Team</a>
-        <a href="#ip">Productions</a>
         <a href="#partnerships">Partners</a>
       </div>
       <div class="footer-col">
