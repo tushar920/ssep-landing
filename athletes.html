@@ -264,11 +264,9 @@ nav{position:fixed;top:0;inset-inline:0;z-index:2000;display:flex;justify-conten
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="athletes.html" class="active">Athletes</a></li>
-    <li><a href="athletes.html">Elite</a></li>
+    <li><a href="athletes.html" class="active">Elite</a></li>
     <li><a href="studio.html">Studio</a></li>
     <li><a href="live.html">Live</a></li>
-    <li><a href="merch.html">Merch</a></li>
     <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
   </ul>
   <div class="nav-right">
@@ -292,9 +290,9 @@ nav{position:fixed;top:0;inset-inline:0;z-index:2000;display:flex;justify-conten
 <div id="mainContent">
   <div id="apEmpty" class="ap-empty">
     <div class="ap-ghost ap-empty-ghost">LEGAXY</div>
-    <div class="ap-empty-title">Select an Athlete</div>
-    <div class="ap-empty-sub">Explore the full roster — elite athletes and emerging stars</div>
-    <div class="ap-empty-arrow">← Open Roster Panel</div>
+    <div class="ap-empty-title">LegaXy Elite</div>
+    <div class="ap-empty-sub">India's most iconic athletes. One roster.</div>
+    <div class="ap-empty-arrow">← Browse the Roster</div>
   </div>
   <div id="apProfile" style="display:none">
     <section class="ap-hero" id="apHeroSection">
@@ -1601,10 +1599,20 @@ function checkUrlParams(){
   const id=p.get('athlete'), type=p.get('type')||'elite';
   if(id){
     const roster=type==='emerging'?ATHLETES.emerging:ATHLETES.elite;
-    const a=roster.find(x=>x.id===id);
+    // match by id field or first-name slug
+    const a=roster.find(x=>x.id===id||x.name.split(' ')[0].toLowerCase()===id.toLowerCase());
     if(a){setMode(type);loadAthlete(a,type);return;}
   }
-  setTimeout(()=>{if(!currentAthlete)toggleSelector()},600);
+  if(type==='emerging'){
+    setMode('emerging');
+    const first=ATHLETES.emerging[0];
+    if(first){loadAthlete(first,'emerging');return;}
+  }
+  // Default: auto-load first elite athlete (Harbhajan) as featured
+  const featured=ATHLETES.elite[0];
+  if(featured){loadAthlete(featured,'elite');}
+  // Open selector after brief delay so user can browse
+  setTimeout(()=>toggleSelector(),800);
 }
 
 /* ═══════════════════════════
