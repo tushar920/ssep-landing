@@ -29,8 +29,8 @@ body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;fon
 #cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
 #cx{width:8px;height:8px;background:var(--orange);transition:width .25s,height .25s}
 #cr{width:30px;height:30px;border:1px solid rgba(188,82,37,.5);transition:top .18s cubic-bezier(.23,1,.32,1),left .18s cubic-bezier(.23,1,.32,1),width .3s,height .3s}
-body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover,.nf-thumb:hover) #cx{width:14px;height:14px}
-body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover,.nf-thumb:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
+body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover) #cx{width:14px;height:14px}
+body:has(a:hover,button:hover,.athlete-card:hover,.why-card:hover) #cr{width:44px;height:44px;border-color:var(--orange)}
 #prog{position:fixed;top:0;left:0;height:1px;z-index:9999;background:var(--metal);width:0}
 section{position:relative;z-index:1}
 
@@ -182,63 +182,90 @@ nav>ul>li:hover .nav-drop{display:block}
 .atrack-dot.on{width:14px;border-radius:2px;background:var(--orange)}
 
 /* ══ PORTFOLIO ══ */
-#portfolio{height:100vh;background:var(--ink);display:flex;flex-direction:column;padding:48px 72px;overflow:hidden}
-.port-header-wrap{margin-bottom:12px;text-align:center;font-family:'Rajdhani',sans-serif}
-.port-nav-list{display:flex;justify-content:center;gap:clamp(14px,3vw,48px);list-style:none;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:12px;margin-bottom:0px;position:relative;z-index:10}
-.port-nav-item{font-family:'Rajdhani',sans-serif;font-size:clamp(13px,1.6vw,20px);font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:2px;cursor:none;padding:6px 0;position:relative;transition:color .3s}
-.port-nav-item::after{content:'';position:absolute;bottom:-17px;left:0;width:100%;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .4s ease}
-.port-nav-item.active{color:#FFF}
-.port-nav-item.active::after{transform:scaleX(1)}
-.port-content-area{width:100%;display:grid;flex-grow:1;min-height:0;align-items:stretch}
-.port-panel{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s ease;display:flex;align-items:center;justify-content:center;padding:0}
-.port-panel.active{opacity:1;visibility:visible;z-index:2}
-.port-panel-inner{position:relative;z-index:2;width:100%;max-width:1140px;display:flex;align-items:stretch;gap:0}
-.port-panel-left{flex:0 0 44%;padding:40px 48px 40px 0;display:flex;flex-direction:column;justify-content:center}
-.port-panel-right{flex:0 0 56%;padding:40px 0 40px 48px;border-left:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:center}
-.port-logo-wrap{height:44px;display:flex;align-items:center;margin-bottom:16px}
-.port-logo-wrap img{height:100%;width:auto;object-fit:contain;display:block}
-.port-logo-fallback{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:3px;text-transform:uppercase;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:none}
-.port-logo-wrap img.err{display:none}
-.port-logo-wrap img.err + .port-logo-fallback{display:block}
-.port-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.5vw,48px);letter-spacing:1px;line-height:.97;color:#FFF}
-.port-h .x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-/* Ghost panel number */
-.port-ghost-num{position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:220px;line-height:1;letter-spacing:-10px;color:rgba(188,82,37,.035);pointer-events:none;user-select:none}
-.port-p{font-size:14px;line-height:1.7;color:var(--text-bright);margin:14px 0 18px;font-weight:400}
-.pf-item{display:flex;align-items:center;gap:10px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);margin-bottom:7px}
-.pf-item::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0}
-.port-link{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);cursor:none;border-bottom:1px solid rgba(188,82,37,.35);padding-bottom:2px;transition:color .3s}
-.port-link:hover{color:var(--orange-light)}
+/* ══ BUSINESS VERTICALS — premium interactive tiles ══ */
+#portfolio{background:var(--ink);padding:80px 0 0;overflow:hidden}
+.portfolio-header{padding:0 72px;margin-bottom:48px}
+.verticals-showcase{display:flex;height:72vh;min-height:520px;position:relative}
+.vt-tile{
+  flex:1;position:relative;overflow:hidden;cursor:none;
+  border-right:1px solid rgba(188,82,37,.1);
+  transition:flex .6s cubic-bezier(.23,1,.32,1);
+  background:var(--ink-lift);
+  min-width:60px;
+}
+.vt-tile:last-child{border-right:none}
+.vt-tile.expanded{flex:4}
+.vt-tile-bg{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;
+  filter:brightness(.35) grayscale(.5);
+  transition:filter .6s ease,transform .6s cubic-bezier(.23,1,.32,1);
+}
+.vt-tile.expanded .vt-tile-bg{filter:brightness(.45) grayscale(.1);transform:scale(1.04)}
+.vt-tile-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,6,10,.98) 0%,rgba(5,6,10,.5) 50%,transparent 100%),linear-gradient(to right,rgba(5,6,10,.6) 0%,transparent 60%)}
+/* Collapsed state: vertical label */
+.vt-label-collapsed{
+  position:absolute;bottom:48px;left:50%;transform:translateX(-50%);z-index:4;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:4px;
+  text-transform:uppercase;color:rgba(255,255,255,.35);
+  writing-mode:vertical-rl;text-orientation:mixed;
+  transition:opacity .4s;white-space:nowrap;
+}
+.vt-tile.expanded .vt-label-collapsed{opacity:0;pointer-events:none}
+/* Expanded state: full content */
+.vt-content{
+  position:absolute;bottom:0;left:0;right:0;z-index:5;
+  padding:40px 44px 48px;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .45s .15s,transform .45s .15s;
+  pointer-events:none;
+}
+.vt-tile.expanded .vt-content{opacity:1;transform:translateY(0);pointer-events:auto}
+.vt-num{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(188,82,37,.6);margin-bottom:10px}
+.vt-logo-img{height:32px;width:auto;object-fit:contain;margin-bottom:14px;display:block;filter:brightness(1.4)}
+.vt-logo-fallback{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:3px;text-transform:uppercase;background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;display:none}
+.vt-logo-img.err{display:none}
+.vt-logo-img.err + .vt-logo-fallback{display:block}
+.vt-h{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,36px);letter-spacing:.5px;line-height:1;color:#FFF;margin-bottom:12px}
+.vt-h .x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vt-p{font-size:13px;line-height:1.7;color:var(--text-bright);max-width:340px;margin-bottom:18px}
+.vt-services{display:flex;flex-direction:column;gap:5px;margin-bottom:20px}
+.vt-service{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);display:flex;align-items:center;gap:8px}
+.vt-service::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.vt-cta{display:inline-flex;align-items:center;gap:8px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(188,82,37,.35);padding-bottom:2px;transition:color .3s;cursor:none}
+.vt-cta:hover{color:var(--orange-light)}
+/* Active indicator line at top */
+.vt-tile::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1);z-index:6}
+.vt-tile.expanded::before{transform:scaleX(1)}
+/* Tab nav strip below tiles */
+.vt-tab-strip{display:flex;border-top:1px solid rgba(255,255,255,.05)}
+.vt-tab{flex:1;padding:18px 20px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);background:transparent;border:none;cursor:none;transition:color .3s,background .3s;border-right:1px solid rgba(255,255,255,.05);text-align:left}
+.vt-tab:last-child{border-right:none}
+.vt-tab.active{color:var(--orange);background:rgba(188,82,37,.05)}
+.vt-tab:hover:not(.active){color:rgba(255,255,255,.6)}
 
-/* ══ PRODUCTIONS / IP ══ */
-#ip{height:100vh;min-height:600px;padding:0;background:var(--ink);position:relative;display:flex}
-.ip-bg-slider{position:absolute;inset:0;z-index:0}
-.ip-slide-bg{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;background-size:cover;background-position:center}
-.ip-bg-1{background-image:url('whos the boss.png')}
-.ip-bg-2{background:radial-gradient(circle at 60% 40%,rgba(58,80,200,.28),var(--ink) 80%)}
-.ip-bg-3{background:radial-gradient(circle at 60% 40%,rgba(80,180,80,.22),var(--ink) 80%)}
-.ip-slide-bg.active{opacity:1}
-.ip-bg-slider::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,6,10,.93) 0%,rgba(5,6,10,.52) 50%,rgba(5,6,10,.22) 100%),linear-gradient(to top,rgba(5,6,10,1) 0%,rgba(5,6,10,0) 40%)}
-.ip-content-overlay{position:relative;z-index:2;width:100%;padding:80px 72px;display:flex;justify-content:space-between;align-items:flex-end}
-.ip-main-info{max-width:50%;opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.23,1,.32,1)}
-.ip-main-info.active{opacity:1;transform:translateY(0)}
-.ip-sec-title{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--chrome);margin-bottom:18px;font-weight:500}
-.ip-hero-tag{display:inline-block;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FFF;background:var(--orange);padding:6px 14px;margin-bottom:14px}
-.ip-hero-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(36px,5.5vw,76px);line-height:1;text-transform:uppercase;color:#FFF;margin-bottom:18px;text-shadow:0 4px 20px rgba(0,0,0,.5);cursor:pointer;display:inline-block}
-.ip-hero-title:hover{color:var(--orange-light)}
-.ip-hero-desc{font-size:15px;line-height:1.72;color:var(--text-bright);max-width:500px}
-.ip-link-box{margin-top:22px}
-.ip-watch-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;background:#FFF;color:#000;font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:12px;text-decoration:none;transition:all .3s ease}
-.ip-watch-btn:hover{background:var(--orange);color:#FFF}
-.ip-thumbnails{display:flex;gap:12px;margin-bottom:10px}
-.nf-thumb{width:150px;height:84px;background:var(--ink-lift);border:1px solid rgba(255,255,255,.12);cursor:none;position:relative;overflow:hidden;opacity:.42;transition:all .4s cubic-bezier(.23,1,.32,1)}
-.nf-thumb:hover,.nf-thumb.active{opacity:1;border-color:var(--orange);transform:translateY(-5px)}
-.nf-thumb-bg{position:absolute;inset:0;background-size:cover;background-position:center}
-.nf-thumb-title{position:absolute;bottom:8px;left:11px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;color:#FFF;z-index:2}
-.nf-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82),transparent 60%);z-index:1}
-.nf-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--orange);width:0;z-index:3}
-.nf-thumb.active .nf-progress{animation:nfTimer 5s linear forwards}
-@keyframes nfTimer{from{width:0}to{width:100%}}
+/* ══ ENHANCED HOMEPAGE INTERACTIONS ══ */
+/* Stat counter animation */
+.mstat-num.counted{transition:none}
+/* Momentum stats hover depth */
+.mstat{cursor:none;transform-style:preserve-3d}
+.mstat:hover{background:rgba(188,82,37,.07);transform:translateY(-4px) scale(1.01)}
+.mstat:hover .mstat-bar{transform:scaleX(1)!important}
+/* Story section parallax word */
+.story-h .parallax-word{display:inline-block;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+/* Vertical tiles add-on for smaller screens */
+@media(max-width:900px){
+  .verticals-showcase{flex-direction:column;height:auto}
+  .vt-tile{flex:none!important;min-height:88px;border-right:none;border-bottom:1px solid rgba(188,82,37,.1)}
+  .vt-tile.expanded{min-height:420px}
+  .vt-label-collapsed{writing-mode:horizontal-tb;bottom:auto;top:50%;transform:translate(-50%,-50%);left:50%}
+  .vt-tab-strip{display:none}
+  #portfolio{padding:60px 0 0}
+  .portfolio-header{padding:0 24px}
+}
+@media(max-width:600px){
+  .vt-content{padding:28px 24px 36px}
+}
 
 /* ══ PARTNERSHIPS / BRAND SCROLL ══ */
 #partnerships{
@@ -911,7 +938,7 @@ nav>ul>li:hover .nav-drop{display:block}
   </a>
   <ul>
     <li>
-      <a href="athletes.html">Athletes <span class="nav-arr">▾</span></a>
+      <a href="athletes.html">Elite <span class="nav-arr">▾</span></a>
       <div class="nav-drop">
         <div class="drop-label">Elite Roster</div>
         <a href="athletes.html?athlete=harbhajan&type=elite">Harbhajan Singh</a>
@@ -934,14 +961,13 @@ nav>ul>li:hover .nav-drop{display:block}
         <a href="athletes.html?type=emerging">Archana</a>
       </div>
     </li>
-    <li><a href="athletes.html">Elite</a></li>
     <li><a href="studio.html">Studio</a></li>
     <li><a href="live.html">Live</a></li>
-    <li><a href="merch.html">Merch</a></li>
     <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
     <li><a href="team/index.html">Team</a></li>
   </ul>
   <a href="careers.html" class="nav-btn" style="text-decoration:none;display:inline-block"><span>Join Legaxy</span></a>
+  <a href="contact.html" class="nav-btn" style="text-decoration:none;display:inline-block;margin-left:8px;background:var(--orange);color:#FFF;border-color:var(--orange)"><span>Enter Ecosystem</span></a>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -949,14 +975,13 @@ nav>ul>li:hover .nav-drop{display:block}
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="athletes.html" onclick="closeMobileMenu()">Athletes</a>
   <a href="athletes.html" onclick="closeMobileMenu()">Elite</a>
   <a href="studio.html" onclick="closeMobileMenu()">Studio</a>
   <a href="live.html" onclick="closeMobileMenu()">Live</a>
-  <a href="merch.html" onclick="closeMobileMenu()">Merch</a>
   <a href="https://tushar920.github.io/LSA/" target="_blank" onclick="closeMobileMenu()">Legaxy Learning</a>
   <a href="team/index.html" onclick="closeMobileMenu()">Team</a>
   <a href="careers.html" class="mob-cta" style="text-decoration:none" onclick="closeMobileMenu()">Join Legaxy →</a>
+  <a href="contact.html" class="mob-cta" style="text-decoration:none;margin-top:8px" onclick="closeMobileMenu()">Enter Ecosystem →</a>
 </div>
 
 <!-- HERO -->
@@ -1024,47 +1049,96 @@ nav>ul>li:hover .nav-drop{display:block}
 <!-- SECTION DIVIDER: athletes → portfolio -->
 <div style="height:40px;background:linear-gradient(to bottom,var(--ink-mid),var(--ink));position:relative;z-index:1;"></div>
 
-<!-- PORTFOLIO -->
+<!-- BUSINESS VERTICALS -->
 <section id="portfolio">
-  <div class="port-header-wrap reveal"><p class="sec-eyebrow">Our Ecosystem</p><h2 class="sec-h" style="font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:2px;font-weight:700">BUSINESS VERTICALS</h2></div>
-  <ul class="port-nav-list reveal" id="portNavList">
-    <li class="port-nav-item active" data-target="0">ELITE</li>
-    <li class="port-nav-item" data-target="1">STUDIO</li>
-    <li class="port-nav-item" data-target="2">LIVE</li>
-    <li class="port-nav-item" data-target="3">MERCH</li>
-    <li class="port-nav-item" data-target="4">LEARNING</li>
-  </ul>
-  <div class="port-content-area" id="portPanelsArea">
-    <div class="port-panel active"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Elite_blue.png" alt="Legaxy Elite" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY ELITE</div></div><h2 class="port-h">TALENT<br/>ARCHITECTED<br/>FOR <span class="x">LEGACY</span></h2></div><div class="port-panel-right"><div class="port-ghost-num">01</div><p class="port-p">End-to-end career architecture — connecting India's finest athletes with world-class brands, legal advisors, and strategic partners who amplify their impact far beyond sport.</p><div class="pf-item">Financial & Legal Advisory</div><div class="pf-item">PR & Personal Branding</div><div class="pf-item">Endorsement & Equity Deals</div><div class="pf-item">Concierge & Career Strategy</div><div class="port-link" onclick="window.location.href='athletes.html'">Explore Elite →</div></div></div></div>
-    <div class="port-panel"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Studio_blue.png" alt="Legaxy Studio" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY STUDIO</div></div><h2 class="port-h">STORIES<br/>THAT<br/><span class="x">DEFINE</span> ERAS</h2></div><div class="port-panel-right"><div class="port-ghost-num">02</div><p class="port-p">Cinematic content that defines careers. From biopics to branded series, podcasts, and digital IP — Legaxy Studio creates value at every touchpoint across TV, digital, and BTL.</p><div class="pf-item">IP Creation & Biopics</div><div class="pf-item">Branded Content Production</div><div class="pf-item">Web & TV Series</div><div class="pf-item">White-label Content</div><div class="port-link" onclick="window.location.href='studio.html'">Explore Studio →</div></div></div></div>
-    <div class="port-panel"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Live_blue.png" alt="Legaxy Live" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY LIVE</div></div><h2 class="port-h">MOMENTS<br/>THAT <span class="x">LIVE</span><br/>FOREVER</h2></div><div class="port-panel-right"><div class="port-ghost-num">03</div><p class="port-p">Larger-than-life experiences that electrify fans and elevate regional sport to global spectacle — award shows, concerts, professional leagues, and immersive fan activations.</p><div class="pf-item">Large-scale Sports Leagues</div><div class="pf-item">Concerts & Award Shows</div><div class="pf-item">Global Tours & Promotions</div><div class="pf-item">NGO & Govt. Sport Partnerships</div><div class="port-link" onclick="window.location.href='live.html'">Explore Live →</div></div></div></div>
-    <div class="port-panel"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Merch_blue.png" alt="Legaxy Merch" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY MERCH</div></div><h2 class="port-h">THE<br/><span class="x">BRAND</span><br/>BEYOND SPORT</h2></div><div class="port-panel-right"><div class="port-ghost-num">04</div><p class="port-p">Unlocking the power of sports IP through licensing, franchising, and digital collectibles — bridging icons and fans through premium merchandise and next-gen Web3 experiences.</p><div class="pf-item">Team Logo & IP Licensing</div><div class="pf-item">Apparel, Footwear & Accessories</div><div class="pf-item">NFTs & Web3 Digital Avatars</div><div class="pf-item">Fan Zones & Pop-up Stores</div><div class="port-link" onclick="window.location.href='merch.html'">Explore Merch →</div></div></div></div>
-    <div class="port-panel"><div class="port-panel-inner"><div class="port-panel-left"><div class="port-logo-wrap"><img src="Legaxy%20Learning_blue.png" alt="Legaxy Learning" onerror="this.classList.add('err')"><div class="port-logo-fallback">LEGAXY LEARNING</div></div><h2 class="port-h">THE NEXT<br/><span class="x">CHAMPION</span><br/>STARTS HERE</h2></div><div class="port-panel-right"><div class="port-ghost-num">05</div><p class="port-p">Education-first initiatives delivering athlete-led masterclasses and structured mentorship across schools and academies — nurturing the next generation from the grassroots up.</p><div class="pf-item">Athlete-led Masterclasses</div><div class="pf-item">School & Academy Programmes</div><div class="pf-item">Structured Mentorship Modules</div><div class="pf-item">Underprivileged Youth Initiatives</div><div class="port-link">Visit Legaxy Learning →</div></div></div></div>
+  <div class="portfolio-header reveal">
+    <p class="sec-eyebrow">Our Ecosystem</p>
+    <h2 class="sec-h" style="font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:2px;font-weight:700">Business Verticals</h2>
   </div>
-</section>
-
-<!-- PRODUCTIONS / IP -->
-<section id="ip">
-  <div class="ip-bg-slider" id="ipBgSlider">
-    <div class="ip-slide-bg ip-bg-1 active"></div>
-    <div class="ip-slide-bg ip-bg-2"></div>
-    <div class="ip-slide-bg ip-bg-3"></div>
-  </div>
-  <div class="ip-content-overlay">
-    <div class="ip-main-info active" id="ipHeroInfo">
-      <p class="ip-sec-title">Original Productions</p>
-      <span class="ip-hero-tag" id="ipHeroTag">Talk Show</span>
-      <h2 class="ip-hero-title" id="ipHeroTitle" onclick="openProduction()">Who's The Boss?</h2>
-      <p class="ip-hero-desc" id="ipHeroDesc">Starring Harbhajan Singh & Geeta Basra — a one-of-a-kind talk show blending behind-the-scenes banter, light-hearted challenges, and real conversations with India's top cricketers.</p>
-      <div class="ip-link-box" id="ipLinkBox">
-        <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="ip-watch-btn">Watch Now ▶</a>
+  <div class="verticals-showcase" id="verticalsTiles">
+    <!-- Tile 1: Elite -->
+    <div class="vt-tile expanded" data-vi="0" onmouseenter="expandTile(0)">
+      <div class="vt-tile-bg" style="background-image:url('harbhajan.jpeg')"></div>
+      <div class="vt-tile-gradient"></div>
+      <span class="vt-label-collapsed">ELITE</span>
+      <div class="vt-content">
+        <div class="vt-num">01</div>
+        <img class="vt-logo-img" src="Legaxy%20Elite_blue.png" alt="Legaxy Elite" onerror="this.classList.add('err')">
+        <span class="vt-logo-fallback">LEGAXY ELITE</span>
+        <h3 class="vt-h">TALENT<br/>FOR <span class="x">LEGACY</span></h3>
+        <p class="vt-p">End-to-end career architecture — connecting India's finest athletes with world-class brands, advisors, and partners.</p>
+        <div class="vt-services">
+          <span class="vt-service">Financial & Legal Advisory</span>
+          <span class="vt-service">PR & Personal Branding</span>
+          <span class="vt-service">Endorsement & Equity Deals</span>
+        </div>
+        <a href="athletes.html" class="vt-cta">Explore Elite →</a>
       </div>
     </div>
-    <div class="ip-thumbnails">
-      <div class="nf-thumb active" data-ip-index="0"><div class="nf-thumb-bg" style="background-image:url('whos the boss.png')"></div><span class="nf-thumb-title">Who's The Boss</span><div class="nf-progress"></div></div>
-      <div class="nf-thumb" data-ip-index="1"><div class="nf-thumb-bg" style="background:radial-gradient(circle,#3A50C8,transparent)"></div><span class="nf-thumb-title">The Unheard Story</span><div class="nf-progress"></div></div>
-      <div class="nf-thumb" data-ip-index="2"><div class="nf-thumb-bg" style="background:radial-gradient(circle,#64C864,transparent)"></div><span class="nf-thumb-title">Legaxy Awards</span><div class="nf-progress"></div></div>
+    <!-- Tile 2: Studio -->
+    <div class="vt-tile" data-vi="1" onmouseenter="expandTile(1)">
+      <div class="vt-tile-bg" style="background:radial-gradient(ellipse 80% 80% at 40% 30%,rgba(188,82,37,.25),var(--ink-lift) 70%)"></div>
+      <div class="vt-tile-gradient"></div>
+      <span class="vt-label-collapsed">STUDIO</span>
+      <div class="vt-content">
+        <div class="vt-num">02</div>
+        <img class="vt-logo-img" src="Legaxy%20Studio_blue.png" alt="Legaxy Studio" onerror="this.classList.add('err')">
+        <span class="vt-logo-fallback">LEGAXY STUDIO</span>
+        <h3 class="vt-h">STORIES THAT<br/><span class="x">DEFINE</span> ERAS</h3>
+        <p class="vt-p">Cinematic content that defines careers — biopics, branded series, and original IP across TV, digital, and BTL.</p>
+        <div class="vt-services">
+          <span class="vt-service">IP Creation & Biopics</span>
+          <span class="vt-service">Branded Content Production</span>
+          <span class="vt-service">Web & TV Series</span>
+        </div>
+        <a href="studio.html" class="vt-cta">Explore Studio →</a>
+      </div>
     </div>
+    <!-- Tile 3: Live -->
+    <div class="vt-tile" data-vi="2" onmouseenter="expandTile(2)">
+      <div class="vt-tile-bg" style="background:radial-gradient(ellipse 80% 80% at 50% 30%,rgba(58,80,200,.22),var(--ink-lift) 70%)"></div>
+      <div class="vt-tile-gradient"></div>
+      <span class="vt-label-collapsed">LIVE</span>
+      <div class="vt-content">
+        <div class="vt-num">03</div>
+        <img class="vt-logo-img" src="Legaxy%20Live_blue.png" alt="Legaxy Live" onerror="this.classList.add('err')">
+        <span class="vt-logo-fallback">LEGAXY LIVE</span>
+        <h3 class="vt-h">MOMENTS THAT<br/><span class="x">LIVE</span> FOREVER</h3>
+        <p class="vt-p">Larger-than-life experiences — award shows, professional leagues, and immersive fan activations that elevate regional sport.</p>
+        <div class="vt-services">
+          <span class="vt-service">Large-scale Sports Leagues</span>
+          <span class="vt-service">Concerts & Award Shows</span>
+          <span class="vt-service">Global Tours & Promotions</span>
+        </div>
+        <a href="live.html" class="vt-cta">Explore Live →</a>
+      </div>
+    </div>
+    <!-- Tile 4: Learning -->
+    <div class="vt-tile" data-vi="3" onmouseenter="expandTile(3)">
+      <div class="vt-tile-bg" style="background:radial-gradient(ellipse 80% 80% at 40% 30%,rgba(80,180,80,.18),var(--ink-lift) 70%)"></div>
+      <div class="vt-tile-gradient"></div>
+      <span class="vt-label-collapsed">LEARNING</span>
+      <div class="vt-content">
+        <div class="vt-num">04</div>
+        <img class="vt-logo-img" src="Legaxy%20Learning_blue.png" alt="Legaxy Learning" onerror="this.classList.add('err')">
+        <span class="vt-logo-fallback">LEGAXY LEARNING</span>
+        <h3 class="vt-h">THE NEXT<br/><span class="x">CHAMPION</span> STARTS HERE</h3>
+        <p class="vt-p">Education-first initiatives delivering athlete-led masterclasses and structured mentorship — nurturing champions from the grassroots up.</p>
+        <div class="vt-services">
+          <span class="vt-service">Athlete-led Masterclasses</span>
+          <span class="vt-service">School & Academy Programmes</span>
+          <span class="vt-service">Mentorship Modules</span>
+        </div>
+        <a href="https://tushar920.github.io/LSA/" target="_blank" class="vt-cta">Visit Legaxy Learning →</a>
+      </div>
+    </div>
+  </div>
+  <!-- Tab strip below -->
+  <div class="vt-tab-strip">
+    <button class="vt-tab active" onclick="expandTile(0)">01 — Elite</button>
+    <button class="vt-tab" onclick="expandTile(1)">02 — Studio</button>
+    <button class="vt-tab" onclick="expandTile(2)">03 — Live</button>
+    <button class="vt-tab" onclick="expandTile(3)">04 — Learning</button>
   </div>
 </section>
 
@@ -1321,7 +1395,7 @@ nav>ul>li:hover .nav-drop{display:block}
     <p class="cta-sub">Join the athletes, brands, and creators shaping the future of Indian sport.</p>
     <div class="cta-btns">
       <a href="contact.html" class="btn-cta-primary" style="text-decoration:none;display:inline-block">Enter the Ecosystem</a>
-      <a href="#portfolio" class="btn-outline" style="text-decoration:none">View Portfolio</a>
+      <a href="#portfolio" class="btn-outline" style="text-decoration:none">View Verticals</a>
     </div>
   </div>
 </section>
@@ -1338,7 +1412,6 @@ nav>ul>li:hover .nav-drop{display:block}
         <a href="athletes.html">Legaxy Elite</a>
         <a href="studio.html">Legaxy Studio</a>
         <a href="live.html">Legaxy Live</a>
-        <a href="merch.html">Legaxy Merch</a>
         <a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a>
       </div>
       <div class="footer-col">
@@ -1346,12 +1419,14 @@ nav>ul>li:hover .nav-drop{display:block}
         <a href="#story">Our Story</a>
         <a href="team/index.html">The Team</a>
         <a href="#partnerships">Partners</a>
+        <a href="careers.html">Careers</a>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
         <a href="mailto:hello@legaxy.org">hello@legaxy.org</a>
         <a href="https://www.linkedin.com/company/legaxyofficial/" target="_blank">LinkedIn</a>
         <a href="https://www.instagram.com/legaxy.official/" target="_blank">Instagram</a>
+        <a href="contact.html">Contact Us</a>
       </div>
     </div>
   </div>
@@ -1407,15 +1482,7 @@ const risingRoster=[
   {name:'Aarav Gautam',sport:'Cricket',role:'Harsha CC · Emerging Prodigy',img:'aarav.jpeg',desc:'A young talent with extraordinary natural flair. His focus, coachability, and hunger to learn mark him as a future champion in the making.'},
 ];
 let currentRoster=eliteRoster,currentAthleteIndex=0,currentTab='elite';
-function renderAthleteCards(){
-  const stage=document.getElementById('atrack');stage.innerHTML='';
-  currentRoster.forEach((a,i)=>{
-    const card=document.createElement('div');card.className='athlete-card';card.dataset.idx=i;
-    card.innerHTML=`<img src="${a.img}" class="ac-img" alt="${a.name}" onerror="this.style.opacity='0'"><div class="ac-overlay"></div><div class="ac-bottom-line"></div><div class="ac-info"><div class="ac-sport">${a.sport}</div><div class="ac-name">${a.name}</div><div class="ac-role">${a.role}</div><div class="ac-desc">${a.desc}</div></div><div class="ac-mini-name">${a.name.split(' ')[0]}</div>`;
-    card.addEventListener('click',()=>setAthleteIndex(i));stage.appendChild(card);
-  });
-  renderDots();updateCardPositions();
-}
+
 function getPositionClass(offset){
   if(offset===0)return 'pos-center';
   if(offset===-1)return 'pos-adj-l';
@@ -1436,7 +1503,7 @@ function updateCardPositions(){
     if(offset>n/2)offset-=n;
     if(offset<-n/2)offset+=n;
     card.classList.add(getPositionClass(offset));
-    card.style.order=''; // clear any old order
+    card.style.order='';
   });
   const ghost=document.getElementById('athleteGhostName');
   if(ghost)ghost.textContent=currentRoster[currentAthleteIndex].name.split(' ')[0].toUpperCase();
@@ -1446,23 +1513,55 @@ function setAthleteIndex(idx){currentAthleteIndex=idx;updateCardPositions();rend
 function shiftAthletes(dir){currentAthleteIndex=(currentAthleteIndex+dir+currentRoster.length)%currentRoster.length;updateCardPositions();renderDots();}
 function switchTab(el,type){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');currentTab=type;currentAthleteIndex=0;currentRoster=type==='elite'?eliteRoster:risingRoster;renderAthleteCards();}
 function switchTabByName(type){currentTab=type;currentAthleteIndex=0;currentRoster=type==='elite'?eliteRoster:risingRoster;document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===(type==='elite'?0:1)));renderAthleteCards();setTimeout(()=>document.getElementById('athletes').scrollIntoView({behavior:'smooth'}),100);}
-setInterval(()=>shiftAthletes(1),4500);renderAthleteCards();
 
-/* Portfolio */
-function switchPortfolio(idx){document.querySelectorAll('.port-nav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));document.querySelectorAll('.port-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});}
-document.querySelectorAll('.port-nav-item').forEach(item=>{item.addEventListener('mouseenter',()=>switchPortfolio(parseInt(item.dataset.target)));});
+/* Athlete click → profile page; center card navigates, others rotate */
+function renderAthleteCards(){
+  const stage=document.getElementById('atrack');stage.innerHTML='';
+  currentRoster.forEach((a,i)=>{
+    const card=document.createElement('div');card.className='athlete-card';card.dataset.idx=i;
+    card.innerHTML=`<img src="${a.img}" class="ac-img" alt="${a.name}" onerror="this.style.opacity='0'"><div class="ac-overlay"></div><div class="ac-bottom-line"></div><div class="ac-info"><div class="ac-sport">${a.sport}</div><div class="ac-name">${a.name}</div><div class="ac-role">${a.role}</div><div class="ac-desc">${a.desc}</div></div><div class="ac-mini-name">${a.name.split(' ')[0]}</div>`;
+    card.addEventListener('click',()=>{
+      if(card.classList.contains('pos-center')){
+        const type=currentTab==='elite'?'elite':'emerging';
+        window.location.href=`athletes.html?athlete=${encodeURIComponent(a.name.split(' ')[0].toLowerCase())}&type=${type}`;
+      } else {
+        setAthleteIndex(i);
+      }
+    });
+    stage.appendChild(card);
+  });
+  renderDots();updateCardPositions();
+}
+setInterval(()=>shiftAthletes(1),4500);
+renderAthleteCards();
 
-/* IP Slider */
-const ipData=[
-  {tag:'Talk Show',title:"Who's The Boss?",desc:"Starring Harbhajan Singh & Geeta Basra — a one-of-a-kind show blending behind-the-scenes banter and real conversations with India's top cricketers.",link:'https://www.youtube.com/@WhosTheBossShow'},
-  {tag:'Docuseries',title:'The Unheard Story',desc:"Cinematic athlete documentaries capturing the journeys of India's sports icons — from the dressing room to the world stage.",link:'#'},
-  {tag:'Live Event IP',title:'Legaxy Awards',desc:'The definitive annual celebration of Indian sport — honouring excellence, courage, and legacy across every discipline.',link:'#'},
-];
-let ipIndex=0;
-function setIp(idx){ipIndex=idx;document.querySelectorAll('.nf-thumb').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.ip-slide-bg').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.nf-thumb')[idx].classList.add('active');document.querySelectorAll('.ip-slide-bg')[idx].classList.add('active');const info=ipData[idx];document.getElementById('ipHeroTag').textContent=info.tag;document.getElementById('ipHeroTitle').textContent=info.title;document.getElementById('ipHeroDesc').textContent=info.desc;const lb=document.getElementById('ipLinkBox');lb.style.display=info.link!=='#'?'block':'none';if(info.link!=='#')lb.querySelector('a').href=info.link;}
-function openProduction(){const l=ipData[ipIndex].link;if(l!=='#')window.open(l,'_blank');}
-document.querySelectorAll('.nf-thumb').forEach((t,i)=>t.addEventListener('mouseenter',()=>setIp(i)));
-setInterval(()=>setIp((ipIndex+1)%3),5000);
+/* Business Verticals — expand tile */
+function expandTile(idx){
+  document.querySelectorAll('.vt-tile').forEach((t,i)=>t.classList.toggle('expanded',i===idx));
+  document.querySelectorAll('.vt-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+}
+// Auto-cycle verticals
+let vtAutoIdx=0,vtAutoTimer=setInterval(()=>{vtAutoIdx=(vtAutoIdx+1)%4;expandTile(vtAutoIdx);},5000);
+document.querySelectorAll('.vt-tile').forEach(t=>t.addEventListener('mouseenter',()=>{clearInterval(vtAutoTimer);expandTile(parseInt(t.dataset.vi));}));
+
+/* Animated stat counters */
+function animateCounter(el){
+  const raw=el.dataset.target||el.textContent;
+  const num=parseFloat(raw.replace(/[^0-9.]/g,''));
+  if(isNaN(num)||el.dataset.counted)return;
+  el.dataset.counted='1';
+  const dur=1400,suffix=raw.replace(/[0-9.]/g,'');
+  let start=0;
+  const step=ts=>{
+    if(!start)start=ts;
+    const pct=Math.min((ts-start)/dur,1),ease=1-Math.pow(1-pct,3);
+    el.textContent=Math.floor(num*ease)+suffix;
+    if(pct<1)requestAnimationFrame(step);else el.textContent=raw;
+  };
+  requestAnimationFrame(step);
+}
+const counterObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);counterObs.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('.mstat-num,.lsa-sn').forEach(el=>counterObs.observe(el));
 
 /* LSA tab switching */
 function lsaTab(idx, btn){
