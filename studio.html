@@ -266,18 +266,40 @@ nav.scrolled{background:rgba(5,6,10,.96);backdrop-filter:blur(16px);border-botto
 .feat-cta{display:flex;gap:14px;align-items:center}
 
 /* ════════════════════════════════════════
-   CAPABILITIES / SERVICES
+   CAPABILITIES — cinematic tile carousel
 ════════════════════════════════════════ */
 #capabilities{padding:120px 72px;background:var(--ink)}
-.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:56px}
-.cap-card{
-  padding:40px 36px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden;transition:background .35s,border-color .35s;
-  cursor:none;
+.cap-carousel-wrap{margin-top:56px;position:relative}
+.cap-carousel{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory;cursor:grab}
+.cap-carousel::-webkit-scrollbar{display:none}
+.cap-carousel:active{cursor:grabbing}
+.cap-slide{
+  flex:0 0 clamp(300px,32vw,420px);scroll-snap-align:start;
+  position:relative;overflow:hidden;background:var(--ink-lift);
+  border:1px solid rgba(255,255,255,.05);border-right:none;
+  transition:background .4s;cursor:none;
+  min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;
 }
-.cap-card:hover{background:rgba(188,82,37,.05);border-color:rgba(188,82,37,.2)}
-.cap-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.cap-card:hover::before{transform:scaleX(1)}
+.cap-slide:last-child{border-right:1px solid rgba(255,255,255,.05)}
+.cap-slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 30% 30%,rgba(188,82,37,.08),transparent 65%);pointer-events:none}
+.cap-slide-bar{position:absolute;top:0;left:0;right:0;height:2px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1);z-index:3}
+.cap-slide:hover .cap-slide-bar{transform:scaleX(1)}
+.cap-slide-bg-num{position:absolute;top:16px;right:16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:80px;line-height:1;color:rgba(188,82,37,.06);pointer-events:none;user-select:none;z-index:0;letter-spacing:-4px}
+.cap-slide-content{position:relative;z-index:2;padding:36px 32px 40px;transition:transform .4s cubic-bezier(.23,1,.32,1)}
+.cap-slide:hover .cap-slide-content{transform:translateY(-6px)}
+.cap-slide-icon{font-size:32px;margin-bottom:20px;display:block;transition:transform .4s}
+.cap-slide:hover .cap-slide-icon{transform:scale(1.15)}
+.cap-slide-num{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;color:rgba(188,82,37,.5);margin-bottom:12px}
+.cap-slide-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:.5px;color:#FFF;margin-bottom:10px}
+.cap-slide-desc{font-size:13px;line-height:1.75;color:var(--text-muted);margin-bottom:20px}
+.cap-slide-services{display:flex;flex-direction:column;gap:5px;max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.23,1,.32,1)}
+.cap-slide:hover .cap-slide-services{max-height:200px}
+.cap-slide-service{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-bright);display:flex;align-items:center;gap:6px}
+.cap-slide-service::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--orange);flex-shrink:0}
+/* Scroll hint arrows */
+.cap-scroll-btns{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.cap-scroll-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(188,82,37,.3);background:transparent;color:var(--orange);cursor:none;font-size:14px;transition:background .3s,border-color .3s;display:flex;align-items:center;justify-content:center}
+.cap-scroll-btn:hover{background:var(--orange);color:#FFF;border-color:var(--orange)}
 .cap-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:4px;color:rgba(188,82,37,.4);margin-bottom:20px;display:block}
 .cap-icon{font-size:32px;margin-bottom:20px;display:block}
 .cap-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:.5px;color:#FFF;margin-bottom:12px}
@@ -627,12 +649,13 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="athletes.html">Athletes</a></li>
+    <li><a href="athletes.html">Elite</a></li>
     <li><a href="studio.html" class="active">Studio</a></li>
-    <li><a href="index.html#portfolio">Portfolio</a></li>
-    <li><a href="index.html#ip">Productions</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
   </ul>
-  <a class="nav-btn" href="mailto:hello@legaxy.org">Work With Us</a>
+  <a class="nav-btn" href="careers.html" style="text-decoration:none">Join Legaxy</a>
+  <a class="nav-btn" href="contact.html" style="text-decoration:none;margin-left:8px;background:var(--orange);color:#FFF;border-color:var(--orange)">Enter Ecosystem</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -682,40 +705,39 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
   <div class="featured-inner">
     <div class="featured-visual reveal-left">
       <div class="featured-frame" data-h="">
-        <!-- Replace .featured-frame-inner with <img> or <video> when media is available -->
         <div class="featured-frame-inner">
-          <div class="frame-placeholder-label">WHO'S THE BOSS?<br/>SEASON 1 — 2023</div>
+          <div class="frame-placeholder-label">THE UNHEARD STORY<br/>DOCUSERIES — 2024</div>
         </div>
-        <div class="featured-frame-tag">SERIES · ORIGINAL IP</div>
-        <div class="featured-frame-num">EP. 01 — 12</div>
+        <div class="featured-frame-tag">DOCUSERIES · ORIGINAL IP</div>
+        <div class="featured-frame-num">EP. 01 — 04</div>
         <div class="featured-play"></div>
       </div>
     </div>
     <div class="featured-info reveal-right">
       <div class="feat-eyebrow">Featured Project</div>
       <div class="featured-meta">
-        <span class="tag">Talk Show</span>
+        <span class="tag">Docuseries</span>
         <span class="tag">Original IP</span>
         <span class="tag">LegaXy Studio</span>
       </div>
-      <h2 class="feat-title">Who's The Boss?</h2>
-      <p class="feat-desc">India's first premium cricketer-hosted talk show — starring Harbhajan Singh & Geeta Basra. Candid conversations, behind-the-scenes drama, and India's top cricketers in their most unfiltered form. A landmark original production that set a new standard for sports entertainment content.</p>
+      <h2 class="feat-title">The Unheard Story</h2>
+      <p class="feat-desc">Cinematic athlete documentary series capturing the untold journeys behind India's sports icons — from the dressing room to the world stage. Long-form storytelling that goes beyond the highlights to reveal the human behind the legend.</p>
       <div class="feat-specs">
         <div class="feat-spec">
           <div class="fs-label">Format</div>
-          <div class="fs-value">12-Episode Series</div>
+          <div class="fs-value">4-Episode Docuseries</div>
         </div>
         <div class="feat-spec">
           <div class="fs-label">Platform</div>
-          <div class="fs-value">YouTube / Digital</div>
+          <div class="fs-value">Digital / OTT</div>
         </div>
         <div class="feat-spec">
           <div class="fs-label">Status</div>
-          <div class="fs-value">Live · Season 2 ›</div>
+          <div class="fs-value">In Production</div>
         </div>
       </div>
       <div class="feat-cta">
-        <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank" class="btn-primary">Watch Series →</a>
+        <a href="contact.html" class="btn-primary">Start a Project →</a>
         <a href="#projects" class="btn-ghost">All Projects</a>
       </div>
     </div>
@@ -729,8 +751,14 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
     <div class="section-title">Creative<br/><span class="metal-text">Capabilities</span></div>
     <p class="section-sub">A full-stack creative studio built specifically for the world of sport — from concept to camera to distribution.</p>
   </div>
-  <div class="cap-grid" id="capGrid">
-    <!-- populated by JS -->
+  <div class="cap-carousel-wrap">
+    <div class="cap-carousel" id="capCarousel">
+      <!-- populated by JS -->
+    </div>
+    <div class="cap-scroll-btns">
+      <button class="cap-scroll-btn" onclick="scrollCap(-1)">←</button>
+      <button class="cap-scroll-btn" onclick="scrollCap(1)">→</button>
+    </div>
   </div>
 </section>
 
@@ -884,10 +912,10 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
       <div class="footer-nav-group">
         <div class="fng-title">Productions</div>
         <div class="fng-links">
-          <a href="https://www.youtube.com/@WhosTheBossShow" target="_blank">Who's The Boss?</a>
           <a href="#">The Unheard Story</a>
           <a href="#">Legaxy Awards</a>
           <a href="#">Campaign Reels</a>
+          <a href="#">Athlete Profiles</a>
         </div>
       </div>
       <div class="footer-nav-group">
@@ -967,13 +995,13 @@ const CAPABILITIES = [
 ═══════════════════════════════════════════ */
 const PROJECTS = [
   {
-    id:'whos-boss', title:"Who's The Boss?", category:'Original IP',
-    desc:'India\'s first premium cricketer-hosted talk show. 12 episodes, multiple seasons.',
-    client:'LegaXy Original', year:'2023',
+    id:'unheard-story', title:'The Unheard Story', category:'Docuseries',
+    desc:'Cinematic athlete documentary series capturing the untold journeys of India\'s sports icons.',
+    client:'LegaXy Original', year:'2024',
     format:'landscape', size:'wide',
-    tags:['Talk Show','Series','YouTube'],
-    img:'whos the boss.png', placeholder:"WHO'S THE BOSS? — SERIES", hasVideo:true,
-    link:'https://www.youtube.com/@WhosTheBossShow'
+    tags:['Docuseries','Long-Form','Athlete Stories'],
+    img:'', placeholder:'THE UNHEARD STORY — DOCUSERIES', hasVideo:true,
+    link:''
   },
   {
     id:'harbhajan-portrait', title:'Harbhajan Singh — Portrait Series', category:'Photography',
@@ -1172,17 +1200,32 @@ function renderMarquee(){
   el.innerHTML=items.map(t=>`<span class="marquee-item">${t}</span>`).join('');
 }
 
-/* — CAPABILITIES — */
+/* — CAPABILITIES CAROUSEL — */
 function renderCapabilities(){
-  document.getElementById('capGrid').innerHTML=CAPABILITIES.map((c,i)=>`
-    <div class="cap-card reveal" style="transition-delay:${i*.08}s" data-h="">
-      <span class="cap-num">${c.num}</span>
-      <span class="cap-icon">${c.icon}</span>
-      <div class="cap-title">${c.title}</div>
-      <div class="cap-desc">${c.desc}</div>
-      <div class="cap-services">${c.services.map(s=>`<span class="cap-service">${s}</span>`).join('')}</div>
-      <div class="cap-ghost">${c.num}</div>
+  const el=document.getElementById('capCarousel');
+  if(!el)return;
+  el.innerHTML=CAPABILITIES.map((c,i)=>`
+    <div class="cap-slide" data-h="">
+      <div class="cap-slide-bar"></div>
+      <div class="cap-slide-bg-num">${c.num}</div>
+      <div class="cap-slide-content">
+        <span class="cap-slide-icon">${c.icon}</span>
+        <div class="cap-slide-num">${c.num}</div>
+        <div class="cap-slide-title">${c.title}</div>
+        <div class="cap-slide-desc">${c.desc}</div>
+        <div class="cap-slide-services">${c.services.map(s=>`<span class="cap-slide-service">${s}</span>`).join('')}</div>
+      </div>
     </div>`).join('');
+  // drag to scroll
+  let isDown=false,startX=0,scrollLeft=0;
+  el.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft});
+  el.addEventListener('mouseleave',()=>isDown=false);
+  el.addEventListener('mouseup',()=>isDown=false);
+  el.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-el.offsetLeft;el.scrollLeft=scrollLeft-(x-startX)*1.5});
+}
+function scrollCap(dir){
+  const el=document.getElementById('capCarousel');
+  if(el)el.scrollBy({left:dir*380,behavior:'smooth'});
 }
 
 /* — PROJECTS — */
