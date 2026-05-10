@@ -224,15 +224,13 @@ footer{padding:32px 72px;background:var(--ink-mid);border-top:1px solid rgba(255
   </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="athletes.html">Athletes</a></li>
     <li><a href="athletes.html">Elite</a></li>
     <li><a href="studio.html">Studio</a></li>
     <li><a href="live.html">Live</a></li>
-    <li><a href="merch.html">Merch</a></li>
     <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
   </ul>
-  <a class="nav-btn-sm" href="careers.html" style="background:rgba(188,82,37,.12)">Careers</a>
-  <a class="nav-btn-sm" href="contact.html">Enter Ecosystem</a>
+  <a class="nav-btn-sm" href="careers.html" style="background:rgba(188,82,37,.12);text-decoration:none">Careers</a>
+  <a class="nav-btn-sm" href="contact.html" style="text-decoration:none">Enter Ecosystem</a>
 </nav>
 
 <!-- HERO -->
@@ -354,12 +352,6 @@ footer{padding:32px 72px;background:var(--ink-mid);border-top:1px solid rgba(255
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Applying For *</label>
-            <select class="form-select" required id="roleSelect">
-              <option value="" disabled selected>Select a role or department</option>
-            </select>
-          </div>
-          <div class="form-group">
             <label class="form-label">LinkedIn / Portfolio URL</label>
             <input class="form-input" type="url" placeholder="https://linkedin.com/in/yourname">
           </div>
@@ -421,20 +413,11 @@ const WHY = [
   { icon:'🤝', title:'Culture of Excellence', desc:'We hold ourselves to the highest standard — in craft, in relationships, and in results. If you share that standard, you\'ll thrive here.' },
 ];
 
-const DEPARTMENTS = ['All', 'Sports & Athlete Management', 'Creative & Media', 'Live & Events', 'Marketing & Brand', 'Technology', 'Internships'];
+const DEPARTMENTS = ['All', 'Creative & Media', 'Sports & Athlete Management'];
 
 const ROLES = [
-  /* Add roles here. type: 'Full Time' | 'Part Time' | 'Contract' | 'Internship' */
-  { id:'athlete-mgr', title:'Athlete Relationship Manager', dept:'Sports & Athlete Management', location:'Delhi / Remote', type:'Full Time', desc:'Own the day-to-day management of LegaXy\'s elite athlete roster — contracts, scheduling, brand partnerships, and wellbeing.' },
-  { id:'content-prod', title:'Content Producer', dept:'Creative & Media', location:'Delhi', type:'Full Time', desc:'End-to-end production of video content, athlete profiles, social campaigns, and original IP projects for LegaXy Studio.' },
-  { id:'video-editor', title:'Senior Video Editor', dept:'Creative & Media', location:'Delhi / Remote', type:'Full Time', desc:'Editing, colour grading, and finishing of premium sports content across digital, broadcast, and social platforms.' },
-  { id:'event-coord', title:'Event Coordinator', dept:'Live & Events', location:'Delhi / NCR', type:'Full Time', desc:'Operational lead for LegaXy Live event productions — venue management, vendor coordination, matchday execution.' },
-  { id:'brand-mgr', title:'Brand Partnerships Manager', dept:'Marketing & Brand', location:'Delhi / Mumbai', type:'Full Time', desc:'Identify, pitch, and close brand partnership deals for LegaXy athletes, events, and original IP productions.' },
-  { id:'social-mgr', title:'Social Media Manager', dept:'Marketing & Brand', location:'Remote', type:'Full Time', desc:'Build and run LegaXy\'s social presence across Instagram, YouTube, X, and LinkedIn — content strategy, publishing, analytics.' },
-  { id:'photographer', title:'Sports Photographer', dept:'Creative & Media', location:'Delhi / On Location', type:'Contract', desc:'Premium sports and athlete portrait photography for campaigns, editorial, and event coverage.' },
-  { id:'broadcast-tech', title:'Broadcast Technician', dept:'Live & Events', location:'Delhi / On Location', type:'Contract', desc:'Multi-camera OB setup and operation for LegaXy Live events, tournaments, and broadcast productions.' },
-  /* ── ADD MORE ROLES BELOW ── */
-  // { id:'role-id', title:'Role Title', dept:'Department', location:'Location', type:'Full Time', desc:'Description.' },
+  { id:'creative-strategy-intern', title:'Creative Strategy Intern', dept:'Creative & Media', location:'Delhi (Hybrid)', type:'Internship', desc:'Work alongside LegaXy\'s creative team on content strategy, athlete storytelling, and brand campaigns. Real work, real ownership, real impact.' },
+  { id:'sports-media-associate', title:'Sports Media Associate', dept:'Sports & Athlete Management', location:'Delhi', type:'Full Time', desc:'Bridge the worlds of athlete management and media — coordinating shoots, digital content, and brand touchpoints across LegaXy\'s elite roster.' },
 ];
 
 const INTERNSHIPS = [
@@ -503,14 +486,8 @@ function renderRoles(){
       </div>
     </a>`).join('')+`
     <div class="role-add-slot">
-      <span class="ras-label">More roles coming soon — check back or send a speculative application</span>
+      <span class="ras-label">More roles coming soon — send a speculative application below</span>
     </div>`;
-  // Populate role select
-  const sel=document.getElementById('roleSelect');
-  if(sel) sel.innerHTML=`<option value="" disabled selected>Select a role or department</option>`
-    +ROLES.map(r=>`<option value="${r.id}">${r.title}</option>`).join('')
-    +INTERNSHIPS.map(i=>`<option value="${i.num}-intern">${i.title} (Internship)</option>`).join('')
-    +`<option value="speculative">Speculative Application</option>`;
 }
 
 function renderInternships(){
