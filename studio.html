@@ -310,8 +310,53 @@ nav.scrolled{background:rgba(5,6,10,.96);backdrop-filter:blur(16px);border-botto
 .cap-ghost{position:absolute;bottom:-12px;right:12px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:72px;line-height:1;color:rgba(255,255,255,.02);pointer-events:none;user-select:none}
 
 /* ════════════════════════════════════════
-   PROJECTS GRID
+   VIDEO GRID
 ════════════════════════════════════════ */
+.vid-filter-row{display:flex;gap:2px;flex-wrap:wrap}
+.vf-btn{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--chrome-dim);cursor:none;transition:all .3s}
+.vf-btn:hover{color:#FFF;border-color:rgba(255,255,255,.3)}
+.vf-btn.active{background:var(--orange);border-color:transparent;color:#FFF}
+.vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.vid-card{background:var(--ink-lift);border:1px solid rgba(255,255,255,.04);overflow:hidden;position:relative;cursor:none;transition:border-color .35s,transform .35s;text-decoration:none;color:inherit;display:block}
+.vid-card:hover{border-color:rgba(188,82,37,.35);transform:translateY(-4px)}
+.vid-card.wide{grid-column:span 2}
+/* Thumbnail / iframe wrapper */
+.vid-thumb{position:relative;overflow:hidden;background:var(--ink-mid);aspect-ratio:16/9}
+.vid-thumb iframe{width:100%;height:100%;border:none;display:block}
+.vid-thumb-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s cubic-bezier(.23,1,.32,1),filter .4s}
+.vid-card:hover .vid-thumb-img{transform:scale(1.04);filter:brightness(.8)}
+.vid-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,.85) 0%,rgba(5,6,10,.15) 50%,transparent 80%);z-index:1;pointer-events:none}
+.vid-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;width:52px;height:52px;border-radius:50%;background:rgba(5,6,10,.65);border:1px solid rgba(188,82,37,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s,transform .3s}
+.vid-play-btn::after{content:'▶';color:var(--orange);font-size:14px;margin-left:2px}
+.vid-card:hover .vid-play-btn{opacity:1;transform:translate(-50%,-50%) scale(1.08)}
+.vid-cat-badge{position:absolute;top:14px;left:14px;z-index:3;font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;background:rgba(188,82,37,.9);color:#FFF;padding:4px 12px;backdrop-filter:blur(6px)}
+.vid-info{padding:20px 22px 24px}
+.vid-meta{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:7px}
+.vid-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(14px,1.8vw,18px);letter-spacing:.5px;color:#FFF;margin-bottom:7px;line-height:1.15}
+.vid-desc{font-size:12px;line-height:1.65;color:var(--text-muted)}
+.vid-arrow{position:absolute;bottom:20px;right:20px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(188,82,37,.25);display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:11px;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s}
+.vid-card:hover .vid-arrow{opacity:1;transform:translateX(0)}
+/* Featured video embed */
+.featured-vid-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:0;border:1px solid rgba(188,82,37,.15);max-width:1200px}
+.fv-embed{position:relative;overflow:hidden;background:var(--ink-lift)}
+.fv-embed iframe{width:100%;display:block;aspect-ratio:16/9;border:none}
+.fv-info{padding:40px 36px;background:var(--ink-lift);display:flex;flex-direction:column;justify-content:center;border-left:1px solid rgba(188,82,37,.1)}
+.fv-eyebrow{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.fv-eyebrow::before{content:'';width:18px;height:1px;background:var(--orange)}
+.fv-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(20px,2.5vw,32px);letter-spacing:.5px;color:#FFF;line-height:1.05;margin-bottom:14px}
+.fv-desc{font-size:14px;line-height:1.75;color:var(--text-muted);margin-bottom:24px}
+.fv-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.fv-tag{font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border:1px solid rgba(188,82,37,.3);color:rgba(255,179,122,.8)}
+@media(max-width:1100px){
+  .featured-vid-wrap{grid-template-columns:1fr}
+  .vid-grid{grid-template-columns:1fr 1fr}
+  .vid-card.wide{grid-column:span 1}
+}
+@media(max-width:768px){
+  #channel-intro,#featured-video,#videos,#channel-embed{padding:64px 24px}
+  .vid-grid{grid-template-columns:1fr}
+  .vid-card.wide{grid-column:span 1}
+}
 #projects{padding:120px 72px;background:var(--ink-mid)}
 .projects-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;gap:24px;flex-wrap:wrap}
 .project-filter-row{display:flex;gap:var(--gap)}
@@ -674,24 +719,24 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
     </div>
   </div>
   <div class="hero-content">
-    <div class="hero-badge">LegaXy Studio — Sports Media Production</div>
+    <div class="hero-badge">LegaXy Studio — FreeHit Sports Content</div>
     <h1 class="hero-h1">
       WHERE SPORT<br/>
       BECOMES<br/>
       <span class="line-accent metal-text">CINEMA.</span>
     </h1>
-    <p class="hero-sub">Premium content creation, brand storytelling, and cinematic production — built for the world of sport.</p>
+    <p class="hero-sub">Premium sports conversations, athlete stories, and exclusive cricket content — produced by LegaXy Studio for FreeHit.</p>
     <div class="hero-ctas">
-      <a href="#featured" class="btn-primary">View Our Work →</a>
-      <a href="#showreel" class="btn-ghost">▶ Watch Showreel</a>
+      <a href="#videos" class="btn-primary">Watch Latest Videos →</a>
+      <a href="https://www.youtube.com/@FreeHitLegaXy" target="_blank" class="btn-ghost">▶ Subscribe on YouTube</a>
     </div>
   </div>
   <div class="hero-scroll-line"><span>SCROLL</span></div>
   <div class="hero-stats-strip">
-    <div class="hero-stat"><div class="hs-num" data-count="50">50+</div><div class="hs-label">Projects Delivered</div></div>
-    <div class="hero-stat"><div class="hs-num" data-count="12">12+</div><div class="hs-label">Elite Athletes</div></div>
-    <div class="hero-stat"><div class="hs-num" data-count="8">8</div><div class="hs-label">Brand Campaigns</div></div>
-    <div class="hero-stat"><div class="hs-num" data-count="3">3</div><div class="hs-label">Original IP Series</div></div>
+    <div class="hero-stat"><div class="hs-num">FreeHit</div><div class="hs-label">by LegaXy Studio</div></div>
+    <div class="hero-stat"><div class="hs-num">12+</div><div class="hs-label">Elite Athletes</div></div>
+    <div class="hero-stat"><div class="hs-num">Cricket</div><div class="hs-label">Stories & Podcasts</div></div>
+    <div class="hero-stat"><div class="hs-num">2024–25</div><div class="hs-label">Season</div></div>
   </div>
 </section>
 
@@ -700,177 +745,87 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
   <div class="marquee-inner" id="marqueeInner"></div>
 </div>
 
-<!-- ══════════ FEATURED PROJECT ══════════ -->
-<section id="featured">
-  <div class="featured-inner">
-    <div class="featured-visual reveal-left">
-      <div class="featured-frame" data-h="">
-        <div class="featured-frame-inner">
-          <div class="frame-placeholder-label">THE UNHEARD STORY<br/>DOCUSERIES — 2024</div>
-        </div>
-        <div class="featured-frame-tag">DOCUSERIES · ORIGINAL IP</div>
-        <div class="featured-frame-num">EP. 01 — 04</div>
-        <div class="featured-play"></div>
+<!-- ══════════ CHANNEL INTRO ══════════ -->
+<section id="channel-intro" style="padding:80px 72px;background:var(--ink-mid)">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1400px">
+    <div class="reveal-left">
+      <div class="section-eyebrow">FreeHit by LegaXy</div>
+      <div class="section-title">Conversations<br/>That <span class="metal-text">Matter</span></div>
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--text-muted);line-height:1.7;margin-bottom:28px">One-on-one talks with sport's biggest names — about the game, their journey, and their world beyond the field. High-quality sports content, podcasts, player stories, and exclusive cricket conversations.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a href="https://www.youtube.com/@FreeHitLegaXy" target="_blank" class="btn-primary" style="text-decoration:none">Subscribe on YouTube →</a>
+        <a href="contact.html" class="btn-ghost" style="text-decoration:none">Work With Us</a>
       </div>
     </div>
-    <div class="featured-info reveal-right">
-      <div class="feat-eyebrow">Featured Project</div>
-      <div class="featured-meta">
-        <span class="tag">Docuseries</span>
-        <span class="tag">Original IP</span>
-        <span class="tag">LegaXy Studio</span>
+    <div class="reveal-right" style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)">
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">Cricket</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px">Interviews & Podcasts</div>
       </div>
-      <h2 class="feat-title">The Unheard Story</h2>
-      <p class="feat-desc">Cinematic athlete documentary series capturing the untold journeys behind India's sports icons — from the dressing room to the world stage. Long-form storytelling that goes beyond the highlights to reveal the human behind the legend.</p>
-      <div class="feat-specs">
-        <div class="feat-spec">
-          <div class="fs-label">Format</div>
-          <div class="fs-value">4-Episode Docuseries</div>
-        </div>
-        <div class="feat-spec">
-          <div class="fs-label">Platform</div>
-          <div class="fs-value">Digital / OTT</div>
-        </div>
-        <div class="feat-spec">
-          <div class="fs-label">Status</div>
-          <div class="fs-value">In Production</div>
-        </div>
+      <div style="padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)">
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">Athlete</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px">Stories & Profiles</div>
       </div>
-      <div class="feat-cta">
-        <a href="contact.html" class="btn-primary">Start a Project →</a>
-        <a href="#projects" class="btn-ghost">All Projects</a>
+      <div style="padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)">
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">Match</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px">Reviews & Predictions</div>
+      </div>
+      <div style="padding:28px 24px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05)">
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,4vw,44px);background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">Viral</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--chrome-dim);margin-top:6px">Moments & Reactions</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════ CAPABILITIES ══════════ -->
-<section id="capabilities">
-  <div class="reveal">
-    <div class="section-eyebrow">What We Do</div>
-    <div class="section-title">Creative<br/><span class="metal-text">Capabilities</span></div>
-    <p class="section-sub">A full-stack creative studio built specifically for the world of sport — from concept to camera to distribution.</p>
+<!-- ══════════ FEATURED VIDEO ══════════ -->
+<section id="featured-video" style="padding:80px 72px;background:var(--ink)">
+  <div class="reveal" style="margin-bottom:48px">
+    <div class="section-eyebrow">Featured</div>
+    <div class="section-title">Latest <span class="metal-text">Drop</span></div>
   </div>
-  <div class="cap-carousel-wrap">
-    <div class="cap-carousel" id="capCarousel">
-      <!-- populated by JS -->
-    </div>
-    <div class="cap-scroll-btns">
-      <button class="cap-scroll-btn" onclick="scrollCap(-1)">←</button>
-      <button class="cap-scroll-btn" onclick="scrollCap(1)">→</button>
-    </div>
-  </div>
+  <div id="featuredVideoWrap" class="reveal"></div>
 </section>
 
-<!-- ══════════ PROJECTS GRID ══════════ -->
-<section id="projects">
-  <div class="projects-header">
+<!-- ══════════ VIDEO GRID ══════════ -->
+<section id="videos" style="padding:80px 72px;background:var(--ink-mid)">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:24px;flex-wrap:wrap">
     <div class="reveal">
-      <div class="section-eyebrow">Portfolio</div>
-      <div class="section-title">Our Work</div>
+      <div class="section-eyebrow">FreeHit Content</div>
+      <div class="section-title">Watch <span class="metal-text">Now</span></div>
     </div>
-    <div class="project-filter-row reveal" id="filterRow">
-      <!-- populated by JS -->
-    </div>
+    <div class="vid-filter-row reveal" id="vidFilterRow"></div>
   </div>
-  <div class="projects-grid" id="projectsGrid">
-    <!-- populated by JS -->
+  <div class="vid-grid" id="vidGrid"></div>
+  <div class="reveal" style="text-align:center;margin-top:48px">
+    <a href="https://www.youtube.com/@FreeHitLegaXy/videos" target="_blank" class="btn-primary" style="text-decoration:none">View All Videos on YouTube →</a>
   </div>
 </section>
 
-<!-- ══════════ SHOWREEL ══════════ -->
-<section id="showreel">
-  <div class="showreel-inner">
-    <div class="reveal" style="text-align:center">
-      <div class="section-eyebrow" style="justify-content:center">Watch</div>
-      <div class="section-title" style="text-align:center">Studio <span class="metal-text">Showreel</span></div>
-      <p class="section-sub" style="margin:0 auto;text-align:center">A curated window into the craft, energy, and storytelling that defines LegaXy Studio's body of work.</p>
+<!-- ══════════ CHANNEL EMBED ══════════ -->
+<section id="channel-embed" style="padding:80px 72px;background:var(--ink)">
+  <div class="reveal" style="text-align:center;max-width:800px;margin:0 auto 48px">
+    <div class="section-eyebrow" style="justify-content:center">Live Channel</div>
+    <div class="section-title" style="text-align:center">FreeHit <span class="metal-text">Channel</span></div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--text-muted);margin:0 auto">Browse all our episodes, shorts, and exclusive content directly from the FreeHit by LegaXy channel.</p>
+  </div>
+  <!-- YouTube channel playlist embed — always shows latest content -->
+  <div class="reveal" style="max-width:1000px;margin:0 auto">
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid rgba(188,82,37,.15)">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=UUTFMqi-L-2vT1Y5eXjvqy5A&rel=0&modestbranding=1&color=white"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="FreeHit by LegaXy — Latest Videos">
+      </iframe>
     </div>
-    <div class="showreel-frame reveal">
-      <!-- Replace inner div with <iframe> or <video> when showreel is available -->
-      <div class="showreel-ph">
-        <div class="showreel-play" data-h=""></div>
-        <div class="showreel-ph-label">LEGAXY STUDIO SHOWREEL 2024</div>
-      </div>
-      <div class="showreel-duration">02:48</div>
+    <div style="display:flex;justify-content:center;margin-top:20px">
+      <a href="https://www.youtube.com/@FreeHitLegaXy" target="_blank" style="font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:8px">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.682 1.875C15.494.745 14.6.088 13.565.017 11.394-.06 8 0 8 0S4.606-.06 2.435.017C1.4.088.506.745.318 1.875.083 3.195 0 5.25 0 5.25s.083 2.055.318 3.375C.506 9.755 1.4 10.412 2.435 10.483 4.606 10.56 8 10.5 8 10.5s3.394.06 5.565-.017c1.035-.07 1.929-.728 2.117-1.858C15.917 7.305 16 5.25 16 5.25s-.083-2.055-.318-3.375zM6.5 7.5V3l4.5 2.25L6.5 7.5z" fill="#BC5225"/></svg>
+        @FreeHitLegaXy on YouTube
+      </a>
     </div>
-    <div class="showreel-ticker reveal">
-      <div class="st-item"><div class="st-num">50+</div><div class="st-label">Films Created</div></div>
-      <div class="st-item"><div class="st-num">4M+</div><div class="st-label">Views Generated</div></div>
-      <div class="st-item"><div class="st-num">12</div><div class="st-label">Athletes Featured</div></div>
-      <div class="st-item"><div class="st-num">3</div><div class="st-label">Original IP Shows</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ BEHIND THE SCENES ══════════ -->
-<section id="bts">
-  <div class="bts-layout">
-    <div class="bts-gallery reveal-left" id="btsGallery">
-      <!-- populated by JS -->
-    </div>
-    <div class="bts-info reveal-right">
-      <div class="section-eyebrow">Behind The Lens</div>
-      <div class="section-title">Behind<br/><span class="metal-text">The Scenes</span></div>
-      <p class="section-sub">Every frame is built on intention. Our creative process is meticulous, collaborative, and rooted in a deep understanding of sport.</p>
-      <div class="bts-process" id="btsProcess">
-        <!-- populated by JS -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ CREATIVE PROCESS ══════════ -->
-<section id="process">
-  <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto">
-    <div class="section-eyebrow" style="justify-content:center">How We Work</div>
-    <div class="section-title" style="text-align:center">The Creative<br/><span class="metal-text">Process</span></div>
-    <p class="section-sub" style="margin:0 auto;text-align:center">Four stages that turn a brief into a premium sports content experience.</p>
-  </div>
-  <div class="process-timeline" id="processTimeline">
-    <!-- populated by JS -->
-  </div>
-</section>
-
-<!-- ══════════ CAMPAIGN SHOWCASE ══════════ -->
-<section id="campaigns">
-  <div class="reveal" style="margin-bottom:56px">
-    <div class="section-eyebrow">Campaigns</div>
-    <div class="section-title">Brand <span class="metal-text">Collaborations</span></div>
-    <p class="section-sub">Campaigns built at the intersection of sport, culture, and premium storytelling.</p>
-  </div>
-  <div class="campaigns-switcher reveal">
-    <div class="campaign-list" id="campaignList">
-      <!-- populated by JS -->
-    </div>
-    <div class="campaign-display" id="campaignDisplay">
-      <!-- populated by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ GALLERY ══════════ -->
-<section id="gallery">
-  <div class="gallery-header reveal">
-    <div>
-      <div class="section-eyebrow">Media</div>
-      <div class="section-title" style="font-size:clamp(28px,4vw,52px)">Gallery</div>
-    </div>
-    <a href="#" class="btn-ghost" data-h="">View Full Gallery →</a>
-  </div>
-  <div class="gallery-scroll reveal" id="galleryScroll">
-    <!-- populated by JS -->
-  </div>
-</section>
-
-<!-- ══════════ CLIENTS ══════════ -->
-<section id="clients">
-  <div class="clients-header reveal">
-    <div class="clients-eyebrow">Trusted By</div>
-    <p class="clients-sub">Brands, teams, and athletes who trust LegaXy Studio to tell their stories.</p>
-  </div>
-  <div class="clients-grid reveal" id="clientsGrid">
-    <!-- populated by JS -->
   </div>
 </section>
 
@@ -901,12 +856,12 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
     </div>
     <div class="footer-nav">
       <div class="footer-nav-group">
-        <div class="fng-title">Studio</div>
+        <div class="fng-title">FreeHit</div>
         <div class="fng-links">
-          <a href="#featured">Featured Work</a>
-          <a href="#capabilities">Capabilities</a>
-          <a href="#projects">All Projects</a>
-          <a href="#showreel">Showreel</a>
+          <a href="#featured-video">Latest Video</a>
+          <a href="#videos">All Videos</a>
+          <a href="#channel-embed">Browse Channel</a>
+          <a href="https://www.youtube.com/@FreeHitLegaXy" target="_blank">YouTube →</a>
         </div>
       </div>
       <div class="footer-nav-group">
@@ -935,500 +890,222 @@ footer{padding:48px 72px 28px;background:var(--ink-mid);border-top:1px solid rgb
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════
-   DATA — Edit this section to add projects,
-   campaigns, clients, gallery items & more.
-   ALL content is driven from these arrays.
-══════════════════════════════════════════ -->
+<!-- DATA — Edit VIDEOS array to add/update content. All sections driven from here. -->
 <script>
 
-/* ═══════════════════════════════════════════
-   ▸ CAPABILITIES DATA
-   Add / edit capabilities here
-═══════════════════════════════════════════ */
-const CAPABILITIES = [
-  {
-    num:'01', icon:'🎬', title:'Content Production',
-    desc:'End-to-end video and film production — from athlete documentaries to brand campaign films that live long after broadcast.',
-    services:['Short Films & Documentaries','Campaign Videos','Social Content Series','Interview & Profile Films','Event Highlight Reels']
-  },
-  {
-    num:'02', icon:'📸', title:'Photography & Shoots',
-    desc:'Premium sports photography, athlete portrait sessions, and brand campaign imagery with a cinematic aesthetic.',
-    services:['Athlete Portrait Sessions','Action & Sport Photography','Brand Campaign Shoots','Event Coverage','Editorial Photography']
-  },
-  {
-    num:'03', icon:'📺', title:'Original IP & Shows',
-    desc:'We develop, produce, and distribute original sports entertainment formats — from talk shows to docuseries.',
-    services:['Talk Shows & Formats','Athlete Docuseries','Sports Reality Concepts','Branded Entertainment','Platform Distribution']
-  },
-  {
-    num:'04', icon:'🎯', title:'Brand Campaigns',
-    desc:'Full-service brand storytelling for sports clients — strategy, creative concept, production, and delivery.',
-    services:['Campaign Strategy','Creative Direction','TVC & Digital Ads','Influencer Content','Launch Activations']
-  },
-  {
-    num:'05', icon:'✂️', title:'Post-Production',
-    desc:'World-class editing, colour grading, motion graphics, and sound design — the craft that defines premium content.',
-    services:['Video Editing & Finishing','Colour Grading','Motion Graphics & Titles','Sound Design & Mix','Visual Effects']
-  },
-  {
-    num:'06', icon:'📱', title:'Digital & Social',
-    desc:'Platform-first content strategy and production — optimised for YouTube, Instagram, and emerging channels.',
-    services:['YouTube Series', 'Instagram Reels & Stories','LinkedIn & OTT Formats','Podcast Production','Digital Campaign Management']
-  }
-];
-
-/* ═══════════════════════════════════════════
-   ▸ PROJECTS DATA
-   Add projects here. Each project:
-   {
-     id, title, category, desc, client, year,
-     format,         // 'landscape' | 'portrait' | 'square'
-     size,           // 'normal' | 'wide' | 'featured'
-     tags:[],
-     img:'',         // path to image, leave empty for placeholder
-     placeholder:    // placeholder label shown when no image
-     hasVideo: bool, // shows play button
-     link:''         // optional external link
-   }
-═══════════════════════════════════════════ */
-const PROJECTS = [
-  {
-    id:'unheard-story', title:'The Unheard Story', category:'Docuseries',
-    desc:'Cinematic athlete documentary series capturing the untold journeys of India\'s sports icons.',
-    client:'LegaXy Original', year:'2024',
-    format:'landscape', size:'wide',
-    tags:['Docuseries','Long-Form','Athlete Stories'],
-    img:'', placeholder:'THE UNHEARD STORY — DOCUSERIES', hasVideo:true,
-    link:''
-  },
-  {
-    id:'harbhajan-portrait', title:'Harbhajan Singh — Portrait Series', category:'Photography',
-    desc:'A premium portrait and lifestyle shoot with India\'s greatest off-spinner.',
-    client:'Harbhajan Singh', year:'2023',
-    format:'portrait', size:'normal',
-    tags:['Portrait','Cricket','Editorial'],
-    img:'harbhajan.jpeg', placeholder:'PORTRAIT SERIES', hasVideo:false, link:''
-  },
-  {
-    id:'chahal-profile', title:'Yuzvendra Chahal — Profile Film', category:'Film',
-    desc:'A cinematic profile film exploring the journey of India\'s premier leg-spinner.',
-    client:'YuzziChahal', year:'2023',
-    format:'portrait', size:'normal',
-    tags:['Profile Film','Cricket','Digital'],
-    img:'chahal.jpeg', placeholder:'PROFILE FILM', hasVideo:true, link:''
-  },
-  {
-    id:'unheard-story', title:'The Unheard Story', category:'Docuseries',
-    desc:'Cinematic athlete documentary series capturing the untold journeys behind the icons.',
-    client:'LegaXy Original', year:'2024',
-    format:'landscape', size:'wide',
-    tags:['Docuseries','Athlete Stories','LegaXy Original'],
-    img:'', placeholder:'THE UNHEARD STORY — DOCUSERIES', hasVideo:true, link:''
-  },
-  {
-    id:'gt-tewatia-campaign', title:'Rahul Tewatia — GT Campaign', category:'Brand Campaign',
-    desc:'Match-day social content and campaign assets for the Gujarat Titans\' clutch finisher.',
-    client:'Gujarat Titans × LegaXy', year:'2023',
-    format:'square', size:'normal',
-    tags:['Brand Campaign','IPL','Social'],
-    img:'tewatia.jpeg', placeholder:'GT CAMPAIGN', hasVideo:false, link:''
-  },
-  {
-    id:'legaxy-awards', title:'LegaXy Awards', category:'Live Event',
-    desc:'India\'s definitive annual celebration of sporting excellence — production, branding, and coverage.',
-    client:'LegaXy Live', year:'2024',
-    format:'landscape', size:'normal',
-    tags:['Event','Awards','Live Production'],
-    img:'', placeholder:'LEGAXY AWARDS 2024', hasVideo:false, link:''
-  },
-  /* ── ADD MORE PROJECTS BELOW ── */
-  // { id:'project-id', title:'Title', category:'Category', desc:'...', client:'...', year:'2024', format:'landscape', size:'normal', tags:[], img:'', placeholder:'PLACEHOLDER', hasVideo:false, link:'' },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ BTS PROCESS STEPS
-   Add / edit BTS steps here
-═══════════════════════════════════════════ */
-const BTS_STEPS = [
-  { num:'01', title:'On Location', desc:'We embed with athletes on-location — training grounds, stadiums, homes — to capture authentic moments impossible to stage.' },
-  { num:'02', title:'Direction & Capture', desc:'Our directors work closely with athletes to draw out natural storytelling. Every setup is designed for cinematic output, not just content.' },
-  { num:'03', title:'Post & Finishing', desc:'Premium colour grading, custom motion graphics, and precise sound design transform raw footage into experiences worth watching repeatedly.' },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ BTS GALLERY FRAMES
-   Add images here. Leave img:'' for placeholder.
-   types: 'tall' | 'normal'
-═══════════════════════════════════════════ */
-const BTS_FRAMES = [
-  { type:'tall', img:'harbhajan.jpeg', label:'On Set — Who\'s The Boss?' },
-  { type:'normal', img:'chahal.jpeg', label:'Portrait Session' },
-  { type:'normal', img:'tewatia.jpeg', label:'Campaign Shoot' },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ PROCESS STEPS
-   Add / edit creative process stages here
-═══════════════════════════════════════════ */
-const PROCESS_STEPS = [
-  {
-    icon:'💡', num:'01', title:'Brief & Strategy',
-    desc:'We start with the story — understanding the athlete, the brand, the moment, and what it needs to mean.',
-    services:['Creative Brief','Story Discovery','Mood Boarding','Format Strategy']
-  },
-  {
-    icon:'🎨', num:'02', title:'Creative Direction',
-    desc:'Our creative team develops the visual language, narrative arc, and production plan before a single camera rolls.',
-    services:['Visual Identity','Script & Storyboard','Location Scouting','Talent Direction']
-  },
-  {
-    icon:'🎬', num:'03', title:'Production',
-    desc:'Premium-grade shooting with dedicated camera operators, lighting, and direction — built for the highest output quality.',
-    services:['Cinematography','Multi-Camera Shoots','Interview Direction','B-Roll & Action']
-  },
-  {
-    icon:'✨', num:'04', title:'Post & Delivery',
-    desc:'Expert editing, colour, motion graphics, and sound — delivered to platform specs and ready to perform.',
-    services:['Editing & Assembly','Colour & Grade','Sound Design','Platform Delivery']
-  }
-];
-
-/* ═══════════════════════════════════════════
-   ▸ CAMPAIGNS DATA
-   Add brand campaigns / collaborations here
-═══════════════════════════════════════════ */
-const CAMPAIGNS = [
-  {
-    id:'whos-boss-s1', name:"Who's The Boss?", type:'Original Talk Show Series',
-    category:'Original IP',
-    title:"Who's The Boss? — Season 1",
-    desc:'A 12-episode original talk show series featuring Harbhajan Singh & Geeta Basra in conversation with India\'s cricketing legends. Produced, directed, and distributed by LegaXy Studio.',
-    stats:[{num:'12',label:'Episodes'},{num:'1M+',label:'Views'},{num:'2023',label:'Year'}],
-    tags:['Original IP','YouTube','Talk Show','Series'],
-    color:'rgba(188,82,37,.08)'
-  },
-  {
-    id:'harbhajan-brand', name:'Harbhajan Singh', type:'Athlete Content Suite',
-    category:'Athlete Branding',
-    title:'Harbhajan Singh — Brand Content Suite',
-    desc:'A comprehensive content partnership encompassing portrait photography, social media content, interview formats, and brand integration assets for one of India\'s most iconic cricketers.',
-    stats:[{num:'40+',label:'Assets'},{num:'6',label:'Brands'},{num:'2023-24',label:'Duration'}],
-    tags:['Athlete Branding','Photography','Social Content','Editorial'],
-    color:'rgba(188,82,37,.05)'
-  },
-  {
-    id:'legaxy-awards', name:'LegaXy Awards', type:'Live Event Production',
-    category:'Live Events',
-    title:'LegaXy Awards 2024',
-    desc:'Full event production, branding, and content coverage for India\'s premier annual sporting excellence awards. From concept through execution, every element built to reflect sporting greatness.',
-    stats:[{num:'200+',label:'Guests'},{num:'12',label:'Categories'},{num:'2024',label:'Year'}],
-    tags:['Event Production','Awards','Branding','Coverage'],
-    color:'rgba(188,82,37,.06)'
-  },
-  {
-    id:'docuseries', name:'The Unheard Story', type:'Docuseries Production',
-    category:'Film & Documentary',
-    title:'The Unheard Story — Docuseries',
-    desc:'Cinematic long-form documentary series exploring the untold stories of India\'s sports icons. Every episode is researched, directed, and finished to broadcast standard.',
-    stats:[{num:'4',label:'Episodes'},{num:'2024',label:'Year'},{num:'Ongoing',label:'Status'}],
-    tags:['Documentary','Long-Form','Athlete Stories','Cinematic'],
-    color:'rgba(188,82,37,.04)'
-  },
-  /* ── ADD MORE CAMPAIGNS BELOW ── */
-  // { id:'id', name:'Name', type:'Type', category:'Cat', title:'Full Title', desc:'...', stats:[], tags:[], color:'rgba(188,82,37,.06)' },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ GALLERY ITEMS
-   Add gallery items here. Leave img:'' for placeholder.
-   sizes: 'tall' | 'wide' | 'sq' | 'xwide'
-═══════════════════════════════════════════ */
-const GALLERY_ITEMS = [
-  { size:'tall', img:'harbhajan.jpeg', caption:'Harbhajan Singh — Who\'s The Boss? Set' },
-  { size:'wide', img:'whos the boss.png', caption:'Who\'s The Boss? — Season 1 Production' },
-  { size:'sq', img:'chahal.jpeg', caption:'Yuzvendra Chahal — Profile Film' },
-  { size:'tall', img:'tewatia.jpeg', caption:'Rahul Tewatia — GT Campaign Shoot' },
-  { size:'xwide', img:'', caption:'LegaXy Awards 2024 — Production Setup' },
-  { size:'sq', img:'sangram.webp', caption:'Sangram Singh — Athlete Portrait' },
-  { size:'wide', img:'', caption:'The Unheard Story — Docuseries Production' },
-  /* ── ADD MORE GALLERY ITEMS BELOW ── */
-  // { size:'sq', img:'path.jpg', caption:'Caption text' },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ CLIENTS / COLLABORATORS DATA
-   Add brands, teams, and partners here
-═══════════════════════════════════════════ */
-const CLIENTS = [
-  { name:'Star Sports', type:'Broadcasting' },
-  { name:'Sony Entertainment', type:'Media' },
-  { name:'IPL', type:'Cricket League' },
-  { name:'Gujarat Titans', type:'IPL Franchise' },
-  { name:'Punjab Kings', type:'IPL Franchise' },
-  { name:'Rajasthan Royals', type:'IPL Franchise' },
-  { name:'Puma India', type:'Sports Apparel' },
-  { name:'Dream11', type:'Fantasy Sports' },
-  { name:'Pepsi', type:'Beverages' },
-  { name:'Bridgestone', type:'Automotive' },
-  { name:'MRF', type:'Cricket Equipment' },
-  { name:'Jio Cinema', type:'Streaming' },
-  /* ── ADD MORE CLIENTS BELOW ── */
-  // { name:'Brand Name', type:'Category' },
-  { name:'+ Your Brand', type:'Coming Soon', add:true },
-];
-
-/* ═══════════════════════════════════════════
-   ▸ MARQUEE ITEMS
-   Edit the scrolling ticker text here
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════════════════ */
 const MARQUEE_ITEMS = [
-  'Sports Content Production','Athlete Storytelling','Premium Filmmaking',
-  'Brand Campaigns','Original IP','Talk Shows','Docuseries',
-  'Editorial Photography','LegaXy Studio','Where Sport Becomes Cinema'
+  'FreeHit by LegaXy','Sports Podcasts','Athlete Interviews',
+  'Cricket Stories','Match Reviews','Player Profiles',
+  'Exclusive Conversations','Where Sport Becomes Cinema','LegaXy Studio'
 ];
 
-/* ═══════════════════════════════════════════
-   RENDER FUNCTIONS — Do not need to edit below
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   ▸ VIDEOS DATA
+   Add / update videos here.
 
-/* — MARQUEE — */
+   Fields:
+     id        — YouTube video ID (11 chars from youtube.com/watch?v=XXXXXXXXXXX)
+     title     — Video title
+     category  — Filter category: 'Interviews' | 'Podcasts' | 'Cricket' | 'Highlights'
+     desc      — Short description (1–2 lines)
+     guest     — Featured athlete/guest
+     size      — 'normal' | 'wide' (wide spans 2 columns)
+     featured  — true = shown in the Featured Video section (use first/best video)
+
+   To add a new video, copy one block and update the fields.
+   The featured:true video appears as the large embed at top.
+═══════════════════════════════════════════════════════ */
+const VIDEOS = [
+  {
+    id:'RcZ_Iqo-8eo',
+    title:'Harbhajan Singh — Unfiltered Cricket Stories & Savage Jokes',
+    category:'Interviews',
+    desc:'The Turbanator like you\'ve never seen him — unfiltered, hilarious, and brutally honest. Epic cricket stories and behind-the-scenes moments from one of India\'s greatest.',
+    guest:'Harbhajan Singh',
+    size:'wide',
+    featured:true
+  },
+  {
+    id:'suL9wf5TF8k',
+    title:'Chahal\'s Snub — Harbhajan Reacts to IND vs SA T20I Squad',
+    category:'Cricket',
+    desc:'Harbhajan Singh\'s candid reaction to Yuzvendra Chahal\'s exclusion from the T20I squad against South Africa.',
+    guest:'Harbhajan Singh',
+    size:'normal',
+    featured:false
+  },
+  {
+    id:'vQ1EApNwNu0',
+    title:'Harbhajan Singh on Cricket, Life & Beyond',
+    category:'Interviews',
+    desc:'A deep-dive conversation with Harbhajan Singh — looking back on a 23-year career and what comes next.',
+    guest:'Harbhajan Singh',
+    size:'normal',
+    featured:false
+  },
+  {
+    id:'YCzUII45uno',
+    title:'Exclusive: Harbhajan Singh on India\'s Next Generation',
+    category:'Cricket',
+    desc:'\'I have full faith in all youngsters. They have it in them to take the team forward.\' — Harbhajan Singh on the future of Indian cricket.',
+    guest:'Harbhajan Singh',
+    size:'normal',
+    featured:false
+  },
+  {
+    id:'oMRpuCYvNm4',
+    title:'Yuzvendra Chahal Speaks After Kent Debut',
+    category:'Interviews',
+    desc:'Fresh from a match-winning performance on county debut, Yuzvendra Chahal talks exclusively about his cricket journey and ambitions.',
+    guest:'Yuzvendra Chahal',
+    size:'normal',
+    featured:false
+  },
+  {
+    id:'zlNQ7q0SSRw',
+    title:'Yuzi Chahal on Cricket, Setbacks & Comebacks',
+    category:'Podcasts',
+    desc:'An honest, wide-ranging conversation with India\'s leading leg-spinner — on the tough phases, the comebacks, and what drives him.',
+    guest:'Yuzvendra Chahal',
+    size:'wide',
+    featured:false
+  },
+  /*
+  ── ADD MORE VIDEOS BELOW ──
+  Copy this template and fill in the fields:
+
+  {
+    id:'VIDEO_ID_HERE',          // 11-char YouTube video ID
+    title:'Video Title Here',
+    category:'Interviews',        // Interviews | Podcasts | Cricket | Highlights
+    desc:'Short description.',
+    guest:'Athlete Name',
+    size:'normal',                // normal | wide
+    featured:false
+  },
+  */
+];
+
+/* ═══════════════════════════════════════════════════════
+   RENDER — MARQUEE
+═══════════════════════════════════════════════════════ */
 function renderMarquee(){
   const el=document.getElementById('marqueeInner');
-  const items=[...MARQUEE_ITEMS,...MARQUEE_ITEMS]; // duplicate for infinite loop
+  const items=[...MARQUEE_ITEMS,...MARQUEE_ITEMS];
   el.innerHTML=items.map(t=>`<span class="marquee-item">${t}</span>`).join('');
 }
 
-/* — CAPABILITIES CAROUSEL — */
-function renderCapabilities(){
-  const el=document.getElementById('capCarousel');
-  if(!el)return;
-  el.innerHTML=CAPABILITIES.map((c,i)=>`
-    <div class="cap-slide" data-h="">
-      <div class="cap-slide-bar"></div>
-      <div class="cap-slide-bg-num">${c.num}</div>
-      <div class="cap-slide-content">
-        <span class="cap-slide-icon">${c.icon}</span>
-        <div class="cap-slide-num">${c.num}</div>
-        <div class="cap-slide-title">${c.title}</div>
-        <div class="cap-slide-desc">${c.desc}</div>
-        <div class="cap-slide-services">${c.services.map(s=>`<span class="cap-slide-service">${s}</span>`).join('')}</div>
+/* ═══════════════════════════════════════════════════════
+   RENDER — FEATURED VIDEO (large embed + info panel)
+═══════════════════════════════════════════════════════ */
+function renderFeaturedVideo(){
+  const v=VIDEOS.find(x=>x.featured) || VIDEOS[0];
+  if(!v) return;
+  document.getElementById('featuredVideoWrap').innerHTML=`
+    <div class="featured-vid-wrap">
+      <div class="fv-embed">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1&color=white"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="${v.title}">
+        </iframe>
       </div>
-    </div>`).join('');
-  // drag to scroll
-  let isDown=false,startX=0,scrollLeft=0;
-  el.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft});
-  el.addEventListener('mouseleave',()=>isDown=false);
-  el.addEventListener('mouseup',()=>isDown=false);
-  el.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-el.offsetLeft;el.scrollLeft=scrollLeft-(x-startX)*1.5});
-}
-function scrollCap(dir){
-  const el=document.getElementById('capCarousel');
-  if(el)el.scrollBy({left:dir*380,behavior:'smooth'});
-}
-
-/* — PROJECTS — */
-const ALL_CATEGORIES=['All',...new Set(PROJECTS.map(p=>p.category))];
-let activeFilter='All';
-function renderFilterBtns(){
-  document.getElementById('filterRow').innerHTML=ALL_CATEGORIES.map(c=>`
-    <button class="pf-btn ${c==='All'?'active':''}" onclick="setFilter('${c}',this)">${c}</button>`).join('');
-}
-function setFilter(cat,btn){
-  activeFilter=cat;
-  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProjects();
-  initObserver();
-}
-function renderProjects(){
-  const filtered=activeFilter==='All'?PROJECTS:PROJECTS.filter(p=>p.category===activeFilter);
-  const grid=document.getElementById('projectsGrid');
-  grid.innerHTML=filtered.map(p=>{
-    const sizeClass=p.size==='wide'?'wide':p.size==='featured'?'featured-card':'';
-    const ratioClass=`ratio-${p.format}`;
-    const imgContent=p.img
-      ?`<img class="pc-img" src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      :'';
-    const phContent=`<div class="pc-placeholder"><div class="pc-ph-label">${p.placeholder}</div></div>`;
-    const playBtn=p.hasVideo?`<div class="featured-play" style="opacity:1;transform:translate(-50%,-50%)"></div>`:'';
-    const link=p.link?`onclick="window.open('${p.link}','_blank')"` :'';
-    return `
-      <div class="project-card ${sizeClass} reveal" data-h="" data-cat="${p.category}" ${link} style="cursor:${p.link?'none':'default'}">
-        <div class="pc-visual ${ratioClass}">
-          ${imgContent}${phContent}
-          <div class="pc-overlay"></div>
-          <div class="pc-cat">${p.category}</div>
-          ${playBtn}
+      <div class="fv-info">
+        <div class="fv-eyebrow">${v.category} · FreeHit</div>
+        <div class="fv-title">${v.title}</div>
+        <div class="fv-desc">${v.desc}</div>
+        <div class="fv-tags">
+          <span class="fv-tag">${v.guest}</span>
+          <span class="fv-tag">${v.category}</span>
+          <span class="fv-tag">FreeHit by LegaXy</span>
         </div>
-        <div class="pc-info">
-          <div class="pc-meta">${p.client} · ${p.year}</div>
-          <div class="pc-title">${p.title}</div>
-          <div class="pc-desc">${p.desc}</div>
-          <div class="pc-tags">${p.tags.map(t=>`<span class="pc-tag">${t}</span>`).join('')}</div>
-        </div>
-        ${p.link?`<div class="pc-arrow">→</div>`:''}
-      </div>`;
-  }).join('')+`
-    <div class="pc-add-slot reveal" style="cursor:none">
-      <span class="pc-add-icon">＋</span>
-      <span class="pc-add-label">Add New Project</span>
-      <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:rgba(188,82,37,.25)">Projects are data-driven. Edit the PROJECTS array.</span>
+        <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" class="btn-primary" style="text-decoration:none;width:fit-content">Watch on YouTube →</a>
+      </div>
     </div>`;
 }
 
-/* — BTS GALLERY — */
-function renderBtsGallery(){
-  document.getElementById('btsGallery').innerHTML=BTS_FRAMES.map(f=>`
-    <div class="bts-frame ${f.type==='tall'?'tall':''}" data-h="">
-      <div class="bts-frame-inner">
-        ${f.img?`<img src="${f.img}" alt="${f.label}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block">`:
-          `<div class="bts-frame-label">${f.label}</div>`}
+/* ═══════════════════════════════════════════════════════
+   RENDER — VIDEO GRID (filter buttons + cards)
+═══════════════════════════════════════════════════════ */
+const ALL_CATS=['All',...new Set(VIDEOS.map(v=>v.category))];
+let activeVidFilter='All';
+
+function renderVidFilters(){
+  document.getElementById('vidFilterRow').innerHTML=ALL_CATS.map(c=>`
+    <button class="vf-btn ${c==='All'?'active':''}" onclick="setVidFilter('${c}',this)">${c}</button>`).join('');
+}
+function setVidFilter(cat,btn){
+  activeVidFilter=cat;
+  document.querySelectorAll('.vf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderVidGrid();
+  initObserver();
+}
+function renderVidGrid(){
+  const filtered=activeVidFilter==='All'?VIDEOS:VIDEOS.filter(v=>v.category===activeVidFilter);
+  const grid=document.getElementById('vidGrid');
+  grid.innerHTML=filtered.map(v=>`
+    <a class="vid-card ${v.size==='wide'?'wide':''} reveal" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" data-h="">
+      <div class="vid-thumb">
+        <img class="vid-thumb-img" src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg"
+          onerror="this.src='https://img.youtube.com/vi/${v.id}/hqdefault.jpg'"
+          alt="${v.title}" loading="lazy">
+        <div class="vid-overlay"></div>
+        <div class="vid-cat-badge">${v.category}</div>
+        <div class="vid-play-btn"></div>
       </div>
-      <div class="bts-label-bar">${f.label}</div>
-    </div>`).join('');
-  document.getElementById('btsProcess').innerHTML=BTS_STEPS.map(s=>`
-    <div class="bts-step reveal" data-h="">
-      <div class="step-num">${s.num}</div>
-      <div class="step-body">
-        <div class="step-title">${s.title}</div>
-        <div class="step-desc">${s.desc}</div>
+      <div class="vid-info">
+        <div class="vid-meta">${v.guest} · FreeHit</div>
+        <div class="vid-title">${v.title}</div>
+        <div class="vid-desc">${v.desc}</div>
       </div>
-    </div>`).join('');
+      <div class="vid-arrow">→</div>
+    </a>`).join('');
 }
 
-/* — PROCESS — */
-function renderProcess(){
-  document.getElementById('processTimeline').innerHTML=PROCESS_STEPS.map((s,i)=>`
-    <div class="process-step reveal" style="transition-delay:${i*.12}s">
-      <div class="ps-dot">${s.icon}</div>
-      <div class="ps-num">${s.num}</div>
-      <div class="ps-title">${s.title}</div>
-      <div class="ps-desc">${s.desc}</div>
-      <div class="ps-services">${s.services.map(sv=>`<span class="ps-service">${sv}</span>`).join('')}</div>
-    </div>`).join('');
-}
-
-/* — CAMPAIGNS — */
-function renderCampaigns(){
-  document.getElementById('campaignList').innerHTML=CAMPAIGNS.map((c,i)=>`
-    <div class="campaign-tab ${i===0?'active':''}" onclick="switchCampaign(${i})" data-h="">
-      <div class="ct-num">${String(i+1).padStart(2,'0')}</div>
-      <div class="ct-name">${c.name}</div>
-      <div class="ct-type">${c.type}</div>
-    </div>`).join('');
-  document.getElementById('campaignDisplay').innerHTML=CAMPAIGNS.map((c,i)=>`
-    <div class="campaign-panel ${i===0?'active':''}">
-      <div class="cp-bg" style="background:linear-gradient(135deg, ${c.color?c.color:'rgba(188,82,37,.06)'} 0%, var(--ink-lift) 100%)"></div>
-      <div class="campaign-ghost">${String(i+1).padStart(2,'0')}</div>
-      <div class="cp-content">
-        <div class="cp-type">${c.category}</div>
-        <div class="cp-title">${c.title}</div>
-        <div class="cp-desc">${c.desc}</div>
-        <div class="cp-stats">${c.stats.map(s=>`<div><div class="cp-stat-num">${s.num}</div><div class="cp-stat-label">${s.label}</div></div>`).join('')}</div>
-        <div class="cp-tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      </div>
-    </div>`).join('');
-}
-function switchCampaign(idx){
-  document.querySelectorAll('.campaign-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  document.querySelectorAll('.campaign-panel').forEach((p,i)=>{
-    p.classList.toggle('active',i===idx);
-    p.style.position=i===idx?'relative':'absolute';
-  });
-}
-
-/* — GALLERY — */
-function renderGallery(){
-  document.getElementById('galleryScroll').innerHTML=GALLERY_ITEMS.map(g=>`
-    <div class="gal-item gal-${g.size}" data-h="">
-      ${g.img
-        ?`<img src="${g.img}" alt="${g.caption}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-           <div class="gal-placeholder" style="display:none"><div class="gal-ph-label">${g.caption.toUpperCase()}</div></div>`
-        :`<div class="gal-placeholder"><div class="gal-ph-label">${g.caption.toUpperCase()}</div></div>`}
-      <div class="gal-cap">${g.caption}</div>
-    </div>`).join('');
-}
-
-/* — CLIENTS — */
-function renderClients(){
-  document.getElementById('clientsGrid').innerHTML=CLIENTS.map(c=>`
-    <div class="client-tile ${c.add?'add-slot':''}" data-h="">
-      <div class="client-name">${c.name}</div>
-      <div class="client-type">${c.type}</div>
-    </div>`).join('');
-}
-
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    CURSOR
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 const cx=document.getElementById('cx'), cr=document.getElementById('cr');
 document.addEventListener('mousemove',e=>{
   cx.style.top=e.clientY+'px'; cx.style.left=e.clientX+'px';
   cr.style.top=e.clientY+'px'; cr.style.left=e.clientX+'px';
 });
 
-/* ═══════════════════════════════════════════
-   SCROLL PROGRESS
-═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   SCROLL PROGRESS + NAV SCROLL STATE
+═══════════════════════════════════════════════════════ */
 window.addEventListener('scroll',()=>{
   const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
   document.getElementById('prog').style.width=pct+'%';
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
 });
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    INTERSECTION OBSERVER — REVEALS
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 function initObserver(){
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        obs.unobserve(e.target);
-      }
+      if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
     });
   },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
-    el.classList.remove('in');
-    obs.observe(el);
+    el.classList.remove('in'); obs.observe(el);
   });
 }
 
-/* ═══════════════════════════════════════════
-   HERO COUNTER ANIMATION
-═══════════════════════════════════════════ */
-function animateCounters(){
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    const target=parseInt(el.dataset.count);
-    const display=el.textContent;
-    const suffix=display.replace(/[0-9]/g,'');
-    let start=0; const dur=1400;
-    const step=ts=>{
-      if(!start)start=ts;
-      const pct=Math.min((ts-start)/dur,1);
-      const ease=1-Math.pow(1-pct,3);
-      el.textContent=Math.floor(target*ease)+suffix;
-      if(pct<1)requestAnimationFrame(step);else el.textContent=display;
-    };
-    setTimeout(()=>requestAnimationFrame(step),800);
-  });
-}
-
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    INIT
-═══════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 renderMarquee();
-renderCapabilities();
-renderFilterBtns();
-renderProjects();
-renderBtsGallery();
-renderProcess();
-renderCampaigns();
-renderGallery();
-renderClients();
-animateCounters();
+renderFeaturedVideo();
+renderVidFilters();
+renderVidGrid();
 setTimeout(initObserver, 100);
 </script>
 </body>
