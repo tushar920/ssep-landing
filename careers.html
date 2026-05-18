@@ -11,13 +11,13 @@
 :root{
   --orange-light:#FFB37A;--orange:#BC5225;--orange-dark:#7A3010;
   --chrome:#C8C8D0;--chrome-dim:#9A9AA4;
-  --ink:#05060A;--ink-mid:#0B0C14;--ink-lift:#12131E;
+  --ink:#070B1A;--ink-mid:#0C1124;--ink-lift:#101628;
   --text:#F0EEEA;--text-muted:#9A9AA4;--text-dim:#4A4A52;--text-bright:#E4E2DE;
   --metal:linear-gradient(135deg,var(--orange-light) 0%,var(--orange) 40%,var(--orange-dark) 70%,var(--orange) 100%);
   --metal-text:linear-gradient(90deg,var(--orange-light),var(--orange),var(--orange-dark),var(--orange),var(--orange-light));
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden;cursor:none}
+body{background:linear-gradient(160deg,#070B1A 0%,#0A0F22 50%,#070B1A 100%);background-attachment:fixed;color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden;cursor:none}
 #cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
 #cx{width:8px;height:8px;background:var(--orange);transition:width .2s,height .2s}
 #cr{width:30px;height:30px;border:1px solid rgba(188,82,37,.5);transition:top .15s cubic-bezier(.23,1,.32,1),left .15s cubic-bezier(.23,1,.32,1),width .3s,height .3s}
@@ -26,7 +26,7 @@ body:has(a:hover,button:hover,[data-h]:hover,.role-card:hover) #cr{width:44px;he
 #prog{position:fixed;top:0;left:0;height:1px;z-index:9999;background:var(--metal);width:0}
 
 /* NAV */
-nav{position:fixed;top:0;inset-inline:0;z-index:2000;display:flex;justify-content:space-between;align-items:center;padding:0 52px;height:72px;background:rgba(5,6,10,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.04)}
+nav{position:fixed;top:0;inset-inline:0;z-index:2000;display:flex;justify-content:space-between;align-items:center;padding:0 52px;height:72px;background:rgba(7,11,26,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.04)}
 .logo{display:flex;align-items:center;text-decoration:none;height:52px}
 .logo img{height:100%;width:auto;object-fit:contain;display:block;filter:brightness(1.15)}
 .logo-text-fallback{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none}
