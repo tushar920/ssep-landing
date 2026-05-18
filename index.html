@@ -37,17 +37,17 @@ section{position:relative;z-index:1}
 /* ══ NAV ══ */
 nav{
   position:fixed;top:0;inset-inline:0;z-index:2000;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 52px;height:72px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;
+  padding:0 40px;height:72px;
   background:linear-gradient(to bottom,rgba(7,11,26,.97) 0%,rgba(7,11,26,0) 100%);
 }
 .logo{display:flex;align-items:center;text-decoration:none;height:52px}
 .logo img{height:100%;width:auto;object-fit:contain;display:block;filter:brightness(1.15)}
 .logo-text-fallback{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none}
 .logo-x-fb{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-nav>ul{display:flex;gap:0;list-style:none;align-items:center}
-nav>ul>li{position:relative}
-nav>ul>li>a{display:block;padding:0 15px;height:72px;line-height:72px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color .3s;white-space:nowrap}
+nav>ul{display:flex;gap:0;list-style:none;align-items:center;flex-shrink:1;min-width:0}
+nav>ul>li{position:relative;flex-shrink:0}
+nav>ul>li>a{display:block;padding:0 11px;height:72px;line-height:72px;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color .3s;white-space:nowrap}
 nav>ul>li>a:hover{color:var(--orange)}
 .nav-arr{font-size:8px;margin-left:3px;opacity:.5;transition:transform .3s;display:inline-block}
 nav>ul>li:hover .nav-arr{transform:rotate(180deg)}
@@ -58,7 +58,7 @@ nav>ul>li:hover .nav-drop{display:block}
 .nav-drop a{display:block;padding:7px 20px;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-weight:500;transition:color .2s,background .2s}
 .nav-drop a:hover{color:var(--orange);background:rgba(188,82,37,.07)}
 .nav-drop hr{border:none;border-top:1px solid rgba(255,255,255,.06);margin:5px 0}
-.nav-btn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;background:transparent;border:1px solid var(--orange);color:var(--orange);padding:9px 22px;cursor:none;margin-left:20px;transition:background .3s,color .3s}
+.nav-btn{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1px solid var(--orange);color:var(--orange);padding:8px 16px;cursor:none;margin-left:8px;transition:background .3s,color .3s;flex-shrink:0}
 .nav-btn:hover{background:var(--orange);color:#FFF}
 
 /* ══ HERO ══ */
