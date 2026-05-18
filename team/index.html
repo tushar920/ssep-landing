@@ -14,15 +14,15 @@
   --orange-dark:#7A3010;
   --chrome:#C8C8D0;
   --chrome-dim:#9A9AA4;
-  --ink:#05060A;
-  --ink-mid:#0B0C14;
-  --ink-lift:#12131E;
+  --ink:#070B1A;
+  --ink-mid:#0C1124;
+  --ink-lift:#101628;
   --text:#F0EEEA;
   --text-muted:#9A9AA4;
   --metal:linear-gradient(135deg,var(--orange-light) 0%,var(--orange) 40%,var(--orange-dark) 70%,var(--orange) 100%);
 }
 html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
+body{background:linear-gradient(160deg,#070B1A 0%,#0A0F22 50%,#070B1A 100%);background-attachment:fixed;color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;overflow-x:hidden;cursor:none}
 
 /* CURSOR */
 #cx,#cr{position:fixed;pointer-events:none;border-radius:50%;z-index:10000;transform:translate(-50%,-50%);top:0;left:0}
@@ -37,19 +37,24 @@ body:has(a:hover,button:hover,.team-card:hover) #cr{width:44px;height:44px;borde
 /* NAV */
 nav{
   position:fixed;top:0;inset-inline:0;z-index:1000;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 52px;height:72px;
-  background:rgba(5,6,10,0.96);backdrop-filter:blur(16px);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;
+  padding:0 40px;height:72px;
+  background:rgba(7,11,26,0.96);backdrop-filter:blur(16px);
   border-bottom:1px solid rgba(255,255,255,0.05);
 }
-.logo{display:flex;align-items:center;height:48px;text-decoration:none}
+.logo{display:flex;align-items:center;height:48px;text-decoration:none;flex-shrink:0}
 .logo img{height:100%;width:auto;object-fit:contain;filter:brightness(1.15)}
 .logo-text-fallback{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#FFF;display:none}
 .logo-x{background:var(--metal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-nav ul{display:flex;gap:36px;list-style:none}
-nav ul a{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color .3s}
+nav ul{display:flex;gap:0;list-style:none;align-items:center;flex-shrink:1;min-width:0}
+nav ul li{position:relative;flex-shrink:0}
+nav ul a{display:block;padding:0 11px;height:72px;line-height:72px;font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--chrome-dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color .3s;white-space:nowrap}
 nav ul a:hover{color:var(--orange)}
 nav ul a.active{color:var(--orange)}
+.nav-btn{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:transparent;border:1px solid var(--orange);color:var(--orange);padding:8px 16px;cursor:none;margin-left:8px;transition:background .3s,color .3s;text-decoration:none;display:inline-block;flex-shrink:0}
+.nav-btn:hover{background:var(--orange);color:#FFF}
+.nav-btn-solid{background:var(--orange);color:#FFF;border-color:var(--orange)}
+.nav-btn-solid:hover{background:transparent;color:var(--orange)}
 
 /* HEADER */
 header{
@@ -214,7 +219,9 @@ footer{
 @media (max-width:900px){
   header,.team-container,footer{padding-inline:32px}
   .grid-leadership{grid-template-columns:1fr}
-  nav{padding:0 32px}
+  nav{padding:0 24px}
+  nav ul{display:none}
+  .nav-btn{display:none}
 }
 </style>
 </head>
@@ -231,11 +238,15 @@ footer{
     <span class="logo-text-fallback">LEGA<span class="logo-x">X</span>Y</span>
   </a>
   <ul>
-    <li><a href="../index.html#athletes">Athletes</a></li>
-    <li><a href="../index.html#portfolio">Portfolio</a></li>
-    <li><a href="../index.html#ip">Productions</a></li>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../athletes.html">Elite</a></li>
+    <li><a href="../studio.html">Studio</a></li>
+    <li><a href="../live.html">Live</a></li>
+    <li><a href="https://tushar920.github.io/LSA/" target="_blank">Legaxy Learning</a></li>
     <li><a href="index.html" class="active">Team</a></li>
   </ul>
+  <a href="../careers.html" class="nav-btn">Join Legaxy</a>
+  <a href="../contact.html" class="nav-btn nav-btn-solid">Enter Ecosystem</a>
 </nav>
 
 <header>
@@ -575,8 +586,10 @@ footer{
   <div class="footer-logo">LEGAXY</div>
   <div class="footer-links">
     <a href="../index.html">Home</a>
-    <a href="#">Contact</a>
-    <a href="#">Privacy</a>
+    <a href="../athletes.html">Elite</a>
+    <a href="../studio.html">Studio</a>
+    <a href="../live.html">Live</a>
+    <a href="../contact.html">Contact</a>
   </div>
 </footer>
 
